@@ -1,0 +1,70 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package silo (in silo.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>S</h3>
+    <p><a href="silo.html#silo_cd">silo_cd</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="silo.html#silo_close">silo_close</a></p>
+    <p><a href="silo.html#silo_ls">silo_ls</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="silo.html#silo_open">silo_open</a></p>
+    <p><a href="silo.html#silo_var">silo_var</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="silo_cd"></a><h3>silo_cd</h3>
+  <pre>DOCUMENT silo_cd, dirname
+  change current silo directory to DIRNAME, which may contain
+    .. or . constructs as a UNIX pathname
+  accepts silo= keyword to operate on a silo file other than the
+    current silo file</pre>
+  <p>SEE ALSO: <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_var">silo_var</a>, <a href="silo.html#silo_open">silo_open</a>, <a href="silo.html#silo_close">silo_close</a></p>
+</div>
+<div class="docblock"><a name="silo_close"></a><h3>silo_close</h3>
+  <pre>DOCUMENT silo_close
+  close current silo file</pre>
+  <p>SEE ALSO: <a href="silo.html#silo_cd">silo_cd</a>, <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_var">silo_var</a>, <a href="silo.html#silo_open">silo_open</a></p>
+</div>
+<div class="docblock"><a name="silo_ls"></a><h3>silo_ls</h3>
+  <pre>DOCUMENT silo_ls
+      or silo_ls, dirname
+      or itemlist= silo_ls(dirname)
+      or itemlist= silo_ls(dirname, fulldirname)
+  list current silo directory or DIRNAME
+  if called as a function, returns a 1D array of strings beginning
+    with ".", and optionally returns FULLDIRNAME, which is the
+    full path name of the directory listed
+    - the individual items in the list do not include the
+      directory path
+    - subdirectory names end with "/", so you can find them
+      using strpart(itemlist,0:0)=="/"
+  accepts silo= keyword to operate on a silo file other than the
+    current silo file</pre>
+  <p>SEE ALSO: <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_cd">silo_cd</a>, <a href="silo.html#silo_open">silo_open</a>, <a href="silo.html#silo_close">silo_close</a></p>
+</div>
+<div class="docblock"><a name="silo_open"></a><h3>silo_open</h3>
+  <pre>DOCUMENT silo_open, filename
+      or silo= silo_open(filename)
+  open FILENAME for later use with silo_... functions
+
+  There is a single current silo file, which is opened and set
+  by the first form.  The other silo_... functions normally
+  operate on this current file, but also accept a silo= keyword,
+  which is a list returned by the second calling sequence for
+  silo_open.
+</pre>
+  <p>SEE ALSO: <a href="silo.html#silo_cd">silo_cd</a>, <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_var">silo_var</a>, <a href="silo.html#silo_close">silo_close</a></p>
+</div>
+<div class="docblock"><a name="silo_var"></a><h3>silo_var</h3>
+  <pre>DOCUMENT var= silo_var(varname)
+  return silo variable VARNAME
+  accepts silo= keyword to operate on a silo file other than the
+    current silo file</pre>
+  <p>SEE ALSO: <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_cd">silo_cd</a>, <a href="silo.html#silo_open">silo_open</a>, <a href="silo.html#silo_close">silo_close</a></p>
+</div>

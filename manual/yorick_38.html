@@ -1,0 +1,86 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Scalar-Index"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_39.html#Index-Range" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.2 Selecting a range of indices" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Scalar-indices-and-array-order"></a>
+<h3 class="subsection">2.3.1 Scalar indices and array order</h3>
+
+<p>An array of objects is stored in consecutive locations in memory (where
+each location is big enough to hold one of the objects).  An array
+<kbd>x</kbd> of three numbers is stored in the order <kbd>[x(1), x(2), x(3)]</kbd>
+in three consecutive slots in memory.  A three-by-two array <kbd>y</kbd>
+means nothing more than an array of two arrays of three numbers each.
+Thus, the six numbers are stored in two contiguous blocks of three
+numbers each: <kbd>[[x(1,1), x(2,1), x(3,1)], [x(1,2), x(2,2),
+x(3,2)]]</kbd>.
+</p>
+<p>A multi-dimensional array may be referenced using fewer indices than its
+number of dimensions.  Hence, in the previous example, <kbd>x(5)</kbd> is the
+same as <kbd>x(2,2)</kbd>, since the latter element is stored fifth.
+</p>
+<p>Although most of Yorick&rsquo;s syntax follows the C language, array indexing
+is designed to resemble FORTRAN array indexing.  In Yorick, as in
+FORTRAN, the first (leftmost) dimension of an array is always the index
+which varies fastest in memory.  Furthermore, the first element along
+any dimension is at index 1, so that a dimension of length three can be
+referenced by index 1 (the first element), index 2 (the second element),
+or index 3 (the third element).
+</p>
+<p>If this inconsistency bothers you, here is why Yorick indexing is like
+FORTRAN indexing: In C, an array of three numbers, for example, is a
+data type on the same footing as the data type of each of its three
+members; by this trick C sidesteps the issue of multi-dimensional arrays
+&mdash; they are singly arrays of objects of an array data type.  While this
+picture accurately reflects the way the multi-dimensional array is
+stored in memory, it does not reflect the way a multi-dimensional array
+is used in a scientific computer program.
+</p>
+<p>In such a program, the fact that the array is stored with one or the
+other index varying fastest is irrelevent &mdash; you are equally likely to
+want to consider as a &ldquo;data type&rdquo; a slice at a constant value of the
+first dimension as of the second.  Furthermore, the length of every
+dimension varies as you vary the resolution of the calculation in the
+corresponding physical direction.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_39.html#Index-Range" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.2 Selecting a range of indices" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

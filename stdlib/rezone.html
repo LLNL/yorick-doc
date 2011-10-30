@@ -1,0 +1,388 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package rezone (in rezone.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>R</h3>
+    <p><a href="rezone.html#rezone">rezone</a></p>
+    <p><a href="rezone.html#rez_adjust_mesh">rez_adjust_mesh</a></p>
+    <p><a href="rezone.html#rez_all">rez_all</a></p>
+    <p><a href="rezone.html#rez_kstyle">rez_color</a></p>
+    <p><a href="rezone.html#rez_drag">rez_drag</a></p>
+    <p><a href="rezone.html#rez_kstyle">rez_kstyle</a></p>
+    <p><a href="rezone.html#rez_ladj">rez_ladj</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="rezone.html#rez_load_hook">rez_load_hook</a></p>
+    <p><a href="rezone.html#rez_kstyle">rez_lstyle</a></p>
+    <p><a href="rezone.html#rez_mark">rez_mark</a></p>
+    <p><a href="rezone.html#rez_mesh">rez_mesh</a></p>
+    <p><a href="rezone.html#rez_next">rez_next</a></p>
+    <p><a href="rezone.html#rez_palette">rez_palette</a></p>
+    <p><a href="rezone.html#rez_prev">rez_prev</a></p>
+    <p><a href="rezone.html#rez_qrt">rez_qireg</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="rezone.html#rez_qrt">rez_qrt</a></p>
+    <p><a href="rezone.html#rez_qrt">rez_qzt</a></p>
+    <p><a href="rezone.html#rez_radj">rez_radj</a></p>
+    <p><a href="rezone.html#rez_regs">rez_regs</a></p>
+    <p><a href="rezone.html#rez_zoom">rez_zoom</a></p>
+    <h3>T</h3>
+    <p><a href="rezone.html#toy_mesh">toy_mesh</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="rezone"></a><h3>rezone</h3>
+  <pre>DOCUMENT rezone, filename
+      or rezone
+
+  Invoke the mouse-driven rezoner.  Input is taken from variables
+  rt, zt, and ireg in the file FILENAME (which is prompted for if
+  omitted).  Output is written to a different file as rt, zt, and
+  ireg.  The output file also contains copies rez_rt, rez_zt, and
+  rez_ireg in case the mesh under a different name is desirable,
+  as well as rez_rt0, rez_zt0, and rez_ireg0, which are the original
+  mesh.
+
+  If you click on [Escape], you may continue rezoning where you left
+  off by typing   rezone   with no arguments.
+
+  When you are finished, click [OK] to write the output file.
+
+  Use [Zoom or Pan] and [Set Styles] to change the plot limits or
+  line colors and styles.  The [Zoom or Pan] screen has buttons which
+  "warp" you to each bowtied or chevroned "problem" zone, as well as
+  a button to toggle between rectangular and polar coordinates.
+
+  Click [Drag Points] to drag points one at a time with the mouse.
+
+  Click [Adjust Line] to smooth the points on logical line segments.
+  You first click on the endpoints P and Q, then click a button to
+  smooth or equal space the poionts between P and Q, or drag any
+  point between P and Q to establish equal ratio zones ("ER" operation).
+
+  Click [Adjust Region] to smooth the points in logically rectangular
+  regions.  You first click on the opposite corners P and R of the
+  rectangle PQRS, then click a button to smooth the interior points,
+  or click on a point on one of the four edges to transfer the spacing
+  on that edge throughout the region PQRS ("EQ" operation).
+
+  The [Undo] (or [Redo]) button removes the effect of the most
+  recent drag points, adjust line, or adjust region operation.
+
+  Hints:
+  (0) After [Escape], the current mesh is in the variables
+      rez_zt, rez_rt, and rez_ireg.  You can change these
+      variables "by hand" before restarting rezone to make
+      algebraic adjustments.
+  (1) Switch to polar coordinates during an [Adjust Line] or
+      [Adjust Region] in order to get points to lie along a
+      circular arc.  If your center point is not (0,0), you
+      will need to [Escape] and subtract your center point
+      from the rez_zt and rez_rt variables yourself, then
+      [Escape] a second time to restore the proper coordinates
+      before you write the output file.
+  (2) You can select a center point as the second point during
+      [Adjust Line] or [Adjust Region].  When you do this, the
+      K (or L) value of this second point will be the same as
+      that of the first point -- otherwise there is no way to
+      distinguish among all of the logical points at the center.
+      In an [Adjust Region], the center point will be labeled
+      Q instead of R as usual, and you will need to choose a
+      third point (S) to complete the rectangle PQRS.
+  (3) If you set the variable rez_color=1 before you include
+      rezone.i, you will get K lines and L lines drawn in different
+      colors instead of the default (which is K lines dashdot and
+      L lines solid).
+  (4) If you have a color monitor, you can set rez_regs before
+      invoking rezone in order to highlight a list of regions.
+
+  The ALL keyword will be passed to the nbow function, which will
+  not be called if the QUIET keyword is non-nil and non-zero.  By
+  default, a short summary of bowtied and chevroned zones is printed.
+
+  If you need help on how to use one of the screens, try getting
+  help on the appropriate on of these see-also topics, e.g.-
+     help, rez_style
+  to get help on the [Set Styles] screen.
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_all">rez_all</a>, <a href="rezone.html#rez_drag">rez_drag</a>, <a href="rezone.html#rez_ladj">rez_ladj</a>, <a href="rezone.html#rez_radj">rez_radj</a>, <a href="rezone.html#rez_zoom">rez_zoom</a>, rez_style, <a href="rezone.html#rez_kstyle">rez_color</a>, <a href="rezone.html#rez_regs">rez_regs</a>, <a href="rezone.html#rez_adjust_mesh">rez_adjust_mesh</a>, <a href="rezone.html#toy_mesh">toy_mesh</a></p>
+</div>
+<div class="docblock"><a name="rez_adjust_mesh"></a><h3>rez_adjust_mesh</h3>
+  <pre>DOCUMENT rez_adjust_mesh
+  is an optional hook function which is called after any change to the
+  mesh (e.g.- by dragging points) has been made.  If it is defined, it
+  may modify the external variables rez_rt and rez_zt.  This hook can
+  be used, for example, to force points along some k or l line to lie
+  along a symmetry line.</pre>
+  <p>SEE ALSO: <a href="rezone.html#rezone">rezone</a>, <a href="rezone.html#rez_all">rez_all</a>, <a href="rezone.html#rez_mesh">rez_mesh</a></p>
+</div>
+<div class="docblock"><a name="rez_all"></a><h3>rez_all</h3>
+  <pre>DOCUMENT rez_all
+  Click on [Drag Points] to drag points around with the mouse with
+  rez_drag.
+
+  Click on [Adjust Line] to adjust points along a line segment with
+  rez_ladj.
+
+  Click on [Adjust Region] to adjust points in a rectangular region
+  with rez_radj.
+
+  Click on the [Undo] button to undo the previous change.
+  Click on the [Redo] button to redo the previous undo.
+  Click on the [Revert] to return to the original mesh.
+
+  When you are finished moving points around, click on [OK].
+  Click on [Escape] to exit with a non-zero return value.
+
+  Click on [Zoom or Pan] to change the plot limits (see rez_zoom).
+
+  Click on [Set Styles] to change the line styles or colors (see
+  rez_style).
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_ladj">rez_ladj</a>, <a href="rezone.html#rez_mesh">rez_mesh</a>, <a href="rezone.html#rez_zoom">rez_zoom</a>, rez_style, <a href="rezone.html#rez_adjust_mesh">rez_adjust_mesh</a></p>
+</div>
+<div class="docsee">
+  <h3>rez_color</h3><p>SEE: <a href="#rez_kstyle">rez_kstyle</a></p>
+</div>
+<div class="docblock"><a name="rez_drag"></a><h3>rez_drag</h3>
+  <pre>DOCUMENT rez_drag
+  Allow points in the rezone mesh to be dragged around with
+  the mouse.  Press mouse button near a vertex, move mouse
+  to desired position of that vertex, and release button.
+  If the point where you click is less than twice the distance to the
+  second closest point than to the nearest point, the point will not
+  be moved (you will hear a beep when you release the button).
+  Click on the [Undo] button to undo the previous move; you can undo
+  up to 100 previous moves by successive [Undo] clicks.
+
+  When you are finished moving points around, click on [OK].
+
+  Click on [Zoom or Pan] to change the plot limits (see rez_zoom).
+
+  Click on [Set Styles] to change the line styles or colors (see
+  rez_style).
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_ladj">rez_ladj</a>, <a href="rezone.html#rez_radj">rez_radj</a>, <a href="rezone.html#rez_mesh">rez_mesh</a>, <a href="rezone.html#rez_zoom">rez_zoom</a>, rez_style</p>
+</div>
+<div class="docblock"><a name="rez_kstyle"></a><h3>rez_kstyle</h3>
+  <pre>DOCUMENT rez_kstyle, rez_lstyle, rez_color
+  is a vector of three longs:  [type,width,color]
+  type MUST be 1, 2, 3, 4, or 5,
+  width MUST be 1, 2, 3, 4, 5, 6, 7, or 8,
+  and color MUST be -1, -2, -3, -4, -5, -6, -7, -8, -9, or -10
+
+  Either or both parameters may be set before or after including
+  rez.i; by default:
+    rez_kstyle= [4, 1, -2]    (dashdot, thin, foreground color)
+    rez_lstyle= [1, 1, -2]    (solid, thin, foreground color)
+
+  To distinguish K and L by color instead of type, try:
+    rez_kstyle= [1, 1, -7]    (dashdot, thin, blue)
+    rez_lstyle= [1, 1, -5]    (solid, thin, red)
+  If the variable rez_color is true (non-nil and non-zero) when
+  this file is included, then these will be the default.
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_load_hook">rez_load_hook</a></p>
+</div>
+<div class="docblock"><a name="rez_ladj"></a><h3>rez_ladj</h3>
+  <pre>DOCUMENT rez_ladj
+  Adjust the points along a logical line segment PQ:
+
+  Click on [Set P] or [Set Q] to set the endpoints of the segment.
+  When P and Q have been set, click [OK]; this button will
+  read [Cancel] if P and Q do not have either the same K or the
+  same L index.
+
+  Click on [Smooth] to smooth the points along PQ.
+
+  Click on [Equal Space] to make the points along PQ equally spaced.
+  This forces PQ to be a straight line.
+
+  Drag any point between P and Q to get equal ratio spacing of all
+  the points between P and Q.  This also forces PQ to be a straight
+  line; if PQ is initially curved, you may want to click on
+  [Equal Space] before you attempt to drag points.
+
+  Click on the [Undo] button to undo the previous adjustment; you can
+  undo up to 20 previous adjustments by successive [Undo] clicks.
+
+  When you are finished adjusting lines, click on [OK].
+
+  Click on [Zoom or Pan] to change the plot limits (see rez_zoom).
+
+  Click on [Set Styles] to change the line styles or colors (see
+  rez_style).
+
+  Hint:
+      You can select a center point as the second point during
+      rez_ladj.  When you do this, the K (or L) value of this second
+      point will be the same as that of the first point --
+      otherwise there is no way to distinguish among all of the
+      logical points at the center.
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_drag">rez_drag</a>, <a href="rezone.html#rez_radj">rez_radj</a>, <a href="rezone.html#rez_mesh">rez_mesh</a>, <a href="rezone.html#rez_zoom">rez_zoom</a>, rez_style</p>
+</div>
+<div class="docblock"><a name="rez_load_hook"></a><h3>rez_load_hook</h3>
+  <pre>DOCUMENT rez_load_hook
+  If non-nil, filename to be included immediately after rez.i.
+  This file can be used to set personalized default values for the
+  many parameters.
+  Some parameters may be set before loading rez.i, as well</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_kstyle">rez_kstyle</a>, <a href="rezone.html#rez_kstyle">rez_lstyle</a></p>
+</div>
+<div class="docsee">
+  <h3>rez_lstyle</h3><p>SEE: <a href="#rez_kstyle">rez_kstyle</a></p>
+</div>
+<div class="docblock"><a name="rez_mark"></a><h3>rez_mark</h3>
+  <pre>DOCUMENT rez_mark
+  Causes rezone functions to mark bowtied or chevroned (boomeranged)
+  zones when the mesh is plotted.  MUST have one of the following values:
+    0 to not mark bowtied or chevroned zones
+    1 to put a B at the center of the positive triangle of bowtied zones
+    2 to put a C at the center of the larger wing of chevroned zones
+    3 to mark both bowtied and chevroned zones
+
+  By default, rez_mark is 3; you may set it to a different value
+  either before or after including rez.i.
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_mesh">rez_mesh</a>, <a href="rezone.html#rez_next">rez_next</a>, <a href="rezone.html#rez_prev">rez_prev</a>, <a href="rezone.html#rez_drag">rez_drag</a></p>
+</div>
+<div class="docblock"><a name="rez_mesh"></a><h3>rez_mesh</h3>
+  <pre>DOCUMENT rez_mesh, rt, zt, ireg
+      or rez_mesh, rt, zt
+      or rez_mesh, zfile
+  set mesh for rez_... commands.  If ZFILE is specified, it must be a
+  binary file containing variables RT, ZT, and (optionally) IREG.</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_all">rez_all</a>, <a href="rezone.html#rez_adjust_mesh">rez_adjust_mesh</a></p>
+</div>
+<div class="docblock"><a name="rez_next"></a><h3>rez_next</h3>
+  <pre>DOCUMENT rez_next
+  zoom in on next bowtied (or chevroned) zone (after rez_mesh).
+  With numeric argument, zooms to that bowtie (or chevron).  With
+  numeric argument 0, zooms to current bowtie (or chevron).</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_prev">rez_prev</a>, <a href="rezone.html#rez_mark">rez_mark</a>, <a href="rezone.html#rez_drag">rez_drag</a></p>
+</div>
+<div class="docblock"><a name="rez_palette"></a><h3>rez_palette</h3>
+  <pre>DOCUMENT rez_palette
+  3-by-ncolors array used as a palette when rez_regs region coloring
+  is set.  The index in rez_regs is the second index into rez_palette.
+  The length 3 first index is [r,g,b].
+  The default is 15 pastels.</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_regs">rez_regs</a></p>
+</div>
+<div class="docblock"><a name="rez_prev"></a><h3>rez_prev</h3>
+  <pre>DOCUMENT rez_prev
+  zoom in on previous bowtied (or chevroned) zone (after rez_mesh).</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_next">rez_next</a>, <a href="rezone.html#rez_mark">rez_mark</a>, <a href="rezone.html#rez_drag">rez_drag</a></p>
+</div>
+<div class="docsee">
+  <h3>rez_qireg</h3><p>SEE: <a href="#rez_qrt">rez_qrt</a></p>
+</div>
+<div class="docblock"><a name="rez_qrt"></a><h3>rez_qrt</h3>
+  <pre>DOCUMENT rez_qrt, rez_qzt, rez_qireg
+  are the names of the mesh variables for rez_mesh, "rt", "zt", and
+  "ireg" by default.  Note that ireg is optional.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>rez_qzt</h3><p>SEE: <a href="#rez_qrt">rez_qrt</a></p>
+</div>
+<div class="docblock"><a name="rez_radj"></a><h3>rez_radj</h3>
+  <pre>DOCUMENT rez_radj
+  Adjust the points in a logical rectangle PQRS:
+
+  Click on [Set P] or [Set R] to set the endpoints of the segment.
+  When P and R have been set, click [OK]; this button will
+  read [Cancel] if P and R have the same K or the same L index.
+
+  Click on a point on any edge of PQRS (but not one of the corners)
+  to copy the spacings on that edge throughout the entire region.
+  All of the lines of the same type (K-line or L-line) as the edge
+  you clicked on will become straight lines.
+
+  Click on [Smooth] to smooth the points interior to PQRS.
+  Click on [Smooth 4] to perform the smooth operation four times.
+
+  Click on the [Undo] button to undo the previous adjustment; you can
+  undo up to 10 previous adjustments by successive [Undo] clicks.
+
+  When you are finished adjusting regions, click on [OK].
+
+  Click on [Zoom or Pan] to change the plot limits (see rez_zoom).
+
+  Click on [Set Styles] to change the line styles or colors (see
+  rez_style).
+
+  Hint:
+      You can select a center point as the second point during
+      rez_radj.  When you do this, the K (or L) value of this second
+      point will be the same as that of the first point --
+      otherwise there is no way to distinguish among all of the
+      logical points at the center.  The center point will be labeled
+      Q instead of R as usual, and you will need to choose a third
+      point (S) to complete the rectangle PQRS.
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_drag">rez_drag</a>, <a href="rezone.html#rez_ladj">rez_ladj</a>, <a href="rezone.html#rez_mesh">rez_mesh</a>, <a href="rezone.html#rez_zoom">rez_zoom</a>, rez_style</p>
+</div>
+<div class="docblock"><a name="rez_regs"></a><h3>rez_regs</h3>
+  <pre>DOCUMENT rez_regs
+  is a vector of region numbers which are to be drawn in the colors
+  specified in rez_palette.  Thus:
+     rez_regs= [3,5]
+  causes regions 3 and 5 to be drawn in colors.  All other regions have
+  white backgrounds.  Hilighting too many regions in this way may slow
+  down the redraws unacceptably.  To highlight all regions, use:
+     rez_regs= indgen(max(rez_ireg))
+  This won't work on monochrome monitors, of course.
+  The default is rez_regs=[].</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_palette">rez_palette</a></p>
+</div>
+<div class="docblock"><a name="rez_zoom"></a><h3>rez_zoom</h3>
+  <pre>DOCUMENT rez_zoom
+  Change limits after setting rez_mesh.
+
+  There are two modes of operation:
+  (1) P-mode:
+      Click on a point to magnify or demagnify about that point.
+      Drag the point to move it to a different position in the
+      viewport.  The left button zooms in (magnifies by 1.5), the
+      right button zooms out (demagnifies by 1.5), and the middle
+      button pans (no magnification change).  If you click just
+      below or just above the tick marks, only the x coordinate
+      is changed; clicking just to the left or just to the right
+      of the viewport changes only the y coordinate.
+  (2) R-mode:
+      Left drag out a rectangle to set the limits to that rectangle.
+      Right drag out a rectangle to cram the entire current viewport
+      into that rectangle (an analog to zooming out).
+      Middle drag to pan as in P-mode (the rubber band rectangle is
+      meaningless in this case).
+
+   Click the [R-mode] (or [P-mode]) button to change modes.
+
+   Click the [OK] button when you are satisfied with the limits.
+
+   Click the [Undo] button to remove the effect of the previous
+   zoom-click.  Up to 100 successive undo operations are allowed.
+
+   Click the [Polar] button to toggle polar coordinates.  The
+   vertical axis will be theta, and the horizontal axis radius.
+   The polar coordinate origin will be at (zt,rt) = (0,0).
+
+   Click the [Next], [Prev], or [First] buttons to focus in on
+   zones which are bowtied or chevroned.  These zones are marked
+   by a B or a C, respectively (if rez_mark is set).
+</pre>
+  <p>SEE ALSO: <a href="rezone.html#rez_mesh">rez_mesh</a></p>
+</div>
+<div class="docblock"><a name="toy_mesh"></a><h3>toy_mesh</h3>
+  <pre>DOCUMENT toy_mesh, filename
+  generates a toy mesh in the file FILENAME in order to be able to
+  play with the rezone function.  (FILENAME must be a string enclosed
+  in double quotes, of course.)</pre>
+  <p>SEE ALSO: <a href="rezone.html#rezone">rezone</a></p>
+</div>

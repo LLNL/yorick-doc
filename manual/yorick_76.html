@@ -1,0 +1,77 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Color-hardcopy"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_77.html#CGM-hardcopy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.4.2 Binary CGM caveats" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Color-hardcopy-1"></a>
+<h3 class="subsection">3.4.1 Color hardcopy</h3>
+
+<p>When you produce a color picture (with plf or pli, for example) on your
+screen, you need to save not only the picture, but also the palette you
+used to draw that picture.  Since the palette might change for each
+frame in a hardcopy file, the file must contain a complete palette as a
+sort of preamble to each frame.  However, you usually want less
+expensive, higher quality black and white output, so the palette
+information is usually unnecessary.  Yorick optionally converts colors
+to a standard gray scale before output to a hardcopy file, saving a
+little space in the output file.
+</p>
+<p>If you are going to use a black and white printer, you can turn off
+palette dumping by means of the <kbd>dump=</kbd> keyword:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">hcp_file, dump=0
+</pre></td></tr></table>
+
+<p>(you could also specify the name for the next hardcopy file).  Unlike
+the name of the hardcopy file, the palette dumping flag persists across
+any number of hardcopy files.  To turn on dumping again, you need to
+call hcp_file with <kbd>dump=1</kbd>.
+</p>
+<p>All Yorick PostScript files will print on any PostScript printer, black
+and white or color.  However, if you set <kbd>dump=0</kbd>, the palette was
+not dumped to the file, and it will print gray even on a color printer.
+If you print a <kbd>dump=1</kbd> file on a black and white printer, the
+result will be very similar to <kbd>dump=0</kbd>; your colors will be
+translated to grays.  You can put the call to hcp_file setting
+<kbd>dump=0</kbd> in your &lsquo;<tt>custom.i</tt>&rsquo; file if you rarely want to dump the
+palette.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_77.html#CGM-hardcopy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.4.2 Binary CGM caveats" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

@@ -1,0 +1,41 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Defining Functions</h2>
+<p>A function of N dummy arguments is defined by:
+</p>
+<p><tt>func</tt> <i>func_name</i><tt>(</tt><i>dummy1, dummy2, ..., dummyN</i><tt>)<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>body_statements</i><tt><br>
+}</tt><br>
+</p>
+<p>If the function has no dummy arguments, the first line of the definition
+should read:
+</p>
+<p><tt>func</tt> <i>func_name</i><tt>(void)</tt>
+</p>
+<p>Mark output parameters with a <tt>&amp;</tt>, as <i>dummy2</i> here:
+</p>
+<p><tt>func </tt><i>func_name</i><tt>(</tt><i>dummy1, <tt>&amp;</tt>dummy2, dummy3</i><tt>)</tt>
+</p>
+<p>If the function will take keyword arguments, they must be listed after
+all positional arguments and marked by a <tt>=</tt>:
+</p>
+<p><tt>func </tt><i>func_name</i><tt>(</tt><i>..., dummyN, key1=, ..., keyN=</i><tt>)</tt>
+</p>
+<p>If the function allows an indeterminate number of positional arguments
+(beyond those which can be named), place the special symbol <tt>..</tt>
+after the final dummy argument, but before the first keyword. For example,
+to define a function which takes one positional argument, followed by an
+indeterminate number of positional arguments, and one keyword, use:
+</p>
+<p><tt>func</tt> <i>func_name</i><tt>(</tt><i>dummy1, <tt>..</tt>, key1=</i><tt>)</tt>
+</p>
+<p><br>The function <tt>more_args()</tt> returns the number of unread
+actual arguments corresponding to the <tt>..</tt> indeterminate dummy argument.
+The function <tt>next_arg()</tt> reads and returns the next unread actual
+argument, or nil if all have been read.
+</p>
+
+

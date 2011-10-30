@@ -1,0 +1,107 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Dimension-Lists"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_50.html#Broadcasting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.6 Broadcasting and conformability" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Dimension-Lists-1"></a>
+<h2 class="section">2.7 Dimension Lists</h2>
+
+<p>You should strive to write Yorick programs in such a way that you never
+need to refer to the lengths of array dimensions.  Array dimensions are
+usually of no direct significance in a calculation; your programs will
+tend to be clearer if only the arrays themselves appear.
+</p>
+<p>In practice, unfortunately, you can&rsquo;t always get by without mentioning
+dimension lengths.  Two functions are important:
+</p>
+<dl compact="compact">
+<dt> <kbd>numberof(x)</kbd></dt>
+<dd><p>returns the total number of items in the array <kbd>x</kbd>.
+</p>
+</dd>
+<dt> <kbd>dimsof(x)</kbd></dt>
+<dd><p>returns a list consisting of the number of dimensions of the array <kbd>x</kbd>,
+followed by the length of each of those dimensions.  Thus, if <kbd>x</kbd> were
+a nine-by-two-by-six array, <kbd>dimsof(x)</kbd> would return <kbd>[3,9,2,6]</kbd>,
+while if <kbd>x</kbd> were a scalar value, <kbd>dimsof(x)</kbd> would return
+<kbd>[0]</kbd>.
+</p>
+</dd>
+<dt> <kbd>dimsof(x, y, z, ...)</kbd></dt>
+<dd><p>With multiple arguments, the <kbd>dimsof</kbd> function returns the dimension
+list of the array <kbd>x+y+z+...</kbd>, or <kbd>[]</kbd> if the input arrays are not
+conformable.
+</p></dd>
+</dl>
+
+<p>The <kbd>array</kbd> function (see <a href="yorick_35.html#Creating-Arrays">Creating Arrays</a>), and the more arcane
+functions <kbd>add_variable</kbd>, <kbd>add_member</kbd>, and <kbd>reshape</kbd> all
+have parameter lists ending with one or more &ldquo;dimension list&rdquo;
+parameters.  Each parameter in a dimension list can be either a scalar
+integer value, representing the length of a single dimension, or a
+list of integers in the format returned by <kbd>dimsof</kbd> to represent
+zero or more dimensions.  Several arguments can be used to build up
+a complicated dimension list:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x1 = array(0.0, 9, 2, 6);     /* 9-by-2-by-6 array of 0.0 */
+x2 = array(0.0, [3,9,2,6]);  /* another 9-by-2-by-6 array */
+x3 = array(0.0, 9, [0], [2,2,6]);   /* ...and yet another */
+
+flux= array(0.0, 3, dimsof(z), numberof(groups));
+</pre></td></tr></table>
+
+<p>In the final example, the <kbd>flux</kbd> might represent the three
+components of a flux vector, at each of a number of positions <kbd>z</kbd>,
+and for each of a number of photon energies <kbd>groups</kbd>.  The first
+dimension of <kbd>flux</kbd> has length three, corresponding to the three
+components of each flux vector.  The last dimension has the same length
+as the <kbd>groups</kbd> array.  In between are zero or more dimensions &ndash;
+whatever the dimensions of the array of positions <kbd>z</kbd>.
+</p>
+<p>By using the rubber index syntax (see <a href="yorick_44.html#Rubber_002dIndex">Rubber-Index</a>), you can extract
+meaningful slices of the <kbd>flux</kbd> array without ever needing to know
+how many dimensions <kbd>z</kbd> had, let alone their lengths.
+</p>
+
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_50.html#Broadcasting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.6 Broadcasting and conformability" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

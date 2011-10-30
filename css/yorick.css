@@ -1,0 +1,238 @@
+/* force vertical scrollbar to prevent jumping in height of banner element
+ * going from pages with to without vertical scrollbar
+ */
+html { height:101%; }
+/* theme colors:
+ * #ffdfbb   - light peach sidebar and header background
+ * #d46161   - muscle color, contrast against sidebar background
+ *   #c32c2c - darker variant for thin lines
+ */
+
+/* Created by Mathew James Taylor
+ * http://matthewjamestaylor.com/blog/perfect-multi-column-liquid-layouts
+ * This layout works around numerous bugs and quirks of many browsers.
+ */
+body {
+    margin:0;
+    padding:0;
+    border:0; /* removes the border around the viewport in old versions of IE */
+    width:100%;
+    background:#ffffff;
+
+    min-width:600px; /* Minimum width of layout - remove line if not required */
+    /* min-width property does not work in old versions of Internet Explorer */
+
+    /* font-size:90%; */
+}
+
+a {
+    color:#c32c2c;
+}
+a:hover {
+    /* color:#fff; */
+    background:#ffdfbb;
+    text-decoration:none;
+}
+.col2 a:hover {
+    /* color:#fff; */
+    background:#ffffff;
+    text-decoration:none;
+}
+.col2 {
+    color:#c32c2c;
+}
+.col2 hr {
+    border:0;
+    height:2px;
+    color:#c32c2c;
+    background-color:#c32c2c;
+}
+
+h1, h2, h3 {
+    margin:.8em 0 .2em 0;
+    padding:0;
+}
+p {
+    margin:.4em 0 .8em 0;
+    padding:0;
+}
+img {
+    /* margin:10px 0 5px; */
+}
+tt,
+kbd,
+pre { 
+    font: 100% Monaco, Courier, monospace;
+}
+img:hover {  /* for texi2html navigation icons */
+    background:#ffdfbb;
+}
+
+#header {
+    clear:both;
+    float:left;
+    width:100%;
+    background-color:#ffdfbb;
+    /* border-bottom:1px solid #000; */
+}
+#header a {
+    color:#ffdfbb;  /* else IE draws color box around banner img */
+}
+#header p,
+#header h1,
+#header h2 {
+    padding:.1em 15px 0 0;  /* top right bottom left */
+    margin:0;
+    color:#d46161
+}
+#banner {
+    float:left;
+    margin:0;
+    padding:0;
+}
+
+#footer {
+    clear:both;
+    float:left;
+    width:100%;
+    border-top:1px solid #ffdfbb;
+}
+#footer p {
+    padding:10px;
+    margin:0;
+}
+
+/* page layout into columns */
+.colmask {  /* same as leftmenu */
+    position:relative;  /* fixes the IE7 overflow hidden bug and
+                           stops the layout jumping out of place */
+    float:left;
+    width:100%;         /* width of whole page */
+    clear:both;
+    overflow:hidden;    /* chops off any overhanging divs */
+}
+.colleft {  /* only child of colmask */
+    position:relative;
+    float:left;
+    width:100%;
+}
+.col1,
+.col2 {     /* children of colleft, in that order */
+    position:relative;
+    float:left;
+    padding:0 0 1em 0;
+    overflow:hidden;
+}
+
+/* Let x = 0 at left edge of colmask
+ *     xc0 = x-coordinate of left edge of colleft
+ *     xc1 = x-coordinate of left edge of col1
+ *     xc2 = x-coordinate of left edge of col2
+ *     p = width of padding around each column
+ *     s = total width (including padding) of sidebar (left column)
+ *       100% - s = total width of main content (right column)
+ *     col1.width = 100% - s - 2*p   (main content)
+ *     col2.width = s - 2*p          (sidebar)
+ *
+ * Now colleft is the only child of colmask, and it floats left so its
+ * left edge would normally be at x=0 and its right edge at x=100%.  We
+ * shift its right edge (to the left) by 100%-s, so that its left edge
+ * moves to x=s-100% (<0) and its right edge to x=s:
+ *     colleft.right = 100%-s
+ *
+ * Since col1 and col2, in that order, are the only children of colleft,
+ * and they float left, their normal left edges would be at 0 and col1.width
+ * respectively, relative to colleft.  Since the left edge of colleft is at
+ * x=s-100%, the normal position of col1 is x = s-100% and the normal position
+ * of col2 is x = -2*p.  We want the left edges to be at x = s+p and x=p
+ * respectively, which we accomplish by the displacements:
+ *     col1.left = 100% + p
+ *     col2.left = 3*p
+ */
+#banner {
+  width:25%   /* s */
+}
+.leftmenu { /* same as colmask */
+    background:#ffffff;  /* right column background colour */
+}
+.leftmenu .colleft {
+    right:75%;           /* 100% - s */
+    background-color:#ffdfbb;    /* left column background colour */
+    background-image:url('../images/skullleft.png');
+    background-position:right top;
+    background-repeat:no-repeat;
+}
+.leftmenu .col1 {
+    width:71%;      /* 100% - s - 2*p */
+    left:102%;      /* 100% + p */
+}
+.leftmenu .col2 {
+    width:21%;      /* s - 2*p */
+    left:6%;        /* 3*p */
+}
+
+/* document comment formatting */
+
+.docsee,
+.docblock {
+    clear:both;
+    width:100%;
+    border-top:2px solid #ffdfbb;
+}
+
+.docsee h3,
+.docblock h3 {
+    padding:0 0 0 1em;
+    color:#c32c2c;
+}
+
+.seclist {
+    text-indent:3em;
+}
+
+/* function/symbol index formatting */
+
+.ndex0,
+.ndex0s {
+    position:relative;
+    float:left;
+    clear:both;
+    width:99%;
+    left:0%;
+    margin:0%;
+    margin-bottom:1em;
+    border:1px solid #ffdfbb;
+    padding:0.25em;
+}
+.ndex0s {  /* this version has a scrollbar if index too long */
+    max-height:10em;
+    overflow:auto;
+}
+
+.ndex1,
+.ndex2,
+.ndex3 {
+    position:relative;
+    float:left;
+    padding:0;
+    width:31%;
+    margin-left:1%;
+    margin-right:1%;
+}
+
+.ndex0 p {
+    text-indent:0;
+    margin:0;
+    padding:0;
+}
+.ndex0 a {
+    color:#000000;
+}
+.ndex0 h3 {
+    text-align:left;
+    text-indent:0;
+    margin:0;
+    padding-left:1em;
+    width:4em;
+    background:#ffdfbb;
+}

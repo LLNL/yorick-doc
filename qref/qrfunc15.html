@@ -1,0 +1,29 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Instancing Data Structures</h2>
+<p>Any data type <i>type_name</i> - basic or defined by <tt>struct</tt>
+- serves as a type converter to that data type. A nil argument is converted
+to a scalar zero of the specified type. Keywords matching the member names
+can be used to assign non-zero values to individual members:
+</p>
+<table><tbody>
+<tr><td><tt><i>type_name</i>()</tt></td>
+<td>scalar instance of <i>type_name</i>, zero value</td></tr>
+<tr><td><tt><i>type_name</i>(<i>memb_name_1</i>=<i>expr_1</i>,...)</tt></td>
+<td>scalar <i>type_name</i></td></tr>
+</tbody></table>
+<p>The <tt>.</tt> operator extracts a member of a data structure. The
+<tt>-></tt>
+operator dereferences a pointer to the data structure before extracting
+the member. For example:
+</p>
+<p><tt>struct Mesh { pointer x, y; long imax, jmax; }</tt>
+<br><tt>mesh = Mesh(x=&amp;xm,imax=dimsof(xm)(1),jmax=dimsof(xm)(2));</tt>
+<br><tt>mesh.y = &amp;ym;</tt>
+<br><tt>mptr = &amp;mesh;</tt>
+<br><tt>print, mesh.x(2,1:10), mptr->y(2,1:10);</tt>
+</p>
+
+

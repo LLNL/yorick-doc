@@ -1,0 +1,76 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Graphics-style"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_78.html#EPS-hardcopy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.4.3 Encapsulated PostScript" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_80.html#style-keyword" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.1 Style keyword" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Graphics-style-1"></a>
+<h2 class="section">3.5 Graphics style</h2>
+
+<p>Yorick formats each page of graphics output according to a model
+regulated by several dozen numeric parameters.  Most of these change
+seldom &ndash; you tend to find a graphics style that suits you, then stick
+with it for many plots.  Yorick demotes the stylistic parameters to a
+lower rank; they are intentionally harder to access and change than
+more urgent items like plot limits or log scaling.  (The gridxy
+function is an exception &ndash; it changes the stylistic parameters that
+determine how Yorick draws ticks, but has a relatively simple
+interface.)
+</p>
+<p>Designing a new graphics style requires patience, hard work, and
+multiple iterations.  Use the &lsquo;<tt>*.gs</tt>&rsquo; files which come with the
+Yorick distribution (installed in <kbd>Y_SITE+&quot;gist&quot;</kbd>) as examples and
+starting points for your own designs.  The following sections should
+help you to understand the meaning of the various style parameters, but
+I am not going to attempt to lead you through an actual design.
+Yorick&rsquo;s predefined graphics styles usually suffice.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_80.html#style-keyword">&bull; style keyword</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Accessing predefined graphics styles.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_81.html#style_002ei">&bull; style.i</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Bypassing predefined graphics styles.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_82.html#plsys">&bull; plsys</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Multiple coordinate systems.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_83.html#ticks-and-labels">&bull; ticks and labels</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            How to change them.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_78.html#EPS-hardcopy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.4.3 Encapsulated PostScript" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_80.html#style-keyword" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.1 Style keyword" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

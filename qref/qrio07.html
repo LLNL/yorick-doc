@@ -1,0 +1,40 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Writing History Records</h2>
+<p>To write a family of files containing history records:
+</p>
+<ol type=1>
+<li>Create the file using <tt>createb</tt>.</li>
+<li>Write all of the non-record (time independent) variables to the file
+using <tt>save</tt>.</li>
+<li>Create a record which will correspond to time <i>time</i> and cycle
+<i>ncyc</i>
+for future <tt>jt</tt> and <tt>jc</tt> commands. Use:
+<br><tt>&nbsp;add_record, <i>f, time, ncyc</i>&nbsp;</tt> make new record at <i>time,
+ncyc</i></li>
+<li>Write all record (time dependent) variables to the file using
+<tt>save</tt>.
+After the first <tt>add_record</tt>, <tt>save</tt> will create and store
+record variables instead of non-record variables as in step 2.</li>
+<li>Repeat steps 3 and 4 for each new record you wish to add to the file.
+For the second and subsequent records, <tt>save</tt> will not allow variables
+which were not written to the first record, or whose data type or shape
+has changed since the first record. That is, the structure of all history
+records in a file must be identical. Use type <tt>pointer</tt> variables
+to deal with data which changes in size, shape, or data type.</li>
+</ol>
+<p>After each <tt>add_record</tt>, any number of <tt>save</tt> commands
+may be used to write the record.
+</p>
+<p>If the current member of a history record file family has at least one
+record, and if the next record would cause the file to exceed the maximum
+allowed file size, <tt>add_record</tt> will automatically form the next
+member of the family. The maximum family member file size defaults to 4
+MBytes, but:
+</p>
+<p><tt>set_filesize, <i>f, n_bytes</i>&nbsp;</tt> set family member size
+</p>
+
+

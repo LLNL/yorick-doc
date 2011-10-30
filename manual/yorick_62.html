@@ -1,0 +1,120 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="plt"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_61.html#plv" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.8 plv" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="plt-1"></a>
+<h3 class="subsection">3.1.9 plt</h3>
+
+<p>The final plotting command, plt, plots text rather than geometrical
+figures:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plt, text, x, y
+</pre></td></tr></table>
+
+<p>Optional keywords determine the font, size, color, and orientation of
+the characters, and the precise meaning of the coordinates x and y &ndash;
+what coordinate system they are given in, and how the text is justified
+relative to the given point.
+</p>
+<p>Unlike the other plotting primitives, by default the (x,y) coordinates
+in the plt command do not refer to the same (x,y) scales as your data.
+Instead, they are so-called normalized device coordinates, which are
+keyed to the sheet of paper, should you print a hardcopy of your
+picture.  To make (x,y) refer to the so-called world coordinates of
+your data (what planet is your data from?), you must use the <kbd>tosys=1</kbd>
+keyword.  If you do locate text in your world coordinate system, only
+its position will follow your data as you zoom and pan through it;
+don&rsquo;t expect text size to grow as you zoom in, or your characters to
+become hideously distorted when you switch to log axis scaling.
+</p>
+<p>Text may be rotated by multiples of 90 degrees by means of the
+<kbd>orient=</kbd> keyword.  Arbitrary rotation angles are not supported, and
+the speed that rotated text is rendered on your screen may be
+dramatically slower than ordinary unrotated text.
+</p>
+<p>You can get superscripts, subscripts, and symbol characters by means
+of escape sequences in the text.  Yorick is not a typesetting program,
+and these features will not be the highest possible quality.  Neither
+will what you see on the screen be absolutely identical to your
+printed hardcopy (that is never true, actually, but superscripts and
+subscripts are noticeably different).  With those caveats, the escape
+feature is still quite useful.
+</p>
+<p>To get a symbol character (assuming you are a font other than symbol),
+precede that character by an exclamation point &ndash; for example,
+<kbd>&quot;!p&quot;</kbd> will be plotted as the Greek letter pi.  There are four
+exceptions: <kbd>&quot;!!&quot;</kbd>, <kbd>&quot;!^&quot;</kbd>, and <kbd>&quot;!_&quot;</kbd> escape to the
+non-symbol characters exclamation point, caret, and underscore,
+respectively.  And <kbd>&quot;!]&quot;</kbd> escapes to caret in the symbol font, which
+is the symbol for perpendicular.  The exclamation point, underscore, and
+right bracket characters are themselves in the symbol font, and
+shouldn&rsquo;t be necessary as escaped symbols.  If the last character
+in the text is an exclamation point, it has no special meaning; you
+do not need to escape a trailing exclamation point.
+</p>
+<p>Caret <kbd>&quot;^&quot;</kbd> introduces superscripts and underscore <kbd>&quot;_&quot;</kbd>
+introduces subscripts.  There are no multiple levels of superscripting;
+every character in the text string is either ordinary, a superscript, or
+a subscript.  A caret switches from ordinary or subscript characters to
+superscript, or from superscript to ordinary.  An underscore switches
+from ordinary or superscript characters to subscript, or from subscript
+back to ordinary.
+</p>
+<p>If the text has multiple lines (separated by newline <kbd>&quot;\n&quot;</kbd>
+characters), plt will plot it in multiple lines, with each line
+justified according to the <kbd>justify=</kbd> keyword, and with the vertical
+justification applied to the whole block.  You should always use the
+appropriate text justification, since the size of the text varies
+from one output device to another &ndash; the size of the text you see on
+your screen is only approximately the size in hardcopy.  In multiline
+text, the superscript and subscript state is reset to ordinary at
+the beginning of each line.
+</p>
+<p>Here is an example of escape sequences:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">text = &quot;The area of a circle is !pr^2\n&quot;+
+  &quot;Einstein's field equations are G_!s!n_=8!pT_!s!n&quot;;
+plt, text, .4,.7,justify=&quot;CH&quot;;
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_61.html#plv" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.8 plv" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

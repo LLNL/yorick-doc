@@ -1,0 +1,89 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package fermi (in fermi.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="fermi.html#fd12">fd12</a></p>
+    <p><a href="fermi.html#fd32">fd32</a></p>
+    <p><a href="fermi.html#fd52">fd52</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="fermi.html#fdm12">fdm12</a></p>
+    <p><a href="fermi.html#fermi">fermi</a></p>
+    <h3>I</h3>
+    <p><a href="fermi.html#ifd12">ifd12</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="fermi.html#ifd32">ifd32</a></p>
+    <p><a href="fermi.html#ifd52">ifd52</a></p>
+    <p><a href="fermi.html#ifdm12">ifdm12</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="fd12"></a><h3>fd12</h3>
+  <pre>DOCUMENT fd12(x)
+  return Fermi-Dirac integral of order 1/2,
+     fd12(x) = integral[0 to inf]{ dt * t^0.5 / (exp(t-x)+1) }
+  accurate to about 1e-12</pre>
+  <p>SEE ALSO: <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></p>
+</div>
+<div class="docblock"><a name="fd32"></a><h3>fd32</h3>
+  <pre>DOCUMENT fd32(x)
+  return Fermi-Dirac integral of order 3/2,
+     fd32(x) = integral[0 to inf]{ dt * t^1.5 / (exp(t-x)+1) }
+  accurate to about 1e-12</pre>
+  <p>SEE ALSO: <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd52">fd52</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></p>
+</div>
+<div class="docblock"><a name="fd52"></a><h3>fd52</h3>
+  <pre>DOCUMENT fd52(x)
+  return Fermi-Dirac integral of order 5/2,
+     fd52(x) = integral[0 to inf]{ dt * t^2.5 / (exp(t-x)+1) }
+  accurate to about 1e-12</pre>
+  <p>SEE ALSO: <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></p>
+</div>
+<div class="docblock"><a name="fdm12"></a><h3>fdm12</h3>
+  <pre>DOCUMENT fdm12(x)
+  return Fermi-Dirac integral of order -1/2,
+     fdm12(x) = integral[0 to inf]{ dt * t^-0.5 / (exp(t-x)+1) }
+  accurate to about 1e-12</pre>
+  <p>SEE ALSO: <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></p>
+</div>
+<div class="docblock"><a name="fermi"></a><h3>fermi</h3>
+  <pre>DOCUMENT #include "fermi.i"
+  Fermi-Dirac integrals and inverses of orders -1/2, 1/2, 3/2, 5/2
+
+  Antia, H. M., Aph.J. 84, p.101-108 (1993)
+</pre>
+  <p>SEE ALSO: <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></p>
+</div>
+<div class="docblock"><a name="ifd12"></a><h3>ifd12</h3>
+  <pre>DOCUMENT ifd12(y)
+  return x = inverse of Fermi-Dirac integral of order 1/2,
+     y = integral[0 to inf]{ dt * t^0.5 / (exp(t-x)+1) }
+  accurate to about 1e-8</pre>
+  <p>SEE ALSO: <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a>, <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a></p>
+</div>
+<div class="docblock"><a name="ifd32"></a><h3>ifd32</h3>
+  <pre>DOCUMENT ifd32(y)
+  return x = inverse of Fermi-Dirac integral of order 3/2,
+     y = integral[0 to inf]{ dt * t^1.5 / (exp(t-x)+1) }
+  accurate to about 1e-8</pre>
+  <p>SEE ALSO: <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd52">ifd52</a>, <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a></p>
+</div>
+<div class="docblock"><a name="ifd52"></a><h3>ifd52</h3>
+  <pre>DOCUMENT ifd52(y)
+  return x = inverse of Fermi-Dirac integral of order 5/2,
+     y = integral[0 to inf]{ dt * t^2.5 / (exp(t-x)+1) }
+  accurate to about 1e-8</pre>
+  <p>SEE ALSO: <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a></p>
+</div>
+<div class="docblock"><a name="ifdm12"></a><h3>ifdm12</h3>
+  <pre>DOCUMENT ifdm12(y)
+  return x = inverse of Fermi-Dirac integral of order -1/2,
+     y = integral[0 to inf]{ dt * t^-0.5 / (exp(t-x)+1) }
+  accurate to about 1e-8</pre>
+  <p>SEE ALSO: <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a>, <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a></p>
+</div>

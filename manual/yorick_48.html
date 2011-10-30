@@ -1,0 +1,99 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Sorting"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_47.html#Finite-Difference" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.10 Rank preserving (finite difference) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_49.html#Transposing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.5 Transposing" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Sorting-1"></a>
+<h2 class="section">2.4 Sorting</h2>
+
+<p>The function <kbd>sort</kbd> returns an index list:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">list = sort(x);
+</pre></td></tr></table>
+
+<p>The list has the same length as the input vector <kbd>x</kbd>, and list(1) is
+the index of the smallest element of <kbd>x</kbd>, list(2) the index of the
+next smallest, and so on.  Thus, <kbd>x(list)</kbd> will be <kbd>x</kbd> sorted
+into ascending order.
+</p>
+<p>By returning an index list instead of the sorted array, <kbd>sort</kbd>
+simplifies the co-sorting of other arrays.  For example, consider a
+series of elaborate experiments.  On each experiment, thermonuclear
+yield and laser input energy are measured, as well as fuel mass.  These
+might reasonably be stored in three vectors <kbd>yield</kbd>, <kbd>input</kbd>,
+and <kbd>mass</kbd>, each of which is a 1D array with as many elements as
+experiments performed.  The order of the elements in the arrays maight
+naturally be the order in which the experiments were performed, so that
+<kbd>yield(3)</kbd>, <kbd>input(3)</kbd>, and <kbd>mass(3)</kbd> represent the third
+experiment.  The experiments can be sorted into order of increasing
+gain (yield per unit input energy) as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">list = sort(yield/input);
+yield = yield(list);
+input = input(list);
+mass = mass(list);
+</pre></td></tr></table>
+
+<p>The inverse list, which will return them to their orginal order, is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">invlist = list;  /* faster than  array(0, dimsof(list)) */
+invlist(list) = indgen(numberof(list));
+</pre></td></tr></table>
+
+<p>The <kbd>sort</kbd> function actually sorts along only one index of a
+multi-dimensional array.  The dimensions of the returned list are the
+same as the dimensions of the input array; the values are indices
+relative to the beginning of the entire array, not indices for the
+dimension being sorted.  Thus, <kbd>x(sort(x))</kbd> is the array <kbd>x</kbd>
+sorted so that the elements along its first dimension are in ascending
+order.  In order to sort along another dimension, pass <kbd>sort</kbd> a
+second argument &ndash; <kbd>x(sort(x,2))</kbd> will be <kbd>x</kbd> sorted into
+increasing order along its second dimension, <kbd>x(sort(x,3))</kbd> along
+its third dimension, and so on.
+</p>
+<p>A related function is <kbd>median</kbd>.  It takes one or two arguments, just
+like <kbd>sort</kbd>, but its result &ndash; which is, of course, the median
+values along the dimension being sorted &ndash; has one fewer dimension than
+its input.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_47.html#Finite-Difference" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.10 Rank preserving (finite difference) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_49.html#Transposing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.5 Transposing" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

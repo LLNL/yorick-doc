@@ -1,0 +1,111 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Pseudo_002dIndex"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_41.html#Index-List" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.4 Selecting an arbitrary list of indices" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_43.html#Negative-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.6 Numbering a dimension from its last element" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Creating-a-pseudo_002dindex"></a>
+<h3 class="subsection">2.3.5 Creating a pseudo-index</h3>
+
+<p>A binary operation applied between two arrays of numbers yields an array
+of results in Yorick &ndash; the operation is performed once for each
+corresponding pair of elements of the operands.  Hence, if <kbd>rho</kbd> and
+<kbd>vol</kbd> are each four-by-three arrays, the expression <kbd>rho*vol</kbd>
+will be a four-by-three array of products, starting with
+<kbd>rho(1,1)*vol(1,1)</kbd>.
+</p>
+<p>This extension of binary operations to array operands is not always
+appropriate.  Instead of operating on the corresponding elements of
+arrays of the same shape, you may want to perform the operation between
+all pairs of elements.  The most common example is the outer product
+of two vectors <kbd>x</kbd> and <kbd>y</kbd>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">outer= x*y(-,);
+</pre></td></tr></table>
+
+<p>Here, if <kbd>x</kbd> were a four element vector, and <kbd>y</kbd> were a three
+element vector, <kbd>outer</kbd> would be the four-by-three array
+<kbd>[[x(1)*y(1), x(2)*y(1), x(3)*y(1), x(4)*y(1)], [x(1)*y(2),
+x(2)*y(2), x(3)*y(2), x(4)*y(2)], [x(1)*y(3), x(2)*y(3), x(3)*y(3),
+x(4)*y(3)]]</kbd>.
+</p>
+<p>In Yorick, this type of multiplication is still commutative.  That is,
+<kbd>x*y(-,)</kbd> is the same as <kbd>y(-,)*x</kbd>.  To produce the three-by-four
+transpose of the array <kbd>outer</kbd>, you would write <kbd>x(-,)*y</kbd>.
+</p>
+<p>I call the <kbd>-</kbd> sign, when used as an index, a pseudo-index because
+it actually inserts an additional dimension into the result array which
+was not present in the array being indexed.  By itself, the expression
+<kbd>y(-,)</kbd> is a one-by-three array (with the same three values as the
+three element vector <kbd>y</kbd>).  You may insert as many pseudo-indices
+into a list of subscripts as you like, at any location you like relative
+to the actual dimensions of the array you are indexing.  Hence,
+<kbd>outer(-,-,,-,)</kbd> would be a one-by-one-by-four-by-one-by-three array.
+</p>
+
+<p>By default, a pseudo-index produces a result dimension of length one.
+However, by appending an index range to the <kbd>-</kbd> sign, separated by
+a colon, you can produce a new dimension of any convenient length:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x = span(-10, 10, 100)(,-:1:50);
+y = span(-5, 5, 50)(-:1:100,);
+gauss2d = exp(-0.5*(x^2+y^2))/(2.0*pi);
+</pre></td></tr></table>
+
+<p>computes a normalized 2-D Gaussian function on a 100-by-50 rectangular
+grid of points in the xy-plane.  The pseudo-index <kbd>-:1:50</kbd> has 50
+elements, and <kbd>-:1:100</kbd> has 100.  For a pseudo-index of non-unit
+length, the values along the actual dimensions are simply copied, so
+that <kbd>span(-10, 10, 100)(,-:1:50)</kbd> is a 100-by-50 array consisting
+of 50 copies of <kbd>span(-10, 10, 100)</kbd>.
+</p>
+<p>If only the result <kbd>gauss2d</kbd> were required, a single default
+pseudo-index would have sufficed:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gauss2d = exp(-0.5*( span(-10,10,100)^2 +
+                     span(-5,5,50)(-,)^2 )) / (2.0*pi);
+</pre></td></tr></table>
+
+<p>However, the rectangular grid of points (<kbd>x</kbd>,<kbd>y</kbd>) is often
+required &ndash; as input to plotting routines for example.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_41.html#Index-List" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.4 Selecting an arbitrary list of indices" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_43.html#Negative-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.6 Numbering a dimension from its last element" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

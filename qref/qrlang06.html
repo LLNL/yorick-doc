@@ -1,0 +1,26 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Arithmetic and Comparison Operators</h2>
+<p>From highest to lowest precedence,
+</p>
+<p><tt>^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> raise to power
+<br><tt>* / %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> multiply, divide, modulo
+<br><tt>+ -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> add, subtract (also unary plus, minus)
+<br><tt>&lt;&lt; >>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> shift left, shift right
+<br><tt>>= &lt; &lt;= >&nbsp;</tt> (not) less, (not) greater (<tt>int</tt> result)
+<br><tt>== !=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> equal, not equal (<tt>int</tt> result)
+<br><tt>&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> bitwise and
+<br><tt>~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> bitwise xor (also unary bitwise complement)
+<br><tt>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> bitwise or
+<br><tt>=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> redefine or assign
+</p>
+<p>Any binary operator may be prefixed to <tt>=</tt> to produce an increment
+operator; thus <tt>x*=5</tt> is equivalent to <tt>x=x*5</tt>. Also, <tt>++x</tt>
+and <tt>--x</tt> are equivalent to <tt>x+=1</tt> and <tt>x-=1</tt>, respectively.
+Finally, <tt>x++</tt> and <tt>x--</tt> increment or decrement <tt>x</tt>
+by 1, but return the value of <tt>x</tt> <b>before</b> the operation.
+</p>
+
+

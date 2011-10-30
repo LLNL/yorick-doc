@@ -1,0 +1,193 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Finite-Difference"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_46.html#Statistical" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.9 Rank reducing (statistical) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_48.html#Sorting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.4 Sorting" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Rank-preserving-_0028finite-difference_0029-range-functions"></a>
+<h3 class="subsection">2.3.10 Rank preserving (finite difference) range functions</h3>
+
+<p>Because Yorick arrays almost invariably represent function values,
+Yorick provides numercal equivalents to the common operations of
+differential and integral calculus.  In order to handle functions of
+several variables in a straightforward manner, these operators are
+implemented as range functions.  Unlike the statistical range functions,
+which return a scalar result, the finite difference range functions do
+not reduce the rank of the subscripted array.  Instead, they preserve
+rank, in the same way that a simple index range <kbd>start:stop</kbd>
+preserves rank.  The available finite difference functions are:
+</p>
+
+<dl compact="compact">
+<dt> <kbd>cum</kbd></dt>
+<dd><p>returns the cumulative sums (sum of all values at smaller index, the
+first index of the result having a value of 0).  The result dimension
+has a length one greater than the dimension in the subscripted array.
+</p>
+</dd>
+<dt> <kbd>psum</kbd></dt>
+<dd><p>returns the partial sum (sum of all values at equal or smaller index)
+up to each element.  The result dimension has the same length as the
+dimension in the subscripted array.  This is the same as <kbd>cum</kbd>,
+except that the leading 0 value in the result is omitted.
+</p>
+</dd>
+<dt> <kbd>dif</kbd></dt>
+<dd><p>returns the pairwise difference between successive elements, positive
+when the function values increase along the dimension, negative when
+they decrease.  The result dimension has a length one less than the
+dimension of the subscripted array.  The <kbd>dif</kbd> function is the
+inverse of the <kbd>cum</kbd> function.
+</p>
+</dd>
+<dt> <kbd>zcen</kbd></dt>
+<dd><p>returns the pairwise average between successive elements.  The result
+dimension has a length one less than the dimension of the subscripted
+array.  The name is short for &ldquo;zone center&rdquo;.
+</p>
+</dd>
+<dt> <kbd>pcen</kbd></dt>
+<dd><p>returns the pairwise average between successive elements.  However, the
+two endpoints are copied unchanged, so that the result dimension has a
+length one greater than the dimension of the subscripted array.  The
+name is short for &ldquo;point center&rdquo;.
+</p>
+</dd>
+<dt> <kbd>uncp</kbd></dt>
+<dd><p>returns the inverse of the <kbd>pcen</kbd> operation.  (Gibberish will be the
+result of applying this function to an array dimension which was not
+produced by the <kbd>pcen</kbd> operation.)  The result dimension has a
+length one less than the dimension of the subscripted array.  The name
+is short for &ldquo;uncenter point centered&rdquo;.
+</p></dd>
+</dl>
+
+<p>The derivative <i>dy/dx</i> of a function <i>y(x)</i>, where <i>y</i> and <i>x</i>
+are represented by 1-D arrays <kbd>y</kbd> and <kbd>x</kbd> of equal length is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">deriv = y(dif)/x(dif);
+</pre></td></tr></table>
+
+<p>Note that <kbd>deriv</kbd> has one fewer element than either <kbd>y</kbd> or
+<kbd>x</kbd>.  The derivative is computed as if <i>y(x)</i> were the piecewise
+linear function passing through the given points <kbd>(x,y)</kbd>; there is
+one fewer line segment (slope) than point.
+</p>
+<p>The values <kbd>x</kbd> and <kbd>y</kbd> can be called &ldquo;point-centered&rdquo;, while the
+values <kbd>deriv</kbd> can be called &ldquo;zone-centered&rdquo;.  The <kbd>zcen</kbd> and
+<kbd>pcen</kbd> functions provide a simple mechanism for moving back and
+forth between point-centered and zone-centered quantities.  Usually,
+there will be several reasonable ways to point-center zone centered data
+and vice-versa.  For example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">deriv_pc1 = deriv(pcen);
+deriv_pc2 = y(dif)(pcen)/x(dif)(pcen);
+deriv_pc3 = y(pcen)(dif)/x(pcen)(dif);
+</pre></td></tr></table>
+
+<p>For a well-resolved function, the differences among these three arrays
+will be negligible.  That is, the differences are second order in
+<kbd>x(dif)</kbd>, which is often the order of the errors in the calculation
+that produced <kbd>x</kbd> and <kbd>y</kbd> in the first place.  If <kbd>x</kbd> and
+<kbd>y</kbd> represent <i>y(x)</i> more accurately that this, then you must know
+a better model of the shape of <i>y(x)</i> than the simple piecewise linear
+model, and you should use that model to select <kbd>deriv_pc1</kbd>,
+<kbd>deriv_pc2</kbd>, and <kbd>deriv_pc3</kbd>, or some other expression.
+</p>
+<p>An indefinite integral may be estimated using the trapezoidal rule:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">indef_integ = (y(zcen)*x(dif))(psum);
+</pre></td></tr></table>
+
+<p>Once again, <kbd>indef_integ</kbd> has one fewer point than <kbd>x</kbd> or
+<kbd>y</kbd>, because there is one fewer trapezoid than point.  This time,
+however, <kbd>indef_integ</kbd> is not zone centered.  Instead,
+<kbd>indef_integ</kbd> represents values at the upper (or lower) boundaries
+<kbd>x(2:)</kbd> (or <kbd>x(:-1)</kbd>).  Often, you want to think of the integral
+of <i>y(x)</i> as a point centered array of definite integrals from
+<kbd>x(1)</kbd> up to each of the <kbd>x(i)</kbd>.  In this case (which actually
+arises more frequently), use the <kbd>cum</kbd> function instead of
+<kbd>psum</kbd> in order to produce a result <kbd>def_integs</kbd> with the same
+number of points as the <kbd>x</kbd> and <kbd>y</kbd> arrays:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">def_integs = (y(zcen)*x(dif))(cum);
+</pre></td></tr></table>
+
+<p>For single definite integrals, the matrix multiply syntax can be used in
+conjunction with the <kbd>dif</kbd> range function.  For example, suppose you
+know the transmission fraction of the filter, <kbd>ff</kbd>, at several
+photon energies <kbd>ef</kbd>.  That is, <kbd>ff</kbd> and <kbd>ef</kbd> are 1-D arrays
+of equal length, specifying a filter transmission function as the
+piecewise linear function connecting the given points.  The final
+dimension of an array <kbd>brightness</kbd> represents an incident spectrum
+(any other dimensions represent different rays, say one ray per pixel of
+an imaging detector).  The 1-D array <kbd>gb</kbd> represents the group
+boundary energies &ndash; that is, the photon energies at the boundaries of
+the spectral groups represented in <kbd>brightness</kbd>.  The following
+Yorick statements compute the detector response:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">filter = integ(ff, ef, gb)(dif);
+response = brightness(..,+)*filter(+);
+</pre></td></tr></table>
+
+<p>For this application, the correct interpolation routine is <kbd>integ</kbd>.
+The integrated transmission function is evaluated at the boundaries
+<kbd>gb</kbd> of the groups; the effective transmission fraction for each
+group is the difference between the integral at the upper bin boundary
+and the lower bin boundary.  The <kbd>dif</kbd> range function computes these
+pairwise differences.  Since the <kbd>gb</kbd> array naturally has one more
+element than the final dimension of <kbd>brightness</kbd> (there is one more
+group boundary energy than group), and since <kbd>dif</kbd> reduces the
+length of a dimension by one, the <kbd>filter</kbd> array has the same length
+as the final dimension of <kbd>brightness</kbd>.
+</p>
+<p>Note that the <kbd>cum</kbd> function cannot be used to integrate
+<kbd>ff(ef)</kbd>, because the points <kbd>gb</kbd> at which the integral must be
+evaluated are not the same as the points <kbd>ef</kbd> at which the integrand
+is known.  Whenever the points at which the integral is required are the
+same (or a subset of) the points at which the integrand is known, you
+should perform the integral using the <kbd>zcen</kbd>, <kbd>dif</kbd>, and
+<kbd>cum</kbd> index functions, instead of the more general <kbd>integ</kbd>
+interpolator.
+</p>
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_46.html#Statistical" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.9 Rank reducing (statistical) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_48.html#Sorting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.4 Sorting" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

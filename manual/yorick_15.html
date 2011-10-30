@@ -1,0 +1,90 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="goto"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_14.html#for" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.2 The for statement" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_16.html#Scoping" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.5 Variable scope" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Using-break_002c-continue_002c-and-goto"></a>
+<h4 class="subsubsection">1.2.4.3 Using <kbd>break</kbd>, <kbd>continue</kbd>, and <kbd>goto</kbd></h4>
+
+<p>The <kbd>break</kbd> statement jumps out of the loop containing it.  The
+<kbd>continue</kbd> statement jumps to the end of the loop body,
+&ldquo;continuing&rdquo; with the next pass through the loop (if any).  In
+deeply nested loops &mdash; which are extremely rare in Yorick programs
+&mdash; you can jump to more general places using the <kbd>goto</kbd>
+statement.  For example, here is how to break out or continue from one
+or both levels of a doubly nested loop:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"> for (i=1 ; i&lt;=n ; ++i) {
+   for (j=1 ; j&lt;=m ; ++j) {
+     if (skip_to_next_j_now) continue;
+     if (skip_to_next_i_now) goto skip_i;
+     if (break_out_of_inner_loop_now) break;
+     if (break_out_of_both_loops_now) goto done;
+     more_statements_A;
+   }
+   more_statements_B;
+  skip_i:
+ }
+done:
+ more_statements_C;
+</pre></td></tr></table>
+
+<p>The <kbd>continue</kbd> jumps just after <kbd>more_statements_A</kbd>, the
+<kbd>break</kbd> just before <kbd>more_statements_B</kbd>.
+</p>
+<p>Break and continue statements may be used to escape from <kbd>while</kbd>
+or <kbd>do while</kbd> loops as well.
+</p>
+<p>If <kbd>while</kbd> tests the condition before the loop body, and <kbd>do
+while</kbd> checks after the loop body, you may have wondered what to do
+when you need to check the condition in the middle of the loop body.
+The answer is the &ldquo;do forever&rdquo; construction, plus the <kbd>break</kbd>
+statement (note the inversion of the sense of the condition):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">for (;;) {
+  body_before_test;
+  if (!condition) break;
+  body_after_test;
+}
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_14.html#for" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.2 The for statement" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_16.html#Scoping" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.5 Variable scope" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

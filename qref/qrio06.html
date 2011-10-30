@@ -1,0 +1,21 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Reading History Records</h2>
+<p>A binary file may have two groups of variables: those belonging to a
+set of history records, and non-record variables. The record variables
+may have different values in each record. The records are labeled by (optional)
+time and cycle numbers:
+</p>
+<p><tt>jt, <i>time</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> advance all open record files to record nearest
+<i>time</i>
+<br><tt>jt, <i>f, time</i>&nbsp;&nbsp;</tt> advance file <i>f</i> to record nearest
+<i>time</i>
+<br><tt>jc, <i>f, ncyc</i>&nbsp;&nbsp;</tt> advance file <i>f</i> to record nearest
+<i>ncyc</i>
+<br><tt>get_times(<i>f</i>)&nbsp;</tt> return list of record times
+<br><tt>get_ncycs(<i>f</i>)&nbsp;</tt> return list of record cycles
+</p>
+
+

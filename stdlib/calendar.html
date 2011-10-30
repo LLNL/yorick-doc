@@ -1,0 +1,135 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package calendar (in calendar.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="calendar.html#base60">base60</a></p>
+    <h3>C</h3>
+    <p><a href="calendar.html#calendar">calendar</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>D</h3>
+    <p><a href="calendar.html#datestamp">datestamp</a></p>
+    <h3>J</h3>
+    <p><a href="calendar.html#julian_day">julian_day</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>T</h3>
+    <p><a href="calendar.html#tz_set">tz_set</a></p>
+    <h3>U</h3>
+    <p><a href="calendar.html#unix_time">unix_time</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="base60"></a><h3>base60</h3>
+  <pre>DOCUMENT dec = base60(h, m, s)
+      or base60, h, m, s, dec
+  converts hours (or degrees) H, minutes M, and seconds S into
+  decimal hours (or degrees) DEC, in the first form.  In the
+  second form, DEC is the input, and H, M, and S are the outputs
+  (H and M are whole numbers of type double in that case).</pre>
+  <p>SEE ALSO: <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#julian_day">julian_day</a>, <a href="calendar.html#datestamp">datestamp</a>, <a href="calendar.html#base60">base60</a></p>
+</div>
+<div class="docblock"><a name="calendar"></a><h3>calendar</h3>
+  <pre>DOCUMENT jdn = calendar(y, m, d)
+      or calendar, y, m, d, jdn
+  returns the Julian Day Number, JDN, associated with year Y,
+  month M (1=Jan, 2=Feb, ..., 12=Dec) and day of month D in the
+  first form.  In the second form, JDN is the input, and Y, M,
+  and D are outputs.  
+
+  The Julian Day Number is a day count used by astronomers, which
+  is by definition independent of any calendar; each passing day
+  increments the count by one.  The zero day of the count falls a
+  bit before 4700 BC, for esoteric reasons (see Wikipedia).
+
+  Julian Day Number modulo 7 (JDN%7) is the day of the week, with
+  0=Mon, 1=Tue, ..., 6=Sun.
+
+  By default, Y, M, and D are in the modern Gregorian calendar.
+  However, with the julian=1 keyword in either form, calendar
+  treats Y, M, and D as the date in the Julian calendar, used
+  in Roman Catholic countries before 1582, in the British
+  empire before 1752, and in Eastern Orthodox countries well
+  into the twentieth century (again, see Wikipedia).
+
+  In the first form (when computing JDN), if Y<50, calendar
+  assumes 2000+Y, and if 50<=Y<100, calendar assumes 1900+Y,
+  unless the noabbrev=1 keyword is present, in which case it
+  assumes you are doing ill-advised archeological work.  In
+  the second form, the output Y will always include the century.
+  The julian=1 keyword implies noabbrev=1.
+</pre>
+  <p>SEE ALSO: <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#julian_day">julian_day</a>, <a href="calendar.html#datestamp">datestamp</a></p>
+</div>
+<div class="docblock"><a name="datestamp"></a><h3>datestamp</h3>
+  <pre>DOCUMENT ts = datestamp(y, m, d, h)
+      or datestamp, y, m, d, h, ts
+      or ts = datestamp(y, m, d, h, 1)
+  converts numeric year Y, month M, day D, and hour H into the 25
+  character string format TS returned by the timestamp() function.
+  The hour H can be a floating point number witha fractional part.
+  In the second form, returns Y, M, D, and H, given TS.
+  In the third form, returns Y, M, D, H, and TS for the current
+  local time, as returned by the timestamp() function.</pre>
+  <p>SEE ALSO: <a href="std-system.html#timestamp">timestamp</a>, <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#julian_day">julian_day</a>, <a href="calendar.html#base60">base60</a>, <a href="calendar.html#calendar">calendar</a></p>
+</div>
+<div class="docblock"><a name="julian_day"></a><h3>julian_day</h3>
+  <pre>DOCUMENT jd = julian_day(y, m, d, h)
+      or julian_day, y, m, d, h, jd
+      or jd = julian_day(now=1)
+  converts numeric year Y, month M, day D, and hour H into the
+  corresponding Julian Day, which includes the fractional part
+  of the day, measured from noon (not midnight) GMT.
+  The hour H can be a floating point number with a fractional part.
+  In the second form, returns Y, M, D, and H, given JD.
+  In the third form, returns JD for the current time.
+  This requires calculating your time zone, as noted below.
+
+  By default, the input or returned Y, M, D, H represent Greenwich
+  time (UT).  (The UNIX time is, by definition, in the Greenwich
+  time zone.)  However, with the loc=1 keyword in the first two
+  forms, Y, M, D, H are the local time.
+
+  The loc=1 or now=1 keywords require the time zone.  If it has not
+  been previously set, the tz_set function is invoked to set it.
+</pre>
+  <p>SEE ALSO: <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#calendar">calendar</a>, <a href="calendar.html#datestamp">datestamp</a>, <a href="calendar.html#base60">base60</a>, <a href="calendar.html#tz_set">tz_set</a></p>
+</div>
+<div class="docblock"><a name="tz_set"></a><h3>tz_set</h3>
+  <pre>DOCUMENT tz_set
+      or tz_set, offset
+  sets the tz_offset global variable, which is the difference
+  between local time and Greenwich mean time in seconds.  In the
+  second form, you specify the offset directly.  In the first form,
+  tz_set attempts to compute it, either from the UNIX time returned
+  by the timestamp function, or from the system date utility if
+  that is not available.  If neither of these attempts works,
+  sets tz_offset to zero.</pre>
+  <p>SEE ALSO: <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#julian_day">julian_day</a></p>
+</div>
+<div class="docblock"><a name="unix_time"></a><h3>unix_time</h3>
+  <pre>DOCUMENT t = unix_time(y, m, d, h)
+      or unix_time, y, m, d, h, t
+      or t = unix_time(now=1)
+  converts numeric year Y, month M, day D, and hour H into the
+  corresponding "UNIX time" T, the number of seconds since
+  1970 Jan 1 00:00:00 UTC = 2440587.5 JD.
+  The hour H can be a floating point number with a fractional part.
+  In the second form, returns Y, M, D, and H, given T.
+  In the third form, returns T for the current time.
+  This requires calculating your time zone, as noted below.
+
+  By default, the input or returned Y, M, D, H represent Greenwich
+  time (UT).  (The UNIX time is, by definition, in the Greenwich
+  time zone.)  However, with the loc=1 keyword in the first two
+  forms, Y, M, D, H are the local time.
+
+  The loc=1 or now=1 keywords require the time zone.  If it has not
+  been previously set, the tz_set function is invoked to set it.
+</pre>
+  <p>SEE ALSO: <a href="calendar.html#julian_day">julian_day</a>, <a href="calendar.html#calendar">calendar</a>, <a href="calendar.html#datestamp">datestamp</a>, <a href="calendar.html#base60">base60</a>, <a href="calendar.html#tz_set">tz_set</a></p>
+</div>

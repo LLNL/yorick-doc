@@ -1,0 +1,88 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package basfix (in basfix.i) - support for Basis-generated pdb files </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="basfix.html#baget">baget</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="basfix.html#baset">baset</a></p>
+    <p><a href="basfix.html#basfix">basfix</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>O</h3>
+    <p><a href="basfix.html#obasis">obasis</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="baget"></a><h3>baget</h3>
+  <pre>DOCUMENT baget(file, varname)
+  read and return the (first) variable named VARNAME in FILE.
+
+  The obasis function opens files read-only.  If you want to update
+  a PFB Basis-generated PDB file without altering its "@decorated"
+  variable names, open the file with updateb, then use baset to
+  modify variables.  Since you can only change the entire variable
+  with baset, you may want to read it first with baget.
+</pre>
+  <p>SEE ALSO: <a href="basfix.html#obasis">obasis</a>, <a href="basfix.html#baset">baset</a></p>
+</div>
+<div class="docblock"><a name="baset"></a><h3>baset</h3>
+  <pre>DOCUMENT baset, file, varname, value
+  set the (first) variable named VARNAME in FILE to VALUE.
+
+  The obasis function opens files read-only.  If you want to update
+  a PFB Basis-generated PDB file without altering its "@decorated"
+  variable names, open the file with updateb, then use baset to
+  modify variables.  Since you can only change the entire variable
+  with baset, you may want to read it first with baget.
+</pre>
+  <p>SEE ALSO: <a href="basfix.html#obasis">obasis</a>, <a href="basfix.html#baget">baget</a></p>
+</div>
+<div class="docblock"><a name="basfix"></a><h3>basfix</h3>
+  <pre>DOCUMENT #include "basfix.i"
+
+  Provides functions obasis, baset, and baget to try to cope with
+  Basis PDB file conventions.
+
+  By default, the openb function is overloaded by the obasis
+  function.  The original openb is called basfix_openb.  It is
+  unclear what side effects this might have, but they are probably
+  minor.  If you want to preserve the original openb function, set
+
+       basfix= 1;
+
+  BEFORE you include basfix.i.
+</pre>
+  <p>SEE ALSO: <a href="basfix.html#obasis">obasis</a>, <a href="basfix.html#baset">baset</a>, <a href="basfix.html#baget">baget</a></p>
+</div>
+<div class="docblock"><a name="obasis"></a><h3>obasis</h3>
+  <pre>DOCUMENT file= obasis(filename)
+      or file= openb(filename)
+      or file= openb(filename, clogfile)
+
+  (If you typed help,openb and are reading this, then consider the
+   latter two forms.  If you typed help,obasis, consider the first.
+   In either case, the original openb function is called basfix_openb.)
+
+  open the existing file FILENAME for read-only binary I/O.
+  (Use updateb or createb, respectively, to open an existing file
+   with read-write access or to create a new file.)
+  If the CLOGFILE argument is supplied, it represents the structure
+  of FILENAME in the Clog binary data description language.
+  After an openb, the file variable may be used to extract variables
+  from the file as if it were a structure instance.  That is, the
+  expression "file.var" refers to the variable "var" in file "file".
+  A complete list of the variable names present in the file may
+  be obtained using the get_vars function.  If the file contains
+  history records, the jt and jc functions may be used to set the
+  current record -- initially, the first record is current.
+  The restore function may be used to make memory copies of data
+  in the file; this will be faster than a large number of
+  references to "file.var".
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-fileio.html#open">open</a>, <a href="std-system.html#cd">cd</a>, <a href="std-filebin.html#show">show</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#get_vars">get_vars</a>, <a href="std-filebin.html#get_times">get_times</a>, <a href="std-filebin.html#get_times">get_ncycs</a>, <a href="std-filebin.html#get_member">get_member</a>, <a href="std-filebin.html#has_records">has_records</a>, <a href="std-filebin.html#set_blocksize">set_blocksize</a>, <a href="std-filebin.html#dump_clog">dump_clog</a>, <a href="std-filebin.html#read_clog">read_clog</a>, <a href="std-filebin.html#recover_file">recover_file</a>, <a href="std-filebin.html#openb_hooks">openb_hooks</a>, <a href="std-filebin.html#close102">open102</a>, <a href="std-filebin.html#close102">close102</a>, <a href="std-filebin.html#get_addrs">get_addrs</a>, <a href="basfix.html#baset">baset</a>, <a href="basfix.html#baget">baget</a></p>
+</div>

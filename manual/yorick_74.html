@@ -1,0 +1,115 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="multiple-windows"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_73.html#fma" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.3.1 fma and redraw" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Multiple-graphics-windows"></a>
+<h3 class="subsection">3.3.2 Multiple graphics windows</h3>
+
+<p>You can have up to eight graphics windows simultaneously.  Each window
+has its own display list, so you can build a picture in one window,
+switch to a second window for another plot, then return to the first
+window.  The windows are numbered 0 through 7.  The window command
+switches windows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">window, 1       // switch to window number 1
+window, 0       // switch back to default window
+</pre></td></tr></table>
+
+<p>If you switch to a window you have never used before, a new graphics
+window will appear on your screen.  (If you do not issue an explicit
+window command before your first graphics command, Yorick
+automatically creates window number 0 for you.)
+</p>
+<p>The window command takes several keywords.  The <kbd>wait=1</kbd> keyword
+pauses Yorick until the new window actually appears on your screen (if
+the window command creates a new window).  This is important under the X
+window system, which cannot draw anything until a newly created window
+actually appears.  If you write a program (such as Yorick&rsquo;s demo
+programs) which will produce graphical output, but you are not sure
+whether there have been any previous graphics commands, you should start
+with the statement:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">window, wait=1;
+</pre></td></tr></table>
+
+<p>The <kbd>style=</kbd> keyword to window specifies a particular graphics style
+for the window.  I&rsquo;ll return to graphics styles later.
+</p>
+<p>The <kbd>dpi=100</kbd> keyword specifies a 100 dot per inch window, rather
+than the default 75 dot per inch window.  The window you see on your
+screen is a replica of a portion of an 8.5 by 11 inch sheet of paper,
+and the dpi (either 75 or 100) refers to the number of screen pixels
+which will correspond to one inch on that sheet of paper if you were to
+tell Yorick to print the picture (see hcp).  Owing to the fonts
+available with X11R4, Yorick permits only the two scale factors.
+</p>
+<p>Initially, a Yorick window is a six inch by six inch window on the 8.5
+by 11 sheet, centered at the center of the upper 8.5 by 8.5 inch square
+for portrait orientation, or at the center of the rectangular sheet for
+landscape orientation.  (Portrait or landscape orientation is a function
+of the graphics style you choose.  Six inches is 450 pixels at 75 dpi or
+600 pixels at 100 dpi, so <kbd>dpi=75</kbd> makes a small window, while
+<kbd>dpi=100</kbd> makes a large window.)  You can resize the window (with
+your window manager), but Yorick will always use either the 75 or 100
+dot per inch scaling, so resizing a Yorick window is not very useful
+unless you want to use more than the six by six inch square that is
+initially visible.
+</p>
+<p>The <kbd>display=</kbd> keyword specifies a display other than your default
+display.  For example, if you have two screens you might use
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">window, 0
+window, 1, display=&quot;zaphod:0.1&quot;
+</pre></td></tr></table>
+
+<p>(if zaphod is the name of the machine running your X server) in order
+to create window number 0 on your default screen and window number 1
+on your second screen.
+</p>
+<p>You will rarely need the other keywords to the window command, which
+allow for a private colormap (for color table animation), turn the
+legends off in hardcopy output, and create a private hardcopy file for
+the sole use of that one window.  With the latter capability, you can
+write commands like eps that print the current picture, without
+affecting the main hardcopy file.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_73.html#fma" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.3.1 fma and redraw" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_75.html#Hardcopy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.4 Getting hardcopy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

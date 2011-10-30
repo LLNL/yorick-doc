@@ -1,0 +1,151 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-advanced (in std.i) - performance and interface optimizations </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>E</h3>
+    <p><a href="std-advanced.html#eq_nocopy">eq_nocopy</a></p>
+    <p><a href="std-advanced.html#errs2caller">errs2caller</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>S</h3>
+    <p><a href="std-advanced.html#swap">swap</a></p>
+    <h3>U</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-advanced.html#unref">unref</a></p>
+    <h3>W</h3>
+    <p><a href="std-advanced.html#wrap_args">wrap_args</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="eq_nocopy"></a><h3>eq_nocopy</h3>
+  <pre>DOCUMENT eq_nocopy, y, x
+  is the same as
+         y= x
+  except that if x is an array, it is not copied, even if it is
+  not a temporary (i.e.- an expression).  Having multiple variables
+  reference the same data can be confusing, which is why the default
+  = operation copies the array.  The most important use of eq_nocopy
+  involves pointers or lists:
+         y= *py
+         z= _car(list)
+  always causes the data pointed to by py to be copied, while
+         eq_nocopy, y, *py
+         eq_nocopy, z, _car(list)
+  does not copy the data - often more nearly what you wanted.
+  Note that scalar int, long, and double variables are always copied,
+  so you cannot count on eq_nocopy setting up an "equivalence"
+  between variables.
+</pre>
+  <p>SEE ALSO: <a href="std-advanced.html#swap">swap</a>, <a href="std-advanced.html#unref">unref</a>.</p>
+</div>
+<div class="docblock"><a name="errs2caller"></a><h3>errs2caller</h3>
+  <pre>DOCUMENT errs2caller, f1, f2, ...
+  makes function F1 (and optionally F2, ...) pass control for dbug
+  mode to its caller if a fault occurs inside F1.  This makes F1
+  behave more like a compiled function for its caller.  For example,
+  if you are writing a mathematical function, you can raise an
+  error in its caller rather than in the function itself -- which
+  is appropriate if the only errors your function raises are, for
+  example, domain errors.  Your function will then respond to a
+  domain error in the same way as, for example, asin(1.5).
+  If you want to wrap arguments of such a function, you need to call
+  errs2caller before wrap_args.</pre>
+  <p>SEE ALSO: <a href="std-advanced.html#wrap_args">wrap_args</a></p>
+</div>
+<div class="docblock"><a name="swap"></a><h3>swap</h3>
+  <pre>DOCUMENT swap, a, b;
+  Exchanges the contents of variables A and B without requiring any
+  temporary copy.  The result of the call is identical to:
+    tmp = a; a = b; b = tmp;
+  which makes a copy of A and then a copy of B.  Another possibility which
+  avoids any copy of A nor B is:
+    local tmp;
+    eq_nocopy, tmp, a; eq_nocopy, a, b; eq_nocopy, b, tmp;
+</pre>
+  <p>SEE ALSO: <a href="std-advanced.html#eq_nocopy">eq_nocopy</a>, <a href="std-advanced.html#unref">unref</a>.</p>
+</div>
+<div class="docblock"><a name="unref"></a><h3>unref</h3>
+  <pre>DOCUMENT unref(x)
+  Returns X, destroying X in the process if it is an array (useful to
+  deal with temporary big arrays).
+</pre>
+  <p>SEE ALSO: <a href="std-advanced.html#eq_nocopy">eq_nocopy</a>, <a href="std-advanced.html#swap">swap</a>.</p>
+</div>
+<div class="docblock"><a name="wrap_args"></a><h3>wrap_args</h3>
+  <pre>DOCUMENT wrap_args, interpreted_function
+  converts INTERPRETED_FUNCTION to a wrapped_func object,
+  which will accept an arbitrary argument list, then invoke
+  INTERPRETED_FUNCTION with a single wrapped_args object as
+  its argument.  The INTERPRETED_FUNCTION must be declared as:
+
+  func INTERPRETED_FUNCTION(args)
+  {
+    ...use args object to retrieve actual arguments...
+  }
+  wrap_args, INTEPRETED_FUNCTION;
+
+  After wrapping, you invoke the function as usual:
+
+  result = INTERPRETED_FUNCTION(arg1, key1=ka1, arg2, ...);
+
+  Unlike an ordinary interpreted function, a wrapped function
+  will accept any number of arguments, and keyword arguments
+  of any name.  Furthermore, unlike an ordinary function, you
+  can determine the number of arguments passed to the function,
+  the names of any simple variable references passed to the
+  function, and other useful information about the arguments.
+  You can set the external value of any simple variable passed
+  as an argument, as if it had been declared func f(..., &x, ...).
+
+  A wrapped_func function call is less efficient and requires
+  less transparent coding than an ordinary function call; the
+  advantage is that you can write a wrapped function which has
+  non-standard semantics, for example, like the save and restore
+  built-in functions (which use the names of the arguments passed
+  to them), or other special effects, like accepting arbitrary
+  keyword names.
+
+  The ARGS object, the single argument actually passed to
+  your INTEPRETED_FUNCTION, is a wrapped_args object, which has
+  the following Eval methods:
+
+    ARGS(-)   returns [keyname1, keyname2, keyname3, ...]
+                the actual names of the keyword arguments passed
+                or nil [] if no keywords were passed
+                ARGS(*,) is a synonym for ARGS(-) to resemble
+                the object syntax (see help,oxy), although the
+                analogy is not exact.
+    ARGS(0)   returns the number of positional arguments passed
+                ARGS(*) is a synonym for ARGS(0) to resemble
+                the object syntax (see help,oxy), although the
+                analogy is not exact.
+    ARGS(i)   returns the i-th positional argument
+                i can also be a string to return a keyword argument,
+                  or a negative number to return the -i-th keyword
+    ARGS, i, value
+              sets the value of argument i, as if it were
+                an output variable declared as func f(..., &x, ...)
+    ARGS(-,i) returns the name of argument i if it was
+                passed as a simple variable reference
+                ARGS(*,i) is a synonym for ARGS(-,i) to resemble
+                the object syntax (see help,oxy), although the
+                analogy is not exact.
+    ARGS(0,i) returns a flag describing the argument:
+      0 if argument is a simple variable reference (set value works)
+      1 if argument is an expression (set value will be discarded)
+      2 if argument does not exist (as opposed to simply nil)
+  For obscure situations, there is also:
+    ARGS(i,:) same as ARGS(i), except if the argument is an lvalue,
+                it is not fetched.
+  This rather arcane feature permits you to pass an argument of the
+  form f.x, where f is a file handle, to functions like dimsof or
+  structof without triggering a read of the file.  Do not assign
+  the result to a variable; use it only as an argument to another
+  function.  The first time you call ARGS(i) for argument i, the
+  lvalue is fetched, and ARGS(i,:) will do nothing special.</pre>
+  <p>SEE ALSO: <a href="std-advanced.html#errs2caller">errs2caller</a></p>
+</div>

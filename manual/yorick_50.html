@@ -1,0 +1,109 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Broadcasting"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_49.html#Transposing" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.5 Transposing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_51.html#Dimension-Lists" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.7 Dimension Lists" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Broadcasting-and-conformability"></a>
+<h2 class="section">2.6 Broadcasting and conformability</h2>
+
+<p>Two arrays need not have identical shape in order for a binary operation
+between them to make perfect sense:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">y = a*x^3 + b*x^2 + c*x + d;
+</pre></td></tr></table>
+
+<p>The obvious intent of this assignment statement is that <kbd>y</kbd> should
+have the same shape as <kbd>x</kbd>, each value of <kbd>y</kbd> being the value of
+the polynomial at the corresponding <kbd>y</kbd>.
+</p>
+<p>Alternatively, array valued coefficients <kbd>a</kbd>, <kbd>b</kbd>, ...,
+represent an array of several polynomials &ndash; perhaps Legendre
+polynomials.  Then, if <kbd>x</kbd> is a scalar value, the meaning is again
+obvious; <kbd>y</kbd> should have the same shape as the coefficient arrays,
+each <kbd>y</kbd> being the value of the corresponding polynomial.
+</p>
+<p>A binary operation is performed once for each element, so that
+<kbd>a+b</kbd>, say, means
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">a(i,j,k,l) + b(i,j,k,l)
+</pre></td></tr></table>
+
+<p>for every <kbd>i, j, k, l</kbd> (taking <kbd>a</kbd> and <kbd>b</kbd> to be four
+dimensional).  The lengths of corresponding indices must match in order
+for this procedure to make sense; Yorick signals a &ldquo;conformability
+error&rdquo; when the shapes of binary operands do not match.
+</p>
+<p>However, if <kbd>a</kbd> had only three dimensions, <kbd>a+b</kbd> still makes
+sense as:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">a(i,j,k) + b(i,j,k,l)
+</pre></td></tr></table>
+
+<p>This sense extends to two dimensional, one dimensional, and finally
+to scalar <kbd>a</kbd>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">a + b(i,j,k,l)
+</pre></td></tr></table>
+
+<p>which is how Yorick interpreted the monomial <kbd>x^3</kbd> in the first
+example of this section.  The shapes of <kbd>a</kbd> and <kbd>b</kbd> are
+conformable as long as the dimensions which they have in common all
+have the same lengths; the shorter operand simply repeats its values
+for every index of a dimension it doesn&rsquo;t have.  This repitition is
+called &ldquo;broadcasting&rdquo;.
+</p>
+<p>Broadcasting is the key to Yorick&rsquo;s array syntax.  In practical
+situations, it is just as likely for the <kbd>a</kbd> array to be missing the
+second (<kbd>j</kbd>) dimension of the <kbd>b</kbd> array as its last (<kbd>l</kbd>)
+dimension.  To handle this case, Yorick will broadcast any unit-length
+dimension in addition to a missing final dimension.  Hence, if the
+<kbd>a</kbd> array has a second dimension of length one, <kbd>a+b</kbd>
+means:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">a(i,1,k,l) + b(i,j,k,l)
+</pre></td></tr></table>
+
+<p>for every <kbd>i, j, k, l</kbd>.  The pseudo-index can be used to generate
+such unit length indices when necessary (see <a href="yorick_42.html#Pseudo_002dIndex">Pseudo-Index</a>).
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_49.html#Transposing" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.5 Transposing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_51.html#Dimension-Lists" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.7 Dimension Lists" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

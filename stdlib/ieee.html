@@ -1,0 +1,126 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package ieee (in ieee.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="ieee.html#as_chars">as_chars</a></p>
+    <h3>I</h3>
+    <p><a href="ieee.html#ieee">ieee</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="ieee.html#ieee_set">ieee_set</a></p>
+    <p><a href="ieee.html#ieee_test">ieee_test</a></p>
+    <h3>N</h3>
+    <p><a href="ieee.html#native_align">native_align</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="ieee.html#native_flim">native_dlim</a></p>
+    <p><a href="ieee.html#native_fix">native_fix</a></p>
+    <p><a href="ieee.html#native_flim">native_flim</a></p>
+    <p><a href="ieee.html#native_flt">native_flt</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="as_chars"></a><h3>as_chars</h3>
+  <pre>DOCUMENT as_chars(x)
+         as_chars, x, xnew
+  return the bits of X as an array of char
+  return value has leading dimension of sizeof(x(1)), otherwise
+    same dimensions as X
+  in second form, sets bits of X to char array XNEW</pre>
+  <p>SEE ALSO: <a href="ieee.html#ieee_test">ieee_test</a>, <a href="ieee.html#ieee_set">ieee_set</a></p>
+</div>
+<div class="docblock"><a name="ieee"></a><h3>ieee</h3>
+  <pre>DOCUMENT ieee.i
+  native_align, native_fix, native_flt, native_flim, native_dlim
+    describe the binary formats of the native primitive numeric types
+  as_chars(x)      -- gets/sets bits of x as char array
+  ieee_test(x)     -- tests for ieee754 special values
+  ieee_set(x,what) -- sets ieee754 special values</pre>
+  
+</div>
+<div class="docblock"><a name="ieee_set"></a><h3>ieee_set</h3>
+  <pre>DOCUMENT ieee_set, x, what
+  set X to ieee754 special value WHAT
+  X must be an array of float or double values
+    (note that X cannot be a scalar double value)
+  WHAT = 0  means leave unchanged
+  WHAT = 1  means set to Inf
+  WHAT = 2  means set to qNaN
+  WHAT = 3  means set to sNaN
+  WHAT = 4  means set to 0.0
+    negate WHAT to set the sign bit of X as well
+
+  WHAT may be an array conformable with X, in order to set only
+  some values of X
+
+  this routine is a no-op if this machine is not known to
+  support these ieee754 special values
+
+Warning-- apparently there is no universal standard for what
+  constitutes signalling versus quiet NaN
+  on MIPS and HPPA architectures, qNaN and sNaN are reversed
+</pre>
+  <p>SEE ALSO: <a href="ieee.html#ieee_test">ieee_test</a>, <a href="ieee.html#as_chars">as_chars</a></p>
+</div>
+<div class="docblock"><a name="ieee_test"></a><h3>ieee_test</h3>
+  <pre>DOCUMENT ieee_test(x)
+  return values:
+  0 if this is an ordinary number
+  -1 if this is -Inf
+  1 if this is Inf
+  2 if this is qNaN
+  3 if this is sNaN
+  4 if this is a denormal
+  5 if this is a denormal which will be treated as NaN
+
+Warning-- apparently there is no universal standard for what
+  constitutes signalling versus quiet NaN
+  on MIPS and HPPA architectures, qNaN and sNaN are reversed
+</pre>
+  <p>SEE ALSO: <a href="ieee.html#ieee_set">ieee_set</a>, <a href="ieee.html#as_chars">as_chars</a></p>
+</div>
+<div class="docblock"><a name="native_align"></a><h3>native_align</h3>
+  <pre>DOCUMENT native_align =
+  [char_align, short_align, int_align, long_align,
+   float_align, double_align, pointer_align, struct_align]
+
+ struct_align may be -1 for ppc/ibm interpretation
+                     -2 for ppc/gcc interpretation</pre>
+  
+</div>
+<div class="docsee">
+  <h3>native_dlim</h3><p>SEE: <a href="#native_flim">native_flim</a></p>
+</div>
+<div class="docblock"><a name="native_fix"></a><h3>native_fix</h3>
+  <pre>DOCUMENT native_fix = [short_format, int_format, long_format]
+  format = [sizeof(type), order]
+  order = 1 for big-endian (most significant byte first)
+         -1 for little-endian (least significant byte first)</pre>
+  
+</div>
+<div class="docblock"><a name="native_flim"></a><h3>native_flim</h3>
+  <pre>DOCUMENT native_flim = [big, tiny, eps]
+  big is the biggest number
+  tiny is the smallest non-denormal number
+  eps is smallest number such that 1+eps != 1</pre>
+  
+</div>
+<div class="docblock"><a name="native_flt"></a><h3>native_flt</h3>
+  <pre>DOCUMENT native_flt = [float_format, double_format]
+  format = [sizeof(type), order, sgn_addr, exp_addr, exp_size,
+            man_addr, man_size, man_norm, exp_bias, denorm]
+  order = 1 for big-endian (most significant byte first)
+         -1 for little-endian (least significant byte first)
+     (interpreted code here does not yet handle VAX middle-endian)
+  addr, size are bit address (from msb), number of bits
+  man_norm is 0 if mantissa 1-bit implied, 1 if 1-bit explicit
+  exp_bias is the exponent field for 1.0
+  denorm is 0 if there are no denormals
+            1 if there are functioning denormals
+            2 if denormals exist but are treated as NaNs</pre>
+  
+</div>

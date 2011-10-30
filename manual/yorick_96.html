@@ -1,0 +1,85 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Embedding"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_95.html#slice3" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.5 slice3 interface" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_97.html#Mechanics-of-embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.1 Mechanics of embedding" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Embedding-Compiled-Routines-Inside-Yorick"></a>
+<h1 class="chapter">4. Embedding Compiled Routines Inside Yorick</h1>
+
+<p>You can create a custom version of Yorick containing your own C or
+Fortran compiled code.  If you are careful, your custom version will be
+easily portable to any site where Yorick has been installed.  You will
+considerably ease portability problems (read &ldquo;future hassles for
+yourself&rdquo;) by writing in ANSI C, which is a portable language, as
+opposed to Fortran, which is not.
+</p>
+<p>My experience with C++ is that its portability is intermediate between
+ANSI C and Fortran.  You should be able to write C++ packages for Yorick
+by using the <kbd>extern &quot;C&quot;</kbd> statement for the interface routines
+called by the interpreter.  I don&rsquo;t encourage this, however, since the
+interpreted language removes many of the motives for programming in C++
+in the first place.
+</p>
+<p>If you do choose Fortran, stick to a strict subset of ANSI Fortran 77.
+Do not attempt to pass character variables into or out of interface
+routines, nor put them in common blocks.  Also, try not to use common
+blocks to pass inputs to or receive outputs from your interface
+routines.  (This is possible; if you enjoy Fortran programming,
+presumably you&rsquo;ll enjoy figuring out a portable way to do this.)
+</p>
+<p>Whether you write in Fortran or C, <em>do not</em> attempt to do I/O of
+any sort in your compiled code.  The whole idea of embedding routines
+inside Yorick is to let Yorick handle all I/O &ndash; text and graphics.
+Another way to say this is, that you want the interface between the
+interpreted and compiled code to be arrays of numbers.  Let the
+interpreter handle reading text to produce the input arrays, or
+writing graphics to display the output arrays.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_97.html#Mechanics-of-embedding">&bull; Mechanics of embedding</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      How to use the make utility.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_98.html#API-for-embedding">&bull; API for embedding</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Using the yapi.h interface.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_99.html#Embedding-example">&bull; Embedding example</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Three ways to implement a function.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_95.html#slice3" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.5 slice3 interface" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_97.html#Mechanics-of-embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.1 Mechanics of embedding" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

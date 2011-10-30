@@ -1,0 +1,295 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Mechanics-of-embedding"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_98.html#API-for-embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.2 API for embedding" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Mechanics-of-embedding-1"></a>
+<h2 class="section">4.1 Mechanics of embedding</h2>
+
+<p>In the following discussion, I refer to three directories:
+&lsquo;<tt>Y_SITE</tt>&rsquo; is the directory where the architecture independent
+parts of Yorick reside; everything Yorick needs at runtime is here.
+&lsquo;<tt>Y_HOME</tt>&rsquo; is the directory where the libraries and executables you
+need to build custom versions are stored.  &lsquo;<tt>Y_LAUNCH</tt>&rsquo; is the
+directory containing the executable for your version of Yorick.  When
+you run Yorick, the names of all three directories are available as
+variables; for example, start yorick and type <kbd>Y_HOME</kbd> to print
+the name of that directory.  Also, I will only discuss the UNIX
+program development environment; the same system works tolerably well
+under the MinGW or Cygwin environments under Windows, which you can
+use with the commerical MSVC++ compiler if you wish.
+</p>
+<p>The paradigm for a compiled extension to yorick is called a &ldquo;compiled
+package&rdquo;.  The idea is that a compiled package should be
+indistinguishable from an interpreted package (for example, a <kbd>.i</kbd>
+file in the interpreted library that comes with the distribution).  In
+the case of a purely interpreted package, you write an include file
+defining your interface.  So, too, you must lay out the interpreted
+interface for a compiled package in an interpreted include file, which
+we call here &lsquo;<tt>mypkg.i</tt>&rsquo;.  Including &lsquo;<tt>mypkg.i</tt>&rsquo; makes the
+compiled package available to the interpreter.
+</p>
+<p>The compiled package include file &lsquo;<tt>mypkg.i</tt>&rsquo; must contain one
+statement, executed before any code that uses the compiled routines,
+which distinguishes it from an interpreted package:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plug_in, &quot;mypkg&quot;;
+</pre></td></tr></table>
+
+<p>Here, we assume the package name is &ldquo;mypkg&rdquo;, matching the name of
+the file &lsquo;<tt>mypkg.i</tt>&rsquo;, but you can choose any name for the package
+you like.  In fact, you can have any number of include files defining
+different pieces of the interface to a single compiled package, say
+&lsquo;<tt>mypkg1.i</tt>&rsquo;, &lsquo;<tt>mypkg2.i</tt>&rsquo;, and so on, each of which would
+contain the above <kbd>plug_in</kbd> call.  In a single compiled package
+source directory, however, there can be at most one package name.  (If
+you want to build more than one binary library, use more than one
+directory to hold the source.)
+</p>
+<p>An alternative form is permitted to make it possible to design package
+include files which are compatible with pre-version-1.6 yorick:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if (!is_void(plug_in)) plug_in, &quot;mypkg&quot;;
+</pre></td></tr></table>
+
+<p>Unlike an interpreted package, before you can use a compiled package,
+you naturally need to compile it!  This is done using the UNIX make
+utility.  Yorick has tools to assist in this build process.  The first
+is the (interpreted) package <kbd>make.i</kbd> which generates, or at least
+provides a starting point for, the &lsquo;<tt>Makefile</tt>&rsquo;, which is the input
+to the make utility.  The second is <kbd>codger</kbd>, a (compiled) yorick
+utility which generates the C source code that bridges between your
+compiled code and yorick&rsquo;s internal compiled code.
+</p>
+<p>First, you need to put your C (and/or Fortran) source and header files
+in the directory containing the &lsquo;<tt>mypkg.i</tt>&rsquo; interface definition
+file(s).  Note that you need to design your C interface in an
+&ldquo;interpreter friendly&rdquo; fashion.  For example, it is worthless to
+write a special function that computes a special function at a single
+point, because the interpreter would need to call it in a loop to
+compute a vector of values, most likely erasing the entire advantage
+of writing your special function in compiled code.  At the very least,
+therefore, you want your compiled functions to accept a (potentially
+long) list of inputs an produce the corresponding list of outputs.
+</p>
+<p>When all the <kbd>.i</kbd>, <kbd>.c</kbd>, and <kbd>.h</kbd> (and Fortran) source
+files for your package have been collected in this package source
+directory (and any unrelated source removed), execute the command
+(in that directory):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">yorick -batch make.i
+</pre></td></tr></table>
+
+<p>This creates a &lsquo;<tt>Makefile</tt>&rsquo; for your package.  In simple cases,
+this &lsquo;<tt>Makefile</tt>&rsquo; will be all you need to build your compiled
+package; in more complicated situations, you will need to edit it by
+hand to fill in critical information the &lsquo;<tt>make.i</tt>&rsquo; package is
+unable to determine by its examination of the source files.
+</p>
+<p>The main reason you may need to edit &lsquo;<tt>Makefile</tt>&rsquo; by hand is to add
+the loader flags (-l and -L) for dependencies, that is, third party
+libraries, your compiled code calls.  You may also need to add
+compiler flags (-I) to enable the compiler to find the header files
+which declare the interfaces to such libraries.  The corresponding
+macros in &lsquo;<tt>Makefile</tt>&rsquo; are <kbd>PKG_DEPLIBS</kbd> and <kbd>PKG_CFLAGS</kbd>,
+respectively.  In general, if your package needs modifications like
+this and you wish it to be buildable by non-experts, you will need to
+modify &lsquo;<tt>Makefile</tt>&rsquo; to pick up the results of a configure script,
+which you will need to design and write.  This can be far more
+difficult than writing the compiled package in the first place.  The
+message is, do not rely on dependent libraries other than libc, libm,
+and the utilities in yorick&rsquo;s own &lsquo;<tt>play/</tt>&rsquo; portability layer if
+you can possibly avoid it.
+</p>
+<p>Once you have the &lsquo;<tt>Makefile</tt>&rsquo;, use the make utility to actually
+build your compiled package.  The &lsquo;<tt>Makefile</tt>&rsquo; invokes a more
+extensive input file, &lsquo;<tt>Y_HOME/Makepkg</tt>&rsquo;, which provides a number
+of useful &ldquo;targets&rdquo; you can build.  Here are several useful make
+command lines; read &lsquo;<tt>Y_HOME/Makepkg</tt>&rsquo; to learn about others:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">make           # build release version
+make install   # install it (may need to be root)
+make debug     # build debuggable version
+make clean     # delete all but source and Makefile
+</pre></td></tr></table>
+
+<p>The release version of your package will be a dynamically loadable
+yorick plugin, as long as yorick is able to handle plugins on your
+platform.  The debuggable version, and the release version on
+platforms which do not permit plugins, will be a complete yorick
+executable, which statically loads your new package at startup.  (By
+default, it will simply be called &ldquo;yorick&rdquo;, and installing such a
+release version it will overwrite the yorick you used to run
+<kbd>-batch make.i</kbd>, so be careful.)
+</p>
+<p>When you want to build your package on a different platform, you always
+need to run:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">yorick -batch make.i
+</pre></td></tr></table>
+<p>before you rerun the make utility.
+</p>
+<p>In addition to the <kbd>plug_in</kbd> command, your &lsquo;<tt>mypkg.i</tt>&rsquo; package
+interface file must contain statements that allow the <kbd>codger</kbd>
+utility to construct the bridge code.  During the build process,
+<kbd>codger</kbd> examines &lsquo;<tt>mypkg.i</tt>&rsquo; package, looking for interpreted
+<kbd>extern</kbd> statements outside any function body.  For each such
+<kbd>extern</kbd> statement, codger generates an interpreted built-in
+function, or an interpreted pointer to compiled global data.  When the
+interpreter includes the file, these statements are no-ops, except
+that they may include DOCUMENT comments that are added to the
+interactive <kbd>help</kbd> system.  The &lsquo;<tt>mypkg.i</tt>&rsquo; file will usually
+also contain purely interpreted wrapper code for these compiled
+objects, in order to create a high-quality interpreted API.
+</p>
+<p>For example, when <kbd>codger</kbd> finds this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">extern my_func;
+/* DOCUMENT my_func(input)
+     returns the frobnostication of the array INPUT.
+ */
+</pre></td></tr></table>
+
+<p>in the &lsquo;<tt>mypkg.i</tt>&rsquo; file, it connects the interpreted symbol
+<kbd>my_func</kbd> to a compiled function <kbd>Y_my_func</kbd> with a specific
+prototype, which you are responsible for writing, as described in the
+following section.
+</p>
+<p>Often you can avoid all these details; codger can generate
+<kbd>Y_my_func</kbd> for you automatically.  To do this, put PROTOTYPE
+comments in your startup include file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func my_func(input)
+/* DOCUMENT my_func(input)
+     returns the frobnostication of the array INPUT.
+ */
+{
+  return my_func_raw(input, numberof(input));
+}
+extern my_func_raw;
+/* PROTOTYPE
+   double my_func_C_name(double array input, long length)
+ */
+</pre></td></tr></table>
+
+<p>This generates a wrapper for a C function which takes a single array as
+input and returns a scalar result.  If the function had been Fortran,
+it would have looked like this (Fortran passes all arguments by reference
+&ndash; that is, as if they were arrays):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func my_func(input)
+/* DOCUMENT my_func(input)
+     returns the frobnostication of the array INPUT.
+ */
+{
+  return my_func_raw(input, numberof(input));
+}
+extern my_func_raw;
+/* PROTOTYPE FORTRAN
+   double my_func_Fortran_name(double array input, long array length)
+ */
+</pre></td></tr></table>
+
+<p>Legal data types for the function return result in the <kbd>PROTOTYPE</kbd>
+comment are: void (i.e.- a subroutine), char, short, int, long, float,
+or double.
+</p>
+<p>Legal data types for the function parameters in the <kbd>PROTOTYPE</kbd>
+comment are: void (only if there are no other parameters), char, short,
+int, long, float, double, string (char *, guaranteed 0-terminated), or
+pointer (void *).  These may be followed by the word &quot;array&quot;, which
+becomes &quot;*&quot; in the C source code, to indicate an array of that type.
+The parameter name is optional.
+</p>
+<p>The <kbd>DOCUMENT</kbd> comment should start with <kbd>/* DOCUMENT</kbd>.  They
+will be returned by the interpreted command <kbd>help, my_func</kbd>, and be
+included in the poor- man&rsquo;s document produced by Yorick&rsquo;s &quot;mkdoc&quot;
+command (see &lsquo;<tt>Y_HOME/i/mkdoc.i</tt>&rsquo;).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">extern my_global;
+reshape, my_global, datatype;
+</pre></td></tr></table>
+
+<p>attaches the interpreted variable <kbd>my_global</kbd> to a C-compiled global of
+the same name, which has the data type <kbd>datatype</kbd> (this must have been
+declared in a previous struct or be one of the primitive types).  If you
+want <kbd>my_global</kbd> to be attached to a global variable of a different
+name, use:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">extern my_global;
+/* EXTERNAL my_global_C_name */
+reshape, my_global, datatype;
+</pre></td></tr></table>
+
+<p>To attach to a Fortran common block, say
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">        double var1, var2, var3
+        common /my_common/ var1, var2, var3
+        save /my_common/
+</pre></td></tr></table>
+
+<p>(note that this doesn&rsquo;t make sense unless the common block is saved outside
+the scope of the functions in which it is used) use:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">struct my_common_type { double var1, var2, var3; }
+extern my_common;
+/* EXTERNAL FORTRAN my_common */
+reshape, my_common, my_common_type;
+</pre></td></tr></table>
+
+<p>If you mix double, integer, and real data in a single common block, you
+can ensure that you won&rsquo;t have any alignment difficulties by putting
+all the doubles first, followed by integers and reals.  If you don&rsquo;t do
+this, you&rsquo;re relying on the existence of a Fortran compiler switch which
+forces proper data alignment &ndash; some machine someday won&rsquo;t have this.
+</p>
+<p>This covers all the things that <kbd>codger</kbd> can do for you.
+</p>
+<p>The primary goal of this system is portability.  The basic idea is
+that all the platform specific problems can be solved once in the
+&lsquo;<tt>Y_HOME/Makepkg</tt>&rsquo; file, so that you can easily move your compiled
+packages from one platform to another.  With the advent of plugins,
+this system also must cope with packages which are either statically
+or dynamically loaded, and the same source code must work for either
+case.  The secondary goal is that the final users should do nothing
+different to use a compiled package than they would to use an
+interpreted package.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_98.html#API-for-embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.2 API for embedding" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

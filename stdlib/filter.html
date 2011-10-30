@@ -1,0 +1,323 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package filter (in filter.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="filter.html#butter">butter</a></p>
+    <h3>C</h3>
+    <p><a href="filter.html#cauer">cauer</a></p>
+    <p><a href="filter.html#cheby1">cheby1</a></p>
+    <p><a href="filter.html#cheby2">cheby2</a></p>
+    <h3>F</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="filter.html#filter">filter</a></p>
+    <p><a href="filter.html#fil_analyze">fil_analyze</a></p>
+    <p><a href="filter.html#fil_bessel">fil_bessel</a></p>
+    <p><a href="filter.html#fil_butter">fil_butter</a></p>
+    <p><a href="filter.html#fil_cauer">fil_cauer</a></p>
+    <p><a href="filter.html#fil_cheby1">fil_cheby1</a></p>
+    <p><a href="filter.html#fil_cheby2">fil_cheby2</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="filter.html#fil_delay">fil_delay</a></p>
+    <p><a href="filter.html#fil_make">fil_make</a></p>
+    <p><a href="filter.html#fil_poly">fil_poly</a></p>
+    <p><a href="filter.html#fil_response">fil_response</a></p>
+    <h3>T</h3>
+    <p><a href="filter.html#to_db">to_db</a></p>
+    <p><a href="filter.html#to_phase">to_phase</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="butter"></a><h3>butter</h3>
+  <pre>DOCUMENT butter(np, w)
+      or butter(np, w, wc, db)
+
+  return frequency response (amplitude) for Butterworth filter;
+  the parameters are the same as for fil_butter.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_butter">fil_butter</a></p>
+</div>
+<div class="docblock"><a name="cauer"></a><h3>cauer</h3>
+  <pre>DOCUMENT cauer(np, ripple, atten, w)
+      or cauer(np, ripple, atten, w, wc, db)
+
+  return frequency response (amplitude) for Cauer filter;
+  the parameters are the same as for fil_cauer.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_cauer">fil_cauer</a></p>
+</div>
+<div class="docblock"><a name="cheby1"></a><h3>cheby1</h3>
+  <pre>DOCUMENT cheby1(np, ripple, w)
+      or cheby1(np, ripple, w, wc, db)
+
+  return frequency response (amplitude) for Chebyshev filter;
+  the parameters are the same as for fil_cheby1.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_cheby1">fil_cheby1</a></p>
+</div>
+<div class="docblock"><a name="cheby2"></a><h3>cheby2</h3>
+  <pre>DOCUMENT cheby2(np, atten, w)
+      or cheby2(np, atten, w, wc, db)
+
+  return frequency response (amplitude) for inverse Chebyshev filter;
+  the parameters are the same as for fil_cheby2.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_cheby2">fil_cheby2</a></p>
+</div>
+<div class="docblock"><a name="filter"></a><h3>filter</h3>
+  <pre>DOCUMENT filter(filt, dt, signal)
+
+  apply the filter FILT to the input SIGNAL, which is sampled
+  at times spaced by DT.  The filter is assumed to be normalized
+  to an angular frequency (e.g.- radians per second), unless
+  DT<0, in which case FILT is assumed to be normalized to a
+  circular frequency (e.g.- Hz or GHz).
+
+  The result will have the same length as SIGNAL; be sure to pad
+  SIGNAL if you need the response to go beyond that time, or
+  you can use the pad=n keyword to force the returned result to
+  have N samples more than SIGNAL.
+
+  If the shift= keyword is non-nil and non-0, then the result
+  is shifted backward in time by the filter group delay at
+  zero frequency.
+
+  The impulse response of the FILT is also assumed to be shorter
+  than the duration of signal, and SIGNAL is assumed to be sampled
+  finely enough to resolve the FILT impulse response.
+
+  FILT is an array of double, which represents a filter with
+  a particular finite list of zeroes and poles.  See the specific
+  functions to construct filters from poles and zeroes (fil_make),
+  or classic Bessel, Butterworth, Chebyshev, inverse Chebyshev, or
+  Cauer (elliptic) designs.  With fil_analyze, you can find the
+  poles and zeroes of a FILT.  The format for FILT is:
+
+  FILT is an array of double with the following meanings:
+    FILT(1) = np = number of poles  (integer >= 0)
+    FILT(2) = nz = number of zeroes (integer >= 0)
+    FILT(3) = reserved
+    FILT(4:4+nz) = coefficients for numerator
+              = [a0, a1, a2, a3, ..., anz]
+    FILT(5+nz:4+nz+np) = coefficents for denominator (if np>0)
+              = [b1, b2, b3, ..., bnp]
+
+  The Laplace transform (s-transform) of the filter response is
+
+    L[FILT] = (a0 + a1*s + a2*s^2 + a3*s^3 + ...) /
+              ( 1 + b1*s + b2*s^2 + b3*s^3 + ...)
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_bessel">fil_bessel</a>, <a href="filter.html#fil_butter">fil_butter</a>, <a href="filter.html#fil_cheby1">fil_cheby1</a>, <a href="filter.html#fil_cheby2">fil_cheby2</a>, <a href="filter.html#fil_cauer">fil_cauer</a>, <a href="filter.html#fil_response">fil_response</a>, <a href="filter.html#fil_make">fil_make</a>, <a href="filter.html#fil_analyze">fil_analyze</a>, <a href="filter.html#to_db">to_db</a>, <a href="filter.html#to_phase">to_phase</a></p>
+</div>
+<div class="docblock"><a name="fil_analyze"></a><h3>fil_analyze</h3>
+  <pre>DOCUMENT fil_analyze, filt, poles, zeroes
+
+  given a FILT, return the complex POLES and ZEROES, sorted in
+  order of increasing imaginary part.  The real parts of POLES will
+  all be negative if the FILT is stable.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_make">fil_make</a></p>
+</div>
+<div class="docblock"><a name="fil_bessel"></a><h3>fil_bessel</h3>
+  <pre>DOCUMENT filt= fil_bessel(np, wc, db)
+
+  returns the lowpass Bessel filter with NP poles, normalized
+  such that at angular frequency WC, the attenuation is DB decibels.
+  (That is, the attenuation factor is 10^(.05*DB) at WC,
+   so that to_db(response(filt,WC))==DB.)
+
+  A Bessel filter has the most nearly constant group delay time
+  d(phase)/dw of any filter of the same order.  It minimizes pulse
+  distortion, but does not cut off very rapidly in frequency.
+
+  If WC is nil or zero, it defaults to 1.0.
+
+  If DB is nil, the filter is normalized such that both the s^0
+  and s^NP terms are 1, unless the natural= keyword is non-zero,
+  in which case the filter is normalized such that the group delay
+  d(phase)/dw is -1 at w=0.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a></p>
+</div>
+<div class="docblock"><a name="fil_butter"></a><h3>fil_butter</h3>
+  <pre>DOCUMENT filt= fil_butter(np, wc, db)
+
+  returns the lowpass Butterworth filter with NP poles, normalized
+  such that at angular frequency WC, the attenuation is DB decibels.
+  (That is, the attenuation factor is 10^(.05*DB) at WC,
+   so that to_db(response(filt,WC))==DB.)
+
+  A Butterworth filter is the best Taylor series approximation to
+  the ideal lowpass filter (a step in frequency) response at both
+  w=0 and w=infinity.
+
+  For wc=1 and db=10*log10(2), the square of the Butterworth frequency
+  response is 1/(1+w^(2*np)).
+
+  If WC is nil or zero, it defaults to 1.0.
+
+  If DB is nil, the filter is normalized "naturally", which is the
+  same as DB=10*log10(2).
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a>, <a href="filter.html#butter">butter</a></p>
+</div>
+<div class="docblock"><a name="fil_cauer"></a><h3>fil_cauer</h3>
+  <pre>DOCUMENT filt= fil_cauer(np, ripple, atten, wc, db)
+      or filt= fil_cauer(np, ripple, -skirt, wc, db)
+
+  returns the lowpass Cauer (elliptic) filter with NP poles, passband
+  ripple RIPPLE and stopband attenuation ATTEN decibels, normalized
+  such that at angular frequency WC, the attenuation is DB decibels.
+  (That is, the attenuation factor is 10^(.05*DB) at WC,
+   so that to_db(response(filter,WC))==DB.)
+
+  If the third parameter is negative, its absolute value is SKIRT,
+  the ratio of the frequency at which the stopband attenuation is
+  first reached to the frequency at which the passband ends (where
+  the attenuation is RIPPLE).  The closer to 1.0 SKIRT is, the
+  smaller the equivalent ATTEN would be.  The external variable
+  cauer_other is set to ATTEN if you provide SKIRT, and to SKIRT
+  if you provide ATTEN.
+
+  The Cauer filter has NP zeroes as well as NP poles.
+
+  Consider the four parameters: (1) filter order, (2) transition
+  ("skirt") bandwidth, (3) passband ripple, and (4) stopband ripple.
+  Given any three of these, the Cauer filter minimizes the fourth.
+
+  If WC is nil or zero, it defaults to 1.0.
+
+  If DB is nil, the filter is normalized "naturally", which is the
+  same as DB=RIPPLE.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a>, <a href="filter.html#cauer">cauer</a></p>
+</div>
+<div class="docblock"><a name="fil_cheby1"></a><h3>fil_cheby1</h3>
+  <pre>DOCUMENT filt= fil_cheby1(np, ripple, wc, db)
+
+  returns the lowpass Chebyshev type I filter with NP poles, and
+  passband ripple RIPPLE decibels, normalized such that at
+  angular frequency WC, the attenuation is DB decibels.
+  (That is, the attenuation factor is 10^(.05*DB) at WC,
+   so that to_db(response(filter,WC))==DB.)
+
+  A Chebyshev type I filter gives the smallest maximum error over the
+  passband for any filter that is a Taylor series approximation to
+  the ideal lowpass filter (a step in frequency) response at
+  w=infinity.  It has NP/2 ripples of amplitude RIPPLE in its passband,
+  and a smooth stopband.
+
+  For wc=1 and db=ripple, the square of the Chebyshev frequency
+  response is 1/(1+eps2*Tnp(w)), where eps2 = 10^(ripple/10)-1,
+  and Tnp is the np-th Chebyshev polynomial, cosh(np*acosh(x)) or
+  cos(np*acos(x)).
+
+  If WC is nil or zero, it defaults to 1.0.
+
+  If DB is nil, the filter is normalized "naturally", which is the
+  same as DB=RIPPLE.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a>, <a href="filter.html#cheby1">cheby1</a></p>
+</div>
+<div class="docblock"><a name="fil_cheby2"></a><h3>fil_cheby2</h3>
+  <pre>DOCUMENT filt= fil_cheby2(np, atten, wc, db)
+
+  returns the lowpass Chebyshev type II filter with NP poles, and
+  stopband attenuation ATTEN decibels, normalized such that at
+  angular frequency WC, the attenuation is DB decibels.
+  (That is, the attenuation factor is 10^(.05*DB) at WC,
+   so that to_db(response(filter,WC))==DB.)
+
+  This is also called an inverse Chebyshev filter, since its poles
+  are the reciprocals of a Chebyshev type I filter.  It has NP zeroes
+  as well as NP poles.
+
+  A Chebyshev type II filter gives the smallest maximum leakage over
+  the stopband for any filter that is a Taylor series approximation to
+  the ideal lowpass filter (a step in frequency) response at
+  w=0.  It has NP/2 ripples of amplitude ATTEN in its stopband,
+  and a smooth passband.
+
+  For wc=1 and db=ripple, the square of the inverse Chebyshev frequency
+  response is 1 - 1/(1+eps2*Tnp(1/w)), where eps2 = 10^(ripple/10)-1 =
+  1/(10^(atten/10)-1) and Tnp is the np-th Chebyshev polynomial,
+  cosh(np*acosh(x)) or cos(np*acos(x)).
+
+  If WC is nil or zero, it defaults to 1.0.
+
+  If DB is nil, the filter is normalized "naturally", which is the
+  same as DB=ATTEN.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a>, <a href="filter.html#cheby2">cheby2</a></p>
+</div>
+<div class="docblock"><a name="fil_delay"></a><h3>fil_delay</h3>
+  <pre>DOCUMENT fil_delay(filt)
+      or fil_delay(filt, 1)
+
+  return the group delay d(phase)/dw at w=0 (zero frequency) for
+  filter FILT.  By default, FILT is assumed to be normalized 
+  to an angular frequency (e.g.- radians per second), but if
+  the 2nd parameter is non-nil and non-0 FILT is assumed to be
+  normalized to a circular frequency (e.g.- Hz or GHz).
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_butter">fil_butter</a>, <a href="filter.html#fil_bessel">fil_bessel</a>, <a href="filter.html#fil_cheby1">fil_cheby1</a>, <a href="filter.html#fil_cheby2">fil_cheby2</a>, <a href="filter.html#fil_response">fil_response</a>, <a href="filter.html#to_db">to_db</a>, <a href="filter.html#to_phase">to_phase</a></p>
+</div>
+<div class="docblock"><a name="fil_make"></a><h3>fil_make</h3>
+  <pre>DOCUMENT filt= fil_make(poles, zeroes)
+
+  given the complex POLES and ZEROES, return a FILT.  The real
+  parts of POLES must all be negative to make a stable FILT.
+  Both POLES and ZEROES must occur in conjugate pairs in order to
+  make a real filter (the returned filter is always real).
+
+  The returned filter always has a0=1 (its DC gain is 1).
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_analyze">fil_analyze</a></p>
+</div>
+<div class="docblock"><a name="fil_poly"></a><h3>fil_poly</h3>
+  <pre>DOCUMENT fil_poly(c, x)
+  return c(1) + c(2)*x + c(3)*x^2 + c(4)*x^3 + ...</pre>
+  
+</div>
+<div class="docblock"><a name="fil_response"></a><h3>fil_response</h3>
+  <pre>DOCUMENT fil_response(filt, w)
+
+  return the complex response of FILT at the frequencies W.
+  The frequency scale for W depends on how FILT has been scaled;
+  filters are rational functions in W.
+
+  The to_db and to_phase functions may be useful for extracting
+  the attenuation and phase parts of the complex response.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_butter">fil_butter</a>, <a href="filter.html#fil_bessel">fil_bessel</a>, <a href="filter.html#fil_cheby1">fil_cheby1</a>, <a href="filter.html#fil_cheby2">fil_cheby2</a>, <a href="filter.html#fil_delay">fil_delay</a>, <a href="filter.html#to_db">to_db</a>, <a href="filter.html#to_phase">to_phase</a></p>
+</div>
+<div class="docblock"><a name="to_db"></a><h3>to_db</h3>
+  <pre>DOCUMENT to_db(signal, ref)
+      or to_db(signal)
+
+  return 20.*log10(abs(SIGNAL)/REF), the number of decibels
+  corresponding to the input SIGNAL.  REF defaults to 1.0.
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_response">fil_response</a>, <a href="filter.html#to_phase">to_phase</a></p>
+</div>
+<div class="docblock"><a name="to_phase"></a><h3>to_phase</h3>
+  <pre>DOCUMENT to_phase(signal)
+      or to_phase(signal, 1)
+
+  return atan(SIGNAL.im,SIGNAL.re), the phase of the input SIGNAL.
+  If the second argument is present and non-0, the phase will be in
+  degrees; by default the phase is in radians.
+
+  To_phase attempts to unroll any jumps from -180 to +180 degrees
+  or vice-versa; zero phase will be taken somewhere near the middle
+  of the signal.  The external variable to_phase_eps controls the
+  details of this unrolling; you can turn off unrolling by setting
+  to_phase_eps=0.0 (initially it is 0.3).
+</pre>
+  <p>SEE ALSO: <a href="filter.html#fil_response">fil_response</a>, <a href="filter.html#to_phase">to_phase</a></p>
+</div>

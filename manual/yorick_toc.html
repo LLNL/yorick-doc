@@ -1,0 +1,181 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="SEC_Contents"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><img src="../images/dmg-next.png" border="0" alt="Forward" align="middle"/></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<h1>Table of Contents</h1>
+<div class="contents">
+
+<ul class="toc">
+  <li><a name="toc-Basic-Ideas" href="yorick_1.html#Basics">1. Basic Ideas</a>
+  <ul class="toc">
+    <li><a name="toc-Simple-Statements-1" href="yorick_2.html#Simple-Statements">1.1 Simple Statements</a>
+    <ul class="toc">
+      <li><a name="toc-Defining-a-variable" href="yorick_3.html#Define-variable">1.1.1 Defining a variable</a></li>
+      <li><a name="toc-Invoking-a-procedure" href="yorick_4.html#Call-procedure">1.1.2 Invoking a procedure</a></li>
+      <li><a name="toc-Printing-an-expression" href="yorick_5.html#Print-expression">1.1.3 Printing an expression</a></li>
+    </ul></li>
+    <li><a name="toc-Flow-Control-Statements" href="yorick_6.html#Flow-control">1.2 Flow Control Statements</a>
+    <ul class="toc">
+      <li><a name="toc-Defining-a-function" href="yorick_7.html#Define-function">1.2.1 Defining a function</a></li>
+      <li><a name="toc-Defining-Procedures" href="yorick_8.html#Define-procedure">1.2.2 Defining Procedures</a></li>
+      <li><a name="toc-Conditional-Execution" href="yorick_9.html#Conditionals">1.2.3 Conditional Execution</a>
+      <ul class="toc">
+        <li><a name="toc-General-if-and-else-constructs" href="yorick_10.html#if_002delse-constructs">1.2.3.1 General <kbd>if</kbd> and <kbd>else</kbd> constructs</a></li>
+        <li><a name="toc-Combining-conditions-with-_0026_0026-and-_007c_007c" href="yorick_11.html#logical-operators">1.2.3.2 Combining conditions with <kbd>&amp;&amp;</kbd> and <kbd>||</kbd></a></li>
+      </ul></li>
+      <li><a name="toc-Loops-1" href="yorick_12.html#Loops">1.2.4 Loops</a>
+      <ul class="toc">
+        <li><a name="toc-The-while-and-do-while-statements" href="yorick_13.html#while-and-do">1.2.4.1 The <kbd>while</kbd> and <kbd>do while</kbd> statements</a></li>
+        <li><a name="toc-The-for-statement" href="yorick_14.html#for">1.2.4.2 The <kbd>for</kbd> statement</a></li>
+        <li><a name="toc-Using-break_002c-continue_002c-and-goto" href="yorick_15.html#goto">1.2.4.3 Using <kbd>break</kbd>, <kbd>continue</kbd>, and <kbd>goto</kbd></a></li>
+      </ul></li>
+      <li><a name="toc-Variable-scope" href="yorick_16.html#Scoping">1.2.5 Variable scope</a>
+      <ul class="toc">
+        <li><a name="toc-extern-statements" href="yorick_17.html#extern">1.2.5.1 <kbd>extern</kbd> statements</a></li>
+        <li><a name="toc-local-statements" href="yorick_18.html#local">1.2.5.2 <kbd>local</kbd> statements</a></li>
+      </ul>
+</li>
+    </ul></li>
+    <li><a name="toc-The-Interpreted-Environment" href="yorick_19.html#Environment">1.3 The Interpreted Environment</a>
+    <ul class="toc">
+      <li><a name="toc-Starting_002c-stopping_002c-and-interrupting-Yorick" href="yorick_20.html#Starting">1.3.1 Starting, stopping, and interrupting Yorick</a></li>
+      <li><a name="toc-Include-files" href="yorick_21.html#Include">1.3.2 Include files</a>
+      <ul class="toc">
+        <li><a name="toc-A-sample-include-file" href="yorick_22.html#Sample-include">1.3.2.1 A sample include file</a></li>
+        <li><a name="toc-Comments-1" href="yorick_23.html#Comments">1.3.2.2 Comments</a></li>
+        <li><a name="toc-DOCUMENT-comments" href="yorick_24.html#DOCUMENT">1.3.2.3 <kbd>DOCUMENT</kbd> comments</a></li>
+        <li><a name="toc-Where-Yorick-looks-for-include-files" href="yorick_25.html#Include-path">1.3.2.4 Where Yorick looks for include files</a></li>
+        <li><a name="toc-The-custom_002ei-file-and-i_002dstart_002f-directory" href="yorick_26.html#Customizing">1.3.2.5 The &lsquo;<tt>custom.i</tt>&rsquo; file and &lsquo;<tt>i-start/</tt>&rsquo; directory</a></li>
+      </ul></li>
+      <li><a name="toc-The-help-function" href="yorick_27.html#Help">1.3.3 The <kbd>help</kbd> function</a></li>
+      <li><a name="toc-The-info-function" href="yorick_28.html#Info">1.3.4 The <kbd>info</kbd> function</a></li>
+      <li><a name="toc-Prompts-1" href="yorick_29.html#Prompts">1.3.5 Prompts</a></li>
+      <li><a name="toc-Shell-commands_002c-removing-and-renaming-files" href="yorick_30.html#Shell-commands">1.3.6 Shell commands, removing and renaming files</a></li>
+      <li><a name="toc-Error-Messages" href="yorick_31.html#Errors">1.3.7 Error Messages</a>
+      <ul class="toc">
+        <li><a name="toc-Runtime-errors-1" href="yorick_32.html#Runtime-errors">1.3.7.1 Runtime errors</a></li>
+        <li><a name="toc-How-to-respond-to-a-runtime-error" href="yorick_33.html#Simple-debugging">1.3.7.2 How to respond to a runtime error</a></li>
+      </ul>
+</li>
+    </ul>
+</li>
+  </ul></li>
+  <li><a name="toc-Using-Array-Syntax" href="yorick_34.html#Arrays">2. Using Array Syntax</a>
+  <ul class="toc">
+    <li><a name="toc-Creating-Arrays-1" href="yorick_35.html#Creating-Arrays">2.1 Creating Arrays</a></li>
+    <li><a name="toc-Interpolating-1" href="yorick_36.html#Interpolating">2.2 Interpolating</a></li>
+    <li><a name="toc-Indexing-1" href="yorick_37.html#Indexing">2.3 Indexing</a>
+    <ul class="toc">
+      <li><a name="toc-Scalar-indices-and-array-order" href="yorick_38.html#Scalar-Index">2.3.1 Scalar indices and array order</a></li>
+      <li><a name="toc-Selecting-a-range-of-indices" href="yorick_39.html#Index-Range">2.3.2 Selecting a range of indices</a></li>
+      <li><a name="toc-Nil-index-refers-to-an-entire-dimension" href="yorick_40.html#Nil-Index">2.3.3 Nil index refers to an entire dimension</a></li>
+      <li><a name="toc-Selecting-an-arbitrary-list-of-indices" href="yorick_41.html#Index-List">2.3.4 Selecting an arbitrary list of indices</a></li>
+      <li><a name="toc-Creating-a-pseudo_002dindex" href="yorick_42.html#Pseudo_002dIndex">2.3.5 Creating a pseudo-index</a></li>
+      <li><a name="toc-Numbering-a-dimension-from-its-last-element" href="yorick_43.html#Negative-Index">2.3.6 Numbering a dimension from its last element</a></li>
+      <li><a name="toc-Using-a-rubber-index" href="yorick_44.html#Rubber_002dIndex">2.3.7 Using a rubber index</a></li>
+      <li><a name="toc-Marking-an-index-for-matrix-multiplication" href="yorick_45.html#Matrix-Multiply">2.3.8 Marking an index for matrix multiplication</a></li>
+      <li><a name="toc-Rank-reducing-_0028statistical_0029-range-functions" href="yorick_46.html#Statistical">2.3.9 Rank reducing (statistical) range functions</a></li>
+      <li><a name="toc-Rank-preserving-_0028finite-difference_0029-range-functions" href="yorick_47.html#Finite-Difference">2.3.10 Rank preserving (finite difference) range functions</a></li>
+    </ul></li>
+    <li><a name="toc-Sorting-1" href="yorick_48.html#Sorting">2.4 Sorting</a></li>
+    <li><a name="toc-Transposing-1" href="yorick_49.html#Transposing">2.5 Transposing</a></li>
+    <li><a name="toc-Broadcasting-and-conformability" href="yorick_50.html#Broadcasting">2.6 Broadcasting and conformability</a></li>
+    <li><a name="toc-Dimension-Lists-1" href="yorick_51.html#Dimension-Lists">2.7 Dimension Lists</a></li>
+  </ul></li>
+  <li><a name="toc-Graphics-1" href="yorick_52.html#Graphics">3. Graphics</a>
+  <ul class="toc">
+    <li><a name="toc-Primitive-plotting-functions" href="yorick_53.html#Plotting-primitives">3.1 Primitive plotting functions</a>
+    <ul class="toc">
+      <li><a name="toc-plg-1" href="yorick_54.html#plg">3.1.1 plg</a></li>
+      <li><a name="toc-pldj-1" href="yorick_55.html#pldj">3.1.2 pldj</a></li>
+      <li><a name="toc-plm-1" href="yorick_56.html#plm">3.1.3 plm</a></li>
+      <li><a name="toc-plc-and-plfc" href="yorick_57.html#plc">3.1.4 plc and plfc</a></li>
+      <li><a name="toc-plf-1" href="yorick_58.html#plf">3.1.5 plf</a></li>
+      <li><a name="toc-pli-1" href="yorick_59.html#pli">3.1.6 pli</a></li>
+      <li><a name="toc-plfp-1" href="yorick_60.html#plfp">3.1.7 plfp</a></li>
+      <li><a name="toc-plv-1" href="yorick_61.html#plv">3.1.8 plv</a></li>
+      <li><a name="toc-plt-1" href="yorick_62.html#plt">3.1.9 plt</a></li>
+    </ul></li>
+    <li><a name="toc-Plot-limits-and-relatives" href="yorick_63.html#Plot-limits">3.2 Plot limits and relatives</a>
+    <ul class="toc">
+      <li><a name="toc-limits-1" href="yorick_64.html#limits">3.2.1 limits</a>
+      <ul class="toc">
+        <li><a name="toc-Zooming-with-the-mouse" href="yorick_65.html#mouse-zooming">3.2.1.1 Zooming with the mouse</a></li>
+        <li><a name="toc-Saving-plot-limits" href="yorick_66.html#saving-limits">3.2.1.2 Saving plot limits</a></li>
+        <li><a name="toc-Forcing-square-limits" href="yorick_67.html#square-limits">3.2.1.3 Forcing square limits</a></li>
+      </ul></li>
+      <li><a name="toc-logxy-1" href="yorick_68.html#logxy">3.2.2 logxy</a></li>
+      <li><a name="toc-gridxy-1" href="yorick_69.html#gridxy">3.2.3 gridxy</a></li>
+      <li><a name="toc-palette-1" href="yorick_70.html#palette">3.2.4 palette</a></li>
+      <li><a name="toc-Color-model-1" href="yorick_71.html#Color-model">3.2.5 Color model</a></li>
+    </ul></li>
+    <li><a name="toc-Managing-a-display-list" href="yorick_72.html#Display-list">3.3 Managing a display list</a>
+    <ul class="toc">
+      <li><a name="toc-fma-and-redraw" href="yorick_73.html#fma">3.3.1 fma and redraw</a></li>
+      <li><a name="toc-Multiple-graphics-windows" href="yorick_74.html#multiple-windows">3.3.2 Multiple graphics windows</a></li>
+    </ul></li>
+    <li><a name="toc-Getting-hardcopy" href="yorick_75.html#Hardcopy">3.4 Getting hardcopy</a>
+    <ul class="toc">
+      <li><a name="toc-Color-hardcopy-1" href="yorick_76.html#Color-hardcopy">3.4.1 Color hardcopy</a></li>
+      <li><a name="toc-Binary-CGM-caveats" href="yorick_77.html#CGM-hardcopy">3.4.2 Binary CGM caveats</a></li>
+      <li><a name="toc-Encapsulated-PostScript" href="yorick_78.html#EPS-hardcopy">3.4.3 Encapsulated PostScript</a></li>
+    </ul></li>
+    <li><a name="toc-Graphics-style-1" href="yorick_79.html#Graphics-style">3.5 Graphics style</a>
+    <ul class="toc">
+      <li><a name="toc-Style-keyword" href="yorick_80.html#style-keyword">3.5.1 Style keyword</a></li>
+      <li><a name="toc-style_002ei-functions" href="yorick_81.html#style_002ei">3.5.2 &lsquo;<tt>style.i</tt>&rsquo; functions</a></li>
+      <li><a name="toc-Coordinate-systems" href="yorick_82.html#plsys">3.5.3 Coordinate systems</a></li>
+      <li><a name="toc-Ticks-and-labels" href="yorick_83.html#ticks-and-labels">3.5.4 Ticks and labels</a></li>
+    </ul></li>
+    <li><a name="toc-Queries_002c-edits_002c-and-legends" href="yorick_84.html#Query-and-edit">3.6 Queries, edits, and legends</a>
+    <ul class="toc">
+      <li><a name="toc-Legends" href="yorick_85.html#legends">3.6.1 Legends</a></li>
+      <li><a name="toc-plq-and-pledit-1" href="yorick_86.html#plq-and-pledit">3.6.2 plq and pledit</a></li>
+    </ul></li>
+    <li><a name="toc-Defaults-for-keywords" href="yorick_87.html#pldefault">3.7 Defaults for keywords</a></li>
+    <li><a name="toc-Writing-new-plotting-functions" href="yorick_88.html#Custom-plot-functions">3.8 Writing new plotting functions</a></li>
+    <li><a name="toc-Animation-1" href="yorick_89.html#Animation">3.9 Animation</a></li>
+    <li><a name="toc-3D-graphics-interfaces" href="yorick_90.html#g_t3D-graphics">3.10 3D graphics interfaces</a>
+    <ul class="toc">
+      <li><a name="toc-Coordinate-mapping" href="yorick_91.html#g_t3D-mapping">3.10.1 Coordinate mapping</a></li>
+      <li><a name="toc-Lighting" href="yorick_92.html#g_t3D-lighting">3.10.2 Lighting</a></li>
+      <li><a name="toc-gnomon" href="yorick_93.html#g_t3D-gnomon">3.10.3 gnomon</a></li>
+      <li><a name="toc-plwf-interface" href="yorick_94.html#plwf">3.10.4 plwf interface</a></li>
+      <li><a name="toc-slice3-interface" href="yorick_95.html#slice3">3.10.5 slice3 interface</a></li>
+    </ul>
+</li>
+  </ul></li>
+  <li><a name="toc-Embedding-Compiled-Routines-Inside-Yorick" href="yorick_96.html#Embedding">4. Embedding Compiled Routines Inside Yorick</a>
+  <ul class="toc">
+    <li><a name="toc-Mechanics-of-embedding-1" href="yorick_97.html#Mechanics-of-embedding">4.1 Mechanics of embedding</a></li>
+    <li><a name="toc-API-for-embedding-1" href="yorick_98.html#API-for-embedding">4.2 API for embedding</a></li>
+    <li><a name="toc-Embedding-example-1" href="yorick_99.html#Embedding-example">4.3 Embedding example</a>
+    <ul class="toc">
+      <li><a name="toc-Using-PROTOTYPE-1" href="yorick_100.html#Using-PROTOTYPE">4.3.1 Using <kbd>PROTOTYPE</kbd></a></li>
+      <li><a name="toc-Using-yapi_002eh-1" href="yorick_101.html#Using-yapi_002eh">4.3.2 Using &lsquo;<tt>yapi.h</tt>&rsquo;</a></li>
+    </ul>
+</li>
+  </ul>
+</li>
+</ul>
+</div>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><img src="../images/dmg-next.png" border="0" alt="Forward" align="middle"/></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

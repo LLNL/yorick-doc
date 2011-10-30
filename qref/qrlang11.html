@@ -1,0 +1,23 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Calling Functions</h2>
+<table><tbody>
+<tr><td><i>f</i><tt>(</tt><i>arg1, ..., argN </i><tt>)</tt></td>
+<td>invoke <i>f</i> as a function</td></tr>
+<tr><td><i>f</i><tt>,</tt> <i>arg1, ..., argN</i></td>
+<td>invoke <i>f</i> as a subroutine, discard return</td></tr>
+</tbody></table>
+<p>Arguments which are omitted are passed to the function as nil. In addition
+to positional arguments, a function (invoked by either of the above two
+mechanisms). Keyword arguments look like this:
+</p>
+<p><i>f</i><tt>,</tt><i>arg1, keyA= exprA, keyB= exprB, arg2, ...</i>
+</p>
+<p>where <i>keyA</i> and <i>keyB</i> are the names of keyword arguments
+of the function <i>f</i>. Omitted keywords are passed to <i>f</i> as nil
+values. Keywords typically set optional values which have defaults.
+</p>
+
+

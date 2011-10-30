@@ -1,0 +1,57 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package series (in series.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>S</h3>
+    <p><a href="series.html#series_n">series_n</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="series.html#series_r">series_r</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="series.html#series_s">series_s</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="series_n"></a><h3>series_n</h3>
+  <pre>DOCUMENT series_n(r, s)
+  returns the minimum number n of terms required for the geometric
+  series
+     1 + r + r^2 + r^3 + ... + r^n = s
+  to reach at least the given value s.  An alternate viewpoint is
+  that n is the minimum number of terms required to achieve the
+  sum s, with a ratio no larger than r.
+  Returns 0 if r<1 and s>1/(1-r), or if s<1.
+  The routine makes the most sense for r>1 and s substantially
+  greater than 1.  The intended use is to determine the minimum
+  number of zones required to span a given thickness t with a given
+  minimum zone size z, and maximum taper ratio r (assumed >1 here):
+     n= series_n(r, t/z);
+  With this n, you have the option of adjusting r or z downwards
+  (using series_r or series_s, respectively) to achieve the final
+  desired zoning.
+  R or S or both may be arrays, as long as they are conformable.</pre>
+  <p>SEE ALSO: <a href="series.html#series_s">series_s</a>, <a href="series.html#series_r">series_r</a></p>
+</div>
+<div class="docblock"><a name="series_r"></a><h3>series_r</h3>
+  <pre>DOCUMENT series_r(s, n)
+  returns the ratio r of the finite geometric series, given the sum s:
+     1 + r + r^2 + r^3 + ... + r^n = s
+  Using n<0 will return the the reciprocal of n>0 result, that is,
+     series_r(s, -n) == 1.0/series_r(s, n)
+  If n==0, returns s-1 (the n==1 result).
+  S or N or both may be arrays, as long as they are conformable.</pre>
+  <p>SEE ALSO: <a href="series.html#series_s">series_s</a>, <a href="series.html#series_n">series_n</a></p>
+</div>
+<div class="docblock"><a name="series_s"></a><h3>series_s</h3>
+  <pre>DOCUMENT series_s(r, n)
+  returns the sum s of the finite geometric series
+     1 + r + r^2 + r^3 + ... + r^n
+  Using n<0 is equivalent to using the reciprocal of r, that is,
+     series_s(r, -n) == series_s(1./r, n)
+  R or N or both may be arrays, as long as they are conformable.</pre>
+  <p>SEE ALSO: <a href="series.html#series_r">series_r</a>, <a href="series.html#series_n">series_n</a></p>
+</div>

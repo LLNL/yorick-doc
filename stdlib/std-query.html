@@ -1,0 +1,330 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-query (in std.i) - finding out variable type and properties </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-query.html#am_subroutine">am_subroutine</a></p>
+    <h3>D</h3>
+    <p><a href="std-query.html#dimsof">dimsof</a></p>
+    <h3>I</h3>
+    <p><a href="std-query.html#identof">identof</a></p>
+    <p><a href="std-query.html#is_array">is_array</a></p>
+    <p><a href="std-query.html#is_integer">is_complex</a></p>
+    <p><a href="std-query.html#is_func">is_func</a></p>
+    <p><a href="std-query.html#is_integer">is_integer</a></p>
+    <p><a href="std-query.html#is_list">is_list</a></p>
+    <p><a href="std-query.html#is_scalar">is_matrix</a></p>
+    <p><a href="std-query.html#is_integer">is_numerical</a></p>
+    <p><a href="std-query.html#is_integer">is_pointer</a></p>
+    <p><a href="std-query.html#is_range">is_range</a></p>
+    <p><a href="std-query.html#is_integer">is_real</a></p>
+    <p><a href="std-query.html#is_scalar">is_scalar</a></p>
+    <p><a href="std-query.html#is_stream">is_stream</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-query.html#is_integer">is_string</a></p>
+    <p><a href="std-query.html#is_struct">is_struct</a></p>
+    <p><a href="std-query.html#is_scalar">is_vector</a></p>
+    <p><a href="std-query.html#is_void">is_void</a></p>
+    <h3>N</h3>
+    <p><a href="std-query.html#nameof">nameof</a></p>
+    <p><a href="std-query.html#numberof">numberof</a></p>
+    <h3>O</h3>
+    <p><a href="std-query.html#orgsof">orgsof</a></p>
+    <h3>S</h3>
+    <p><a href="std-query.html#sizeof">sizeof</a></p>
+    <p><a href="std-query.html#structof">structof</a></p>
+    <h3>T</h3>
+    <p><a href="std-query.html#typeof">typeof</a></p>
+    <h3>U</h3>
+    <p><a href="std-query.html#use_origins">use_origins</a></p>
+    <h3>Y</h3>
+    <p><a href="std-query.html#identof">Y_BUILTIN</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-query.html#identof">Y_CHAR</a></p>
+    <p><a href="std-query.html#identof">Y_COMPLEX</a></p>
+    <p><a href="std-query.html#identof">Y_DOUBLE</a></p>
+    <p><a href="std-query.html#identof">Y_FLOAT</a></p>
+    <p><a href="std-query.html#identof">Y_FUNCTION</a></p>
+    <p><a href="std-query.html#identof">Y_INT</a></p>
+    <p><a href="std-query.html#identof">Y_LONG</a></p>
+    <p><a href="std-query.html#identof">Y_LVALUE</a></p>
+    <p><a href="std-query.html#identof">Y_OPAQUE</a></p>
+    <p><a href="std-query.html#identof">Y_POINTER</a></p>
+    <p><a href="std-query.html#identof">Y_RANGE</a></p>
+    <p><a href="std-query.html#identof">Y_SHORT</a></p>
+    <p><a href="std-query.html#identof">Y_STREAM</a></p>
+    <p><a href="std-query.html#identof">Y_STRING</a></p>
+    <p><a href="std-query.html#identof">Y_STRUCT</a></p>
+    <p><a href="std-query.html#identof">Y_STRUCTDEF</a></p>
+    <p><a href="std-query.html#identof">Y_VOID</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="am_subroutine"></a><h3>am_subroutine</h3>
+  <pre>DOCUMENT am_subroutine()
+  returns 1 if the current Yorick function was invoked as a subroutine,
+  else 0.  If am_subroutine() returns true, the result of the current
+  function will not be used, and need not be computed (the function
+  has been called for its side effects only).</pre>
+  
+</div>
+<div class="docblock"><a name="dimsof"></a><h3>dimsof</h3>
+  <pre>DOCUMENT dimsof(object)
+      or dimsof(object1, object2, ...)
+  returns a vector of integers describing the dimensions of OBJECT.
+  The format of the vector is [number of dims, length1, length2, ...].
+  The orgsof function returns the origin of each dimension (normally 1).
+  If more than one argument is given, dimsof returns the dimension
+  list of the result of binary operations between all the objects,
+  or nil if the objects are not conformable.</pre>
+  <p>SEE ALSO: <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#structof">structof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-query.html#sizeof">sizeof</a>, <a href="std-query.html#orgsof">orgsof</a></p>
+</div>
+<div class="docblock"><a name="identof"></a><h3>identof</h3>
+  <pre>DOCUMENT identof(object)
+  Returns type identifier of OBJECT as a long integer:
+    0 (Y_CHAR)      for an array of char('s)
+    1 (Y_SHORT)     for an array of short('s)
+    2 (Y_INT)       for an array of int('s)
+    3 (Y_LONG)      for an array of long('s)
+    4 (Y_FLOAT)     for an array of float('s)
+    5 (Y_DOUBLE)    for an array of double('s)
+    6 (Y_COMPLEX)   for an array of complex('s)
+    7 (Y_STRING)    for an array of string('s)
+    8 (Y_POINTER)   for an array of pointer('s)
+    9 (Y_STRUCT)    for a structure object
+   10 (Y_RANGE)     for a range object
+   11 (Y_LVALUE)    for a lvalue
+   12 (Y_VOID)      for a void (undefined) object
+   13 (Y_FUNCTION)  for a function array
+   14 (Y_BUILTIN)   for a builtin array
+   15 (Y_STRUCTDEF) for a data type or structure definition
+   16 (Y_STREAM)    for a file stream
+   17 (Y_OPAQUE)    for an opaque object
+</pre>
+  <p>SEE ALSO: <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#structof">structof</a>.</p>
+</div>
+<div class="docblock"><a name="is_array"></a><h3>is_array</h3>
+  <pre>DOCUMENT is_array(object)
+  returns 1 if OBJECT is an array data type (as opposed to a function,
+  structure definition, index range, I/O stream, etc.), else 0.
+  An array OBJECT can be written to or read from a binary file;
+  non-array Yorick data types cannot.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_stream">is_stream</a>, <a href="std-query.html#is_scalar">is_scalar</a></p>
+</div>
+<div class="docsee">
+  <h3>is_complex</h3><p>SEE: <a href="#is_integer">is_integer</a></p>
+</div>
+<div class="docblock"><a name="is_func"></a><h3>is_func</h3>
+  <pre>DOCUMENT is_func(object)
+  returns 1 if OBJECT is a Yorick interpreted function, 2 if OBJECT
+  is a built-in (that is, compiled) function, 3 if OBJECT is an
+  autoload, 4 if object is a wrap_args function, 5 if object
+  is a closure function, else 0.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_stream">is_stream</a>, <a href="std-include.html#autoload">autoload</a>, <a href="std-oxy.html#closure">closure</a></p>
+</div>
+<div class="docblock"><a name="is_integer"></a><h3>is_integer</h3>
+  <pre>DOCUMENT is_integer(x)
+      or is_real(x)
+      or is_complex(x)
+      or is_numerical(x)
+      or is_string(x)
+      or is_pointer(x)
+  These functions  return true if  X is an  array of type:  integer, real
+  (i.e.  double or  float), complex,  numerical (i.e.  integer,  real or
+  complex), string, or pointer.
+</pre>
+  <p>SEE ALSO: <a href="std-query.html#structof">structof</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, is_hash, <a href="std-query.html#is_list">is_list</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_scalar">is_scalar</a>, <a href="std-query.html#is_stream">is_stream</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_void">is_void</a>.</p>
+</div>
+<div class="docblock"><a name="is_list"></a><h3>is_list</h3>
+  <pre>DOCUMENT is_list(object)
+  returns 1 if OBJECT is a list or nil, else 0 (see _lst).</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-list.html#_lst">_lst</a></p>
+</div>
+<div class="docsee">
+  <h3>is_matrix</h3><p>SEE: <a href="#is_scalar">is_scalar</a></p>
+</div>
+<div class="docsee">
+  <h3>is_numerical</h3><p>SEE: <a href="#is_integer">is_integer</a></p>
+</div>
+<div class="docsee">
+  <h3>is_pointer</h3><p>SEE: <a href="#is_integer">is_integer</a></p>
+</div>
+<div class="docblock"><a name="is_range"></a><h3>is_range</h3>
+  <pre>DOCUMENT is_range(object)
+  returns 1 if OBJECT is an index range (e.g.-  3:5 or 11:31:2),
+  else 0.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_stream">is_stream</a></p>
+</div>
+<div class="docsee">
+  <h3>is_real</h3><p>SEE: <a href="#is_integer">is_integer</a></p>
+</div>
+<div class="docblock"><a name="is_scalar"></a><h3>is_scalar</h3>
+  <pre>DOCUMENT is_scalar(x)
+      or is_vector(x)
+      or is_matrix(x)
+  These functions return true if X is (respectively) a scalar, a vector
+  (i.e., a 1-D array), or a matrix (i.e., a 2-D array).
+</pre>
+  <p>SEE ALSO: <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, is_hash, <a href="std-query.html#is_integer">is_integer</a>, <a href="std-query.html#is_list">is_list</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_stream">is_stream</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_void">is_void</a>.</p>
+</div>
+<div class="docblock"><a name="is_stream"></a><h3>is_stream</h3>
+  <pre>DOCUMENT is_stream(object)
+  returns 1 if OBJECT is a binary I/O stream (usually a file), else 0.
+  The _read and _write functions work on object if and only if
+  is_stream returns non-zero.  Note that is_stream returns 0 for a
+  text stream -- you need the typeof function to test for those.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_struct">is_struct</a></p>
+</div>
+<div class="docsee">
+  <h3>is_string</h3><p>SEE: <a href="#is_integer">is_integer</a></p>
+</div>
+<div class="docblock"><a name="is_struct"></a><h3>is_struct</h3>
+  <pre>DOCUMENT is_struct(object)
+  returns 1 if OBJECT is the definition of a Yorick struct, else 0.
+  Thus, is_struct(double) returns 1, but is_struct(1.0) returns 0.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_void">is_void</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_stream">is_stream</a></p>
+</div>
+<div class="docsee">
+  <h3>is_vector</h3><p>SEE: <a href="#is_scalar">is_scalar</a></p>
+</div>
+<div class="docblock"><a name="is_void"></a><h3>is_void</h3>
+  <pre>DOCUMENT is_void(object)
+  returns 1 if OBJECT is nil (the one instance of the void data type),
+  else 0.</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-query.html#is_range">is_range</a>, <a href="std-query.html#is_struct">is_struct</a>, <a href="std-query.html#is_stream">is_stream</a></p>
+</div>
+<div class="docblock"><a name="nameof"></a><h3>nameof</h3>
+  <pre>DOCUMENT nameof(object)
+  If OBJECT is a function or a structure definition, returns the
+  name of the func or struct as it was defined (not necessarily
+  the name of the variable passed to the nameof function).</pre>
+  <p>SEE ALSO: <a href="std-query.html#typeof">typeof</a></p>
+</div>
+<div class="docblock"><a name="numberof"></a><h3>numberof</h3>
+  <pre>DOCUMENT numberof(object)
+  returns the number of elements if object is an array, or 0 if not.</pre>
+  <p>SEE ALSO: <a href="std-query.html#sizeof">sizeof</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#structof">structof</a></p>
+</div>
+<div class="docblock"><a name="orgsof"></a><h3>orgsof</h3>
+  <pre>DOCUMENT orgsof(object)
+  returns a vector of integers describing the dimensions of OBJECT.
+  The format of the vector is [number of dims, origin1, origin2, ...].
+  By default, dimension origins are ignored, but use_origins changes
+  this.  The dimsof function returns the length of each dimension.
+  *** NOTE NOTE NOTE ***
+  Unless use_origins(1) is in effect, orgsof will always return
+  1 for all of the originI in the list.  Thus, whether use_origins(1)
+  is in effect or not, you are guaranteed that x(orgsof(x)(2)) is the
+  first element of x.
+
+  *** DEPRECATED ***
+  Do not use index origins.  Your brain will explode sooner or later.
+</pre>
+  <p>SEE ALSO: <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#structof">structof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-query.html#sizeof">sizeof</a>, <a href="std-query.html#use_origins">use_origins</a></p>
+</div>
+<div class="docblock"><a name="sizeof"></a><h3>sizeof</h3>
+  <pre>DOCUMENT sizeof(object)
+  returns the size of the object in bytes, or 0 for non-array objects.
+  sizeof(structure_definition) returns the number of bytes per instance.
+  sizeof(binary_file) returns the file size in bytes.</pre>
+  <p>SEE ALSO: <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#structof">structof</a>, <a href="std-query.html#numberof">numberof</a></p>
+</div>
+<div class="docblock"><a name="structof"></a><h3>structof</h3>
+  <pre>DOCUMENT structof(object)
+  returns the data type of OBJECT, or nil for non-array OBJECTs.
+  Use typeof(object) to get the ASCII name of a the data type.</pre>
+  <p>SEE ALSO: <a href="std-query.html#typeof">typeof</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-query.html#sizeof">sizeof</a>, <a href="std-query.html#nameof">nameof</a></p>
+</div>
+<div class="docblock"><a name="typeof"></a><h3>typeof</h3>
+  <pre>DOCUMENT typeof(object)
+  returns a string describing the type of object.  For the basic
+  data types, these are "char", "short", "int", "long", "float",
+  "double", "complex", "string", "pointer", "struct_instance",
+  "void", "range", "struct_definition", "function", "builtin",
+  "stream" (for a binary stream), and "text_stream".</pre>
+  <p>SEE ALSO: <a href="std-query.html#structof">structof</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#sizeof">sizeof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-query.html#nameof">nameof</a></p>
+</div>
+<div class="docblock"><a name="use_origins"></a><h3>use_origins</h3>
+  <pre>DOCUMENT dummy= use_origins(dont_force)
+  Yorick array dimensions have an origin as well as a length.
+  By default, this origin is 1 (like FORTRAN arrays, unlike C
+  arrays).  However, the array function and the pseudo-index (-)
+  can be used to produce arrays with other origins.
+
+  Initially, the origin of an array index is ignored by Yorick; the
+  first element of any array has index 1.  You can change this
+  default behavior by calling use_origins with non-zero DONT_FORCE,
+  and restore the default behavior by calling use_origins(0).
+
+  When the returned object DUMMY is destroyed, either by return from
+  the function in which it is a local variable, or by explicit
+  redefintion of the last reference to it, the treatment of array
+  index origins reverts to the behavior prior to the call to
+  use_origins.  Thus, you can call use_origins at the top of a
+  function and not worry about restoring the external behavior
+  before every possible return (including errors).
+
+  *** DEPRECATED ***
+  Do not use index origins.  Your brain will explode sooner or later.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#array">array</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#orgsof">orgsof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_BUILTIN</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_CHAR</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_COMPLEX</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_DOUBLE</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_FLOAT</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_FUNCTION</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_INT</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_LONG</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_LVALUE</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_OPAQUE</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_POINTER</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_RANGE</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_SHORT</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_STREAM</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_STRING</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_STRUCT</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_STRUCTDEF</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>
+<div class="docsee">
+  <h3>Y_VOID</h3><p>SEE: <a href="#identof">identof</a></p>
+</div>

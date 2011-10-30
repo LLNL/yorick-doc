@@ -1,0 +1,42 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Information About Variables</h2>
+<table><tbody>
+<tr><td><tt>print, <i>var1, var2, ...</i></tt></td>
+<td>print the values of the <i>varI</i></td></tr>
+<tr><td><tt>info, <i>var</i></tt></td>
+<td>print a description of <i>var</i></td></tr>
+<tr><td><tt>dimsof(<i>x</i>)</tt></td>
+<td>returns [#dimensions, length1, length2, ...]</td></tr>
+<tr><td><tt>orgsof(<i>x</i>)</tt></td>
+<td>returns [#dimensions, origin1, origin2, ...]</td></tr>
+<tr><td><tt>numberof(<i>x</i>)</tt></td>
+<td>returns number of elements (product of <tt>dimsof</tt>)</td></tr>
+<tr><td><tt>typeof(<i>x</i>)</tt></td>
+<td>returns name of data type of <i>x</i></td></tr>
+<tr><td><tt>structof(<i>x</i>)</tt></td>
+<td>returns data type of <i>x</i></td></tr>
+<tr><td><tt>is_array(<i>x </i>)</tt></td>
+<td>returns 1 if <i>x</i> is an array, else 0</td></tr>
+<tr><td><tt>is_func(<i>x</i>)</tt></td>
+<td>returns 1 or 2 if <i>x</i> is an function, else 0</td></tr>
+<tr><td><tt>is_void(<i>x </i>)</tt></td>
+<td>returns 1 if <i>x</i> is nil, else 0</td></tr>
+<tr><td><tt>is_range(<i>x</i>)</tt></td>
+<td>returns 1 if <i>x</i> is an index range, else 0</td></tr>
+<tr><td><tt>is_stream(<i>x</i>)</tt></td>
+<td>returns 1 if <i>x</i> is a binary file, else 0</td></tr>
+<tr><td><tt>am_subroutine()</tt></td>
+<td>1 if current function invoked as subroutine</td></tr>
+</tbody></table>
+<p>The <tt>print</tt> function returns a string array of one string per
+line if it is invoked as a function. Using <tt>print</tt> on files, bookmarks,
+and other objects usually produces some sort of useful description. Also,
+<tt>print</tt>
+is the default function, so that
+<i>expr</i>
+is equivalent to <tt>print,</tt> <i>expr </i>(if <i>expr </i>is not a function).</p>
+
+

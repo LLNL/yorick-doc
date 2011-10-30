@@ -1,0 +1,75 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="square-limits"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_66.html#saving-limits" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.1.2 Saving plot limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_68.html#logxy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.2 logxy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_64.html#limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2.1 limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Forcing-square-limits"></a>
+<h4 class="subsubsection">3.2.1.3 Forcing square limits</h4>
+
+<p>The square keyword chooses any extreme limit to force the x and y
+scales to have identical units &ndash; so that a circle will always look
+round, not elliptical, for instance.  Of course, if you set all four
+limits explicitly, the square keyword will have no effect.  For
+example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">limits, square=1, 0., &quot;e&quot;, 0., &quot;e&quot;
+</pre></td></tr></table>
+
+<p>forces the lower limits of both x and y to zero, while the upper
+limits are chosen to both show all of the data in the first quadrant,
+and to keep the units of x and y the same (normally, this means xmax
+and ymax are equal, but if the viewport were not square, xmax and ymax
+would be in the same ratio as the sides of the viewport).  The square
+keyword remains in effect even if the units are changed, hence, for
+example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">limits
+</pre></td></tr></table>
+
+<p>will reset all limits to extreme values, but now one axis may extend
+beyond the limits of the data in that direction to keep the x and y
+units equal.  To return to the default behavior, you must explicitly
+call the limits command with the square keyword again, for example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">limits, square=0
+</pre></td></tr></table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_66.html#saving-limits" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.1.2 Saving plot limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_68.html#logxy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.2 logxy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_64.html#limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2.1 limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

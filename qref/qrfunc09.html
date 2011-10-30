@@ -1,0 +1,30 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Interpolation and Lookup Functions</h2>
+<p>In the following function, <i>y </i>and <i>x </i>are one-dimensional
+arrays which determine a piecewise linear function <i>y(x)</i>. The <i>x
+</i>must be monotonic. The <i>xp </i>(for <i>x </i>-prime) can be an array of any
+dimensionality; the dimensions of the result will be the same as the dimensions
+of <i>xp</i>.
+</p>
+<p><tt>digitize(<i>xp, x</i>)&nbsp;&nbsp;</tt> returns indices of <i>xp </i>values
+in <i>x</i>
+<br><tt>interp(<i>y, x, xp</i>)&nbsp;</tt> returns <i>yp</i>, <i>xp
+</i>interpolated
+into <i>y(x)</i>
+<br><tt>integ(<i>y, x, xp</i>)&nbsp;&nbsp;</tt> returns the integrals of <i>y(x) </i>from
+<i>x</i>(1) to <i>xp</i>
+</p>
+<p>Note that <tt>integ</tt> is really an area-conserving interpolator.
+If the <i>xp</i> coincide with <i>x</i>, you probably want to use
+<br><tt>&nbsp;&nbsp;(</tt><i>y </i><tt>(zcen)*</tt><i>x </i><tt>(dif))(cum)</tt>
+<br>instead.
+</p>
+<p>The on-line <tt>help</tt> documentation for <tt>interp</tt> describes
+how to use <tt>interp</tt> and <tt>integ</tt> with multidimensional <i>y</i>
+arrays.
+</p>
+
+

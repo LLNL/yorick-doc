@@ -1,0 +1,563 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotout (in graph.i) - controlling plot windows and files </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="graph-plotout.html#animate">animate</a></p>
+    <h3>C</h3>
+    <p><a href="graph-plotout.html#current_mouse">current_mouse</a></p>
+    <p><a href="graph-plotout.html#current_window">current_window</a></p>
+    <h3>E</h3>
+    <p><a href="graph-plotout.html#eps">eps</a></p>
+    <p><a href="graph-plotout.html#epsi">epsi</a></p>
+    <h3>F</h3>
+    <p><a href="graph-plotout.html#fma">fma</a></p>
+    <p><a href="graph-plotout.html#current_mouse">focused_window</a></p>
+    <h3>H</h3>
+    <p><a href="graph-plotout.html#current_mouse">has_mouse</a></p>
+    <p><a href="graph-plotout.html#hcp">hcp</a></p>
+    <p><a href="graph-plotout.html#hcp">hcpoff</a></p>
+    <p><a href="graph-plotout.html#hcp">hcpon</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plotout.html#hcps">hcps</a></p>
+    <p><a href="graph-plotout.html#hcp_file">hcp_file</a></p>
+    <p><a href="graph-plotout.html#hcp_finish">hcp_finish</a></p>
+    <p><a href="graph-plotout.html#hcp_out">hcp_out</a></p>
+    <h3>J</h3>
+    <p><a href="graph-plotout.html#jpeg">jpeg</a></p>
+    <h3>K</h3>
+    <p><a href="graph-plotout.html#keybd_focus">keybd_focus</a></p>
+    <h3>N</h3>
+    <p><a href="graph-plotout.html#no_window">no_window</a></p>
+    <h3>P</h3>
+    <p><a href="graph-plotout.html#palette">palette</a></p>
+    <p><a href="graph-plotout.html#pdf">pdf</a></p>
+    <p><a href="graph-plotout.html#plsys">plsys</a></p>
+    <p><a href="graph-plotout.html#png">png</a></p>
+    <p><a href="graph-plotout.html#png_dpi">png_dpi</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotout.html#png_dpi">png_gray</a></p>
+    <p><a href="graph-plotout.html#png_dpi">png_smooth</a></p>
+    <h3>R</h3>
+    <p><a href="graph-plotout.html#raw_style">raw_style</a></p>
+    <p><a href="graph-plotout.html#redraw">redraw</a></p>
+    <h3>S</h3>
+    <p><a href="graph-plotout.html#set_gpath">set_gpath</a></p>
+    <h3>V</h3>
+    <p><a href="graph-plotout.html#viewport">viewport</a></p>
+    <h3>W</h3>
+    <p><a href="graph-plotout.html#window">window</a></p>
+    <p><a href="graph-plotout.html#window_select">window_exists</a></p>
+    <p><a href="graph-plotout.html#window_geometry">window_geometry</a></p>
+    <p><a href="graph-plotout.html#window_select">window_list</a></p>
+    <p><a href="graph-plotout.html#window_select">window_select</a></p>
+    <p><a href="graph-plotout.html#winkill">winkill</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="animate"></a><h3>animate</h3>
+  <pre>DOCUMENT animate
+      or animate, 0/1
+  without any arguments, toggles animation mode; with argument 0,
+  turns off animation mode, with argument 1 turns on animation mode.
+  In animation mode, the X window associated with a graphics window
+  is actually an offscreen pixmap which is bit-blitted onscreen
+  when an fma command is issued.  This is confusing unless you are
+  actually trying to make a movie, but results in smoother animation
+  if you are.  Generally, you should turn animation on, run your movie,
+  then turn it off.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="current_mouse"></a><h3>current_mouse</h3>
+  <pre>DOCUMENT current_mouse();
+      or current_mouse(win);
+      or focused_window();
+      or has_mouse();
+      or has_mouse(win);
+
+  The function current_mouse returns the pointer position in the
+  graphics window with pointer focus as an array of double's in the
+  form [X,Y,SYS,WIN] where X and Y are the pointer coordinates in
+  the coordinate system SYS and WIN is the number of the graphics
+  window.  If no graphics window currently has the pointer focus or
+  if WIN is specified but does not match the graphics window with
+  pointer focus, the result is empty.
+
+  The function focused_window returns the number of the graphics
+  window with pointer focus, or -1 if none.
+
+  The function has_mouse with a void argument returns true if any
+  Yorick graphics window has the pointer focus. If WIN is
+  specified, the function has_mouse returns true if graphics window
+  WIN has the pointer focus.
+
+  Note that the window which has the pointer focus may be different
+  from the so-called current window to which graphics commands are
+  directed.  The built-in functions `window' and `current_window'
+  (which see) can be used to set/query the current window.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#current_window">current_window</a>, <a href="graph-plotmisc.html#mouse">mouse</a>, <a href="graph-plotout.html#window">window</a></p>
+</div>
+<div class="docblock"><a name="current_window"></a><h3>current_window</h3>
+  <pre>DOCUMENT n= current_window()
+  returns the number of the current graphics window, or -1 if none.</pre>
+  
+</div>
+<div class="docblock"><a name="eps"></a><h3>eps</h3>
+  <pre>DOCUMENT eps, name
+  writes the picture in the current graphics window to the Encapsulated
+  PostScript file NAME+".eps" (i.e.- the suffix .eps is added to NAME).
+  This function requires ghostscript.  Any hardcopy file associated with
+  the current window is first closed, but the default hardcopy file is
+  unaffected.  As a side effect, legends are turned off and color table
+  dumping is turned on for the current window.
+  The external variable EPSGS_CMD contains the command to start
+  ghostscript.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#pdf">pdf</a>, <a href="graph-plotout.html#png">png</a>, <a href="graph-plotout.html#jpeg">jpeg</a>, <a href="graph-plotout.html#epsi">epsi</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#no_window">no_window</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="epsi"></a><h3>epsi</h3>
+  <pre>DOCUMENT eps, name
+  writes the picture in the current graphics window to the Encapsulated
+  PostScript file NAME+".epsi" (i.e.- the suffix .epsi is added to NAME).
+  The eps function requires the ps2epsi utility which comes with the
+  project GNU Ghostscript program.  Any hardcopy file associated with
+  the current window is first closed, but the default hardcopy file is
+  unaffected.  As a side effect, legends are turned off and color table
+  dumping is turned on for the current window.
+  The external variable PS2EPSI_FORMAT contains the format for the
+  command to start the ps2epsi program.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#hcp_finish">hcp_finish</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docblock"><a name="fma"></a><h3>fma</h3>
+  <pre>DOCUMENT fma
+  frame advance the current graphics window.  The current picture
+  remains displayed in the associated X window until the next element
+  is actually plotted.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#animate">animate</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docsee">
+  <h3>focused_window</h3><p>SEE: <a href="#current_mouse">current_mouse</a></p>
+</div>
+<div class="docsee">
+  <h3>has_mouse</h3><p>SEE: <a href="#current_mouse">current_mouse</a></p>
+</div>
+<div class="docblock"><a name="hcp"></a><h3>hcp</h3>
+  <pre>DOCUMENT hcp
+         hcpon
+         hcpoff
+  The hcp command sends the picture displayed in the current graphics
+  window to the hardcopy file.  (The name of the default hardcopy file
+  can be specified using hcp_file; each individual graphics window may
+  have its own hardcopy file as specified by the window command.)
+  The hcpon command causes every fma (frame advance) command to do
+  and implicit hcp, so that every frame is sent to the hardcopy file.
+  The hcpoff command reverts to the default "demand only" mode.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#pdf">pdf</a>, <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docsee">
+  <h3>hcpoff</h3><p>SEE: <a href="#hcp">hcp</a></p>
+</div>
+<div class="docsee">
+  <h3>hcpon</h3><p>SEE: <a href="#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="hcps"></a><h3>hcps</h3>
+  <pre>DOCUMENT hcps, name
+  writes the picture in the current graphics window to the
+  PostScript file NAME+".ps" (i.e.- the suffix .ps is added to NAME).
+  Legends are not written, but the palette is always dumped.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#hcp_finish">hcp_finish</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docblock"><a name="hcp_file"></a><h3>hcp_file</h3>
+  <pre>DOCUMENT hcp_file, filename, dump=0/1, ps=0/1
+  sets the default hardcopy file to FILENAME.  If FILENAME ends with
+  ".cgm", the file will be a binary CGM, otherwise it will be a
+  Postscript file.  By default, the hardcopy file name will be
+  "Aa00.ps", or "Ab00.ps" if that exists, or "Ac00.ps" if both
+  exist, and so on.  The default hardcopy file gets hardcopy from all
+  graphics windows which do not have their own specific hardcopy file
+  (see the window command).  If the dump keyword is present and non-zero,
+  the current palette will be dumped at the beginning of each frame
+  of the default hardcopy file (default behavior).  With dump=0,
+  all colors are converted to a gray scale, and the output files are
+  smaller because no palette information is included.
+  Use ps=0 to make "Aa00.cgm", "Ab00.cgm", etc by default instead of
+  Postscript.
+  The dump= and ps= settings persist until explicitly changed by a
+  second call to hcp_file; the dump=1 setting becomes the default for
+  the window command as well.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docblock"><a name="hcp_finish"></a><h3>hcp_finish</h3>
+  <pre>DOCUMENT filename= hcp_finish()
+      or filename= hcp_finish(n)
+  closes the current hardcopy file and returns the filename.
+  If N is specified, closes the hcp file associated with window N
+  and returns its name; use hcp_finish(-1) to close the default
+  hardcopy file.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#hcp_out">hcp_out</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="hcp_out"></a><h3>hcp_out</h3>
+  <pre>DOCUMENT hcp_out
+      or hcp_out, n
+  finishes the current hardcopy file and sends it to the printer.
+  If N is specified, prints the hcp file associated with window N;
+  use hcp_out,-1 to print the default hardcopy file.
+  Unless the KEEP keyword is supplied and non-zero, the file will
+  be deleted after it is processed by gist and sent to lpr.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#hcp_finish">hcp_finish</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="jpeg"></a><h3>jpeg</h3>
+  <pre>DOCUMENT jpeg, name
+  writes the picture in the current graphics window to the JPEG
+  file NAME+".jpg" (i.e.- the suffix .jpg is added to NAME).  The
+  jpeg file is intended to be imported into MS PowerPoint or other
+  commercial presentation software.  This function starts ghostscript
+  using the EPSGS_CMD variable.  With the gray=1 keyword, you get
+  the jpeggray ghostscript device, otherwise jpeg.
+  The default yorick graphics window is 6 inches square, and by
+  default jpeg produces 72 dpi (dot per inch) output.  You can change
+  this with the dpi= keyword; dpi=300 is extremely high resolution.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#png">png</a>, <a href="graph-plotout.html#pdf">pdf</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docblock"><a name="keybd_focus"></a><h3>keybd_focus</h3>
+  <pre>DOCUMENT keybd_focus, on_off
+  By default, graphics windows set a window manager hint which
+  allows them to accept keyboard focus.  With ON_OFF zero, that
+  hint will not be set when a new graphics window is created.
+  This causes the window manager to refuse to offer keyboard
+  focus to the graphics window -- very desirable, since it can't
+  accept keyboard input anyway.  With fvwm, for example, this
+  means keyboard focus can stay in the terminal window even when
+  you are mouse zooming the graphics window.  However, many
+  window managers confuse colormap focus with keyboard focus, so
+  if you set the private=1 colormap in the window function, you
+  may not be able to convince the window manager to give the
+  graphics window colormap focus since it won't give it keyboard
+  focus.  Weird.</pre>
+  
+</div>
+<div class="docblock"><a name="no_window"></a><h3>no_window</h3>
+  <pre>DOCUMENT no_window
+         no_window, hcpname
+         no_window, ""
+  Set up a graphics window with no interactive display, similar to
+    window, display="", hcp=hcpname, dump=1, legends=0;
+  You can optionally supply a filename HCPNAME; if you do not, the
+  default filename will be "no_window".  If HCPNAME is "" or string(0),
+  this graphics window is killed, and the special behavior of the
+  eps and other commands (see below) is restored to normal.  Use
+  no_window if you do not want to create an interactive graphics
+  window, for example when yorick is running in batch mode and is
+  not connected to any interactive graphics devices, causing the
+  code to crash when it tries to create an interactive window.
+
+  As a convenience, no_window accepts a style= keyword, which it will
+  pass along to the window command.  If you need to set other window
+  properties, call the window function after no_window.
+  
+  Additionally, the no_window function changes the behavior of the
+  single picture commands hcps, eps, pdf, png, jpeg (and other functions
+  based on the hcps command) to write the current drawing to the specified
+  file, then reissue a non-displaying window command.  The effect is to
+  simplify making a sequence of plots in batch mode without creating any
+  interactive graphics window.  If you want to write the whole sequence
+  into a single .ps file, you use the no_window function to set the
+  filename, then hcp or hcp_on to dump frames into the file.
+
+  Alternatively, if you need to write one file per frame (for example
+  one png per picture to include in slides using presentation software),
+  you can call no_window, then issue the png (or similar) command just
+  before advancing to the next frame.  (Unfortunately, you cannot do
+  both -- either you are writing all the frames into one ps file, or
+  you are writing one frame per file.  Calling the single frame function
+  will close the postscript file.)
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#pdf">pdf</a>, <a href="graph-plotout.html#png">png</a>, <a href="graph-plotout.html#jpeg">jpeg</a></p>
+</div>
+<div class="docblock"><a name="palette"></a><h3>palette</h3>
+  <pre>DOCUMENT palette, filename
+      or palette, source_window_number
+      or palette, red, green, blue, ntsc=1/0
+      or palette, red, green, blue, gray
+      or palette, red, green, blue, query=1
+      or palette, red, green, blue, gray, query=1
+  sets (or retrieves with query=1) the palette for the current
+  graphics window.  The FILENAME is the name of a Gist palette file;
+  the standard palettes are "earth.gp", "stern.gp", "rainbow.gp",
+  "heat.gp", "gray.gp", and "yarg.gp".  Use the maxcolors keyword
+  in the pldefault command to put an upper limit on the number of
+  colors which will be read from the palette in FILENAME.
+
+  In the second form, the palette for the current window is copied
+  from the SOURCE_WINDOW_NUMBER.  If the X colormap for the window is
+  private, there will still be two separate X colormaps for the two
+  windows, but they will have the same color values.
+
+  In the third form, RED, GREEN, and BLUE are 1-D arrays of the same
+  length specifying the palette you wish to install; the values
+  should vary between 0 and 255, and your palette should have no
+  more than 240 colors.  If ntsc=0, monochrome devices (such as most
+  laser printers) will use the average brightness to translate your
+  colors into gray; otherwise, the NTSC (television) averaging will
+  be used (.30*RED+.59*GREEN+.11*BLUE).  Alternatively, you can specify
+  GRAY explicitly.
+
+  Ordinarily, the palette is not dumped to a hardcopy file
+  (color hardcopy is still rare and expensive), but you can
+  force the palette to dump using the window or hcp_file commands.
+
+  See the dump= keyword for the hcp_file and window commands if you
+  are having trouble getting color in your hardcopy files.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotq.html#pldefault">pldefault</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="pdf"></a><h3>pdf</h3>
+  <pre>DOCUMENT pdf, name
+  writes the picture in the current graphics window to the Adobe PDF
+  file NAME+".pdf" (i.e.- the suffix .pdf is added to NAME).  The
+  pdf file is intended to be imported into MS PowerPoint or other
+  commercial presentation software, or into in pdftex or pdflatex
+  documents; it is cropped.  The result should be equivalent to
+  running the epstopdf utility (which comes with TeX, see www.tug.org)
+  on the eps file produced by the eps command.
+  This function requires ghostscript.  Any hardcopy file associated with
+  the current window is first closed, but the default hardcopy file is
+  unaffected.  As a side effect, legends are turned off and color table
+  dumping is turned on for the current window.
+  The external variable EPSGS_CMD contains the command to start
+  ghostscript.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#png">png</a>, <a href="graph-plotout.html#jpeg">jpeg</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#no_window">no_window</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="plsys"></a><h3>plsys</h3>
+  <pre>DOCUMENT plsys, n
+      or plsys(n)   or   plsys()
+  sets the current coordinate system to number N in the current
+  graphics window.  If N equals 0, subsequent elements will be
+  plotted in absolute NDC coordinates outside of any coordinate
+  system.  The default style sheet "work.gs" defines only a single
+  coordinate system, so the only other choice is N equal 1.  You
+  can make up your own style sheet (using a text editor) which
+  defines mulitple coordinate systems.  You need to do this if
+  you want to display four plots side by side on a single page,
+  for example.  The standard style sheets "work2.gs" and "boxed2.gs"
+  define two overlayed coordinate systems with the first labeled
+  to the right of the plot and the second labeled to the left of
+  the plot.  When using overlayed coordinate systems, it is your
+  responsibility to ensure that the x-axis limits in the two
+  systems are identical.
+  Return value is coordinate system setting before this call;
+  input n may be nil to retrieve this without changing it.  Return
+  value can be <0 if the information is unavailable for some reason.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="png"></a><h3>png</h3>
+  <pre>DOCUMENT png, name
+  writes the picture in the current graphics window to the PNG
+  file NAME+".png" (i.e.- the suffix .png is added to NAME).  The
+  png file is intended to be imported into MS PowerPoint or other
+  commercial presentation software.  This function starts ghostscript
+  using the EPSGS_CMD variable.  With the gray=1 keyword, you get
+  the pnggray ghostscript device, otherwise png16m.
+  The default yorick graphics window is 6 inches square, and by
+  default png produces 300 dpi (dot per inch) output.  You can change
+  this with the dpi= keyword; dpi=72 is screen resolution.
+  Finally, the smooth=1 keyword sets the TextAlphaBits and
+  GraphicsAlphaBits postscript variables to 2; smooth=2 sets them
+  to 4, which produce increasing levels of anti-aliasing.  With
+  smooth=1 or smooth=2, you can probably get away with lower dpi.
+  The default is smooth=0.  (Arguably, smooth=2 and dpi=72 or 100
+  should be the defaults.)
+  The default values of the keywords can be changed by setting
+  the corresponding extern variable png_dpi, png_gray, or png_smooth.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#eps">eps</a>, <a href="graph-plotout.html#pdf">pdf</a>, <a href="graph-plotout.html#jpeg">jpeg</a>, <a href="graph-plotout.html#hcps">hcps</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docblock"><a name="png_dpi"></a><h3>png_dpi</h3>
+  <pre>DOCUMENT png_dpi, png_gray, png_smooth
+  You can set these variables to change the default values
+  of the dpi=, gray=, and smooth= keywords for the png command</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#png">png</a></p>
+</div>
+<div class="docsee">
+  <h3>png_gray</h3><p>SEE: <a href="#png_dpi">png_dpi</a></p>
+</div>
+<div class="docsee">
+  <h3>png_smooth</h3><p>SEE: <a href="#png_dpi">png_dpi</a></p>
+</div>
+<div class="docblock"><a name="raw_style"></a><h3>raw_style</h3>
+  <pre>DOCUMENT raw_style: get_style, set_style, read_style, write_style
+         #include "style.i"
+  alternatives to the style= keyword of the window command which
+  allow the interpreter to set or get all the details of the
+  window style.  Include "style.i" and read the help for get_style.</pre>
+  
+</div>
+<div class="docblock"><a name="redraw"></a><h3>redraw</h3>
+  <pre>DOCUMENT redraw
+  redraws the X window associated with the current graphics window.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="set_gpath"></a><h3>set_gpath</h3>
+  <pre>DOCUMENT old = set_gpath(gist_path)
+  set path (colon delimited directories) for Gist graphics package,
+  returning old path.  GIST_PATH nil or string(0) just returns old.</pre>
+  
+</div>
+<div class="docblock"><a name="viewport"></a><h3>viewport</h3>
+  <pre>DOCUMENT port= viewport();
+  returns [xmin,xmax,ymin,ymax] of the current viewport (or 0,0,0,0
+  if currently plotting to system 0) in NDC coordinates.</pre>
+  <p>SEE ALSO: <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#gridxy">gridxy</a></p>
+</div>
+<div class="docblock"><a name="window"></a><h3>window</h3>
+  <pre>DOCUMENT window, n, display="host:server.screen", dpi=100/75, wait=0/1,
+                    private=0/1, hcp="hcp_filename", dump=0/1,
+                    legends=1/0, style="style_sheet_filename",
+                    width=wpixels,height=hpixels,rgb=1,
+                    parent=id,xpos=x_in_parent,ypos=y_in_parent
+
+  select window N as the current graphics output window.  N may
+  range from 0 to 63, inclusive.  Each graphics window corresponds to
+  an X window, and optionally has its own associated hardcopy file.
+  If N is omitted, it defaults to the current coordinate system.
+
+  The X window will appear on your default display at 75 dpi, unless
+  you specify the display and/or dpi keywords.  A dpi=100 X window
+  is larger than a dpi=75 X window; both represent the same thing
+  on paper.  Use display="",hcp="filename" to create a graphics window
+  which has no associated X window, but instead plots to a hardcopy
+  file (you should do this if you want to make plots in a non-interactive
+  batch mode).
+
+  By default, if the X window needs to be created, the graphics area
+  will be 450x450 pixels if dpi=75, or 600x600 pixels if dpi=100,
+  representing a 6x6 inch square on hardcopy paper.  You can override
+  this default initial size using the width and height keywords.
+  These settings remain in force indefinitely; use width=0,height=0
+  to return to the default dpi-dependent behavior.  For a dpi=75,
+  landscape=0 window, width=638,height=825 displays the entire sheet
+  of hardcopy paper.  Supplying these keywords will not change the
+  size of an existing window; only newly created windows.
+
+  By default, an X window will attempt to use shared colors, which
+  permits several Yorick graphics windows (including windows from
+  multiple instances of Yorick) to use a common palette.  You can
+  force an X window to post its own colormap (set its colormap
+  attribute) with the private=1 keyword.  You will most likely have
+  to fiddle with your window manager to understand how it handles
+  colormap focus if you do this.  Use private=0 to return to shared
+  colors.
+
+  By default, Yorick will not wait for the X window to become visible;
+  code which creates a new window, then plots a series of frames to
+  that window should use wait=1 to assure that all frames are actually
+  plotted.
+
+  By default, a graphics window does NOT have a hardcopy file
+  of its own -- any request for hardcopy are directed to the
+  default hardcopy file, so hardcopy output from any window goes
+  to a single file.  By specifying the hcp keyword, however, a
+  hardcopy file unique to this window will be created.  If the
+  "hcp_filename" ends in ".cgm", the hardcopy file is a binary CGM
+  file; otherwise, hardcopy files are in Postscript format.  Use
+  hcp="" to revert to the default hardcopy file (closing the window
+  specific file, if any).  The legends keyword, if present, controls
+  whether the curve legends are (legends=1, the default) or are not
+  (legends=0) dumped to the hardcopy file.  The dump keyword, if
+  present, controls whether all colors are converted to a gray scale,
+  (dump=0), or the current palette is dumped at the beginning of each
+  page of hardcopy output (dump=1, the default).  (The legends keyword
+  applies to all pictures dumped to hardcopy from this graphics
+  window.  The dump keyword applies only to the specific hardcopy
+  file defined using the hcp keyword -- use the dump keyword in the
+  hcp_file command to get the same effect in the default hardcopy
+  file.)
+
+  Use rgb=1 to set the rgb color model when you are creating a
+  window on an 8-bit display on which you intend to use three
+  component rgb colors (see color).  This installs the 5x9x5
+  colorcube and avoids having to issue the palette command
+  after the first true color object has been drawn.
+
+  If both display="" and hcp="", the graphics window will be
+  entirely eliminated.
+
+  The style keyword, if present, specifies the name of a Gist style
+  sheet file; the default is "work.gs".  The style sheet determines
+  the number and location of coordinate systems, tick and label styles,
+  and the like.  Other choices include "axes.gs", "boxed.gs",
+  "work2.gs", and "boxed2.gs".
+
+  The parent=id keyword can be used to make the yorick window a
+  subwindow of an existing window.  The id is an integer, which is
+  the system-dependent window id that must be retrieved from the
+  application which owns the parent window.  When parent= is defined,
+  xpos= and ypos= specify the offset in that window; both default to 0.
+
+  If invoked as a function, window(...) returns the current
+  window number.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotout.html#hcp_file">hcp_file</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#redraw">redraw</a>, <a href="graph-plotout.html#palette">palette</a>, <a href="graph-plotout.html#animate">animate</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#winkill">winkill</a>, <a href="graph-plotlim.html#gridxy">gridxy</a>, <a href="graph-plotout.html#no_window">no_window</a></p>
+</div>
+<div class="docsee">
+  <h3>window_exists</h3><p>SEE: <a href="#window_select">window_select</a></p>
+</div>
+<div class="docblock"><a name="window_geometry"></a><h3>window_geometry</h3>
+  <pre>DOCUMENT window_geometry()
+      or window_geometry(win)
+  Get geometry settings of the  visible region of display window WIN (or
+  current window  if WIN is nil  or not specified).   These settings are
+  subject to change  each time the window get resized.   The result is a
+  vector of 6 doubles:
+    [DPI, ONE_PIXEL, XBIAS, YBIAS, WIDTH, HEIGHT]
+  where:
+    DPI = dot-per-inch of WIN
+    ONE_PIXEL = pixel size in NDC units
+    XBIAS = abscissa offset in NDC units
+    YBIAS = ordinate offset in NDC units
+    WIDTH = width of visible region in pixels
+    HEIGHT = height of visible region in pixels
+  Pixel coordinates (XPIX,YPIX) run  from top-left (0,0) to bottom-right
+  (WIDTH-1,HEIGHT-1).  The conversion to NDC coordinates is:
+    XNDC = XBIAS + XPIX*ONE_PIXEL;
+    YNDC = YBIAS - YPIX*ONE_PIXEL;
+
+  If window WIN does not exists, all output values are zero.
+
+  Notes:
+    (1) The  top/left  margin(s) used  by  Gist window  to display  some
+        message are not considered as part of the "visible" region.
+    (2) An  extra 0.5  pixel offset has  been added to  (XBIAS,YBIAS) to
+        avoid rounding errors.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#current_window">current_window</a>, <a href="graph-plotout.html#viewport">viewport</a>, <a href="graph-plotlim.html#limits">limits</a>.</p>
+</div>
+<div class="docsee">
+  <h3>window_list</h3><p>SEE: <a href="#window_select">window_select</a></p>
+</div>
+<div class="docblock"><a name="window_select"></a><h3>window_select</h3>
+  <pre>DOCUMENT window_select(n)
+      or window_exists(n)
+      or window_list()
+
+  The function window_select makes window number N the current one and
+  return 1 (true); unless window number N does not exists, in which case
+  the current window is left unchanged and 0 (false) is returned.
+
+  The function window_exists returns 1 or 0 whether or not window number
+  N exists.
+
+  The function window_list returns the list of existing windows as a
+  vector of longs or nil if no window currently exists.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#current_window">current_window</a>, <a href="graph-plotout.html#redraw">redraw</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotout.html#window_geometry">window_geometry</a>.</p>
+</div>
+<div class="docblock"><a name="winkill"></a><h3>winkill</h3>
+  <pre>DOCUMENT winkill
+      or winkill, n
+  deletes the current graphics window, or graphics window N (0-63).</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a></p>
+</div>

@@ -1,0 +1,117 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Define-variable"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_4.html#Call-procedure" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.1.2 Invoking a procedure" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Defining-a-variable"></a>
+<h3 class="subsection">1.1.1 Defining a variable</h3>
+
+<p>The following five Yorick statements define the five variables <kbd>c</kbd>,
+<kbd>m</kbd>, <kbd>E</kbd>, <kbd>theta</kbd>, and <kbd>file</kbd>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">c = 3.00e10;  m = 9.11e-28
+E = m*c^2
+theta = span(0, 6*pi, 200)
+file = create(&quot;damped.txt&quot;)
+</pre></td></tr></table>
+
+<p>Variable names are case sensitive, so <kbd>E</kbd> is not the same variable
+as <kbd>e</kbd>.  A variable name must begin with a letter of the alphabet
+(either upper or lower case) or with an underscore (<kbd>_</kbd>);
+subsequent characters may additionally include digits.
+</p>
+<p>A semicolon terminates a Yorick statement, so the first line contains
+two statements.  To make Yorick statements easier to type, you don&rsquo;t
+need to put a semicolon at the end of most lines.  However, if you are
+composing a Yorick program in a text file (as opposed to typing
+directly to Yorick itself, a semicolon at the end of every line
+reduces the chances of a misinterpretation, and makes your program
+easier to read.
+</p>
+<p>Conversely, a new line need not represent the end of a statement.  If
+the line is incomplete, the statement automatically continues on the
+following line.  Hence, the second and third lines above could have
+been typed as:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">E=
+  m *
+  c^2
+theta= span(0, 6*pi,
+            200)
+</pre></td></tr></table>
+
+<p>In the second line, <kbd>*</kbd> and <kbd>^</kbd> represent multiplication and
+raising to a power.  The other common arithmetic operators are
+<kbd>+</kbd>, <kbd>-</kbd>, <kbd>/</kbd> (division), and <kbd>%</kbd> (remainder or
+modulo).  The rules for forming arithmetic expressions with these
+operators and parentheses are the same in Yorick as in Fortran or C
+(but note that <kbd>^</kbd> does not mean raise to a power in C, and
+Fortran uses the symbol <kbd>**</kbd> for that operation).
+</p>
+<p>The <kbd>span</kbd> function returns 200 equally spaced values beginning
+with <kbd>0</kbd> and ending with <kbd>6*pi</kbd>.  The variable <kbd>pi</kbd> is
+predefined as 3.14159...
+</p>
+<p>The <kbd>create</kbd> function returns an object representing the new file.
+The variable <kbd>file</kbd> specifies where output functions should write
+their data.  Besides numbers like <kbd>c</kbd>, <kbd>m</kbd>, and <kbd>E</kbd>, or
+arrays of numbers like <kbd>theta</kbd>, or files like <kbd>file</kbd>, Yorick
+variables may represent several other sorts of objects, taken up in
+later chapters.
+</p>
+<p>The <kbd>=</kbd> operator is itself a binary operator, which has the side
+effect of redefining its left operand.  It associates from right to
+left, that is, the rightmost <kbd>=</kbd> operation is performed first (all
+other binary operators except <kbd>^</kbd> associate from left to right).
+Hence, several variables may be set to a single value with a single
+statement:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">psi = phi = theta = span(0, 6*pi, 200)
+</pre></td></tr></table>
+
+<p>When you define a variable, Yorick forgets any previous value and data
+type:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">phi = create(&quot;junk.txt&quot;)
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_4.html#Call-procedure" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.1.2 Invoking a procedure" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

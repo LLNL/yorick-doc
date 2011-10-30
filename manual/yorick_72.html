@@ -1,0 +1,105 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Display-list"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_71.html#Color-model" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.5 Color model" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_73.html#fma" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3.1 fma and redraw" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Managing-a-display-list"></a>
+<h2 class="section">3.3 Managing a display list</h2>
+
+<p>Most graphics are overlays produced by several calls to the primitive
+plotting functions.  For example, to compare of three calculations of,
+say, temperature as a function of time, type this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plg, temp1, time1
+plg, temp2, time2
+plg, temp3, time3
+</pre></td></tr></table>
+
+<p>All three curves will appear on a single plot; as you type each plg
+command, you see that curve appear.
+</p>
+<p>The basic paradigm of Yorick&rsquo;s interactive graphics package is that as
+you type the command to add each curve to the plot, you see that curve
+appear.  You may need to open a file or perform a calculation in order
+to generate the next curve.  Often, an interesting comparison will
+occur to you only after you have seen the first few curves.
+</p>
+<p>Even if you are not changing the data in a plot, you often will want
+to change plot limits, or see how your data looks with log or semi-log
+axes.  You can call limits, logxy, or gridxy any time you want; the
+changes you request take place immediately.
+</p>
+<p>Yorick maintains a display list &ndash; a list of the primitive plotting
+commands you have issued to display your data &ndash; to enable you to make
+these kinds of changes to your picture.  The primitive functions just
+add items to the display list; you don&rsquo;t need access to the actual
+rendering routines.  You can change secondary features like plot
+limits or log axis scaling changing the plotted data.  In order to
+actually produce a picture, Yorick must &ldquo;walk&rdquo; its display list,
+sending appropriate plotting commands to some sort of graphics output
+device.
+</p>
+<p>If the picture changes, Yorick automatically walks its display list
+just before pausing to wait for your next input line.  Thus, while you
+are thinking about what to do next, you are always looking at the
+current state of the display list.
+</p>
+<p>A command like limits does not actually force an immediate replot; it
+just raises a flag that tells Yorick it needs to walk its display
+list.  Therefore, feel free to call limits or logxy several times if a
+Yorick program is clearer that way &ndash; the effects will be cumulative,
+but you will not have to wait for Yorick to redraw your screen each
+time &ndash; the replot only happens when Yorick pauses to walk the display
+list.
+</p>
+<p>Usually, the display list paradigm does just what you expect.
+However, the indirection can produce some subtle and surprising
+effects, especially when you write a Yorick program that produces
+graphical output (rather than just typing plotting commands directly).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_73.html#fma">&bull; fma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Frame advance (begin next picture).
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_74.html#multiple-windows">&bull; multiple windows</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            How to get them.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_71.html#Color-model" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.5 Color model" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_73.html#fma" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3.1 fma and redraw" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

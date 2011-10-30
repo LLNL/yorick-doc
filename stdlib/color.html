@@ -1,0 +1,71 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package color (in color.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="color.html#brighten">brighten</a></p>
+    <h3>D</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="color.html#dump_palette">dump_palette</a></p>
+    <h3>P</h3>
+    <p><a href="color.html#palette_directory">palette_directory</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>T</h3>
+    <p><a href="color.html#to_hsv">to_hsv</a></p>
+    <p><a href="color.html#to_rgb">to_rgb</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="brighten"></a><h3>brighten</h3>
+  <pre>DOCUMENT brighten, factor
+      or brighten
+  brighten the current palette by the specified FACTOR.
+  The FACTOR is the slope of the transfer function for the color value
+  (see to_hsv for a description of the hsv color system); a value of
+  1.0 always remains 1.0, but values near 0.0 change by FACTOR.
+  FACTOR= 1.0 is a no-op.  The default factor is 4.0.</pre>
+  <p>SEE ALSO: <a href="color.html#dump_palette">dump_palette</a></p>
+</div>
+<div class="docblock"><a name="dump_palette"></a><h3>dump_palette</h3>
+  <pre>DOCUMENT dump_palette, name
+  dump the current palette under the NAME.  If NAME contains no
+  slash characters, the palette_directory will be prepended to the
+  name.  The name can be fed back to the palette command in order
+  to reload the cumped palette.</pre>
+  <p>SEE ALSO: <a href="color.html#brighten">brighten</a>, <a href="graph-plotout.html#palette">palette</a>, <a href="color.html#palette_directory">palette_directory</a></p>
+</div>
+<div class="docblock"><a name="palette_directory"></a><h3>palette_directory</h3>
+  <pre>DOCUMENT palette_directory= "~/Gist/"
+  holds the default directory for the dump_palette command.
+  The directory name *must* end with "/"; the default is shown.</pre>
+  <p>SEE ALSO: <a href="color.html#dump_palette">dump_palette</a></p>
+</div>
+<div class="docblock"><a name="to_hsv"></a><h3>to_hsv</h3>
+  <pre>DOCUMENT hsv= to_hsv(rgb)
+      or hsv= to_hsv([r,g,b])
+  return the HSV representation of the n-by-3 array of RGB colors
+  rgb: red, green, blue from 0 to 255
+  hsv: h= hue in degrees, red=0, green=120, blue=240
+       s= saturation from 0 (gray) to 1 (full hue)
+       v= value from 0 (black) to 1 (full intensity)
+       s= 1 - min(r,g,b)/max(r,g,b)
+       v= max(r,g,b)</pre>
+  <p>SEE ALSO: <a href="color.html#to_rgb">to_rgb</a></p>
+</div>
+<div class="docblock"><a name="to_rgb"></a><h3>to_rgb</h3>
+  <pre>DOCUMENT rgb= to_rgb(hsv)
+      or rgb= to_rgb([h,s,v])
+  return the RGB representation of the n-by-3 array of HSV colors
+  rgb: red, green, blue from 0 to 255
+  hsv: h= hue in degrees, red=0, green=120, blue=240
+       s= saturation from 0 (gray) to 1 (full hue)
+       v= value from 0 (black) to 1 (full intensity)
+       s= 1 - min(r,g,b)/max(r,g,b)
+       v= max(r,g,b)/255</pre>
+  <p>SEE ALSO: <a href="color.html#to_hsv">to_hsv</a></p>
+</div>

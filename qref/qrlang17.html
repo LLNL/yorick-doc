@@ -1,0 +1,38 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Loops</h2>
+<p>Yorick has three types of loops:
+</p>
+<p><tt>while (</tt><i>condition</i><tt>)</tt> <i>body_statement
+</i>
+<br><tt>do</tt> <i>body_statement&nbsp;</i> <tt>while (</tt><i>condition</i><tt>)
+<br>for (</tt><i>init_expr <tt>;</tt> test_expr <tt>;</tt> inc_expr</i><tt>)</tt> <i>body_statement</i>
+</p>
+<p>The <i>init_expr</i> and <i>inc_expr</i> of a <tt>for</tt> loop may be
+comma delimited lists of expressions. They or the <i>test_expr</i> may
+be omitted. In particular, <tt>for (;;) ...</tt> means ``do forever''.
+If there is a <i>test_expr</i>, the <i>body_statement</i> of the <tt>for</tt>
+loop will execute until it becomes false (possibly never executing). After
+each pass, but before the <i>test_expr</i>, the <i>inc_expr</i> executes.
+A <tt>for</tt> loop to make N passes through its <i>body_statement</i>
+might look like this:
+</p>
+<p><tt>for (i=1 ; i&lt;=N ; i++)</tt> <i>body_statement</i>
+</p>
+<p>Within a loop body, the following statements are legal:
+</p>
+<p><tt>break</tt> exit the current loop now&nbsp;
+<br><tt>continue</tt> abort the current pass through the current loop
+</p>
+<p>For more complex flow control, Yorick supports a <tt>goto</tt>:
+</p>
+<table><tbody>
+<tr><td><tt>goto</tt> <i>label</i></td>
+<td>go to the statement after <i>label</i></td></tr>
+<tr><td><i>label</i><tt>:</tt> <i>statement</i></td>
+<td>mark <i>statement</i> as a <tt>goto</tt> target</td></tr>
+</tbody></table>
+
+

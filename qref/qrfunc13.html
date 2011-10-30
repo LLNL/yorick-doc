@@ -1,0 +1,20 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Generating Simple Meshes</h2>
+<p>Many Yorick calculations begin by defining an array of <i>x </i>values
+which will be used as the argument to functions of a single variable. The
+easiest way to do this is with the <tt>span</tt> or <tt>spanl</tt> function:
+<br><tt>&nbsp;&nbsp;x = span(x_min, x_max, 200);</tt>
+<br>This gives 200 points equally spaced from <tt>x_min</tt> to <tt>x_max</tt>.
+</p>
+<p>A two dimensional rectangular grid is most easily obtained as follows:
+<br><tt>&nbsp;&nbsp;x = span(x_min, x_max, 50)(, -:1:40);</tt>
+<br><tt>&nbsp;&nbsp;y = span(y_min, y_max, 40)(-:1:50, );</tt>
+<br>This gives a 50-by-40 rectangular grid with <tt>x</tt> varying fastest.
+Such a grid is appropriate for exploring the behavior of a function of
+two variables. Higher dimensional meshes can be built in this way, too.
+</p>
+
+

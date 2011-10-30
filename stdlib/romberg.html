@@ -1,0 +1,56 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package romberg (in romberg.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+    <p><a href="romberg.html#max_doublings">max_doublings</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>R</h3>
+    <p><a href="romberg.html#romberg">romberg</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>S</h3>
+    <p><a href="romberg.html#simpson">simpson</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="max_doublings"></a><h3>max_doublings</h3>
+  <pre>DOCUMENT max_doublings= 20
+  is the maximum number of times romberg or simpson will split the
+  integration interval in half.  Default is 20.</pre>
+  
+</div>
+<div class="docblock"><a name="romberg"></a><h3>romberg</h3>
+  <pre>DOCUMENT integral= romberg(function, a, b)
+      or integral= romberg(function, a, b, epsilon)
+  returns the integral of FUNCTION(x) from A to B.  If EPSILON is
+  given, Simpson's rule is refined until that fractional accuracy
+  is obtained.  EPSILON defaults to 1.e-6.
+
+  If the notvector= keyword is supplied and non-zero, then FUNCTION
+  may not be called with a list of x values to return a list of
+  results.  By default, FUNCTION is assumed to be a vector function.
+
+  If the function is not very smooth, simpson may work better.
+</pre>
+  <p>SEE ALSO: <a href="romberg.html#simpson">simpson</a>, <a href="romberg.html#max_doublings">max_doublings</a></p>
+</div>
+<div class="docblock"><a name="simpson"></a><h3>simpson</h3>
+  <pre>DOCUMENT integral= simpson(function, a, b)
+      or integral= simpson(function, a, b, epsilon)
+  returns the integral of FUNCTION(x) from A to B.  If EPSILON is
+  given, Simpson's rule is refined until that fractional accuracy
+  is obtained.  EPSILON defaults to 1.e-6.
+
+  If the notvector= keyword is supplied and non-zero, then FUNCTION
+  may not be called with a list of x values to return a list of
+  results.  By default, FUNCTION is assumed to be a vector function.
+
+  If the function is very smooth, romberg may work better.
+</pre>
+  <p>SEE ALSO: <a href="romberg.html#romberg">romberg</a>, <a href="romberg.html#max_doublings">max_doublings</a></p>
+</div>

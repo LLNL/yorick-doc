@@ -1,0 +1,56 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package ylmdec (in ylmdec.i) - compute Ylm coefficients using hex ray tracer </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="ylmdec.html#accumulate">accumulate</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>G</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="ylmdec.html#get_ylm">get_ylm</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="accumulate"></a><h3>accumulate</h3>
+  <pre>DOCUMENT alm= accumulate(n, f, mesh, rcap, rtrack, pts, dylm, flux, nrpp)
+
+  Do N batches (approximately rays_per_batch each, default 13000) of
+  rays from file F, MESH = hydra_mesh(F), analyzing the symmetry of
+  a capsule of radius RCAP (all rays tangent to this sphere),
+  tracing the rays only down to radius RTRACK (>1.001*RCAP).
+
+  This routine is designed to be called several times successively
+  to get better statistics.  PTS, DYLM, FLUX, and NRPP are all updated.
+  PTS = unit vectors in directions of points on capsule surface
+        defaults to bucky(3,1): 1280 points with an intrinsic
+        fidelity of about 1% out to l=12
+        use bucky(4,1,domega), dylm= get_ylm(pts,lmax,list)*domega(-,..)
+        to get 5120 points and intrinsic fidelity of about 0.2% at l=12
+  DYLM = ylm*domega for PTS
+  FLUX = accumulated flux at each of PTS; units are power/area
+  NRPP = accumulated number of rays per point of capsule surface
+  ALM = 91 coefficients of Ylm up to l=12 corresponding to FLUX
+        l= [0, 1,1, 2,2,2, 3,3,3,3, 4,4,4,4,4, ...]
+        m= [0, 0,1, 0,1,2, 0,1,2,3, 0,1,2,3,4, ...]</pre>
+  
+</div>
+<div class="docblock"><a name="get_ylm"></a><h3>get_ylm</h3>
+  <pre>DOCUMENT get_ylm(pts, lmax, list)
+  returns values of Ylm at the 3-by-anything array of unit vectors
+  PTS, for all l and m up to LMAX.  The return value is
+  (lmax+1)*(lmax+2)/2-by-anything.  The LIST is also returned; its
+  value is [1, 2,2, 3,3,3, 4,4,4,4, ..., LMAX+1,LMAX+1,...,LMAX+1]
+  -- i copies of each integer i up to LMAX+1.  This can be useful
+  in conjunction with the histogram function; its values are l+1
+  for each element of the returned array's first index.  The m
+  values are [0, 0,1, 0,1,2, 0,1,2,3, 0,1,2,3,4, ...].  Negative m
+  values are omitted, since they would be the conjugates of m>0.
+    llist= list-1;
+    mlist= (!list(dif))(cum)-(list-2)*(list-1)/2;</pre>
+  
+</div>

@@ -1,0 +1,141 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package kepler (in kepler.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>J</h3>
+    <p><a href="kepler.html#jpl_planets">jpl_planets</a></p>
+    <h3>K</h3>
+    <p><a href="kepler.html#kepler">kepler</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="kepler.html#kepler2">kepler2</a></p>
+    <h3>M</h3>
+    <p><a href="kepler.html#moon">moon</a></p>
+    <h3>S</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="kepler.html#sch_planets">sch_moon</a></p>
+    <p><a href="kepler.html#sch_planets">sch_planets</a></p>
+    <p><a href="kepler.html#solar_system">solar_system</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="jpl_planets"></a><h3>jpl_planets</h3>
+  <pre>DOCUMENT jpl_planets
+orbital elements from http://ssd.jpl.nasa.gov/elem_planets.html
+"Mean orbit solutions from a 250 yr. least squares fit of the
+DE200 planetarty ephemeris to a Keplerian orbit where each element
+is allowed to vary linearly with time.  This solution fits the
+terrestrial planets to 25" or better, but achieves only 600" for
+Saturn.  Elements are referenced to mean ecliptic and equinox
+of J2000 at the J2000 epoch (2451545.0 JD)."
+J2000 = 2000 January 1.5
+
+WARNING: these elements are 1.5 JD later than sch_planets
+
+definitions:
+argument of perihelion = longitude of perihelion -
+                         longitude of ascending node
+mean anomaly = mean longitude - longitude of perihelion
+1 Julian century = 36525 days</pre>
+  
+</div>
+<div class="docblock"><a name="kepler"></a><h3>kepler</h3>
+  <pre>DOCUMENT xyz = kepler(orbit, time)
+      or xyz = kepler(orbit, time, ma, ta, norb)
+
+  return 3-dimsof(orbit(1,..))-by-dimsof(time) XYZ coordinates
+  corresponding to the orbit(s) ORBIT and time(s) TIME.  Optionally
+  return mean anomaly MA, true anomaly TA, and integer number of
+  orbits, each a dimsof(orbit(1,..))-by-dimsof(time) array.  The
+  MA and TA are in radians.  The x-axis is along the line of the
+  vernal equinox, the z-axis is ecliptic north.
+
+  ORBIT has leading dimension 12: [angle from perihelion, mean daily
+  motion, semi-major axis, d/dt(semi-major axis), eccentricity,
+  d/dt(eccentricity), longitude of ascending node, d/dt(ascending
+  node), angle from ascending node to perihelion, d/dt(perihelion),
+  inclination, d/dt(inclination)]
+  (Six pairs of a quantity and its time derivative.)
+  The angles are in degrees; d/dt units must match TIME units.
+
+  Mean anomaly is not an angle in real space; it is the quantity
+  proportional to time in Kepler's equation.  True anomaly is the
+  angle from perihelion to planet.
+
+  With a non-nil, non-zero full= keyword, return XYZUVW -- that is,
+  six coordinates including velocities as well as positions.
+</pre>
+  <p>SEE ALSO: <a href="kepler.html#sch_planets">sch_planets</a>, <a href="kepler.html#jpl_planets">jpl_planets</a>, <a href="kepler.html#sch_planets">sch_moon</a>, <a href="kepler.html#moon">moon</a>, <a href="kepler.html#solar_system">solar_system</a></p>
+</div>
+<div class="docblock"><a name="kepler2"></a><h3>kepler2</h3>
+  <pre>DOCUMENT xyz = kepler2(orbit, xyz0)
+      or xyz = kepler2(orbit, xyz0, time, ma, ta)
+
+  return dimsof(xyz0) XYZ coordinates corresponding to the orbit(s)
+  ORBIT and direction(s) XYZ0.  The dimensions of ORBIT beyond the
+  first, if any, must match those of XYZ0, although XYZ0 may have
+  any number of trailing dimensions.
+
+  Optionally return TIME, mean anomaly MA, and true anomaly TA,
+  each a dimsof(orbit(1,..))-by-dimsof(time) array.  The MA and TA
+  are in radians.  The x-axis is along the line of the vernal
+  equinox, the z-axis is ecliptic north.  The XYZ0 direction is first
+  projected into the plane of the orbit; then XYZ will be proportional
+  to XYZ0.  The time derivatives of the ORBIT elements are ignored.
+
+  ORBIT has leading dimension 12: [angle from perihelion, mean daily
+  motion, semi-major axis, d/dt(semi-major axis), eccentricity,
+  d/dt(eccentricity), longitude of ascending node, d/dt(ascending
+  node), angle from ascending node to perihelion, d/dt(perihelion),
+  inclination, d/dt(inclination)]
+  (Six pairs of a quantity and its time derivative.)
+  The angles are in degrees; d/dt units must match TIME units.
+
+  Mean anomaly is not an angle in real space; it is the quantity
+  proportional to time in Kepler's equation.  True anomaly is the
+  angle from perihelion to planet.
+</pre>
+  <p>SEE ALSO: <a href="kepler.html#sch_planets">sch_planets</a>, <a href="kepler.html#jpl_planets">jpl_planets</a>, <a href="kepler.html#sch_planets">sch_moon</a>, <a href="kepler.html#moon">moon</a>, <a href="kepler.html#solar_system">solar_system</a></p>
+</div>
+<div class="docblock"><a name="moon"></a><h3>moon</h3>
+  <pre>DOCUMENT xyz = moon(time)
+  return position XYZ of the moon relative to center of earth
+  at TIME; the XYZ has leading dimension 3; x is along the vernal
+  equinox, z is ecliptic north.  The corrections to the lunar orbit
+  are from Schlyter (see sch_moon).  Claimed accurate to 2 arc minutes
+  over some reasonable time.  TIME is in days since 0/Jan/00 (that is,
+  0000 UT 31/Dec/99).  This is 1.5 days earlier than the J2000 epoch.</pre>
+  <p>SEE ALSO: <a href="kepler.html#solar_system">solar_system</a>, <a href="kepler.html#sch_planets">sch_moon</a>, <a href="kepler.html#kepler">kepler</a></p>
+</div>
+<div class="docsee">
+  <h3>sch_moon</h3><p>SEE: <a href="#sch_planets">sch_planets</a></p>
+</div>
+<div class="docblock"><a name="sch_planets"></a><h3>sch_planets</h3>
+  <pre>DOCUMENT sch_planets, sch_moon
+from "How to compute planetary positions",
+by Paul Schlyter of Stockholm, Sweden
+http://hotel04.ausys.se/pausch
+"Please note that the orbital elements of Uranus and Neptune as given
+here are somewhat less accurate.  They include a long period perturbation
+between Uranus and Neptune.  The period of the perturbation is about
+4200 years."
+After corrections in the case of the moon, jupiter, saturn, and uranus,
+these are claimed to be accurate to under 1 arc minute for the inner
+planets, about 1 arc minute for the outer planets, and 2 arc minutes
+for the moon.</pre>
+  
+</div>
+<div class="docblock"><a name="solar_system"></a><h3>solar_system</h3>
+  <pre>DOCUMENT xyz = moon(time)
+  return position XYZ of the moon relative to center of earth
+  at TIME; the XYZ has leading dimension 3; x is along the vernal
+  equinox, z is ecliptic north.  Corrections due to Schlyter (see
+  sch_planets) are applied.  Claimed accurate to under 1 arc minute
+  over some reasonable time.  TIME is in days since 0/Jan/00 (that is,
+  0000 UT 31/Dec/99).  This is 1.5 days earlier than the J2000 epoch.</pre>
+  <p>SEE ALSO: <a href="kepler.html#solar_system">solar_system</a>, <a href="kepler.html#sch_planets">sch_moon</a>, <a href="kepler.html#kepler">kepler</a></p>
+</div>

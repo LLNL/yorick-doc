@@ -1,0 +1,74 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package demo1 (in demo1.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>D</h3>
+    <p><a href="demo1.html#demo1">demo1</a></p>
+    <h3>E</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="demo1.html#evolve">evolve</a></p>
+    <h3>S</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="demo1.html#shock">shock</a></p>
+    <p><a href="demo1.html#sound">sound</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="demo1"></a><h3>demo1</h3>
+  <pre>DOCUMENT demo1
+  run the 1-D hydrocode demonstration.  An X window should pop up
+  in which a movie of a wave propagating down a shock tube appears.
+  Use the 'sound' and 'shock' commands to set two different interesting
+  initial conditions; the default is 'sound'.
+</pre>
+  <p>SEE ALSO: <a href="demo1.html#sound">sound</a>, <a href="demo1.html#shock">shock</a>, <a href="demo1.html#evolve">evolve</a></p>
+</div>
+<div class="docblock"><a name="evolve"></a><h3>evolve</h3>
+  <pre>DOCUMENT evolve, time1
+      or evolve, time1, time0
+  Step the hydro calculation forward to TIME1,
+  starting with the initial conditions in the
+  RT, z, and v arrays at time TIME0 (default 0.0
+  if omitted).  The calculation also depends on
+  the constants M (mass/area/zone) and gammaM1
+  (gamma-1 for the gamma-law equation of state).
+  The pressure array p is updated in addition to
+  the primary state arrays RT, z, and v.
+
+  Boundary conditions are specified by setting
+  either a boundary pressure or a boundary
+  velocity at each end of the fluid column.
+  bc0_v   - Boundary velocity at z(0), or []
+            if z(0) has pressure BC.
+  bc0_p   - Boundary pressure beyond z(0).
+  bc0_time  - If bc0_v or bc0_p is an array,
+              bc0_time is an array of the same
+              length specifying the corresponding
+              times for time dependent BCs.
+  bc0_Z   - Acoustic impedance at z(0) if bc0_v
+            is nil (default is 0).
+  bcN_v, bcN_p, bcN_time, and bcN_Z have the same
+  meanings for the z(n_zones) boundary.
+
+  The worker routines OutputResults and
+  TakeStep must be supplied.</pre>
+  
+</div>
+<div class="docblock"><a name="shock"></a><h3>shock</h3>
+  <pre>DOCUMENT sound
+  Set up the initial conditions for evolve to launch a strong wave, which
+  steepens into a shock as it propagates.
+</pre>
+  <p>SEE ALSO: <a href="demo1.html#sound">sound</a>, <a href="demo1.html#evolve">evolve</a></p>
+</div>
+<div class="docblock"><a name="sound"></a><h3>sound</h3>
+  <pre>DOCUMENT sound
+  Set up the initial conditions for evolve to launch a weak sound wave.
+</pre>
+  <p>SEE ALSO: <a href="demo1.html#shock">shock</a>, <a href="demo1.html#evolve">evolve</a></p>
+</div>

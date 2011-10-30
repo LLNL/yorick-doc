@@ -1,0 +1,64 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="plv"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_60.html#plfp" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.7 plfp" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_62.html#plt" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.9 plt" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="plv-1"></a>
+<h3 class="subsection">3.1.8 plv</h3>
+
+<p>While plc, plf, pli, and plfp plot representations of a single valued
+function of two variables, the plv command plots a 2D vector at each
+of a number of (x,y) points.  The vector actually looks more like a
+dart &ndash; it is an isoceles triangle with a much narrower base than
+height, with its altitude equal to the vector (u,v), in both magnitude
+and direction, and its centroid at the point (x,y):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plv, v, u, y, x
+</pre></td></tr></table>
+
+<p>Making a good vector plot is very tricky.  Not only must you find a
+nice looking length scale for your (u,v) vectors &ndash; the longest should
+be something like the spacing between your (x,y) points &ndash; but also
+you must sprinkle the (x,y) points themselves rather uniformly
+throughout the region of your plot.  The time you spend overcoming
+these artistic difficulties usually isn&rsquo;t worth the effort.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_60.html#plfp" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.7 plfp" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_62.html#plt" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.9 plt" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

@@ -1,0 +1,26 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Including Source Files</h2>
+<p><tt>#include "<i>filename.i</i>"&nbsp;&nbsp;&nbsp;</tt> insert contents of <i>filename</i>
+</p>
+<p>This is a parser directive, NOT an executable statement. Yorick also
+provides two forms of executable include statements:
+</p>
+<p><tt>include, "<i>filename.i</i>"&nbsp;&nbsp;&nbsp;</tt> parse contents of <i>filename.i</i>
+<br><tt>require, "<i>filename.i</i>"&nbsp;&nbsp;&nbsp;</tt> parse <i>filename.i</i> if not
+yet parsed
+</p>
+<p>The effect of the <tt>include</tt> function is not quite immediate,
+since any tasks (<tt>*main*</tt> programs) generated cannot execute until
+the task which called <tt>include</tt> finishes.
+</p>
+<p>The <tt>require</tt> function should be placed at the top of a file
+which represents a package of Yorick routines that depends on functions
+or variables defined in another package <i>filename.i</i>.
+</p>
+<p>The <i>filename.i </i>ends with a <tt>.i</tt> suffix by convention.
+</p>
+
+

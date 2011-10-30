@@ -1,0 +1,26 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Conditional Execution</h2>
+<p>A Yorick statement can be executed or not based on the value of a scalar
+<i>condition</i>
+(0 means don't execute, non-0 means execute):
+</p>
+<p><tt>if (</tt><i>condition</i><tt>)</tt> <i>statementT</i>
+</p>
+<p>or, more generally,
+</p>
+<p><tt>if (</tt><i>condition</i><tt>)</tt> <i>statementT</i><br>
+<tt>else</tt> <i>statementF</i>
+</p>
+<p>Several <tt>if</tt> statements may be chained as follows:
+</p>
+<p><tt>if (</tt><i>condition1</i><tt>)</tt> <i>statement1
+</i><br><tt>else if (</tt><i>condition2</i><tt>)</tt> <i>statement2
+</i><br><tt>else if (</tt><i>condition3</i><tt>)</tt> <i>statement3
+</i><br>...
+<br><tt>else</tt> <i>statementF</i>
+</p>
+
+

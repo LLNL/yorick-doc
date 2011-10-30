@@ -1,0 +1,259 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-math (in std.i) - simple mathematical functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-math.html#abs">abs</a></p>
+    <p><a href="std-math.html#acos">acos</a></p>
+    <p><a href="std-math.html#asinh">acosh</a></p>
+    <p><a href="std-math.html#asin">asin</a></p>
+    <p><a href="std-math.html#asinh">asinh</a></p>
+    <p><a href="std-math.html#atan">atan</a></p>
+    <p><a href="std-math.html#asinh">atanh</a></p>
+    <h3>C</h3>
+    <p><a href="std-math.html#ceil">ceil</a></p>
+    <p><a href="std-math.html#conj">conj</a></p>
+    <p><a href="std-math.html#sin">cos</a></p>
+    <p><a href="std-math.html#sinh">cosh</a></p>
+    <p><a href="std-math.html#sech">csch</a></p>
+    <h3>E</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-math.html#exp">exp</a></p>
+    <p><a href="std-math.html#expm1">expm1</a></p>
+    <h3>F</h3>
+    <p><a href="std-math.html#floor">floor</a></p>
+    <h3>I</h3>
+    <p><a href="std-math.html#im_part">im_part</a></p>
+    <h3>L</h3>
+    <p><a href="std-math.html#log">log</a></p>
+    <p><a href="std-math.html#log10">log10</a></p>
+    <p><a href="std-math.html#log1p">log1p</a></p>
+    <p><a href="std-math.html#lround">lround</a></p>
+    <h3>P</h3>
+    <p><a href="std-math.html#pi">pi</a></p>
+    <p><a href="std-math.html#poly">poly</a></p>
+    <h3>R</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-math.html#random">random</a></p>
+    <p><a href="std-math.html#randomize">randomize</a></p>
+    <p><a href="std-math.html#random">random_seed</a></p>
+    <p><a href="std-math.html#re_part">re_part</a></p>
+    <p><a href="std-math.html#lround">round</a></p>
+    <h3>S</h3>
+    <p><a href="std-math.html#sech">sech</a></p>
+    <p><a href="std-math.html#sign">sign</a></p>
+    <p><a href="std-math.html#sin">sin</a></p>
+    <p><a href="std-math.html#sinh">sinh</a></p>
+    <p><a href="std-math.html#sqrt">sqrt</a></p>
+    <h3>T</h3>
+    <p><a href="std-math.html#sin">tan</a></p>
+    <p><a href="std-math.html#sinh">tanh</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="abs"></a><h3>abs</h3>
+  <pre>DOCUMENT abs(x)
+      or abs(x, y, z, ...)
+  returns the absolute value of its argument.
+  In the multi-argument form, returns sqrt(x^2+y^2+z^2+...).</pre>
+  <p>SEE ALSO: <a href="std-math.html#sign">sign</a>, <a href="std-math.html#sqrt">sqrt</a></p>
+</div>
+<div class="docblock"><a name="acos"></a><h3>acos</h3>
+  <pre>DOCUMENT acos(x)
+  returns the inverse cosine of its argument, range [0, pi].</pre>
+  <p>SEE ALSO: <a href="std-math.html#sin">sin</a>, <a href="std-math.html#sin">cos</a>, <a href="std-math.html#sin">tan</a>, <a href="std-math.html#asin">asin</a>, <a href="std-math.html#acos">acos</a>, <a href="std-math.html#atan">atan</a></p>
+</div>
+<div class="docsee">
+  <h3>acosh</h3><p>SEE: <a href="#asinh">asinh</a></p>
+</div>
+<div class="docblock"><a name="asin"></a><h3>asin</h3>
+  <pre>DOCUMENT asin(x)
+  returns the inverse sine of its argument, range [-pi/2, pi/2].</pre>
+  <p>SEE ALSO: <a href="std-math.html#sin">sin</a>, <a href="std-math.html#sin">cos</a>, <a href="std-math.html#sin">tan</a>, <a href="std-math.html#asin">asin</a>, <a href="std-math.html#acos">acos</a>, <a href="std-math.html#atan">atan</a></p>
+</div>
+<div class="docblock"><a name="asinh"></a><h3>asinh</h3>
+  <pre>DOCUMENT asinh(x)
+         acosh(x)
+         atanh(x)
+  returns the inverse hyperbolic sine, cosine, or tangent of
+  its argument.  The range of real acosh is >=0.0.</pre>
+  <p>SEE ALSO: <a href="std-math.html#sinh">sinh</a>, <a href="std-math.html#sinh">cosh</a>, <a href="std-math.html#sinh">tanh</a>, <a href="std-math.html#sech">sech</a>, <a href="std-math.html#sech">csch</a></p>
+</div>
+<div class="docblock"><a name="atan"></a><h3>atan</h3>
+  <pre>DOCUMENT atan(x)
+      or atan(y, x)
+  returns the inverse tangent of its argument, range [-pi/2, pi/2].
+  In the two argument form, returns the angle from (1, 0) to (x, y),
+  in the range (-pi, pi], with atan(1, 0)==pi/2.  (If x>=0, this is
+  the same as atan(y/x).)</pre>
+  <p>SEE ALSO: <a href="std-math.html#sin">sin</a>, <a href="std-math.html#sin">cos</a>, <a href="std-math.html#sin">tan</a>, <a href="std-math.html#asin">asin</a>, <a href="std-math.html#acos">acos</a>, <a href="std-math.html#atan">atan</a></p>
+</div>
+<div class="docsee">
+  <h3>atanh</h3><p>SEE: <a href="#asinh">asinh</a></p>
+</div>
+<div class="docblock"><a name="ceil"></a><h3>ceil</h3>
+  <pre>DOCUMENT ceil(x)
+  returns the smallest integer not less than x (no-op on integers).</pre>
+  <p>SEE ALSO: <a href="std-math.html#floor">floor</a>, <a href="std-math.html#lround">round</a></p>
+</div>
+<div class="docblock"><a name="conj"></a><h3>conj</h3>
+  <pre>DOCUMENT conj(z)
+  returns the complex conjugate of its argument.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>cos</h3><p>SEE: <a href="#sin">sin</a></p>
+</div>
+<div class="docsee">
+  <h3>cosh</h3><p>SEE: <a href="#sinh">sinh</a></p>
+</div>
+<div class="docsee">
+  <h3>csch</h3><p>SEE: <a href="#sech">sech</a></p>
+</div>
+<div class="docblock"><a name="exp"></a><h3>exp</h3>
+  <pre>DOCUMENT exp(x)
+  returns the exponential function of its argument (inverse of log).</pre>
+  <p>SEE ALSO: <a href="std-math.html#expm1">expm1</a>, <a href="std-math.html#log">log</a>, <a href="std-math.html#log10">log10</a>, <a href="std-math.html#sinh">sinh</a>, <a href="std-math.html#sinh">cosh</a>, <a href="std-math.html#sinh">tanh</a>, <a href="std-math.html#sech">sech</a>, <a href="std-math.html#sech">csch</a></p>
+</div>
+<div class="docblock"><a name="expm1"></a><h3>expm1</h3>
+  <pre>DOCUMENT expm1(x)
+      or expm1(x, ex)
+  return exp(X)-1 accurate to machine precision (even for X<<1)
+  in the second form, returns exp(x) to EX</pre>
+  <p>SEE ALSO: <a href="std-math.html#exp">exp</a>, <a href="std-math.html#log1p">log1p</a></p>
+</div>
+<div class="docblock"><a name="floor"></a><h3>floor</h3>
+  <pre>DOCUMENT floor(x)
+  returns the largest integer not greater than x (no-op on integers).</pre>
+  <p>SEE ALSO: <a href="std-math.html#ceil">ceil</a>, <a href="std-math.html#lround">round</a></p>
+</div>
+<div class="docblock"><a name="im_part"></a><h3>im_part</h3>
+  <pre>DOCUMENT im_part(z)
+  returns the imaginary part of its argument.
+  Unlike z.im, works if z is not complex (returns zero).</pre>
+  
+</div>
+<div class="docblock"><a name="log"></a><h3>log</h3>
+  <pre>DOCUMENT log(x)
+  returns the natural logarithm of its argument (inverse of exp).</pre>
+  <p>SEE ALSO: <a href="std-math.html#log1p">log1p</a>, <a href="std-math.html#log10">log10</a>, <a href="std-math.html#exp">exp</a>, <a href="std-math.html#asinh">asinh</a>, <a href="std-math.html#asinh">acosh</a>, <a href="std-math.html#asinh">atanh</a></p>
+</div>
+<div class="docblock"><a name="log10"></a><h3>log10</h3>
+  <pre>DOCUMENT log10(x)
+  returns the base 10 logarithm of its argument (inverse of 10^x).</pre>
+  <p>SEE ALSO: <a href="std-math.html#log">log</a>, <a href="std-math.html#exp">exp</a>, <a href="std-math.html#asinh">asinh</a>, <a href="std-math.html#asinh">acosh</a>, <a href="std-math.html#asinh">atanh</a></p>
+</div>
+<div class="docblock"><a name="log1p"></a><h3>log1p</h3>
+  <pre>DOCUMENT log1p(x)
+  return log(1+X) accurate to machine precision (even for X<<1)
+  from Goldberg, ACM Computing Surveys, Vol 23, No 1, March 1991,
+    apparently originally from HP-15C Advanced Functions Handbook</pre>
+  <p>SEE ALSO: <a href="std-math.html#expm1">expm1</a>, <a href="std-math.html#log1p">log1p</a></p>
+</div>
+<div class="docblock"><a name="lround"></a><h3>lround</h3>
+  <pre>DOCUMENT round(x);
+         lround(x);
+  These functions return X rounded to the nearest integer.  The result of
+  round(X) is a floating point value, while that of lround(X) is a long
+  integer.  They are respectively equivalent to: floor(X+0.5) and
+  long(floor(X+0.5)).</pre>
+  <p>SEE ALSO: <a href="std-math.html#floor">floor</a>, <a href="std-math.html#ceil">ceil</a></p>
+</div>
+<div class="docblock"><a name="pi"></a><h3>pi</h3>
+  <pre>DOCUMENT pi
+  roughly 3.14159265358979323846264338327950288</pre>
+  
+</div>
+<div class="docblock"><a name="poly"></a><h3>poly</h3>
+  <pre>DOCUMENT poly(x, a0, a1, a2, ..., aN)
+  returns the polynomial  A0 + A1*x + A2*x^2 + ... + AN*X^N
+  The data type and dimensions of the result, and conformability rules
+  for the inputs are identical to those for the expression.</pre>
+  
+</div>
+<div class="docblock"><a name="random"></a><h3>random</h3>
+  <pre>DOCUMENT random(dimension_list)
+         random_seed, seed
+  returns an array of random double values with the given
+  DIMENSION_LIST (nil for a scalar result), uniformly distributed
+  on the interval from 0.0 to 1.0.
+  The algorithm is from Press and Teukolsky, Computers in Physics,
+  vol. 6, no. 5, Sep/Oct 1992 (ran2).  They offer a reward of $1000
+  to anyone who can exhibit a statistical test that this random
+  number generator fails in a "non-trivial" way.
+  The random_seed call reinitializes the random number sequence;
+  SEED should be between 0.0 and 1.0 non-inclusive; if SEED is
+  omitted, nil, or out of range, the sequence is reinitialized as
+  when Yorick starts.
+  The numbers are actually at the centers of 2147483562 equal width
+  bins on the interval [0,1].  Although only these 2 billion numbers
+  are possible, the period of the generator is roughly 2.3e18.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#randomize">randomize</a></p>
+</div>
+<div class="docblock"><a name="randomize"></a><h3>randomize</h3>
+  <pre>DOCUMENT randomize
+         randomize()
+  set the seed for random "randomly" (based on the timer clock
+  and the current state of random).  As a function, returns the
+  value of the seed passed to random_seed.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="std-math.html#random">random_seed</a></p>
+</div>
+<div class="docsee">
+  <h3>random_seed</h3><p>SEE: <a href="#random">random</a></p>
+</div>
+<div class="docblock"><a name="re_part"></a><h3>re_part</h3>
+  <pre>DOCUMENT re_part(z)
+  returns the real part of its argument.  (Same as double(z).)
+  Unlike z.re, works if z is not complex.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>round</h3><p>SEE: <a href="#lround">lround</a></p>
+</div>
+<div class="docblock"><a name="sech"></a><h3>sech</h3>
+  <pre>DOCUMENT sech(x)
+         csch(x)
+  returns the hyperbolic secant (1/cosh) or cosecant (1/sinh) of
+  its argument, without overflowing for large x.</pre>
+  <p>SEE ALSO: <a href="std-math.html#sinh">sinh</a>, <a href="std-math.html#sinh">cosh</a>, <a href="std-math.html#sinh">tanh</a>, <a href="std-math.html#asinh">asinh</a>, <a href="std-math.html#asinh">acosh</a>, <a href="std-math.html#asinh">atanh</a></p>
+</div>
+<div class="docblock"><a name="sign"></a><h3>sign</h3>
+  <pre>DOCUMENT sign(x)
+  returns algebraic sign of it argument, or closest point on the
+  unit circle for complex x.  Guaranteed that x==sign(x)*abs(x).
+  sign(0)==+1.</pre>
+  <p>SEE ALSO: <a href="std-math.html#abs">abs</a></p>
+</div>
+<div class="docblock"><a name="sin"></a><h3>sin</h3>
+  <pre>DOCUMENT sin(x)
+         cos(x)
+         tan(x)
+  returns the sine, cosine, or tangent of its argument,
+  which is in radians.</pre>
+  <p>SEE ALSO: <a href="std-math.html#asin">asin</a>, <a href="std-math.html#acos">acos</a>, <a href="std-math.html#atan">atan</a></p>
+</div>
+<div class="docblock"><a name="sinh"></a><h3>sinh</h3>
+  <pre>DOCUMENT sinh(x)
+         cosh(x)
+         tanh(x)
+  returns the hyperbolic sine, cosine, or tangent of its argument.</pre>
+  <p>SEE ALSO: <a href="std-math.html#sech">sech</a>, <a href="std-math.html#sech">csch</a>, <a href="std-math.html#asinh">asinh</a>, <a href="std-math.html#asinh">acosh</a>, <a href="std-math.html#asinh">atanh</a></p>
+</div>
+<div class="docblock"><a name="sqrt"></a><h3>sqrt</h3>
+  <pre>DOCUMENT sqrt(x)
+  returns the square root of its argument.</pre>
+  <p>SEE ALSO: <a href="std-math.html#abs">abs</a></p>
+</div>
+<div class="docsee">
+  <h3>tan</h3><p>SEE: <a href="#sin">sin</a></p>
+</div>
+<div class="docsee">
+  <h3>tanh</h3><p>SEE: <a href="#sinh">sinh</a></p>
+</div>

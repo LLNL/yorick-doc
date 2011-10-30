@@ -1,0 +1,46 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package legndr (in legndr.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>L</h3>
+    <p><a href="legndr.html#legndr">legndr</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>Y</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="legndr.html#ylm_coef">ylm_coef</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="legndr"></a><h3>legndr</h3>
+  <pre>DOCUMENT legndr(l,m, x)
+  return the associated Legendre function Plm(x).  The X may
+  be an array (-1<=x<=1), but L and M (0<=M<=L) must be scalar
+  values.  For m=0, these are the Legendre polynomials Pl(x).
+  Relation of Plm(x) to Pl(x):
+    Plm(x) = (-1)^m (1-x^2)^(m/2) d^m/dx^m(Pl(x))
+  Relation of Plm(x) to spherical harmonics Ylm:
+    Ylm(theta,phi)= sqrt((2*l+1)(l-m)!/(4*pi*(l+m)!)) *
+                        Plm(cos(theta)) * exp(1i*m*phi)</pre>
+  <p>SEE ALSO: <a href="legndr.html#ylm_coef">ylm_coef</a></p>
+</div>
+<div class="docblock"><a name="ylm_coef"></a><h3>ylm_coef</h3>
+  <pre>DOCUMENT ylm_coef(l,m)
+  return sqrt((2*l+1)(l-m)!/(4*pi*(l+m)!)), the normalization
+  coefficient for spherical harmonic Ylm with respect to the
+  associated Legendre function Plm.  In this implementation,
+  0<=m<=l; use symmetry for m<0, or use sines and cosines
+  instead of complex exponentials.  Unlike Plm, array L and M
+  arguments are permissible here.
+  WARNING: These get combinitorially small with large L and M;
+  probably Plm is simultaneously blowing up and should be
+  normalized directly in legndr if what you want is Ylm.  But
+  I don't feel like working all that out -- if you need large
+  L and M results, you should probably be working with some
+  sort of asymptotic form anyway...</pre>
+  <p>SEE ALSO: <a href="legndr.html#legndr">legndr</a></p>
+</div>

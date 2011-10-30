@@ -1,0 +1,89 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="plf"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_57.html#plc" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.4 plc and plfc" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_59.html#pli" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.6 pli" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="plf-1"></a>
+<h3 class="subsection">3.1.5 plf</h3>
+
+<p>The plf command plots a filled mesh, that is, it gives a solid color
+to each quadrilateral zone in a two dimensional mesh.  The color is
+taken from a continuous list of colors called a palette.  Different
+colors represent different function values.  A palette could be a
+scale of gray values from black to white, or a spectrum of colors from
+red to violet.
+</p>
+<p>Unlike plc, for which the z array had the same shape as x and y, the z
+array in a plf command must be an M-1 by N-1 array if x and y are M by
+N.  That is, there is one z value or color for each zone of the mesh
+instead of one z value per node:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plf, z, y, x
+</pre></td></tr></table>
+
+<p>A separate palette command determines the sequence of colors which will
+represent z values.  Keywords to plf determine how z will be scaled onto
+the palette (by default, the minimum z value will get the first color in
+the palette, and the maximum z the last color), and whether the edges of
+the zones are drawn in addition to coloring the interior.  When the x
+and y coordinates are projections of a two dimensional surface in three
+dimensions, the projected mesh may overlap itself, in which case the
+order plf draws the zones becomes important &ndash; at a given (x,y), you
+will only see the color of the last-drawn zone containing that point.
+The drawing order is the same as the storage order of the z array,
+namely <kbd>(1,1)</kbd>, <kbd>(2,1)</kbd>, <kbd>(3,1)</kbd>, ..., <kbd>(1,2)</kbd>,
+<kbd>(2,2)</kbd>, <kbd>(3,2)</kbd>, ..., <kbd>(1,3)</kbd>, <kbd>(2,3)</kbd>, <kbd>(3,3)</kbd>,
+...
+</p>
+<p>One or two contours plotted in a contrasting color on top of a filled
+mesh is one of the least puzzling ways to present a function of two
+variables.  The fill colors give a better feel for the smooth
+variation of the function than many contour lines, but the
+correspondence between color and function value is completely
+arbitrary.  One or two contour lines solves this visual puzzle nicely,
+especially if drawn at one or two particularly important levels that
+satisfy a viewer&rsquo;s natural curiosity.
+</p>
+<p>As of yorick 1.5, z may also be a 3 by M-1 by N-1 array of type char in
+order to make a true color filled mesh.  The first index of z is (red,
+green, blue), with 0 minimum intensity and 255 maximum.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_57.html#plc" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.4 plc and plfc" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_59.html#pli" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.6 pli" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

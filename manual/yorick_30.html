@@ -1,0 +1,115 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Shell-commands"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_29.html#Prompts" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.5 Prompts" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Shell-commands_002c-removing-and-renaming-files"></a>
+<h3 class="subsection">1.3.6 Shell commands, removing and renaming files</h3>
+
+<p>Yorick has a <kbd>system</kbd> function which you can use to invoke
+operating system utilities.  For example, typing <kbd>ls *.txt</kbd> to a
+UNIX shell will list all files in your current working directory
+ending with &lsquo;<tt>.txt</tt>&rsquo;.  Similarly, <kbd>pwd</kbd> prints the name of your
+working directory:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; system, &quot;pwd&quot;
+/home/icf/munro
+&gt; system, &quot;ls *.txt&quot;
+   damped.txt      junk.txt
+</pre></td></tr></table>
+
+<p>This is so useful that there is a special escape syntax which
+automatically generates the system call, so you don&rsquo;t need to type the
+name <kbd>system</kbd> or all of the punctuation.  The rule is, that if the
+first character of a Yorick statement is <kbd>$</kbd> (dollar), the
+remainder of that line becomes a quoted string which is passed to the
+<kbd>system</kbd> function.  Hence, you really would have typed:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; $pwd
+/home/icf/munro
+&gt; $ls *.txt
+   damped.txt      junk.txt
+</pre></td></tr></table>
+
+<p>Note that you cannot use <kbd>;</kbd> to stack <kbd>$</kbd> escaped lines &mdash;
+the semicolon will be passed to <kbd>system</kbd>.  Obviously, this syntax
+breaks all of the ordinary rules of Yorick&rsquo;s grammar.
+</p>
+<p>On UNIX systems, the <kbd>system</kbd> function (which calls the ANSI C
+standard library function of the same name) usually executes your
+command in a Bourne shell.  If you are used to a different shell, you
+might be surprised at some of the results.  If you have some
+complicated shell commands for which you need, say, the C-shell
+<kbd>csh</kbd>, just start a copy of that shell before you issue your
+commands:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; $csh
+% ls *.txt
+  damped.txt    junk.txt
+% exit
+&gt;
+</pre></td></tr></table>
+
+<p>As this example shows, you can start up an interactive program with
+the <kbd>system</kbd> function.  When you exit that program, you return to
+Yorick.
+</p>
+<p>One system command which you cannot use is <kbd>cd</kbd> (or <kbd>pushd</kbd> or
+<kbd>popd</kbd>) to change directories.  The working directory of the shell
+you start under Yorick will change, but the change has no effect on
+Yorick&rsquo;s own working directory.  Instead, use Yorick&rsquo;s own <kbd>cd</kbd>
+function:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; cd, &quot;new/working/directory&quot;
+&gt;
+</pre></td></tr></table>
+
+<p>Also, if you write a Yorick program which manipulates temporary files,
+you should not use the UNIX commands <kbd>mv</kbd> or <kbd>rm</kbd> to rename or
+remove the files; any time you use the <kbd>system</kbd> command you are
+restricting your program to a particular class of operating systems.
+Instead, use Yorick&rsquo;s <kbd>rename</kbd> and <kbd>remove</kbd> functions, which
+will work under any operating system.  Yorick also has <kbd>mkdir</kbd>,
+<kbd>rmdir</kbd>, <kbd>lsdir</kbd>, <kbd>get_cwd</kbd>, and <kbd>get_env</kbd>
+functions.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_29.html#Prompts" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.5 Prompts" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

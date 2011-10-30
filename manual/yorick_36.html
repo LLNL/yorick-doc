@@ -1,0 +1,113 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Interpolating"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_35.html#Creating-Arrays" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.1 Creating Arrays" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Interpolating-1"></a>
+<h2 class="section">2.2 Interpolating</h2>
+
+<p>As I have said, a Yorick array often represents the values of a
+continuous function at a number of discrete points.  In order to find
+the values of the function at other points, you need to know how it
+varies between (or beyond) the given points.  In general, to interpolate
+(or extrapolate), you need a detailed understanding of how the function
+was discretized in the first place.  However, when the list of values
+accurately represents the function, linear interpolation between the
+known points will suffice.  A function which is linear between
+successive points is called &ldquo;piecewise linear&rdquo;.
+</p>
+<p>The <kbd>interp</kbd> function is a mechanism for converting a list of
+function values at discrete points into a piecewise linear function
+which can be evaluated at any point.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">theta = span(0, pi, 100);
+x_circle = cos(theta);
+y_circle = sin(theta);
+x = span(-2, 2, 64);
+y = interp(y_circle, x_circle, x);
+</pre></td></tr></table>
+
+<p>This code fragment produces a <kbd>y</kbd> array with the same number of
+points as <kbd>x</kbd> (64), with the values of the piecewise linear function
+defined by the points <kbd>(x_circle, y_circle)</kbd>.  Outside the range
+covered by <kbd>x_circle</kbd>, the piecewise linear function remains
+constant &ndash; the simplest possible extrapolation rule.
+</p>
+<p>Regarded as a function of its third argument, <kbd>interp</kbd> behaves just
+like the <kbd>sin</kbd> or <kbd>cos</kbd> function &ndash; its first two arguments are
+really parameters specifying which piecewise linear function
+<kbd>interp</kbd> will evaluate.
+</p>
+<p>The <kbd>integ</kbd> function works just like <kbd>interp</kbd>, except that it
+returns the integral of the piecewise linear function.  The integration
+constant is chosen so that <kbd>integ</kbd> returns zero at the first point
+of the piecewise linear function.  (This point will actually have the
+maximum value of x if the x array is decreasing.)  Thus, the integral
+of the piecewise linear approximation to the semicircle and the exact
+integral of the semicircle can be computed by:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">yi = integ(y_circle, x_circle, x);
+yi_exact = 0.5*(acos(max(min(x,1),-1)) - x*sqrt(1-min(x^2,1)));
+</pre></td></tr></table>
+
+<p>Again, the piecewise linear function is assumed to remain constant
+beyond the first and last points specified.  Hence, <kbd>integ</kbd> is a
+linear function when extrapolating, and piecewise parabolic when
+interpolating.
+</p>
+<p>Use <kbd>integ</kbd> only when you need the indefinite integral of a
+piecewise linear function.  Yorick has more efficient ways to compute
+definite integrals.  Again, think of <kbd>integ</kbd>, like <kbd>interp</kbd>, as
+a continuous function of its third argument; the first two arguments are
+parameters specifying which function.
+</p>
+<p>Neither <kbd>interp</kbd> nor <kbd>integ</kbd> makes sense unless its second
+argument is either increasing or decreasing.  There is no way to decide
+which branch of a multi-valued function should be returned.
+</p>
+<p>Internally, both <kbd>interp</kbd> and <kbd>integ</kbd> need a lookup function &ndash;
+that is, a function which finds the index of the point in x_circle just
+beyond each of the x values.  This lookup function can also be called
+directly; its name is <kbd>digitize</kbd>.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_35.html#Creating-Arrays" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.1 Creating Arrays" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

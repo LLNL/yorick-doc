@@ -1,0 +1,38 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package ellipse (in ellipse.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>E</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="ellipse.html#EllipticE">EllipticE</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="ellipse.html#EllipticK">EllipticK</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="EllipticE"></a><h3>EllipticE</h3>
+  <pre>DOCUMENT EllipticE(k)
+  return E(k), the complete Elliptic Function
+  integral from 0 to pi/2 of  sqrt(1-k^2 *(sin(x))^2) dx
+  k must lie in -1<= k <=1
+
+  Uses the arithmetic/geometric mean method. (Abramowitz & Stegun p598) 
+</pre>
+  <p>SEE ALSO: <a href="ellipse.html#EllipticK">EllipticK</a></p>
+</div>
+<div class="docblock"><a name="EllipticK"></a><h3>EllipticK</h3>
+  <pre>DOCUMENT EllipticK(k)
+return E(k), the complete Elliptic Function 
+integral from 0 to pi/2 of  1/sqrt(1-k^2 *(sin(x))^2) dx
+uses the arithmetic/geometric mean method. (Abramowitz & Stegun p598)
+k must lie in   -1 < k <1.
+
+E(k) diverges as log(4/sqrt(1-k^2)) as k->1
+</pre>
+  <p>SEE ALSO: <a href="ellipse.html#EllipticE">EllipticE</a></p>
+</div>

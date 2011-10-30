@@ -1,0 +1,84 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Matrix-Multiply"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_44.html#Rubber_002dIndex" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.7 Using a rubber index" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_46.html#Statistical" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.9 Rank reducing (statistical) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Marking-an-index-for-matrix-multiplication"></a>
+<h3 class="subsection">2.3.8 Marking an index for matrix multiplication</h3>
+
+<p>Yorick has a special syntax for matrix multiplication, or, more
+generally, inner product:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">A(,+)*B(+,)
+B(+,)*A(,+)
+x(+)*y(+)
+P(,+,,)*Q(,,+)
+</pre></td></tr></table>
+
+<p>In the first example, <kbd>A</kbd> would be an L-by-M array, <kbd>B</kbd> would be
+an M-by-N array, and the result would be the L-by-N matrix product.  In
+the second example, the result would be the N-by-L transpose of the
+first result.  The general rule is that all of the &ldquo;spectator&rdquo;
+dimensions of the left operand precede the spectator dimensions of the
+right operand in the result.
+</p>
+<p>The third example shows how to form the inner product of two vectors
+<kbd>x</kbd> and <kbd>y</kbd> of equal length.  The fourth example shows how to
+contract the second dimension of a 4-D array <kbd>P</kbd> with the third
+dimension of the 3-D array <kbd>Q</kbd>.  If <kbd>P</kbd> were 2-by-3-by-4-by-5
+and <kbd>Q</kbd> were 6-by-7-by-3, the result array would be
+2-by-4-by-5-by-6-by-7.
+</p>
+<p>Unlike all of the other special subscript symbols (nil, <kbd>-</kbd>,
+<kbd>..</kbd>, and <kbd>*</kbd> so far), the <kbd>+</kbd> sign marking an index for use
+in an inner product is actually treated specially by the Yorick parser.
+The <kbd>+</kbd> subscript is a parse error unless the array (or expression)
+being subscripted is the left or right operand of a binary <kbd>*</kbd>
+operator, which is then parsed as matrix multiplication instead of
+Yorick&rsquo;s usual element-by-element multiplication.  A parse error will
+also result if only one of the operands has a dimension marked by
+<kbd>+</kbd>.  Both operands must have exactly one marked dimension, and the
+marked dimensions must turn out to be of equal length at run
+time.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_44.html#Rubber_002dIndex" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.7 Using a rubber index" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_46.html#Statistical" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.9 Rank reducing (statistical) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

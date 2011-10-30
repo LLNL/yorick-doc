@@ -1,0 +1,41 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Elementary Functions</h2>
+<p><tt>abs, sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> absolute value, arithmetic sign
+<br><tt>sqrt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> square root
+<br><tt>floor, ceil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> round down, round up to integer
+<br><tt>conj&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> complex conjugation
+<br><tt>pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> the constant 3.14159265358979323846...
+<br><tt>sin, cos, tan&nbsp;&nbsp;&nbsp;&nbsp;</tt> trigonometric functions (of radians)
+<br><tt>asin, acos, atan&nbsp;</tt> inverse trigonometric functions
+<br><tt>sinh, cosh, tanh, sech, csch&nbsp;</tt> hyperbolic functions
+<br><tt>asinh, acosh, atanh&nbsp;</tt> inverse hyperbolic functions
+<br><tt>exp, log, log10&nbsp;&nbsp;</tt> exponential and logarithmic functions
+<br><tt>min, max&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> find minimum, maximum of array
+<br><tt>sum, avg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> find sum, average of array
+<br><tt>random&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> random number generator
+
+</p>
+<p>The <tt>atan</tt> function takes one or two arguments; <tt>atan(t)</tt>
+returns a value in the range (-<font face="symbol">p</font>/2,<font face="symbol">p</font>/2]),
+while <tt>atan(y,x)</tt> returns the counterclockwise angle from (1,0)
+to (x,y) in the range (-<font face="symbol">p</font>,<font face="symbol">p</font>]).
+</p>
+<p>The <tt>abs</tt> function allows any number of arguments; for example,
+<tt>abs(x,y,z)</tt> is the same as <tt>sqrt(x^2+y^2+z^2)</tt>. The <tt>sign</tt>
+satisfies <tt>sign(0)==1</tt> and <tt>abs(z)*sign(z)==z</tt> always (even
+when <tt>z</tt> is <tt>complex</tt>).
+</p>
+<p>The <tt>min</tt> and <tt>max</tt> functions return a scalar result when
+presented with a single argument, but the pointwise minimum or maximum
+when presented with multiple arguments.
+</p>
+<p>The <tt>min</tt>, <tt>max</tt>, <tt>sum</tt>, and single argument <tt>abs</tt>
+functions return integer results when presented integer arguments; the
+other functions will promote their arguments to a real type and return
+reals.
+</p>
+
+

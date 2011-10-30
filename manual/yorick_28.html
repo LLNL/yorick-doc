@@ -1,0 +1,78 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Info"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_27.html#Help" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.3 The help function" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_29.html#Prompts" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.5 Prompts" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="The-info-function"></a>
+<h3 class="subsection">1.3.4 The <kbd>info</kbd> function</h3>
+
+<p>If you want to know the data type and dimensions of a variable, use
+the <kbd>info</kbd> function.  Unlike <kbd>help</kbd>, which is intended to tell
+you what a thing <em>means</em>, <kbd>info</kbd> simply tells what a thing
+<em>is</em>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; info, theta
+ array(double,200)
+&gt; info, E
+ array(double)
+</pre></td></tr></table>
+
+<p>Here, <kbd>double</kbd> means &ldquo;double precision floating point number&rdquo;,
+which is the default data type for any real number.  The default
+integer data type is called <kbd>long</kbd>.  (Both these names come from
+the C language, which gives them a precise meaning.)
+</p>
+<p>Notice that the scalar value <kbd>E</kbd> is, somewhat confusingly, called
+an &ldquo;array&rdquo;.  In fact, a scalar is a special case of an array with
+zero dimensions.  The <kbd>info</kbd> function is designed to print a Yorick
+expression which will create a variable of the same data type and
+shape as its argument.  Thus, <kbd>array(double,200)</kbd> in an expression
+would evaluate to an array of 200 real numbers, while
+<kbd>array(double)</kbd> is a real scalar (the values are always
+zero).
+</p>
+<p>Using <kbd>info</kbd> on a non-numeric quantity (a file object, a function,
+etc.) results in the same output as the <kbd>print</kbd> function.  If an
+array of numbers might be large, try <kbd>info</kbd> before
+<kbd>print</kbd>.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_27.html#Help" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.3 The help function" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_29.html#Prompts" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.5 Prompts" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

@@ -1,0 +1,130 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-checksum (in std.i) - crc, md5, sha1 checksums </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>C</h3>
+    <p><a href="std-checksum.html#crc_on">crc_on</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>M</h3>
+    <p><a href="std-checksum.html#md5">md5</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>S</h3>
+    <p><a href="std-checksum.html#md5">sha1</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="crc_on"></a><h3>crc_on</h3>
+  <pre>DOCUMENT crc = crc_on(x)
+      or crc = crc_on(x, crc0)
+      or crc_table = crc_on(crc_def, -)
+      or crc = crc_on(x, crc_table)
+      or crc = crc_on(x, crc_table, crc0)
+      or crc_def = crc_on(crc_table, -)
+  return a cyclic redundancy check on X.  The crc has type long which
+  is very likely (1 chance in 4 billion) to remain unchanged if X is
+  corrupted by random noise.  With a non-nil crc0 argument previously
+  returned by crc_on, begins with crc0 to yield (roughly speaking) the
+  result you would have gotten on a single call if the two X arguments
+  had been concatenated (note that the order matters).
+
+  If X is a string array, the strings themselves, not including trailing
+  '\0', are concatenated; string(0) is indistinguishable from "".
+  If X is a struct instance array or a pointer array, the checksum
+  returns an error.  X must be an array or nil [].
+
+  Note that the crc value for any data type other than char depends
+  on the native binary format on the platform where crc_on runs; the
+  value will be different on other formats, just as it will be different
+  for an array cast to a different data type.
+
+  There are many different CRC algorithms, which can be parameterized
+  by five integer values:
+    CRC_DEF = [width, poly, init, reflect, xor]
+  Here width is the width in bits, reflect is either 0 or 1 (false or
+  true), and poly, init, and xor are zero except for at most their
+  width least significant bits.  The returned crc is also zero except
+  for its width least significant bits.  The parameterization is
+  described in "A Painless Guide to CRC Error Detection Algorithms" at
+    http://www.ross.net/crc/
+  (The reflect parameter corresponds to refin and refot, which must
+  be equal for crc_on to work, and the xor parameter corresponds to
+  xorot.)  You can find a list of popular parameter values at
+    http://regregex.bbcmicro.net/crc-catalogue.htm
+  Do not try to "roll your own" parameters; let the experts do it.
+  Here are some popular choices (crc_on requires width>=8):
+    crc_def = [32, 0x04C11DB7, 0xFFFFFFFF, 1, 0xFFFFFFFF]  ("pkzip")
+    crc_def = [32, 0x04C11DB7, 0, 0, 0xFFFFFFFF]           ("cksum")
+    crc_def = [24, 0x864CFB, 0xB704CE, 0, 0]               ("crc24")
+    crc_def = [16, 0x8005, 0, 1, 0]                        ("arc")
+    crc_def = [16, 0x1021, 0, 1, 0]                        ("kermit")
+  The default is "pkzip".  You can pass any of these five strings
+  instead of an array of five numbers as CRC_DEF.
+  
+  To use a CRC algorithm other than "pkzip", you must first generate
+  a CRC_TABLE by calling crc_on(crc_def,-), then pass the CRC_TABLE
+  as the second argument with X as the first to compute the CRC.
+  Finally, crc_on(crc_table,-) returns the corresponding CRC_DEF;
+  crc_on(,-) returns the CRC_DEF for the default "pkzip" algorithm.</pre>
+  <p>SEE ALSO: <a href="std-checksum.html#md5">md5</a>, <a href="std-checksum.html#md5">sha1</a></p>
+</div>
+<div class="docblock"><a name="md5"></a><h3>md5</h3>
+  <pre>DOCUMENT digest = md5(data)         compute digest of DATA array
+         state = []                 initialize STATE
+         md5, state, data           process DATA updating STATE
+         digest = md5(state, data)  return DIGEST from STATE
+         sha1 function has same semantics as md5 function
+  The md5 and sha1 functions compute message digests or hashes.  The
+  digest returned by md5 is an array of 16 char (128 bits); the digest
+  returned by sha1 is an array of 20 char (160 bits).  There is a
+  single call form, in which the input DATA array comprises the entire
+  "message" to be digested.  There is also a multi-call sequence, in
+  which you invoke md5 or sha1 with two arguments: The first argument
+  is a STATE variable, while the second argument is the DATA to be
+  appended to the "message" in that call.  DATA may be nil [], which
+  causes no change in the STATE.  STATE must be a simple variable
+  reference, which is updated and returned with each call.  As long
+  as you call md5 or sha1 as a subroutine, STATE continues to be updated;
+  call md5 or sha1 as a function to return the final digest of the
+  concatenated "message".  Before the first call, you must initialize
+  STATE to [].  The final function call destroys STATE, returning it
+  as [].  (To generate the final digest, both the md5 and sha1 algorithms
+  append some padding to the input message, which destroys STATE.)
+
+  If DATA is a string array, the strings themselves, not including trailing
+  '\0', are concatenated; string(0) is indistinguishable from "".
+  If DATA is a struct instance array or a pointer array, the digesting
+  function returns an error.  DATA must be an array or nil [].
+
+  Although STATE is an array of char, it is platform dependent even
+  though the final digest is not.  Do not attempt to save STATE or
+  to use STATE itself as a digest.
+
+  The advantage of md5 or sha1 over the crc_on function is that
+  the resulting digest will be unique; no two DATA streams will
+  ever produce the same digest for nearly all practical purposes.
+  For the 32-bit crc result, you will get different data streams
+  that have identical crc values after you process a modest number
+  of data streams (tens of thousands).  Thus, md5 or sha1 can be used
+  to "fingerprint" data streams; if the fingerprints of two streams
+  agree, you can be practically sure the streams themselves agree.
+
+  Both md5 and sha1 have now been "broken" cryptographically, which
+  means that it is possible by heroic effort to create two different
+  streams with the same digest.  (At this writing, many examples of
+  streams with identical md5 digests exist.  No such examples exist
+  yet for sha1, but it is clear that a few will appear fairly soon.)
+  However, absent malicious intent and huge levels of effort, both
+  md5 and sha1 are perfectly useful for fingerprinting data.  These
+  algorithms give the same results as the md5sum and sha1sum
+  utilities, widely used to fingerprint files on the Web.
+</pre>
+  <p>SEE ALSO: <a href="std-checksum.html#crc_on">crc_on</a></p>
+</div>
+<div class="docsee">
+  <h3>sha1</h3><p>SEE: <a href="#md5">md5</a></p>
+</div>

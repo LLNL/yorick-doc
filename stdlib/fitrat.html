@@ -1,0 +1,69 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package fitrat (in fitrat.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="fitrat.html#fitpol">fitpol</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="fitrat.html#fitrat">fitrat</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="fitpol"></a><h3>fitpol</h3>
+  <pre>DOCUMENT yp= fitpol(y, x, xp)
+      or yp= fitpol(y, x, xp, keep=1)
+  is an interpolation routine similar to interp, except that fitpol
+  returns the polynomial of degree numberof(X)-1 which passes through
+  the given points (X,Y), evaluated at the requested points XP.
+
+  The X must either increase or decrease monotonically.
+
+  If the KEEP keyword is present and non-zero, the external variable
+  yperr will contain a list of error estimates for the returned values
+  yp on exit.
+
+  The algorithm is taken from Numerical Recipes (Press, et. al.,
+  Cambridge University Press, 1988); it is called Neville's algorithm.
+  The rational function interpolator fitrat is better for "typical"
+  functions.  The Yorick implementaion requires numberof(X)*numberof(XP)
+  temporary arrays, so the X and Y arrays should be reasonably small.
+</pre>
+  <p>SEE ALSO: <a href="fitrat.html#fitrat">fitrat</a>, <a href="std-array.html#interp">interp</a></p>
+</div>
+<div class="docblock"><a name="fitrat"></a><h3>fitrat</h3>
+  <pre>DOCUMENT yp= fitrat(y, x, xp)
+      or yp= fitrat(y, x, xp, keep=1)
+  is an interpolation routine similar to interp, except that fitpol
+  returns the diagonal rational function of degree numberof(X)-1 which
+  passes through the given points (X,Y), evaluated at the requested
+  points XP.  (The numerator and denominator polynomials have equal
+  degree, or the denominator has one larger degree.)
+
+  The X must either increase or decrease monotonically.  Also, this
+  algorithm works by recursion, fitting successively to consecutive
+  pairs of points, then consecutive triples, and so forth.
+  If there is a pole in any of these fits to subsets, the algorithm
+  fails even though the rational function for the final fit is non-
+  singular.  In particular, if any of the Y values is zero, the
+  algorithm fails, and you should be very wary of lists for which
+  Y changes sign.  Note that if numberof(X) is even, the rational
+  function is Y-translation invariant, while numberof(X) odd generally
+  results in a non-translatable fit (because it decays to y=0).
+
+  If the KEEP keyword is present and non-zero, the external variable
+  yperr will contain a list of error estimates for the returned values
+  yp on exit.
+
+  The algorithm is taken from Numerical Recipes (Press, et. al.,
+  Cambridge University Press, 1988); it is called the Bulirsch-Stoer
+  algorithm.  The Yorick implementaion requires numberof(X)*numberof(XP)
+  temporary arrays, so the X and Y arrays should be reasonably small.
+</pre>
+  <p>SEE ALSO: <a href="fitrat.html#fitpol">fitpol</a>, <a href="std-array.html#interp">interp</a></p>
+</div>

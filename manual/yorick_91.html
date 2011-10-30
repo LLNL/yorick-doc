@@ -1,0 +1,148 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="g_t3D-mapping"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_92.html#g_t3D-lighting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.2 Lighting" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Coordinate-mapping"></a>
+<h3 class="subsection">3.10.1 Coordinate mapping</h3>
+
+<p>Since the picture you are viewing is always two dimensional, you need
+to project three dimensional objects onto your screen.  I designed the
+3D interface to allow you to change this projective mapping without
+re-issuing plotting commands, by analogy with the 2D limits command.
+</p>
+<p>Instead of limits, however, you need to specify a projection.  Imagine
+that your screen is the image plane of a camera.  This camera carries
+a coordinate system in which +x is rightward, +y is upward, and +z is
+out of the screen toward your face.  Your world coordinate system &ndash;
+the coordinates of your data &ndash; has some orientation relative to these
+camera coordinates.  You can rotate your world coordinates &ndash; and see
+the object you have plotted rotate &ndash; using either the rot3 or orient3
+commands.
+</p>
+<p>The three arguments to rot3 are the angles (in radians) to rotate your
+object about the camera x, y, and z axes.  These three rotations are
+applied in order, first the x angle, then the y angle, then the z
+angle.  Omitted or nil arguments are the same as zero arguments.  Note
+that 3D rotation is not a commutative operation, so if you want the z
+rotation to come first, followed by an x rotation, you need to issue
+two rot3 commands (like limits or logxy changes, rot3 changes
+accumulate so Yorick will only redraw your screen once):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">rot3,,,zangle; rot3,xangle
+</pre></td></tr></table>
+
+<p>The orient3 operation is less general than rot3, and therefore easier
+to use.  With orient3, the z axis of your world coordinates always
+projects parallel to the camera y axis, so z is plotted upward on your
+screen.  The first argument to orient3 is the angle about the world z
+axis that the world x axis should be rotated relative to the camera x
+axis.  The optional second argument to orient3 is the angle from the
+camera y to the world z &ndash; the angle at which you are looking down at
+the scene.  Once set, that downlook angle persists until you reset it.
+With no arguments, orient3 returns to a sane standard orientation.
+Hence, you can just type:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">orient3
+</pre></td></tr></table>
+
+<p>to return to a standard view of your scene.
+</p>
+<p>Unlike rot3, the results of an orient3 are not cumulative.  With each
+orient3 call, you completely specify the orientation of your object.
+Thus, if you set the orientation of your object by orient3:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">orient3, -.75*pi
+</pre></td></tr></table>
+
+<p>and you want to twist it just a little, you would issue a slightly
+different orient3 command:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">orient3, -.70*pi
+</pre></td></tr></table>
+
+<p>While if your rot3 command
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">rot3,, -.75*pi
+</pre></td></tr></table>
+
+<p>were not quite right, you&rsquo;d twist it a little more by specifying a
+small angle:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">rot3,, .05*pi
+</pre></td></tr></table>
+
+<p>Unfortunately, the projection operation is more complicated than
+merely the three angles of an arbitrary rotation matrix.  The distance
+from your camera (or eye) to the object also enters.  By default, you
+are infinitely far away, looking through an infinite magnification
+lens.  This is called isometric projection, because equal length
+parallel segments in your world coordinates have equal length on your
+screen, no matter how close or far from the camera.  If you want a
+perspective picture, you can use the setz3 command to set the z
+value in the camera coordinate system where your camera (or eye) is
+located.
+</p>
+<p>Don&rsquo;t bother attempting to put the camera inside your data; it&rsquo;s not
+edifying.  Extreme fisheye perspectives won&rsquo;t make your scientific
+data more intelligible.  Keep the camera well outside your object.
+</p>
+<p>Your camera always looks toward -z.  Initially, the aim point is the
+origin of the camera coordinate system, but you can change it to any
+other point by means of the aim3 function.  If you want to specify an
+aim point in your world coordinate system instead, use the mov3
+function, which is analogous to rot3.
+</p>
+<p>In general, you should use the nobox.gs graphics style, since the 2D
+axes are not useful.  For an isometric view, the 2D (x,y) axes are
+simple projections of your (x,y,z) world coordinates.  For a
+perspective view (after you have called setz3), the 2D (x,y)
+coordinates are the tangents of ray angles between the camera z axis
+and points on your object.  The 2D limits command is useful for
+cropping or adjusting your view, but you should not turn off the
+<kbd>square=1</kbd> keyword.
+</p>
+<p>The functions save3 and restore3 save and later restore the entire 3D
+coordinate mapping, including the effects of rot3 or orient3, mov3,
+aim3, and setz3.  You can also undo the effects of any number of these
+commands by means of the undo3 function.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_92.html#g_t3D-lighting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.2 Lighting" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

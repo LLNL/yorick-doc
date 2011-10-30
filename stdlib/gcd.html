@@ -1,0 +1,58 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package gcd (in gcd.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="gcd.html#factorize">factorize</a></p>
+    <h3>G</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="gcd.html#gcd">gcd</a></p>
+    <h3>I</h3>
+    <p><a href="gcd.html#is_prime">is_prime</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>L</h3>
+    <p><a href="gcd.html#lcm">lcm</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="factorize"></a><h3>factorize</h3>
+  <pre>DOCUMENT factorize(x)
+  return list of prime factors of X and their powers as an n-by-2
+  array.  May include a large non-prime factor if X exceeds 3e9.
+  In any event, product(result(,1)^result(,2)) will equal abs(X).
+  X must be a scalar integer type.</pre>
+  <p>SEE ALSO: <a href="gcd.html#gcd">gcd</a>, <a href="gcd.html#lcm">lcm</a>, <a href="gcd.html#is_prime">is_prime</a></p>
+</div>
+<div class="docblock"><a name="gcd"></a><h3>gcd</h3>
+  <pre>DOCUMENT gcd(a,b)
+  returns the GCD (greatest common divisor) of A and B, which must
+  be one of the integer data types.  A and B may be conformable
+  arrays; the semantics of the gcd call are the same as any other
+  binary operation.  Uses Euclid's celebrated algorithm.
+  The absolute values of A and B are taken before the operation
+  commences; if either A or B is 0, the return value will be 0.</pre>
+  <p>SEE ALSO: <a href="gcd.html#lcm">lcm</a>, <a href="gcd.html#is_prime">is_prime</a>, <a href="gcd.html#factorize">factorize</a></p>
+</div>
+<div class="docblock"><a name="is_prime"></a><h3>is_prime</h3>
+  <pre>DOCUMENT is_prime(x)
+  return non-zero if and only if X (which must be a scalar integer)
+  is prime.  May return a false positive if X is greater than about
+  3e9, since at most 20000 candidate factors are checked.
+  The absolute value of X is taken first; zero is not prime, but 1 is.</pre>
+  <p>SEE ALSO: <a href="gcd.html#gcd">gcd</a>, <a href="gcd.html#lcm">lcm</a>, <a href="gcd.html#factorize">factorize</a></p>
+</div>
+<div class="docblock"><a name="lcm"></a><h3>lcm</h3>
+  <pre>DOCUMENT lcm(a,b)
+  returns the LCM (least common multiple) of A and B, which must
+  be one of the integer data types.  A and B may be conformable
+  arrays; the semantics of the lcm call are the same as any other
+  binary operation.
+  The absolute values of A and B are taken before the operation
+  commences; if either A or B is 0, the return value will be 0.</pre>
+  <p>SEE ALSO: <a href="gcd.html#gcd">gcd</a>, <a href="gcd.html#is_prime">is_prime</a>, <a href="gcd.html#factorize">factorize</a></p>
+</div>

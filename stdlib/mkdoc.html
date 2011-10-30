@@ -1,0 +1,27 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package mkdoc (in mkdoc.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="mkdoc.html#mkdoc">mkdoc</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="mkdoc"></a><h3>mkdoc</h3>
+  <pre>DOCUMENT mkdoc, filename
+      or mkdoc, filename, outname, lpp
+  alphabetizes and indexes the DOCUMENT comments in FILENAME, and
+  formats into "dictionary-like" pages for printing.  If OUTNAME
+  is not given or nil, the output file will be FILENAME with ".doc"
+  replacing the ".i".  If LPP is not given, it defaults to 58 --
+  the maximum number of available lines per page of output.
+  (Use 55 to be able to print with "lpr -p" style page headings.)
+  FILENAME can be an array of strings to combine several include
+  files into a single document.</pre>
+  <p>SEE ALSO: <a href="std-info.html#help">help</a></p>
+</div>

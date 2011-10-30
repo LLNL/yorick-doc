@@ -1,0 +1,119 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Sample-include"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_21.html#Include" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_23.html#Comments" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.2 Comments" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="A-sample-include-file"></a>
+<h4 class="subsubsection">1.3.2.1 A sample include file</h4>
+
+<p>Here is &lsquo;<tt>damped.i</tt>&rsquo;, which defines the damped sine wave functions
+we&rsquo;ve been designing in this chapter:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/* damped.i */
+
+local damped;
+/* DOCUMENT damped.i --- compute and output damped sine waves
+   SEE ALSO: damped_wave, q_out
+ */
+
+func damped_wave(phase, Q)
+/* DOCUMENT damped_wave(phase, Q)
+     returns a damped sine wave evaluated at PHASE, for quality factor Q.
+     (High Q means little damping.)  The PHASE is 2*pi after one period of
+     the natural frequency of the oscillator.  PHASE and Q must be
+     conformable arrays.
+
+   SEE ALSO: q_out
+ */
+{
+  nu = 0.5/Q;
+  omega = sqrt(1.-nu*nu);
+  return sin(omega*phase)*exp(-nu*phase);  /* always zero at phase==0 */
+}
+
+func q_out(Q, file)
+/* DOCUMENT q_out, Q, file
+         or q_out(Q, file)
+     Write the damped sine wave of quality factor Q to the FILE.
+     FILE may be either a filename, to create the file, or a file
+     object returned by an earlier create or q_out operation.  If
+     q_out is invoked as a function, it returns the file object.
+
+     The external variable
+          theta
+     determines the phase points at which the damped sine wave is
+     evaluated; q_out will write two header lines, followed by
+     two columns, with one line for each element of the theta
+     array.  The first column is theta; the second is
+     damped_wave(theta, Q).
+
+     If Q is an array, the two header lines and two columns will
+     be repeated for each element of Q.
+
+   SEE ALSO: damped_wave
+ */
+{
+  if (structof(file)==string) file = create(file);
+  n = numberof(Q);
+  for (i=1 ; i&lt;=n ; ++i) { /* loop on elements of Q */
+    write, file, &quot;Q = &quot;+pr1(Q(i));
+    write, file, &quot;   theta       amplitude&quot;;
+    write, file, theta, damped_wave(theta,Q(i));
+  }
+  return file;
+}
+</pre></td></tr></table>
+
+<p>You would type
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &quot;damped.i&quot;
+</pre></td></tr></table>
+
+<p>to read the Yorick statements in the file.  The first thing you notice
+is that there are comments &mdash; the text enclosed by <kbd>/* */</kbd>.  If
+you take the trouble to save a program in an include file, you will be
+wise to make notes about what it&rsquo;s for and annotations of obscure
+statements which might confuse you later.  Writing good comments is
+arguably the most difficult skill in programming.  Practice it
+diligently.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_21.html#Include" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_23.html#Comments" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.2 Comments" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

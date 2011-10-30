@@ -1,0 +1,410 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-filetxt (in std.i) - text i/o to terminal, file, or string </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="std-filetxt.html#bookmark">backup</a></p>
+    <p><a href="std-filetxt.html#bookmark">bookmark</a></p>
+    <h3>P</h3>
+    <p><a href="std-filetxt.html#pr1">pr1</a></p>
+    <p><a href="std-filetxt.html#print">print</a></p>
+    <p><a href="std-filetxt.html#print_columns">print_columns</a></p>
+    <p><a href="std-filetxt.html#print_format">print_format</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>R</h3>
+    <p><a href="std-filetxt.html#rdfile">rdfile</a></p>
+    <p><a href="std-filetxt.html#rdline">rdline</a></p>
+    <p><a href="std-filetxt.html#read">read</a></p>
+    <p><a href="std-filetxt.html#read_n">read_n</a></p>
+    <h3>S</h3>
+    <p><a href="std-filetxt.html#select_file">select_file</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-filetxt.html#read">sread</a></p>
+    <p><a href="std-filetxt.html#write">swrite</a></p>
+    <h3>T</h3>
+    <p><a href="std-filetxt.html#tonum">tonum</a></p>
+    <p><a href="std-filetxt.html#totxt">totxt</a></p>
+    <h3>W</h3>
+    <p><a href="std-filetxt.html#write">write</a></p>
+  </div>
+</div>
+<div class="docsee">
+  <h3>backup</h3><p>SEE: <a href="#bookmark">bookmark</a></p>
+</div>
+<div class="docblock"><a name="bookmark"></a><h3>bookmark</h3>
+  <pre>DOCUMENT backup, f
+      or bmark= bookmark(f)
+         ...
+         backup, f, bmark
+  back up the text stream F, so that the next call to the read
+  function returns the same line as the previous call to read
+  (note that you can only back up one line).  If the optional
+  second argument BMARK is supplied, restores the state of the
+  file F to its state at the time the bookmark function was
+  called.
+  After a matching failure in read, use the single argument form
+  of backup to reread the line containing the matching failure.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#read">read</a>, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#close">close</a></p>
+</div>
+<div class="docblock"><a name="pr1"></a><h3>pr1</h3>
+  <pre>DOCUMENT pr1(x)
+  returns text representing expression X, equivalent to print(X)(1).</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print">print</a>, <a href="std-filetxt.html#write">swrite</a>, <a href="std-filetxt.html#totxt">totxt</a></p>
+</div>
+<div class="docblock"><a name="print"></a><h3>print</h3>
+  <pre>DOCUMENT print, object1, object2, object3, ...
+      or print(object1, object2, object3, ...)
+  prints an ASCII representation of the OBJECTs, in roughly the format
+  they could appear in Yorick source code.  When invoked as a subroutine
+  (in the first form), output is to the terminal.  When invoked as a
+  function (int the second form), the output is stored as a vector of
+  strings, one string per line that would have been output.
+  Printing a structure definition prints the structure definition;
+  printing a function prints its "func" definition; printing files,
+  bookmarks, and other objects generally provides some sort of
+  useful description of the object.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#totxt">totxt</a>, <a href="std-filetxt.html#pr1">pr1</a>, <a href="std-filetxt.html#print_format">print_format</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-debug.html#error">exit</a>, <a href="std-debug.html#error">error</a>, <a href="std-query.html#nameof">nameof</a>, <a href="std-query.html#typeof">typeof</a></p>
+</div>
+<div class="docblock"><a name="print_columns"></a><h3>print_columns</h3>
+  <pre>DOCUMENT print_columns, list;
+      or print_columns(list);
+  Write array of strings LIST in columns.  In subroutine form, the result
+  is printed to standard output; otherwise, the function returns an array
+  of formatted strings (one per row).
+
+  The maximum width (in number of characters) of each row can be specified
+  with keyword WIDTH (default 79).  But actual width may be larger, since
+  at least one column is produced.
+
+  The maximum number of columns may be limited by using keyword MAXCOLS (by
+  default, there is no limit).
+
+  Keywords BOL, SEP and EOL, can be set to scalar strings to use at begin
+  of line, between each column, at end of line respectively.  SEP can also
+  be the number of spaces to insert between columns.  The default are:
+  BOL="", SEP=5 (five spaces) and EOL=string(0).
+
+  Keyword LABEL can be used to number items. LABEL must be a scalar string.
+  If LABEL contains a "%d", it is used to format the index; otherwise,
+  LABEL is the string to use as separator between indices and items.  For
+  instance:
+    label="[%d] "  yields: "[1] first_item    [2] second_item  ..."
+    label=" - "    yields: "1 - first_item    2 - second_item  ..."
+
+  Keyword START can be used to specify the starting index for numbering
+  items (default START=1).
+
+</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#write">swrite</a>, select_name, <a href="std-filetxt.html#select_file">select_file</a>.</p>
+</div>
+<div class="docblock"><a name="print_format"></a><h3>print_format</h3>
+  <pre>DOCUMENT print_format, line_length, max_lines, char=, short=, int=,
+                       float=, double=, complex=, pointer=
+  sets the format string the print function will use for each of
+  the basic data types.  Yorick format strings are the same as the
+  format strings for the printf function defined in the ANSI C standard.
+  The default strings may be restored individually by setting the
+  associated format string to ""; all defaults are restored if
+  print_format is invoked with no arguments.  The default format strings
+  are:  "0x%02x", "%d", "%d", "%ld", "%g", "%g", and "%g+%gi".
+  Note that char and short values are converted to int before being
+  passed to printf, and that float is converted to double.
+  If present, an integer positional argument is taken as the line
+  length; <=0 restores the default line length of 80 characters,
+  while nil [] leaves the line length unchanged.
+  A second positional argument, if present, becomes the maximum number
+  of lines to output; <=0 restores the default of 5000 lines.  A single
+  print command will not produce more than this many lines of output;
+  output simply stops without any additional messages.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print">print</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-filetxt.html#totxt">totxt</a>, <a href="std-query.html#nameof">nameof</a>, <a href="std-query.html#typeof">typeof</a></p>
+</div>
+<div class="docblock"><a name="rdfile"></a><h3>rdfile</h3>
+  <pre>DOCUMENT rdfile(f)
+      or rdfile(f, nmax)
+  reads all remaining lines (or at most NMAX lines) from file F.
+  If NMAX is omitted, it defaults to 2^20 lines (about a million).
+  The result is an array of strings, one per line of F.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#rdline">rdline</a></p>
+</div>
+<div class="docblock"><a name="rdline"></a><h3>rdline</h3>
+  <pre>DOCUMENT rdline(f)
+      or rdline(f, n, prompt= pstring)
+  returns next line from stream F (stdin if F nil).  If N is non-nil,
+  returns a string array containing the next N lines of F.  If
+  end-of-file occurs, rdline returns nil strings.  If F is nil,
+  uses the PSTRING to prompt for input (default "read> ").</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#read">read</a>, <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#close">close</a>, <a href="std-filetxt.html#bookmark">bookmark</a>, <a href="std-filetxt.html#bookmark">backup</a>, <a href="std-filetxt.html#read_n">read_n</a>, <a href="std-filetxt.html#rdfile">rdfile</a></p>
+</div>
+<div class="docblock"><a name="read"></a><h3>read</h3>
+  <pre>DOCUMENT n= read(f, format=fstring, obj1, obj2, ...)
+      or n= read(prompt= pstring, format=fstring, obj1, obj2, ...)
+      or n= sread(source, format=fstring, obj1, obj2, ...)
+  reads text from I/O stream F (1st form), or from the keyboard (2nd
+  form), or from the string or string array SOURCE (3rd form),
+  interprets it according to the optional FSTRING, and uses that
+  interpretation to assign values to OBJ1, OBJ2, ...  If the input
+  is taken from the keyboard, the optional prompt PSTRING (default
+  "read> ") is printed before each line is read.  The Yorick write
+  function does not interact with the read function -- writes are
+  always to end-of-file, and do not affect the sequence of lines
+  returned by read.  The backup (and bookmark) function is the
+  only way to change the sequence of lines returned by read.
+
+  There must be one non-supressed conversion specifier (see below)
+  in FSTRING for each OBJ to be read; the type of the conversion
+  specifier must generally match the type of the OBJ.  That is,
+  an integer OBJ requires an integer specifier (d, i, o, u, or x)
+  in FSTRING, a real OBJ requires a real specifier (e, f, or g),
+  and a string OBJ requires a string specifier (s or []).  An OBJ
+  may not be complex, a pointer, a structure instance, or any non-
+  array Yorick object.  If FSTRING is not supplied, or if it has
+  fewer conversion specifiers than the number of OBJ arguments,
+  then Yorick supplies default specifiers ("%ld" for integers,
+  "%lg" for reals, and "%s" for strings).  If FSTRING contains more
+  specifiers than there are OBJ arguments, the part of FSTRING
+  beginning with the first specifier with no OBJ is ignored.
+
+  The OBJ may be scalar or arrays, but the dimensions of every OBJ
+  must be identical.  If the OBJ are arrays, Yorick behaves as
+  if the read were called in a loop numberof(OBJ1) times, filling
+  one array element of each of the OBJ according to FSTRING on
+  each pass through the loop.  (Note that this behavior includes
+  the case of reading columns of numbers by a single call to read.)
+
+  The return value N is the total number of scalar assignments
+  which were made as a result of this call.  (If there were 4
+  OBJ arguments, and each was an array with 17 elements, a return
+  value of N==35 would mean the following:  The first 8 elements
+  of OBJ1, OBJ2, OBJ3, and OBJ4 were read, and the 9th element of
+  OBJ1, OBJ2, and OBJ3 was read.)  The read function sets any
+  elements of the OBJ which were not read to zero -- hence,
+  independent of the returned N, the all of the old data in the
+  OBJ arguments is overwritten.
+
+  The read or sread functions continue reading until either:
+  (1) all elements of all OBJ have been filled, or (2) end-of-file
+  (or end of SOURCE for sread) is reached ("input failure"), or
+  (3) part of FSTRING or a conversion specifier supplied by
+  default fails to match the source text ("matching failure").
+
+  The FSTRING is composed of a series of "directives" which are
+  (1) whitespace -- means to skip any amount of whitespace in the
+      source text
+  (2) characters other than whitespace and % -- must match the
+      characters in the source text exactly, or matching failure
+      occurs and the read operation stops
+  (3) conversion specifiers beginning with % and ending with a
+      character specifying the type of conversion -- optionally
+      skip whitespace, then convert as many characters as
+      continue to "look like" the conversion type, possibly
+      producing a matching failure
+  The conversion specifier is of the form %*WSC, where:
+    is either the character '*' or not present
+    A specifier beginning with %* does not correspond to any of
+    the OBJ; the converted value will be discarded.
+  W is either a positive decimal integer specifying the maximum
+    field width (not including any skipped leading whitespace),
+    or not present if any number of characters up to end-of-line
+    is acceptable.
+  S is either one of the characters 'h', 'l', or 'L', or not
+    present.  Yorick allows this for compatibility with the C
+    library functions, but ignores it.
+  C is a character specifying the type of conversion:
+    d   - decimal integer
+    i   - decimal, octal (leading 0), or hex (leading 0x) integer
+    o   - octal integer
+    u   - unsigned decimal integer (same as d for Yorick)
+    x, X            - hex integer
+    e, f, g, E, G   - floating point real
+    s   - string of non-whitespace characters
+    [xxx]   - (xxx is any sequence of characters) longest string
+              of characters matching those in the list
+    [^xxx]  - longest string of characters NOT matching those in
+              the list (this is how you can extend %s to be
+              delimited by something other than whitespace)
+    %   - the ordinary % character; complete conversion
+          specification must be "%%"
+
+  The read function is modeled on the ANSI standard C library
+  fscanf and sscanf functions, but differs in several respects:
+    (1) Yorick's read cannot handle the %c, %p, or %n conversion
+        specifiers in FSTRING.
+    (2) Yorick's read never results in a portion of a line
+        being read -- any unused part of a line is simply discarded
+        (end FSTRING with "%[^\n]" if you want to save the trailing
+        part of an input line).
+    (3) As a side effect of (2), there are some differences between
+        fscanf and Yorick's read in how whitespace extending across
+        newlines is handled.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#close">close</a>, <a href="std-filetxt.html#bookmark">bookmark</a>, <a href="std-filetxt.html#bookmark">backup</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filetxt.html#read_n">read_n</a>, <a href="std-filetxt.html#tonum">tonum</a></p>
+</div>
+<div class="docblock"><a name="read_n"></a><h3>read_n</h3>
+  <pre>DOCUMENT read_n, f, n0, n1, n2, ...
+  grabs the next numbers N0, N1, N2, ... from file F, skipping over
+  any whitespace, comma, semicolon, or colon delimited tokens which
+  are not numbers.  (Actually, only the first and last characters of
+  the token have to look like a number -- 4xxx3 would be read as 4.)
+  ***WARNING*** at most ten Ns are allowed
+  The Ns can be arrays, provided all have the same dimensions.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#read">read</a>, <a href="std-filetxt.html#rdline">rdline</a></p>
+</div>
+<div class="docblock"><a name="select_file"></a><h3>select_file</h3>
+  <pre>DOCUMENT select_file()
+      or select_file(dir)
+  Interactively select name of an existing file starting at current working
+  directory or at last selected directory or at DIR if this argument is
+  specified.  The function returns full path of selected file or nil [] if
+  no valid selection is made.  If keyword FOREVER is true, a file must be
+  selected for the function to return.
+
+  If keyword ALL is true, then all files and directories get displayed --
+  even the "hidden" ones which name start with a dot.  In any cases, the
+  current and parent directories ("." and "..") get displayed to allow the
+  user to re-scan the current directory or to go into the parent directory.
+
+  Keyword PATTERN can be set to a regular expression to select only files
+  that match PATTERN.  For instance, PATTERN="\\.(tgz|tar\\.gz)$" would
+  match any files with suffix ".tgz" or ".tar.gz".
+
+  Keyword WIDTH can be used to specify a different text width than the
+  default of 79 characters.
+
+  Keyword PROMPT can be set to change the default prompt:
+    " Select file/directory: "
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#lsdir">lsdir</a>, regmatch, <a href="std-filetxt.html#print_columns">print_columns</a>.</p>
+</div>
+<div class="docsee">
+  <h3>sread</h3><p>SEE: <a href="#read">read</a></p>
+</div>
+<div class="docsee">
+  <h3>swrite</h3><p>SEE: <a href="#write">write</a></p>
+</div>
+<div class="docblock"><a name="tonum"></a><h3>tonum</h3>
+  <pre>DOCUMENT tonum(s)
+      or tonum(s, mask)
+  returns array of numbers corresponding to given array of strings S.
+  For each element of S which consists of a single number (either a
+  decimal integer or floating point number), tonum returns the numeric
+  value.  The return value is type double and the same dimensions as S.
+  Any elements of S which cannot be interpreted as single numeric
+  values will have the value -1.0e99 in the result array.  You can
+  specify a different value for "not a number" with the nan= keyword.
+  The optional MASK is an output of type int of the same dimensions
+  as S, which is 1 where S is a floating point number (with decimal
+  point and/or exponent), 3 where S is an integer, and 0 where S is
+  not a number.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#read">sread</a>, <a href="std-filetxt.html#totxt">totxt</a>, <a href="std-string.html#strgrep">strgrep</a></p>
+</div>
+<div class="docblock"><a name="totxt"></a><h3>totxt</h3>
+  <pre>DOCUMENT totxt(x)
+      or totxt(x, fmt)
+  returns text representing expression X.  If X is not numeric,
+  then totxt(x) is the same as print(x).  If X is numeric, then
+  totxt returns an array of strings with the same dimensions as X.
+  Integers get %d format, while reals get %g format, unless you
+  specify FMT.  FMT can be a single numeric format, or just a
+  number with the following interpretation:
+    FMT = integer w  means %wd for integers or %wf for reals
+    FMT = real w.p  means %wd for integers or %w.pf for reals
+  In either case, a negative value -w or -w.p switches to hex
+  format for integers %wx or exponential format %w.pe for reals.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print">print</a>, <a href="std-filetxt.html#write">swrite</a>, <a href="std-filetxt.html#tonum">tonum</a></p>
+</div>
+<div class="docblock"><a name="write"></a><h3>write</h3>
+  <pre>DOCUMENT n= write(f, format=fstring, linesize=l, obj1, obj2, ...)
+         n= write(format=fstring, linesize=l, obj1, obj2, ...)
+      or strings= swrite(format=fstring, linesize=l, obj1, obj2, ...)
+  writes text to I/O stream F (1st form), or to the terminal (2nd
+  form), or to the STRINGS string array (3rd form), representing
+  arrays OBJ1, OBJ2, ..., according to the optional FSTRING.  The
+  optional linesize L defaults to 80 characters, and helps restrict
+  line lengths when FSTRING is not given, or does not contain
+  newline directives.  The write function always appends to the
+  end of a text file; the position for a sequence of reads is
+  not affected by intervening writes.
+
+  There must be one conversion specifier (see below) in FSTRING for
+  each OBJ to be written; the type of the conversion specifier must
+  generally match the type of the OBJ.  That is, an integer OBJ
+  requires an integer specifier (d, i, o, u, x, or c) in FSTRING,
+  a real OBJ requires a real specifier (e, f, or g), a string OBJ
+  requires the string specifier (s), and a pointer OBJ requires a
+  the pointer specifier (p).  An OBJ may not be complex, a structure
+  instance, or any non-array Yorick object.  If FSTRING is not
+  supplied, or if it has fewer conversion specifiers than the
+  number of OBJ arguments, then Yorick supplies default specifiers
+  (" %8ld" for integers, " %14.6lg" for reals, " %s" for strings, and
+  " %8p" for pointers).  If FSTRING contains more specifiers than
+  there are OBJ arguments, the part of FSTRING beginning with the
+  first specifier with no OBJ is ignored.
+
+  The OBJ may be scalar or arrays, but the dimensions of the OBJ
+  must be conformable.  If the OBJ are arrays, Yorick behaves as
+  if he write were called in a loop dimsof(OBJ1, OBJ2, ...) times,
+  writing one array element of each of the OBJ according to FSTRING
+  on each pass through the loop.  The swrite function returns a
+  string array with dimensions dimsof(OBJ1, OBJ2, ...).  The write
+  function inserts a newline between passes through the array if
+  the line produced by the previous pass did not end with a
+  newline, and if the total number of characters output since the
+  previous inserted newline, plus the number of characters about
+  to be written on the current pass, would exceed L characters
+  (L defaults to 80).  The write function returns the total
+  number of characters output.
+
+  The FSTRING is composed of a series of "directives" which are
+  (1) characters other than % -- copied directly to output
+  (2) conversion specifiers beginning with % and ending with a
+      character specifying the type of conversion -- specify
+      how to convert an OBJ into characters for output
+  The conversion specifier is of the form %FW.PSC, where:
+  F is zero or more optional flags:
+    - left justify in field width
+    + signed conversion will begin with either + or -
+      (space) signed conversion  will begin with either space or -
+    # alternate form (see description of each type below)
+    0 pad field width with leading 0s instead of leading spaces
+  W is either a decimal integer specifying the minimum field width
+    (padded as specified by flags), or not present to use the
+    minimum number of characters required.
+  .P is either a decimal integer specifying the precision of the
+    result, or not present to get the default.  For integers, this
+    is the number of digits to be printed (possibly forcing leading
+    zeroes), and defaults to 1.  For reals, this is the number of
+    digits after the decimal point, and defaults to 6.  For strings,
+    this is the maximum number of characters to print, and defaults
+    to infinity.
+  S is either one of the characters 'h', 'l', or 'L', or not
+    present.  Yorick allows this for compatibility with the C
+    library functions, but ignores it.
+  C is a character specifying the type of conversion:
+    d, i  - decimal integer
+    o     - octal integer (# forces leading 0)
+    u     - unsigned decimal integer (same as d for Yorick)
+    x, X            - hex integer (# forces leading 0x)
+    f     - floating point real in fixed point notation
+            (# forces decimal)
+    e, E  - floating point real in scientific notation
+    g, G  - floating point real in fixed or scientific notation
+            depending on the value converted (# forces decimal)
+    s   - string of ASCII characters
+    c   - integer printed as corresponding ASCII character
+    p   - pointer
+    %   - the ordinary % character; complete conversion
+          specification must be "%%"
+
+  The write function is modeled on the ANSI standard C library
+  fprintf and sprintf functions, but differs in several respects:
+    (1) Yorick's write cannot handle the %n conversion specifier
+        in FSTRING.
+    (2) Yorick's write may insert additional newlines if the OBJ
+        are arrays, to avoid extremely long output lines.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print">print</a>, <a href="std-debug.html#error">exit</a>, <a href="std-debug.html#error">error</a>, <a href="std-filetxt.html#read">read</a>, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#close">close</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a></p>
+</div>

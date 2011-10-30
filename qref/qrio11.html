@@ -1,0 +1,24 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Setting Plot Limits</h2>
+
+<p><tt>logxy, <i>xflag, yflag</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> set log or linear axis scaling
+<br><tt>limits, <i>xmin, xmax, ymin, ymax</i>&nbsp;</tt> set plot limits
+<br><tt>limits, <i>xmin, xmax</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> set plot x-limits
+<br><tt>range, <i>ymin, ymax</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> set plot y-limits
+<br><tt><i>l </i>= limits()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> save current plot limits in <i>l</i>
+<br><tt>limits, <i>l</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> restore plot limits saved in <i>l</i>
+</p>
+<p>The four plot limits can be numbers to fix them at specific values,
+or the string <tt>"e"</tt> to specify extreme values. The <tt>limits</tt>
+command accepts the keywords <tt>square</tt>, <tt>nice</tt>, and
+<tt>restrict</tt>, which control how extreme values are computed.
+</p>
+<p>Plot limits may also be set by point-and-click in the X window. The
+left button zooms in, middle button pans, and right button zooms out. Refer
+<tt>help</tt> on <tt>limits</tt> for details.
+</p>
+
+

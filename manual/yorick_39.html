@@ -1,0 +1,80 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Index-Range"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_38.html#Scalar-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.1 Scalar indices and array order" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_40.html#Nil-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.3 Nil index refers to an entire dimension" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Selecting-a-range-of-indices"></a>
+<h3 class="subsection">2.3.2 Selecting a range of indices</h3>
+
+<p>You can refer to several consecutive array elements by an index range:
+<kbd>x(3:6)</kbd> means the four element subarray <kbd>[x(3), x(4), x(5),
+x(6)]</kbd>.
+</p>
+<p>Occasionally, you also want to refer to a sparse subset of an array; you
+can add an increment to an index range by means of a second colon:
+<kbd>x(3:7:2)</kbd> means the three element subarray <kbd>[x(3), x(5),
+x(7)]</kbd>.
+</p>
+<p>A negative increment reverses the order of the elements: <kbd>x(7:3:-2)</kbd>
+represents the same three elements, but in the opposite order
+<kbd>[x(7), x(5), x(3)]</kbd>.  The second element mentioned in the index
+range may not actually be present in the resulting subset, for example,
+<kbd>x(7:2:-2)</kbd> is the same as <kbd>x(7:3:-2)</kbd>, and <kbd>x(3:6:2)</kbd>
+represents the two element subarray <kbd>[x(3), x(5)]</kbd>.
+</p>
+<p>Just as the increment defaults to 1 if it is omitted, the start and stop
+elements of an index range also have default values, namely the first
+and last possible index values.  Hence, if <kbd>x</kbd> is a one-dimensional
+array with 10 elements, <kbd>x(8:)</kbd> is the same as <kbd>x(8:10)</kbd>.  With
+a negative increment, the defaults are reversed, so that <kbd>x(:8:-1)</kbd>
+is the same as <kbd>x(10:8:-1)</kbd>.
+</p>
+<p>A useful special case of the index range default rules is <kbd>x(::-1)</kbd>,
+which represents the array <kbd>x</kbd> in reverse order.
+</p>
+<p>Beware of a minor subtlety: <kbd>x(3:3)</kbd> is not the same thing as
+<kbd>x(3)</kbd>.  An index range always represents an array of values, while
+a scalar index represents a single value.  Hence, <kbd>x(3:3)</kbd> is an
+array with a single element, <kbd>[x(3)]</kbd>.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_38.html#Scalar-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.1 Scalar indices and array order" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_40.html#Nil-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.3 Nil index refers to an entire dimension" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

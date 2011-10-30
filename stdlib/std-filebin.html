@@ -1,0 +1,961 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-filebin (in std.i) - save and restore binary data </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-filebin.html#add_member">add_member</a></p>
+    <p><a href="std-filebin.html#add_next_file">add_next_file</a></p>
+    <p><a href="std-filebin.html#add_record">add_record</a></p>
+    <p><a href="std-filebin.html#add_variable">add_variable</a></p>
+    <p><a href="std-filebin.html#alpha_primitives">alpha_primitives</a></p>
+    <p><a href="std-filebin.html#at_pdb_open">at_pdb_close</a></p>
+    <p><a href="std-filebin.html#at_pdb_open">at_pdb_open</a></p>
+    <h3>C</h3>
+    <p><a href="std-filebin.html#close102">close102</a></p>
+    <p><a href="std-filebin.html#close102">close102_default</a></p>
+    <p><a href="std-filebin.html#collect">collect</a></p>
+    <p><a href="std-filebin.html#cray_primitives">cray_primitives</a></p>
+    <p><a href="std-filebin.html#createb">createb</a></p>
+    <h3>D</h3>
+    <p><a href="std-filebin.html#data_align">data_align</a></p>
+    <p><a href="std-filebin.html#dec_primitives">dec_primitives</a></p>
+    <p><a href="std-filebin.html#dump_clog">dump_clog</a></p>
+    <h3>E</h3>
+    <p><a href="std-filebin.html#edit_times">edit_times</a></p>
+    <h3>G</h3>
+    <p><a href="std-filebin.html#get_addrs">get_addrs</a></p>
+    <p><a href="std-filebin.html#get_member">get_member</a></p>
+    <p><a href="std-filebin.html#get_times">get_ncycs</a></p>
+    <p><a href="std-filebin.html#get_primitives">get_primitives</a></p>
+    <p><a href="std-filebin.html#get_times">get_times</a></p>
+    <p><a href="std-filebin.html#get_vars">get_vars</a></p>
+    <h3>H</h3>
+    <p><a href="std-filebin.html#has_records">has_records</a></p>
+    <h3>I</h3>
+    <p><a href="std-filebin.html#i86_primitives">i86_primitives</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-filebin.html#install_struct">install_struct</a></p>
+    <h3>J</h3>
+    <p><a href="std-filebin.html#jc">jc</a></p>
+    <p><a href="std-filebin.html#jr">jr</a></p>
+    <p><a href="std-filebin.html#jt">jt</a></p>
+    <h3>M</h3>
+    <p><a href="std-filebin.html#macl_primitives">macl_primitives</a></p>
+    <p><a href="std-filebin.html#mac_primitives">mac_primitives</a></p>
+    <h3>O</h3>
+    <p><a href="std-filebin.html#close102">open102</a></p>
+    <p><a href="std-filebin.html#openb">openb</a></p>
+    <p><a href="std-filebin.html#openb_hooks">openb_hooks</a></p>
+    <h3>P</h3>
+    <p><a href="std-filebin.html#pc_primitives">pc_primitives</a></p>
+    <h3>R</h3>
+    <p><a href="std-filebin.html#read_clog">read_clog</a></p>
+    <p><a href="std-filebin.html#recover_file">recover_file</a></p>
+    <p><a href="std-filebin.html#save">restore</a></p>
+    <h3>S</h3>
+    <p><a href="std-filebin.html#save">save</a></p>
+    <p><a href="std-filebin.html#set_blocksize">set_blocksize</a></p>
+    <p><a href="std-filebin.html#set_cachesize">set_cachesize</a></p>
+    <p><a href="std-filebin.html#set_filesize">set_filesize</a></p>
+    <p><a href="std-filebin.html#set_primitives">set_primitives</a></p>
+    <p><a href="std-filebin.html#set_vars">set_vars</a></p>
+    <p><a href="std-filebin.html#sgi64_primitives">sgi64_primitives</a></p>
+    <p><a href="std-filebin.html#show">show</a></p>
+    <p><a href="std-filebin.html#struct_align">struct_align</a></p>
+    <p><a href="std-filebin.html#sun3_primitives">sun3_primitives</a></p>
+    <p><a href="std-filebin.html#sun_primitives">sun_primitives</a></p>
+    <h3>U</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-filebin.html#updateb">updateb</a></p>
+    <h3>V</h3>
+    <p><a href="std-filebin.html#vaxg_primitives">vaxg_primitives</a></p>
+    <p><a href="std-filebin.html#vax_primitives">vax_primitives</a></p>
+    <h3>X</h3>
+    <p><a href="std-filebin.html#xdr_primitives">xdr_primitives</a></p>
+    <h3>_</h3>
+    <p><a href="std-filebin.html#_init_clog">_init_clog</a></p>
+    <p><a href="std-filebin.html#_init_pdb">_init_pdb</a></p>
+    <p><a href="std-filebin.html#_jr">_jc</a></p>
+    <p><a href="std-filebin.html#_jr">_jr</a></p>
+    <p><a href="std-filebin.html#_jr">_jt</a></p>
+    <p><a href="std-filebin.html#_not_cdf">_not_cdf</a></p>
+    <p><a href="std-filebin.html#_not_pdb">_not_pdb</a></p>
+    <p><a href="std-filebin.html#_read">_read</a></p>
+    <p><a href="std-filebin.html#_init_pdb">_set_pdb</a></p>
+    <p><a href="std-filebin.html#_read">_write</a></p>
+    <p><a href="std-filebin.html#__xdr">__alpha</a></p>
+    <p><a href="std-filebin.html#__xdr">__cray</a></p>
+    <p><a href="std-filebin.html#__xdr">__dec</a></p>
+    <p><a href="std-filebin.html#__xdr">__i86</a></p>
+    <p><a href="std-filebin.html#__xdr">__ibmpc</a></p>
+    <p><a href="std-filebin.html#__xdr">__mac</a></p>
+    <p><a href="std-filebin.html#__xdr">__macl</a></p>
+    <p><a href="std-filebin.html#__xdr">__sgi64</a></p>
+    <p><a href="std-filebin.html#__xdr">__sun</a></p>
+    <p><a href="std-filebin.html#__xdr">__sun3</a></p>
+    <p><a href="std-filebin.html#__xdr">__vax</a></p>
+    <p><a href="std-filebin.html#__xdr">__vaxg</a></p>
+    <p><a href="std-filebin.html#__xdr">__xdr</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="add_member"></a><h3>add_member</h3>
+  <pre>DOCUMENT add_member, file, struct_name, offset, name, type, dimlist
+  adds a member to a data type in the file FILE.  The data type name
+  (struct name) is STRUCT_NAME, which will be created if it does
+  not already exist.  The new member will be at OFFSET (in bytes)
+  from the beginning of an instance of this structure, and will
+  have the specified NAME, TYPE, and DIMLIST.  Use OFFSET -1 to
+  have add_member compute the next available offset in the structure.
+  The TYPE can be either a structure definition, or a string naming
+  a previously defined data type in FILE.  The optional DIMLIST is
+  as for the "array" function.
+  The STRUCT_NAME built from a series of add_member calls cannot be
+  used until it is installed with install_struct.
+  This function should be used very sparingly, mostly in code which
+  is building the structure of a foreign-format binary file.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#add_variable">add_variable</a>, <a href="std-filebin.html#install_struct">install_struct</a>, <a href="std-filebin.html#struct_align">struct_align</a></p>
+</div>
+<div class="docblock"><a name="add_next_file"></a><h3>add_next_file</h3>
+  <pre>DOCUMENT failure= add_next_file(file, filename, create_flag)
+  adds the next file to the FILE, which must contain history records.
+  If FILENAME is non-nil, the new file will be called that, otherwise
+  the next sequential filename is used.  If CREATE_FLAG is present
+  and non-zero, the new file will be created if it does not already
+  exist.  If omitted or nil, CREATE_FLAG defaults to 1 if the file has
+  write permission and 0 if it does not.
+  Returns 0 on success.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#add_record">add_record</a></p>
+</div>
+<div class="docblock"><a name="add_record"></a><h3>add_record</h3>
+  <pre>DOCUMENT add_record, file, time, ncyc
+      or add_record, file, time, ncyc, address
+      or add_record, file
+  adds a new record to FILE corresponding to the specified TIME and
+  NCYC (respectively a double and a long).  Either or both TIME
+  and NCYC may be nil or omitted, but the existence of TIME and
+  NCYC must be the same for every record added to one FILE.
+  If present, ADDRESS specifies the disk address of the new record,
+  which is assumed to be in the current file.  Without ADDRESS, or
+  if ADDRESS<0, the next available address is used; this may create
+  a new file in the family (see the set_filesize function).
+  The add_record function leaves the new record current
+  for subsequent save commands to actually write the data.
+
+  The TIME, NCYC, and ADDRESS arguments may be equal length vectors
+  to add several records at once; in this case, the first of the
+  newly added records is the current one.  If all three of TIME,
+  NCYC, and ADDRESS are nil or omitted, no new records are added,
+  but the file becomes a record file if it was not already, and in
+  any case, no record will be the current record after such an
+  add_record call.
+
+  After the first add_record call (even if no records were added),
+  subsequent add_variable commands will create record variables.
+  After the first record has been added, subsequent save commands
+  will create any new variables as record variables.
+  After a second record has been added using add_record, neither
+  save commands nor add_variable commands may be used to introduce
+  any new record variables.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#set_filesize">set_filesize</a>, <a href="std-filebin.html#set_blocksize">set_blocksize</a>, <a href="std-filebin.html#add_variable">add_variable</a></p>
+</div>
+<div class="docblock"><a name="add_variable"></a><h3>add_variable</h3>
+  <pre>DOCUMENT add_variable, file, address, name, type, dimlist
+  adds a variable NAME to FILE at the specified ADDRESS, with the
+  specified TYPE and dimensions given by DIMLIST.  The DIMLIST may
+  be zero or more arguments, as for the "array" function.  If the
+  ADDRESS is <0, the next available address is used. Note that,
+  unlike the save command, add_variable does not actually write any
+  data -- it merely changes Yorick's description of the contents of
+  FILE.
+  After the first add_record call, add_variable adds a variable to
+  the record instead of a non-record variable.  See add_record.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#add_record">add_record</a>, <a href="std-filebin.html#add_member">add_member</a>, <a href="std-filebin.html#install_struct">install_struct</a>, <a href="std-filebin.html#data_align">data_align</a></p>
+</div>
+<div class="docblock"><a name="alpha_primitives"></a><h3>alpha_primitives</h3>
+  <pre>DOCUMENT alpha_primitives, file
+  sets FILE primitive data types to be native to DEC alpha workstations.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>at_pdb_close</h3><p>SEE: <a href="#at_pdb_open">at_pdb_open</a></p>
+</div>
+<div class="docblock"><a name="at_pdb_open"></a><h3>at_pdb_open</h3>
+  <pre>DOCUMENT at_pdb_open
+         at_pdb_close
+  bits for optional behavior when a PDB file is opened or closed:
+
+  at_pdb_open:
+  000  Major-Order:  value specified in file is correct
+  001  Major-Order:102 always
+  002  Major-Order:  opposite from what file says
+  003  Major-Order:101 always
+
+  004  Strip Basis @... suffices from variable names (when possible)
+       Danger!  If you do this and open a file for update, the variable
+       names will be stripped when you close the file!
+  010  Use Basis @history convention on input
+
+  The 001 and 002 bits may be overridden by the open102 keyword.
+  The default value of at_pdb_open is 010.
+
+  at_pdb_close (the value at the time the file is opened or created
+                is remembered):
+  001  Write Major-Order 102 PDB file
+  002  Write PDB style history data
+     The following are no-ops unless bit 002 is set:
+  004  Use Basis @history convention on output
+  010  Do NOT pack all history record variables into
+       a single structure instance.
+
+  The 001 bit may be overridden by the close102 keyword or if
+  close102_default is non-zero.
+  The default value of at_pdb_close is 007.
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#close102">close102_default</a></p>
+</div>
+<div class="docblock"><a name="close102"></a><h3>close102</h3>
+  <pre>DOCUMENT close102  is a keyword for createb or updateb,
+         open102   is a keyword for openb or updateb
+         close102_default   is a global variable (initially 0)
+           ***Do not use close102_default -- use at_pdb_close
+              -- this is for backward compatibility only***
+
+         close102=1  means to close the PDB file "Major-Order:102"
+         close102=0  means close it "Major-Order:101"
+            if not specified, uses 1 if close102_default non-zero,
+            otherwise the value specified in at_pdb_close
+
+         open102=1   means to ignore what the PDB file says internally,
+                     and open it as if it were "Major-Order:102"
+         open102=0   (the default) means to assume the PDB file is
+                     correctly writen
+         open102=2   means to assume that the file is incorrectly
+                     written, whichever way it is marked
+         open102=3   means to ignore what the PDB file says internally,
+                     and open it as if it were "Major-Order:101"
+
+  The PDB file format comes in two styles, "Major-Order:101", and
+  "Major-Order:102".  Yorick interprets these correctly by default,
+  but other codes may ignore them, or write them incorrectly.
+
+  Unlike Yorick, not all codes are able to correctly read both
+  styles.  If you are writing a file which needs to be read by
+  a "102 style" code, create it with the close102=1 keyword.
+
+  If you notice that a file you though was a history file isn't, or
+  that the dimensions of multi-dimensional variables are transposed
+  from the order you expected, the code which wrote the file probably
+  blew it.  Try openb("filename", open102=2).  The choices 1 and 3
+  are for cases in which you know the writing code was supposed to
+  write the file one way or the other, and you don't want to be
+  bothered.
+
+  The open102 and close102 keywords, if present, override the
+  defaults in the variables at_pdb_open and at_pdb_close.
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#at_pdb_open">at_pdb_open</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_close</a></p>
+</div>
+<div class="docsee">
+  <h3>close102_default</h3><p>SEE: <a href="#close102">close102</a></p>
+</div>
+<div class="docblock"><a name="collect"></a><h3>collect</h3>
+  <pre>DOCUMENT result= collect(f, name_string)
+  scans through all records of the history file F accumulating the
+  variable NAME_STRING into a single array with one additional
+  index varying from 1 to the number of records.
+
+  NAME_STRING can be either a simple variable name, or a name
+  followed by up to four simple indices which are either nil, an
+  integer, or an index range with constant limits.  (Note that
+  0 or negative indices count from the end of a dimension.)
+
+  Examples:
+     collect(f, "xle")        -- collects the variable f.xle
+     collect(f, "tr(2,2:)")   -- collects f.tr(2,2:)
+     collect(f, "akap(2,-1:0,)") -- collects f.akap(2,-1:0,)
+                  (i.e.- akap in the last two values of its
+                         second index)
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#get_times">get_times</a></p>
+</div>
+<div class="docblock"><a name="cray_primitives"></a><h3>cray_primitives</h3>
+  <pre>DOCUMENT cray_primitives, file
+  sets FILE primitive data types to be native to Cray 1, XMP, and YMP.</pre>
+  
+</div>
+<div class="docblock"><a name="createb"></a><h3>createb</h3>
+  <pre>DOCUMENT file= createb(filename)
+      or file= createb(filename, primitives)
+  creates FILENAME as a PDB file in "w+b" mode, destroying any
+  existing file by that name.  If the PRIMITIVES argument is
+  supplied, it must be the name of a procedure that sets the
+  primitive data types for the file.  The default is to create
+  a file with the native primitive types of the machine on which
+  Yorick is running.  The following PRIMITIVES functions are
+  predefined:
+     sun_primitives    -- appropriate for Sun, HP, IBM, and
+                          most other workstations
+     sun3_primitives   -- appropriate for old Sun-2 or Sun-3
+     dec_primitives    -- appropriate for DEC (MIPS) workstations, Windows
+     alpha_primitives  -- appropriate for DEC alpha workstations
+     sgi64_primitives  -- appropriate for 64 bit SGI workstations
+     cray_primitives   -- appropriate for Cray 1, XMP, and YMP
+     mac_primitives    -- appropriate for MacIntosh
+     macl_primitives   -- appropriate for MacIntosh, 12-byte double
+     i86_primitives    -- appropriate for Linux i86 machines
+     pc_primitives     -- appropriate for IBM PC
+     vax_primitives    -- appropriate for VAXen only (H doubles)
+     vaxg_primitives   -- appropriate for VAXen only (G doubles)
+     xdr_primitives    -- appropriate for XDR files
+
+  FILENAME may also be char (that is, the char datatype) in order to
+  create an in-memory binary file using vopen.  Such a file must be
+  closed with vclose or everything written to it will be lost.
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-fileio.html#vopen">vopen</a>, <a href="std-fileio.html#vsave">vsave</a>, <a href="std-system.html#cd">cd</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#add_record">add_record</a>, <a href="std-filebin.html#set_filesize">set_filesize</a>, <a href="std-filebin.html#set_blocksize">set_blocksize</a>, <a href="std-filebin.html#close102">close102</a>, <a href="std-filebin.html#close102">close102_default</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_open</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_close</a></p>
+</div>
+<div class="docblock"><a name="data_align"></a><h3>data_align</h3>
+  <pre>DOCUMENT data_align, file, alignment
+  in binary file FILE, align new variables to begin at a byte address
+  which is a multiple of ALIGNMENT.  (This affects placement of data
+  declared using save and add_variable.  For add_variable, data_align
+  has an effect only if the address is not specified.)  If ALIGNMENT
+  is <=0, new variables will be aligned as they would be if they were
+  data structure members.  The default value is 0.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#add_variable">add_variable</a></p>
+</div>
+<div class="docblock"><a name="dec_primitives"></a><h3>dec_primitives</h3>
+  <pre>DOCUMENT dec_primitives, file
+  sets FILE primitive data types to be native to DEC (MIPS) workstations.</pre>
+  
+</div>
+<div class="docblock"><a name="dump_clog"></a><h3>dump_clog</h3>
+  <pre>DOCUMENT dump_clog, file, clog_name
+  dumps a Contents Log of the binary file FILE into the text file
+  CLOG_NAME.  Any previous file named CLOG_NAME is overwritten.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a></p>
+</div>
+<div class="docblock"><a name="edit_times"></a><h3>edit_times</h3>
+  <pre>DOCUMENT edit_times, file
+      or edit_times, file, keep_list
+      or edit_times, file, keep_list, new_times, new_ncycs
+  edits the records for FILE.  The KEEP_LIST is a 0-origin index list
+  of records to be kept, or nil to keep all records.  The NEW_TIMES
+  array is the list of new time values for the (kept) records, and
+  the NEW_NCYCS array is the list of new cycle number values for the
+  (kept) records.  Either NEW_TIMES, or NEW_NCYCS, or both, may be
+  nil to leave the corresponding values unchanged.  If non-nil,
+  NEW_TIMES and NEW_NCYCS must have the same length as KEEP_LIST,
+  or, if KEEP_LIST is nil, as the original number of records in
+  the file.  If KEEP_LIST, NEW_TIME, and NEW_NCYCS are all omitted
+  or nil, then edit_times removes records as necessary to ensure
+  that the remaining records have monotonically increasing times,
+  or, if no times are present, monotonically increasing ncycs.
+  (The latest record at any given time/ncyc is retained, and earlier
+  records are removed.)
+  In no case does edit_times change the FILE itself; only Yorick's
+  in-memory model of the file is altered.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#get_times">get_times</a>, <a href="std-filebin.html#get_times">get_ncycs</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a></p>
+</div>
+<div class="docblock"><a name="get_addrs"></a><h3>get_addrs</h3>
+  <pre>DOCUMENT addr_lists= get_addrs(file)
+  returns the byte addresses of the non-record and record variables
+  in the binary file FILE, and lists of the record addresses, file
+  indices, and filenames for file families with history records.
+       *addr_lists(1)   absolute addresses of non-record variables
+       *addr_lists(2)   relative addresses of record variables
+                        (add record address to get absolute address)
+          The order of these two address lists matches the
+          corresponding lists of names returned by get_vars.
+       *addr_lists(3)   absolute addresses of records
+       *addr_lists(4)   list of file indices corresponding to
+                        addr_lists(3); indices are into addr_lists(5)
+       *addr_lists(5)   list of filenames in the family</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#has_records">has_records</a>, <a href="std-filebin.html#get_vars">get_vars</a></p>
+</div>
+<div class="docblock"><a name="get_member"></a><h3>get_member</h3>
+  <pre>DOCUMENT get_member(f_or_s, member_name)
+  returns F_OR_S member MEMBER_NAME, like F_OR_S.MEMBER_NAME syntax,
+  but MEMBER_NAME can be a computed string.  The F_OR_S may be a
+  binary file or a structure instance.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a></p>
+</div>
+<div class="docsee">
+  <h3>get_ncycs</h3><p>SEE: <a href="#get_times">get_times</a></p>
+</div>
+<div class="docblock"><a name="get_primitives"></a><h3>get_primitives</h3>
+  <pre>DOCUMENT prims = get_primitives(file)
+  Return the primitive data types for FILE as an array of 32
+  integers.  The format is described under set_primitives.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#set_primitives">set_primitives</a>, <a href="std-filebin.html#__xdr">__xdr</a>, <a href="std-filebin.html#__xdr">__i86</a></p>
+</div>
+<div class="docblock"><a name="get_times"></a><h3>get_times</h3>
+  <pre>DOCUMENT times= get_times(file)
+         ncycs= get_ncycs(file)
+  returns the list of time or ncyc values associated with the records
+  if FILE, or nil if there are none.  The time values are not guaranteed
+  to be precise (but they should be good to at least 6 digits or so);
+  the precise time associated with each record may be stored as a record
+  variable.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#collect">collect</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#edit_times">edit_times</a></p>
+</div>
+<div class="docblock"><a name="get_vars"></a><h3>get_vars</h3>
+  <pre>DOCUMENT name_lists= get_vars(file)
+  returns the lists of non-record and record variable names in the
+  binary FILE.  The return value is an array of two pointers to
+  arrays of type string; *name_lists(1) is the array of non-record
+  variable names (or nil if there are none), *name_lists(2) is the
+  array of record variable names.
+  The get_addrs function returns corresponding lists of disk
+  addresses; the get_member function can be used in conjunction
+  with the dimsof, structof, and typeof functions to determine
+  the other properties of a variable.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#has_records">has_records</a>, <a href="std-filebin.html#get_addrs">get_addrs</a>, <a href="std-filebin.html#set_vars">set_vars</a></p>
+</div>
+<div class="docblock"><a name="has_records"></a><h3>has_records</h3>
+  <pre>DOCUMENT has_records(file)
+  returns 1 if FILE has history records, 0 if it does not.</pre>
+  
+</div>
+<div class="docblock"><a name="i86_primitives"></a><h3>i86_primitives</h3>
+  <pre>DOCUMENT i86_primitives, file
+  sets FILE primitive data types to be native to Linux i86 machines.</pre>
+  
+</div>
+<div class="docblock"><a name="install_struct"></a><h3>install_struct</h3>
+  <pre>DOCUMENT install_struct, file, struct_name
+      or install_struct, file, struct_name, size, align, order
+      or install_struct, file, struct_name, size, align, order, layout
+  installs the data type named STRUCT_NAME in the binary FILE.  In
+  the two argument form, STRUCT_NAME must have been built by one or
+  more calls to the add_member function.  In the 5 and 6 argument calls,
+  STRUCT_NAME is a primitive data type -- an integer type for the 5
+  argument call, and a floating point type for the 6 argument call.
+  The 5 argument form may also be used to declare opaque data types.
+  SIZE is the size of an instance in bytes, ALIGN is its alignment
+  boundary (also in bytes), and ORDER is the byte order.  ORDER is
+  1 for most significant byte first, -1 for least significant byte
+  first, and 0 for opaque (unconverted) data.  Other ORDER values
+  represent more complex byte permutations (2 is the byte order for
+  VAX floating point numbers).  If ORDER equals SIZE, then the data
+  type is not only opaque, but also must be read sequentially.
+  LAYOUT is an array of 7 long values parameterizing the floating
+  point format, [sign_address, exponent_address, exponent_size,
+  mantissa_address, mantissa_size, mantissa_normalized, exponent_bias]
+  (the addresses and sizes are in bits, reduced to MSB first order).
+  Use, e.g., nameof(float) for STRUCT_NAME to redefine the meaning
+  of the float data type for FILE.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#add_variable">add_variable</a>, <a href="std-filebin.html#add_member">add_member</a></p>
+</div>
+<div class="docblock"><a name="jc"></a><h3>jc</h3>
+  <pre>DOCUMENT jc, file, ncyc
+  jump to the record of FILE nearest the specified NCYC.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#_jr">_jc</a>, <a href="std-filebin.html#edit_times">edit_times</a>, <a href="std-filebin.html#show">show</a>, <a href="std-filebin.html#jr">jr</a></p>
+</div>
+<div class="docblock"><a name="jr"></a><h3>jr</h3>
+  <pre>DOCUMENT jr, file, i
+      or _jr(file, i)
+  Jump to a particular record number I (from 1 to n_records) in a
+  binary file FILE.  The function returns 1 if such a record exists,
+  0 if there is no such record.  In the latter case, no action is
+  taken; the program halts with an error only if jr was invoked
+  as a subroutine.  Record numbering wraps like array indices; use
+  jr, file, 0  to jump to the last record, -1 to next to last, etc.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#edit_times">edit_times</a>, <a href="std-filebin.html#show">show</a></p>
+</div>
+<div class="docblock"><a name="jt"></a><h3>jt</h3>
+  <pre>DOCUMENT jt, time
+      or jt, file, time
+      or jt, file
+      or jt, file, -
+  jump to the record nearest the specified TIME.  If no FILE is
+  specified, the current record of all open binary files containing
+  records is shifted.
+  If both FILE and TIME are specified and jt is called as a function,
+  it returns the actual time of the new current record.
+
+N.B.: "jt, file" and "jt, file, -" are obsolete.  Use the jr function to
+  step through a file one record at a time.
+
+  If only the FILE is specified, increment the current record of that
+  FILE by one.  If the TIME argument is - (the pseudo-index range
+  function), decrement the current record of FILE by one.
+  If the current record is the last, "jt, file" unsets the current record
+  so that record variables will be inaccessible until another jt or jc.
+  The same thing happens with "jt, file, -" if the current record was the
+  first.
+  If only FILE is specified, jt returns 1 if there is a new current
+  record, 0 if the call resulted in no current record.  Thus "jt(file)"
+  and "jt(file,-)" may be used as the condition in a while loop to step
+  through every record in a file:
+     file= openb("example.pdb");
+     do {
+       restore, file, interesting_record_variables;
+       ...calculations...
+     } while (jt(file));
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#_jr">_jt</a>, <a href="std-filebin.html#edit_times">edit_times</a>, <a href="std-filebin.html#show">show</a>, <a href="std-filebin.html#jr">jr</a></p>
+</div>
+<div class="docblock"><a name="macl_primitives"></a><h3>macl_primitives</h3>
+  <pre>DOCUMENT macl_primitives, file
+  sets FILE primitive data types to be native to MacIntosh, long double.</pre>
+  
+</div>
+<div class="docblock"><a name="mac_primitives"></a><h3>mac_primitives</h3>
+  <pre>DOCUMENT mac_primitives, file
+  sets FILE primitive data types to be native to MacIntosh, 8 byte double.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>open102</h3><p>SEE: <a href="#close102">close102</a></p>
+</div>
+<div class="docblock"><a name="openb"></a><h3>openb</h3>
+  <pre>DOCUMENT file = openb(filename)
+      or file = openb(filename, clogfile)
+  open the existing file FILENAME for read-only binary I/O.
+  (Use updateb or createb, respectively, to open an existing file
+   with read-write access or to create a new file.)
+  If the CLOGFILE argument is supplied, it represents the structure
+  of FILENAME in the Clog binary data description language.
+  After an openb, the file variable may be used to extract variables
+  from the file as if it were a structure instance.  That is, the
+  expression "file.var" refers to the variable "var" in file "file".
+  A complete list of the variable names present in the file may
+  be obtained using the get_vars function.  If the file contains
+  history records, the jt and jc functions may be used to set the
+  current record -- initially, the first record is current.
+  The restore function may be used to make memory copies of data
+  in the file; this will be faster than a large number of
+  references to "file.var".
+  The openb function will recognize families of PDB or netCDF files
+  by their sequential names and open all files subsequent to FILENAME
+  in such a family as well as FILENAME itself.  You can use the one=1
+  keyword to suppress this behavior and open only FILENAME.
+  FILENAME may be a file handle to skip the initial open operation.
+  This feature is intended to enable in-memory files created with
+  vopen to be opened:
+    file = openb(vopen(char_array,1));
+  FILENAME may also be char_array directly, as returned by vsave.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#vopen">vopen</a>, <a href="std-system.html#cd">cd</a>, <a href="std-filebin.html#show">show</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#get_vars">get_vars</a>, <a href="std-filebin.html#get_times">get_times</a>, <a href="std-filebin.html#get_times">get_ncycs</a>, <a href="std-filebin.html#get_member">get_member</a>, <a href="std-filebin.html#has_records">has_records</a>, <a href="std-filebin.html#set_blocksize">set_blocksize</a>, <a href="std-filebin.html#dump_clog">dump_clog</a>, <a href="std-filebin.html#read_clog">read_clog</a>, <a href="std-filebin.html#recover_file">recover_file</a>, <a href="std-filebin.html#openb_hooks">openb_hooks</a>, <a href="std-filebin.html#close102">open102</a>, <a href="std-filebin.html#close102">close102</a>, <a href="std-filebin.html#get_addrs">get_addrs</a></p>
+</div>
+<div class="docblock"><a name="openb_hooks"></a><h3>openb_hooks</h3>
+  <pre>DOCUMENT openb_hooks
+  list of functions to be tried by openb if the file to be
+  opened is not a PDB file.  By default,
+    openb_hooks= _lst(_not_pdbf, _not_cdf).
+  The hook functions will be called with the file as argument
+  (e.g.- _not_cdf(file)), beginning with _car(openb_hooks), until
+  one of them returns 0.  Note that a hook should return 0 if it
+  "recognizes" the file as one that it should be able to open, but
+  finds that the file is misformatted (alternatively, it could call
+  error to abort the whole process).</pre>
+  
+</div>
+<div class="docblock"><a name="pc_primitives"></a><h3>pc_primitives</h3>
+  <pre>DOCUMENT pc_primitives, file
+  sets FILE primitive data types to be native to IBM PC.</pre>
+  
+</div>
+<div class="docblock"><a name="read_clog"></a><h3>read_clog</h3>
+  <pre>DOCUMENT file= read_clog(file, clog_name)
+  raw routine to set the binary data structure of FILE according
+  to the text description in the Contents Log file CLOG_NAME.</pre>
+  
+</div>
+<div class="docblock"><a name="recover_file"></a><h3>recover_file</h3>
+  <pre>DOCUMENT recover_file, filename
+      or recover_file, filename, clogfile
+  writes the descriptive information at the end of a corrupted
+  binary file FILENAME from its Contents Log file CLOGFILE, which
+  is FILENAME+"L" by default.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>restore</h3><p>SEE: <a href="#save">save</a></p>
+</div>
+<div class="docblock"><a name="save"></a><h3>save</h3>
+  <pre>DOCUMENT save, obj, var1, var2, ...
+         restore, obj, var1, var2, ...
+         grp = save(var1, var2, ...)
+         grp = restore(var1, var2, ...)
+  saves the variables VAR1, VAR2, etc. in the object OBJ, or restores
+  them from that object.  An object can be a binary file handle, in which
+  case there may be restrictions on the type of the VARi; in particular,
+  the VARi will need to be arrays or structure definitions.  In general,
+  the kind of object OBJ determines what kinds of variables can be
+  saved in it.
+
+  Called as functions, save and restore return a grp object, a very
+  light weight in-memory container that can hold any kind of yorick
+  variable.  In the case of save, the grp contains the the specified
+  variables VARi.  For group objects (not necessarily other objects),
+  the saved items are not copies, but references.  However, if you
+  redefine a VARi after a save to a group object, the group member
+  corresponding to that VARi does not change.  Hence, groups are a
+  way to maintain "namespaces" in yorick.  The return value from
+  save is simply a group object containing the VARi.  The return
+  value from restore is more interesting: it is a group object containing
+  the values of the VARi before they were restored.  This enables you to
+  put things back the way they were before a restore, after you are
+  finished using the restored variables.
+
+  Special cases of save:
+    grp = save();   // return an empty group object
+    obj = save(*);  // return the entire global symbol table as an object
+    save, obj;      // saves entire global symbol table in OBJ, silently
+      skipping any variables whose data type OBJ does not support
+  Other special cases:
+    restore, obj;   // restores all named variables in OBJ
+    save, use, var1, var2, ...;
+    restore, use, var1, var2, ...;
+      save and restore to the current context object (see help,use).
+
+  Each VARi may be a simple variable reference, in which case the name
+  of the VARi specifies which member of the object.  (In the case of
+  save, a VARi whose name matches no current object member will create
+  a new object member of that name.)  However, any of the VARi may
+  instead be be a pair of arguments instead of a single argument:
+    VARi -->  MEMBSPECi, VALi
+  where MEMBSPECi is an expression (but NOT a simple variable reference)
+  whose value specifies which object member, and the VALi argument is
+  the external value.  In the case of save, VALi may also be an
+  expression; in the case of restore, VALi must be the simple variable
+  reference for the variable which restore will set to the specified
+  object member.  For example:
+    var2 = 3*x+7;
+    save, obj, var1, var2, var3;
+    save, obj, var1, "var2", 3*x+7, var3;
+    save, obj, var1, swrite(format="var%ld",8/4), 3*x+7, var3;
+  All three save calls do the same thing.  The corresponding restore
+  works by name; the order need not be the same as the save:
+    restore, obj, var2, var3, var1;
+  puts the saved values back where they started, while:
+    restore, obj, var2, swrite(format="var%ld",1), x;
+  puts var2 back to its saved value, but sets x to the value saved
+  as var1.  You can use the noop() function to make an expression out
+  of a variable holding a MEMBSPEC.  For example, if varname="var1", then
+    restore, obj, noop(varname), x;  // or
+    restore, obj, varname+"", x;
+  will set x to the value saved as var1, while
+    restore, obj, varname, x;   // error!
+  attempts to restore two variables named "varname" and "x" from obj.
+
+  For the save function, each VARi may also be a keyword argument:
+    VARi -->  member=VALi
+  which behaves exactly the same as:
+    VARi -->  "member",VALi
+  but is slightly more efficient, since it avoids the string argument.
+  You can also omit the "save" in a subroutine call if all arguments
+  are keywords:
+    save, obj, m1=val1, m2=val2, ...;
+  is the same thing as:
+    obj, m1=val1, m2=val2, ...;
+
+  Some kinds of objects (including the group objects, but usually not
+  binary file handles) support anonymous members.  For such objects,
+  the order in which the members were saved is significant, and member
+  names are optional.  You can create anonymous members by passing
+  string(0) to save as the MEMBSPEC.  Unlike ordinary names, each save
+  with string(0) as the name creates a new member (rather than overwriting
+  the existing member with that name).  All members (named as well as
+  anonymous) are numbered starting from 1 for the first member, in the
+  order in which they are created.  For objects supporting anonymous
+  members, MEMBSPEC may also be an integer, which is the member index.
+
+  In fact, MEMBSPECi can be any of the following:
+  scalar string   - member name, string(0) on save creates anonymous member
+  scalar index    - member index
+  string array    - VALi a group with those members (string(0) on save OK)
+  index array     - VALi a group with those members
+  min:max:step    - VALi a group with those members
+  nil []          - save only: if VALi is not an object, same as string(0),
+    if VALi is an object, merge with OBJ, that is members of VALi become
+    members of OBJ, creating or overwriting named members and always
+    appending anonymous members.
+  MEMBSPEC indices and index ranges accept zero or negative values with
+  the same meaning as for array indices, namely 0 represents the last
+  member, -1 the second to the last, and so on.  Unlike array indices,
+  the non-positive index values also work in index array MEMBSPECs.
+
+  See help,oxy (object extension to yorick) for more on objects.
+
+  As a final remark, notice that you can use save and restore to
+  construct group objects without having any side effects -- that is,
+  without "damaging" the state of any other variables.  For example,
+  suppose we want to create an object bump consisting of three
+  variables x, y, and z, that need to be computed.  In order to do
+  that without clobbering existing values of x, y, and z, or anything
+  else, we can do this:
+    bump = save(x, y, z);        // save current values of x, y, z
+    scratch = save(scratch, xy); // save scratch variables (xy and scratch)
+    xy = span(-4, 4, 250);
+    x = xy(,-:1:250);
+    y = xy(-:1:250,);
+    z = sqrt(0.5/pi)*exp(-0.5*abs(x,y)^2);
+    bump = restore(bump);        // put back old x,y,z, set bump to new
+    restore, scratch;            // restore xy and scratch itself
+</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#oxy">oxy</a>, <a href="std-oxy.html#is_obj">is_obj</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-oxy.html#use">use</a>, <a href="std-mesh.html#noop">noop</a>, <a href="std-oxy.html#gaccess">gaccess</a></p>
+</div>
+<div class="docblock"><a name="set_blocksize"></a><h3>set_blocksize</h3>
+  <pre>DOCUMENT set_blocksize, file, blocksize
+      or set_blocksize, blocksize
+  sets smallest cache block size for FILE to BLOCKSIZE.  BLOCKSIZE
+  is rounded to the next larger number of the form 4096*2^n if
+  necessary; cache blocks for this file will be multiples of
+  BLOCKSIZE bytes long.  The default BLOCKSIZE is 0x4000 (16 KB)
+  initially.  The second form, with no FILE argument, sets the
+  default BLOCKSIZE.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#_read">_read</a>, <a href="std-filebin.html#_read">_write</a>, <a href="std-filebin.html#set_cachesize">set_cachesize</a></p>
+</div>
+<div class="docblock"><a name="set_cachesize"></a><h3>set_cachesize</h3>
+  <pre>DOCUMENT set_cachesize, maxBlockSize, totalCacheSize
+  Sets largest cache block size to  MAXBLOCKSIZE.  MAXBLOCKSIZE
+  is rounded to the next larger number of the form 4096*2^n if
+  necessary.
+  Sets the total cache size to TOTALCACHESIZE.  TOTALCACHESIZE
+  will be set to 4*MAXBLOCKSIZE if it is smaller than that.
+  The default MAXBLOCKSIZE is 0x080000 (512k) and the default
+  TOTALCACHESIZE is  0x140000 (1.25 Mbytes).</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#set_blocksize">set_blocksize</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a></p>
+</div>
+<div class="docblock"><a name="set_filesize"></a><h3>set_filesize</h3>
+  <pre>DOCUMENT set_filesize, file, filesize
+  sets the new family member threshhold for FILE to FILESIZE.
+  Whenever a new record is added (see add_record), if the current file
+  in the FILE family has at least one record and the new record would
+  cause the current file to exceed FILESIZE bytes, a new family
+  member will be created to hold the new record.
+  Note that set_filesize must be called after the first call to
+  add_record.
+  The default FILESIZE is 0x800000 (8 MB).</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#add_record">add_record</a></p>
+</div>
+<div class="docblock"><a name="set_primitives"></a><h3>set_primitives</h3>
+  <pre>DOCUMENT set_primitives, file, prims
+  Return the primitive data types for FILE as an array of 32
+  integers.  Versions for particular machines are defined in
+  prmtyp.i, and can be accessed using functions like
+  sun_primitives or i86_primitives.  See __xdr for a complete
+  list.  The format is:
+  [size, align, order] repeated 6 times for char, short, int,
+    long, float, and double, except that char align is always 1,
+    so result(2) is the structure alignment (see struct_align).
+  [sign_address,  exponent_address, exponent_bits,
+   mantissa_address, mantissa_bits,
+   mantissa_normalization, exponent_bias] repeated twice for
+    float and double.  See the comment at the top of prmtyp.i
+    for an explanation of these fields.
+  the total number of items is thus 3*6+7*2=32.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#get_primitives">get_primitives</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#__xdr">__xdr</a>, <a href="std-filebin.html#__xdr">__i86</a></p>
+</div>
+<div class="docblock"><a name="set_vars"></a><h3>set_vars</h3>
+  <pre>DOCUMENT set_vars, file, names
+      or set_vars, file, nonrec_names, rec_names
+  Change the names of the variables in FILE to NAMES.  If the
+  file has record variables, you can use the second form to change
+  the record variable names.  Either of the two lists may be nil
+  to leave those names unchanged, but if either is not nil, it must
+  be a 1D array of strings whose length exactly matches the number
+  of that type of variable actually present in the file.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#has_records">has_records</a>, <a href="std-filebin.html#get_vars">get_vars</a></p>
+</div>
+<div class="docblock"><a name="sgi64_primitives"></a><h3>sgi64_primitives</h3>
+  <pre>DOCUMENT sgi64_primitives, file
+  sets FILE primitive data types to be native to 64-bit SGI workstations.</pre>
+  
+</div>
+<div class="docblock"><a name="show"></a><h3>show</h3>
+  <pre>DOCUMENT show, f
+      or show, f, pat
+      or show, f, 1
+  prints a summary of the variables contained in binary file F.
+  If there are too many variables, use the second form to select
+  only those variables whose first few characters match PAT.
+  In the third form, continues the previous show command where it
+  left off -- this may be necessary for files with large numbers of
+  variables.
+  The variables are printed in alphabetical order down the columns.
+  The print function can be used to obtain other information about F.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#jt">jt</a>, <a href="std-filebin.html#jc">jc</a></p>
+</div>
+<div class="docblock"><a name="struct_align"></a><h3>struct_align</h3>
+  <pre>DOCUMENT struct_align, file, alignment
+  in binary file FILE, align new struct members which are themselves
+  struct instances to begin at a byte address which is a multiple of
+  ALIGNMENT.  (This affects members declared explicitly by add_member,
+  as well as implicitly by save or add_variable.)  If ALIGNMENT is <=0,
+  returns to the default for this machine.  The struct alignment is in
+  addition to the alignment implied by the most restrictively aligned
+  member of the struct.  Most machines want ALIGNMENT of 1.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#add_member">add_member</a></p>
+</div>
+<div class="docblock"><a name="sun3_primitives"></a><h3>sun3_primitives</h3>
+  <pre>DOCUMENT sun3_primitives, file
+  sets FILE primitive data types to be native to Sun-2 or Sun-3.</pre>
+  
+</div>
+<div class="docblock"><a name="sun_primitives"></a><h3>sun_primitives</h3>
+  <pre>DOCUMENT sun_primitives, file
+  sets FILE primitive data types to be native to Sun, HP, IBM, etc.</pre>
+  
+</div>
+<div class="docblock"><a name="updateb"></a><h3>updateb</h3>
+  <pre>DOCUMENT file= updateb(filename)
+      or file= updateb(filename, primitives)
+  open a binary data file FILENAME for update (mode "r+b").
+  The optional PRIMITIVES argument is as for the createb function.
+  If the file exists, it is opened as if by openb(filename),
+  otherwise a new PDB file is created as if by createb(filename).</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-system.html#cd">cd</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#get_vars">get_vars</a>, <a href="std-filebin.html#get_addrs">get_addrs</a>, <a href="std-filebin.html#close102">close102</a>, <a href="std-filebin.html#close102">close102_default</a>, <a href="std-filebin.html#close102">open102</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_open</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_close</a></p>
+</div>
+<div class="docblock"><a name="vaxg_primitives"></a><h3>vaxg_primitives</h3>
+  <pre>DOCUMENT vaxg_primitives, file
+  sets FILE primitive data types to be native to VAXen, G-double, only.</pre>
+  
+</div>
+<div class="docblock"><a name="vax_primitives"></a><h3>vax_primitives</h3>
+  <pre>DOCUMENT vax_primitives, file
+  sets FILE primitive data types to be native to VAXen, H-double, only.</pre>
+  
+</div>
+<div class="docblock"><a name="xdr_primitives"></a><h3>xdr_primitives</h3>
+  <pre>DOCUMENT xdr_primitives, file
+  sets FILE primitive data types to be XDR (external data representation).</pre>
+  
+</div>
+<div class="docblock"><a name="_init_clog"></a><h3>_init_clog</h3>
+  <pre>DOCUMENT _init_clog, file
+  initializes a Clog binary file.  Used after creating a new file --
+  must be called AFTER the primitive data formats have been set.</pre>
+  
+</div>
+<div class="docblock"><a name="_init_pdb"></a><h3>_init_pdb</h3>
+  <pre>DOCUMENT _init_pdb, file, at_pdb_close
+         _set_pdb, file, at_pdb_close
+  initializes a PDB binary file.  Used after creating a new file --
+  must be called AFTER the primitive data formats have been set.
+  The _set_pdb call only sets the CloseHook, on the assumption that
+  the file header has already been written (as in recover_file).</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#recover_file">recover_file</a>, <a href="std-filebin.html#at_pdb_open">at_pdb_close</a></p>
+</div>
+<div class="docsee">
+  <h3>_jc</h3><p>SEE: <a href="#_jr">_jr</a></p>
+</div>
+<div class="docblock"><a name="_jr"></a><h3>_jr</h3>
+  <pre>DOCUMENT _jt, file, time
+         _jc, file, ncyc
+         _jr, file
+  are raw versions of jt and jc provided to simplify redefining
+  the default jt and jc functions to add additional features.
+  For example, you could redefine jt to jump to a time, then
+  plot something.  The new jt can pass its arguments along to
+  _jt, then call the appropriate plotting functions.
+  There is a raw version of jr as well.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>_jt</h3><p>SEE: <a href="#_jr">_jr</a></p>
+</div>
+<div class="docblock"><a name="_not_cdf"></a><h3>_not_cdf</h3>
+  <pre>DOCUMENT _not_cdf(file)
+  is like _not_pdb, but for netCDF files.</pre>
+  
+</div>
+<div class="docblock"><a name="_not_pdb"></a><h3>_not_pdb</h3>
+  <pre>DOCUMENT _not_pdb(file, familyOK)
+  returns 1 if FILE is not a PDB file, otherwise returns 0 after
+  setting the structure and data tables, and cataloguing any
+  history records.  Used to open an existing file.  Also detects
+  a file with an appended Clog description.
+  Before calling _not_pdb, set the variable yPDBopen to the value
+  of at_pdb_open you want to be in force.  (For historical reasons
+  -- in order to allow for the open102 keyword to openb -- _not_pdb
+  looks at the value of the variable yPDBopen, rather than at_pdb_open
+  directly.)</pre>
+  
+</div>
+<div class="docblock"><a name="_read"></a><h3>_read</h3>
+  <pre>DOCUMENT _write, file, address, expression
+         _read, file, address, variable
+      or nbytes= _read(file, address, variable);
+  are low level read and write functions which do not "see" the
+  symbol table for the binary FILE.  The ADDRESS is the byte address
+  at which to begin the write or read operation.  The type and number
+  of objects of the EXPRESSION or VARIABLE determines how much data
+  to read, and what format conversion operations to apply.  In the
+  case of type char, no conversion operations are ever applied, and
+  _read will return the actual number of bytes read, which may be
+  fewer than the number implied by VARIABLE in this one case.
+  (In all other cases, _read returns numberof(VARIABLE).)
+  If the FILE has records, the ADDRESS is understood to be in the
+  file family member in which the current record resides.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-filebin.html#updateb">updateb</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-query.html#sizeof">sizeof</a></p>
+</div>
+<div class="docsee">
+  <h3>_set_pdb</h3><p>SEE: <a href="#_init_pdb">_init_pdb</a></p>
+</div>
+<div class="docsee">
+  <h3>_write</h3><p>SEE: <a href="#_read">_read</a></p>
+</div>
+<div class="docsee">
+  <h3>__alpha</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__cray</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__dec</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__i86</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__ibmpc</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__mac</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__macl</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__sgi64</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__sun</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__sun3</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__vax</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docsee">
+  <h3>__vaxg</h3><p>SEE: <a href="#__xdr">__xdr</a></p>
+</div>
+<div class="docblock"><a name="__xdr"></a><h3>__xdr</h3>
+  <pre>DOCUMENT primitive data types for various machines:
+    little-endians
+__i86      Intel x86 Linux
+__ibmpc    IBM PC (2 byte int)
+__alpha    Compaq alpha
+__dec      DEC workstation (MIPS), Intel x86 Windows
+__vax      DEC VAX (H-double)
+__vaxg     DEC VAX (G-double)
+    big-endians
+__xdr      External Data Representation
+__sun      Sun, HP, SGI, IBM-RS6000, MIPS 32 bit
+__sun3     Sun-2 or Sun-3 (old)
+__sgi64    SGI, Sun, HP, IBM-RS6000 64 bit
+__mac      MacIntosh 68000 (power Mac, Gx are __sun)
+__macl     MacIntosh 68000 (12 byte double)
+__cray     Cray XMP, YMP</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#set_primitives">set_primitives</a></p>
+</div>

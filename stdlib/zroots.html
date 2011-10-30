@@ -1,0 +1,36 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package zroots (in zroots.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>L</h3>
+    <p><a href="zroots.html#laguerre">laguerre</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>Z</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="zroots.html#zroots">zroots</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="laguerre"></a><h3>laguerre</h3>
+  <pre>DOCUMENT laguerre(a,x)
+  Given the coefficients a(1:m+1) of the m'th degree
+  complex polynomial Sum(a(i)*x^(i-1)) and a guess x, returns a root.
+  See Numerical Recipes (Press, et. al., Cambridge Univ. Press 1988),
+  section 9.5.</pre>
+  
+</div>
+<div class="docblock"><a name="zroots"></a><h3>zroots</h3>
+  <pre>DOCUMENT zroots(a)
+  returns the vector of (complex) roots of the (complex) 
+  polynomial: Sum(a(i)*x^(i-1)) using Laguerre's method.
+  The roots are sorted in order of increasing real parts.  Call with
+  non-zero imsort keyword to sort into increasing imaginary parts.
+  See Numerical Recipes (Press, et. al., Cambridge Univ. Press 1988),
+  section 9.5.</pre>
+  
+</div>

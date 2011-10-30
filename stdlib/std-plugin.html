@@ -1,0 +1,83 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-plugin (in std.i) - loading plugins </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-plugin.html#plug_dir">plug_dir</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-plugin.html#plug_in">plug_in</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="plug_dir"></a><h3>plug_dir</h3>
+  <pre>DOCUMENT old_dirs = plug_dir(dirname)
+      or plug_dir
+      or current_dirs = plug_dir()
+  causes plug_in to look in DIRNAME for dynamic library files, in
+  addition to Y_HOME/lib.  DIRNAME may be an array of strings to
+  search multiple directories.  The return value is the previous
+  list of directories searched by plug_in.  No checks are made
+  for repeats, so be careful not to grow the list indiscriminately.
+  In the second form (or called as a subroutine with DIRNAME []),
+  empties the plug_in search path; in the third form does not
+  alter the current search path.  Note that Y_HOME/lib is omitted
+  from the end of the return value, even though it is searched.</pre>
+  <p>SEE ALSO: <a href="std-plugin.html#plug_in">plug_in</a></p>
+</div>
+<div class="docblock"><a name="plug_in"></a><h3>plug_in</h3>
+  <pre>DOCUMENT plug_in, "pkgname"
+
+  Dynamically link to yorick package "pkgname".  The compiled
+  functions of the package are in a shared object file; these
+  files have a naming convention which differs slightly on different
+  platforms.  On most UNIX systems (including Mac OS X), the
+  binary file is named pkgname.so.  On MS Windows systems, the
+  binary file is named pkgname.dll.  On HPUX systems, the name is
+  pkgname.sl.  The "pkgname" argument to plug_in does not include
+  this platform-dependent file extension, so that the yorick code
+  containing the plug_in command will be portable.
+
+  After dynamically linking the compiled routines in the pkgname
+  shared object binary, yorick runs the function (which must be
+  present) yk_pkgname in order to initialize the package.  At
+  minimum yk_pkgname returns lists of the new compiled (builtin)
+  functions defined by the package and the names by which they
+  may be invoked by interpreted code.
+
+  Additionally, yk_pkgname returns a list of files to be included
+  containing interpreted wrapper functions for the compiled routines
+  and DOCUMENT comments for the help system.  Conventionally, these
+  include files are located in the Y_SITE/i0 or Y_HOME/lib directories,
+  and the name (of one) of the file(s) is pkgname.i.  If the package
+  has been statically linked (i.e.- not by plug_in), these .i files
+  are automatically included when yorick starts.  However, if the
+  package is loaded dynamically by plug_in, you must arrange to
+  include one or all of these .i files as you would any interpreted
+  package (e.g.- by the autoload or require functions, or manually).
+
+  The upshot of all this is that the plug_in function is designed
+  to be placed at the top of the .i files associated with the
+  package.  You are not supposed to call plug_in manually, rather
+  when you #include (or autoload) a .i file which needs compiled
+  functions, that .i file invokes plug_in to perform any required
+  dynamic linking to compiled code.  Thus, the end user does not
+  do anything differently for a package that uses dynamically loaded
+  compiled code, than for a purely interpreted package.
+
+  Yorick dynamic library support solves a distribution problem.  For
+  debugging and creating compiled packages for your own use, you want
+  to build special versions of yorick with your compiled routines
+  statically linked.  In order to support platforms on which there
+  is no dynamic linking, if you call the plug_in function for a
+  package that is statically linked (e.g.- plug_in,"yor"), the
+  function will silently become a no-op when it notices that the
+  "pkgname" package was already loaded at startup.
+</pre>
+  <p>SEE ALSO: <a href="std-plugin.html#plug_dir">plug_dir</a>, <a href="std-include.html#include">include</a>, <a href="std-include.html#include">require</a>, <a href="std-include.html#autoload">autoload</a></p>
+</div>

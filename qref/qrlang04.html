@@ -1,0 +1,38 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Constants</h2>
+<p>By default, an integer number is a constant of type <tt>long</tt>, and
+a real number is a constant of type <tt>double</tt>. Constants of the types<tt>short</tt>,
+<tt>int</tt>, <tt>float</tt>,
+and <tt>complex</tt> are specified by means of the suffices
+<tt>s</tt>, <tt>n</tt>, <tt>f</tt>, and
+<tt>i</tt>, respectively. Here are some examples:
+</p>
+<p><tt>char&nbsp;&nbsp;&nbsp; '\0', '\1', '\x7f', '\177', 'A', '\t'</tt>
+<br><tt>short&nbsp;&nbsp; 0s, 1S, 0x7fs, 0177s, -32766s</tt>
+<br><tt>int&nbsp;&nbsp;&nbsp;&nbsp; 0N, 1n, 0x7Fn, 0177n, -32766n</tt>
+<br><tt>long&nbsp;&nbsp;&nbsp; 0, 1, 0x7f, 0177, -32766, 1234L</tt>
+<br><tt>float&nbsp;&nbsp; .0f, 1.f, 1.27e2f, 0.00127f, -32.766e3f</tt>
+<br><tt>double&nbsp; 0.0, 1.0, 127.0, 1.27e-3, -32.766e-33</tt>
+<br><tt>complex 0i, 1i, 127.i, 1.27e-3i, -32.766e-33i</tt>
+<br><tt>string&nbsp; "", "Hello, world!", "\tTab\n2nd line"</tt>
+</p>
+<p>The following escape sequences are recognized in type <tt>char</tt>
+and type <tt>string</tt> constants:<br>
+</p>
+<p><tt>\n&nbsp;&nbsp;&nbsp;</tt> newline
+<br><tt>\t&nbsp;&nbsp;&nbsp;</tt> tab
+<br><tt>\"&nbsp;&nbsp;&nbsp;</tt> double quote
+<br><tt>\'&nbsp;&nbsp;&nbsp;</tt> single quote
+<br><tt>\\&nbsp;&nbsp;&nbsp;</tt> backslash
+<br><tt>\ooo&nbsp;</tt> octal number
+<br><tt>\xhh&nbsp;</tt> hexadecimal number
+<br><tt>\a&nbsp;&nbsp;&nbsp;</tt> alert (bell)
+<br><tt>\b&nbsp;&nbsp;&nbsp;</tt> backspace
+<br><tt>\f&nbsp;&nbsp;&nbsp;</tt> formfeed (new page)
+<br><tt>\r&nbsp;&nbsp;&nbsp;</tt> carriage return
+</p>
+
+

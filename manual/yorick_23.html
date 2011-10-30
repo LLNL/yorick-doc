@@ -1,0 +1,98 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Comments"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_22.html#Sample-include" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.1 A sample include file" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_24.html#DOCUMENT" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.3 DOCUMENT comments" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Comments-1"></a>
+<h4 class="subsubsection">1.3.2.2 Comments</h4>
+
+<p>There are two ways to insert comments into a Yorick program.  These
+are the C style <kbd>/* ... */</kbd> and the C++ style <kbd>//</kbd>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">// C++ style comments begin with // (anywhere on a line)
+// and end at the end of that line.
+
+E = m*c^2;  /* C style comments begin with slash-star, and
+               do not end until start-slash, even if that
+               is several lines later.  */
+/* C style comments need not annotate a single line.
+ * You should pick a comment style which makes your
+ * code attractive and easy to read.  */
+
+F = m*a;         // Here is another C++ style comment...
+divE = 4*pi*rho; /* ... and a final C style comment. */
+</pre></td></tr></table>
+
+<p>I strongly recommend C++ style comments when you &ldquo;comment
+out&rdquo; a sequence of Yorick statements.  C style comments do not nest
+properly, so you can&rsquo;t comment out a series of lines which contain
+comments:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/*
+E = m*c^2;   /* ERROR -- this ends the outer comment --&gt; */
+F = m*a
+*/ &lt;-- then this causes a syntax error
+</pre></td></tr></table>
+
+<p>The C++ style not only works correctly; it also makes it more obvious
+that the lines in question are comments:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">// E = m*c^2;   /* Any kind of comment could go here.  */
+// F = m*a;
+</pre></td></tr></table>
+
+<p>Yorick recognizes one special comment: If the first line of an include
+file begins with <kbd>#!</kbd>, Yorick ignores that line.  This allows Yorick
+include scripts to be executable on UNIX systems supporting the &ldquo;pound
+bang&rdquo; convention:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#!/usr/local/bin/yorick -batch
+/* If this file has execute permission, UNIX will use Yorick to
+ * execute it.  The Yorick function get_argv can be used to accept
+ * command line arguments (see help, get_argv).  You might want
+ * to use -i instead of -batch on the first line.  Read the help
+ * on process_argv and batch for more information.  */
+write, &quot;The square root of pi is&quot;, sqrt(pi);
+quit;
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_22.html#Sample-include" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.1 A sample include file" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_24.html#DOCUMENT" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.3 DOCUMENT comments" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

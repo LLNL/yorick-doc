@@ -1,0 +1,103 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Print-expression"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_4.html#Call-procedure" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.1.2 Invoking a procedure" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Printing-an-expression"></a>
+<h3 class="subsection">1.1.3 Printing an expression</h3>
+
+<p>An unadorned expression is also a legal Yorick statement; Yorick prints
+its value.  In the preceding examples, only the characters you would
+type have been shown; to exhibit the <kbd>print</kbd> function and its
+output, I need to show you what your screen would look like &mdash; not only
+what you type, but what Yorick prints.  To begin with, Yorick prompts
+you for input with a <kbd>&gt;</kbd> followed by a space (see <a href="yorick_29.html#Prompts">Prompts</a>).  In
+the examples in this section, therefore, the lines which begin with
+<kbd>&gt;</kbd> are what you typed; the other line(s) are Yorick&rsquo;s
+responses.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; E
+8.199e-07
+&gt; print, E
+8.199e-07
+&gt; m;c;m*c^2
+9.11e-28
+3.e+10
+8.199e-07
+&gt; span(0,2,5)
+[0,0.5,1,1.5,2]
+&gt; max(sin(theta)*exp(-theta/6))
+0.780288
+</pre></td></tr></table>
+
+<p>In the <kbd>span</kbd> example, notice that an array is printed as a comma
+delimited list enclosed in square brackets.  This is also a legal
+syntax for an array in a Yorick statement.  For numeric data, the
+<kbd>print</kbd> function always displays its output in a format which
+would be legal in a Yorick statement; you must use the <kbd>write</kbd>
+function if you want &ldquo;prettier&rdquo; output.  Beware of typing an
+expression or variable name which is a large array; it is easy to
+generate lots of output (you can interrupt Yorick by typing control-c
+if you do this accidentally, see <a href="yorick_20.html#Starting">Starting</a>).
+</p>
+<p>Most non-numeric objects print some useful descriptive information;
+for example, before it was closed, the <kbd>file</kbd> variable above would
+have printed:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; file
+write-only text stream at:
+  LINE: 201  FILE: /home/icf/munro/damped.txt
+</pre></td></tr></table>
+
+<p>As you may have noticed, printing a variable and invoking a procedure
+with no arguments are syntactically indistinguishable.  Yorick decides
+which operation is appropriate at run time.  Thus, if <kbd>file</kbd> had
+been a function, the previous input line would have invoked the
+<kbd>file</kbd> function; as it was not a function, Yorick printed the
+<kbd>file</kbd> variable.  Only an explicit use of the <kbd>print</kbd> function
+will print a function:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; print, fma
+builtin fma()
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_4.html#Call-procedure" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.1.2 Invoking a procedure" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_2.html#Simple-Statements" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.1 Simple Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

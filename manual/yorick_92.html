@@ -1,0 +1,95 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="g_t3D-lighting"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_91.html#g_t3D-mapping" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.1 Coordinate mapping" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_93.html#g_t3D-gnomon" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.3 gnomon" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Lighting"></a>
+<h3 class="subsection">3.10.2 Lighting</h3>
+
+<p>Yorick&rsquo;s pseudocolor model cannot describe a shaded color object.  (You
+need to be able to specify arbitrary colors for that.)  Therefore, if
+you want shading to suggest a 3D shape, you must settle for black and
+white (or any single color &ndash; the &lsquo;<tt>heat.gp</tt>&rsquo; palette works about as
+well as &lsquo;<tt>gray.gp</tt>&rsquo; for shading).
+</p>
+<p>You also need to worry about more variables &ndash; namely the position and
+relative brightness of any lights illuminating your object.  You call
+the light3 function to set up light sources.
+</p>
+<p>The 3D surfaces comprising your object (plotted by either plf or plfp
+for the &lsquo;<tt>plwf.i</tt>&rsquo; or &lsquo;<tt>slice3.i</tt>&rsquo; interfaces) consist of a number
+of polygonal facets.  Yorick assigns a 3D normal vector to each facet
+(for non-planar polygons, the direction is somewhat arbitrary).  The
+lighting model, which you set up by light3 calls, maps normal directions
+to surface brightness.  If the facet is oriented so that it reflects one
+of your light sources directly toward your camera, that facet will
+appear very bright.
+</p>
+<p>The functional form of this specular reflection model is
+<kbd>(1+cos(alpha))^n</kbd>, where alpha is the angle between your camera and
+the light source, as seen from the center of the facet.  You can adjust
+the power n.  Large n gives a polished metallic look; small n gives a
+matte look.  You can specify as many light sources as you want.
+However, the light sources are all infinitely far away.  Also, although
+you can specify a different n for each light source, you cannot get
+dfferent values of n for different surfaces or parts of surfaces.
+</p>
+<p>Instead of or in addition to these specular light sources, you can
+also get diffuse lighting.  In this model, the brightness of a surface
+is simply proportional to the cosine of its angle relative to your
+viewing direction.  Thus, a surface you view face on is brightest,
+while one viewed edge on is dimmest (the effect is called limb
+darkening).
+</p>
+<p>All of these effects are controlled by keywords to the light3
+function: specular (brightness of specular light sources), sdir
+(directions to specular light sources), spower (the powers n for the
+specular light sources), diffuse (brightness of diffuse light source),
+and ambient (an overall additive brightness).  The light3 function
+also returns a value, which you can pass back to it in a later call
+in order to restore a previous lighting specification.
+</p>
+<p>These lighting models &ndash; which are actually the standard models you
+find in most 3D graphics packages &ndash; bear little relationship to the
+appearance of real world scenes.  There are no shadows, and surfaces
+have no intrinsic texture.  Your goal is excitement, not realism.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_91.html#g_t3D-mapping" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.1 Coordinate mapping" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_93.html#g_t3D-gnomon" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.3 gnomon" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

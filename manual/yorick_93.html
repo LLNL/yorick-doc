@@ -1,0 +1,66 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="g_t3D-gnomon"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_92.html#g_t3D-lighting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.2 Lighting" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_94.html#plwf" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.4 plwf interface" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="gnomon"></a>
+<h3 class="subsection">3.10.3 gnomon</h3>
+
+<p>Use the gnomon function to turn the gnomon on or off.  The gnomon is a
+projection of three orthgonal segments parallel to the world x, y, and
+z axes.  The letters x, y, and z appear near the ends of the segments
+&ndash; a black on white letter means the segment is pointing out of the
+screen; white on black means into the screen.
+</p>
+<p>A related function is cage3, which turns 3D axes on or off.  The cage is
+a rectangular box surrounding your object, with tick marks on its edges
+to make your plot a 3D analogue of a typical 2D plot.  (Of course,
+unlike the 2D plot, there is no way you can actually use the ticks
+around the cage to figure out the coordinates of a point in your
+picture.)  The faces of the cage are at planes set by the limit3
+function.  The plwf function automatically calls limit3 with reasonable
+extreme values, but for the pl3tree function you will need to call
+limit3 yourself.  Unlike the 2D limits function, limit3 allows you to
+set the aspect ratio of the cage; by default cage3 scales your x, y, and
+z world coordinates to make the edges of the cage appear as equal
+lengths.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_92.html#g_t3D-lighting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.2 Lighting" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_94.html#plwf" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10.4 plwf interface" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

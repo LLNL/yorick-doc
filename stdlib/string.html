@@ -1,0 +1,129 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package string (in string.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>G</h3>
+    <p><a href="string.html#getdate">getdate</a></p>
+    <p><a href="string.html#gettime">gettime</a></p>
+    <h3>P</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="string.html#_parsedate_month_names">parsedate</a></p>
+    <h3>S</h3>
+    <p><a href="string.html#scalar">scalar</a></p>
+    <p><a href="string.html#strchr">strchr</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="string.html#strtolower">strtolower</a></p>
+    <p><a href="string.html#strtoupper">strtoupper</a></p>
+    <h3>_</h3>
+    <p><a href="string.html#_parsedate_month_names">_parsedate_month_names</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="getdate"></a><h3>getdate</h3>
+  <pre>DOCUMENT date = getdate();
+      or getdate, date;
+  Get date of the day in the form "DD/MM/YY".
+</pre>
+  <p>SEE ALSO: <a href="string.html#gettime">gettime</a>, <a href="string.html#_parsedate_month_names">parsedate</a>, <a href="std-system.html#timestamp">timestamp</a>.</p>
+</div>
+<div class="docblock"><a name="gettime"></a><h3>gettime</h3>
+  <pre>DOCUMENT time = gettime();
+      or gettime, time;
+  Get current time in the form "HH:MM:SS".
+</pre>
+  <p>SEE ALSO: <a href="string.html#getdate">getdate</a>, <a href="string.html#_parsedate_month_names">parsedate</a>, <a href="std-system.html#timestamp">timestamp</a>.</p>
+</div>
+<div class="docsee">
+  <h3>parsedate</h3><p>SEE: <a href="#_parsedate_month_names">_parsedate_month_names</a></p>
+</div>
+<div class="docblock"><a name="scalar"></a><h3>scalar</h3>
+  <pre>DOCUMENT scalar -- get optional scalar parameter
+
+PROTOTYPE
+  x = scalar(xarg, xdef, lt=, le=, gt=, ge=, type=, arg=, fn=);
+
+ARGUMENTS
+  XARG    argument passed to the function.
+  XDEF    default value for the scalar argument (optional, if not
+          specified, then it is guessed that the caller must supply the
+          argument).
+KEYWORDS
+  GE=     to be valid, XARG must be >= GE (optional, only one of GT or GE
+          can be used).
+  GT=     to be valid, XARG must be >  GT (optional, only one of GT or GE
+          can be used).
+  LE=     to be valid, XARG must be <= LE (optional, only one of LT or LE
+          can be used).
+  LT=     to be valid, XARG must be <  LT (optional, only one of LT or LE
+          can be used).
+  TYPE=   data type of the scalar (optional).
+  FN=     function name for error messages (optional string).
+  ARG=    argument name for error messages (optional string).
+
+DESCRIPTION
+  Check XARG and return a scalar value (i.e., either XARG converted to TYPE
+  if it is not void or XDEF otherwise).  If XARG is not within any specified
+  bound or if it is not a scalar or if it is void (e.g., not specified) and
+  there is no default value XDEF, an error message is written out.
+
+EXAMPLE
+  The following function has 2 scalar arguments X and Y, the 1st one is an
+  integer (of type long) which must be specified and be strictly greater
+  than 22 while the 2nd default to .5 and must be in [0., 1.]:
+    func foo(x,y) {
+        x= scalar(x,     gt=22,        type=long,   fn="foo", arg="X");
+        y= scalar(y, .5, ge=0., le=1., type=double, fn="foo", arg="Y");
+        ...
+    }
+
+WARNING
+  There is no checking of consistency of options.
+
+HISTORY: 29 Sept. 1995 by Eric THIEBAUT.  (Modified slightly by DHM)</pre>
+  
+</div>
+<div class="docblock"><a name="strchr"></a><h3>strchr</h3>
+  <pre>DOCUMENT strchr -- get first/last index of a character in a string 
+
+SYNOPSIS: i = strchr(s, c)
+          i = strchr(s, c, last=1)
+
+DIAGNOSTIC: returns 0 if character C is not found in string S.
+
+HISTORY: October 27, 1995 by Eric THIEBAUT.
+  DHM modified for yorick-1.6 23/Jan/05
+
+********** DEPRECATED **************
+  new code should use strfind directly
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#strmatch">strmatch</a></p>
+</div>
+<div class="docblock"><a name="strtolower"></a><h3>strtolower</h3>
+  <pre>DOCUMENT strtolower -- convert a string to lower case letters
+
+********** DEPRECATED **************
+  new code should use strcase directly
+</pre>
+  <p>SEE ALSO: <a href="string.html#strtoupper">strtoupper</a></p>
+</div>
+<div class="docblock"><a name="strtoupper"></a><h3>strtoupper</h3>
+  <pre>DOCUMENT strtoupper -- convert a string to upper case letters
+
+********** DEPRECATED **************
+  new code should use strcase directly
+</pre>
+  <p>SEE ALSO: <a href="string.html#strtolower">strtolower</a></p>
+</div>
+<div class="docblock"><a name="_parsedate_month_names"></a><h3>_parsedate_month_names</h3>
+  <pre>DOCUMENT parsedate, timestamp, day,month,year, hour,minute,second;
+      or parsedate(timestamp);
+  Get numerical version of time as specified by TIMESTAMP.  When called
+  as a function, the result is [DAY, MONTH, YEAR, HOUR, MINUTE, SECOND].
+</pre>
+  <p>SEE ALSO: <a href="string.html#gettime">gettime</a>, <a href="string.html#getdate">getdate</a>, <a href="std-system.html#timestamp">timestamp</a>.</p>
+</div>

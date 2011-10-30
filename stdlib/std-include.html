@@ -1,0 +1,243 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-include (in std.i) - including files and parsing strings </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-include.html#autoload">autoload</a></p>
+    <h3>C</h3>
+    <p><a href="std-include.html#current_include">current_include</a></p>
+    <h3>F</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-include.html#funcdef">funcdef</a></p>
+    <p><a href="std-include.html#funcset">funcset</a></p>
+    <h3>G</h3>
+    <p><a href="std-include.html#get_includes">get_includes</a></p>
+    <h3>I</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-include.html#include">include</a></p>
+    <p><a href="std-include.html#include1">include1</a></p>
+    <p><a href="std-include.html#include_all">include_all</a></p>
+    <h3>R</h3>
+    <p><a href="std-include.html#include">require</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="autoload"></a><h3>autoload</h3>
+  <pre>DOCUMENT autoload, ifile, var1, var2, ...
+      or autoload, ifile
+  causes IFILE to be included when any of the variables VAR1, VAR2, ...
+  is referenced as a function or subroutine.  Multiple autoload
+  calls may refer to a single IFILE; the effect is cumulative.  Note
+  that any reference to a single one of the VARi causes all of them
+  to be replaced (when IFILE is included).
+  The semantics of this process are complicated, but should work
+  as expected in most cases: After the call to autoload, the VARi
+  may not be redefined (e.g.- VARi=something or func VARi) without
+  generating a warning message, and causing all the VARi for the
+  same IFILE to become undefined.  The semantic subtlety arises
+  from the yorick variable scoping rules; if any of the VARi has local
+  scope for any function in the calling chain when the inclusion of
+  IFILE is actually triggered, only those local values will be
+  replaced.  (The autoload function is no different than the require
+  or include functions in this regard.)
+  The second form, with no VARi, cancels the autoload, without giving
+  any warning; all the VARi become undefined.
+
+  Before IFILE is included, the VARi behave like [] (nil) variables
+  as far as their response to the is_void function, and the ! and ?
+  operators.  (You can use is_func to discover whether a variable is
+  an autoload.)  Only their actual use in a function or subroutine call
+  will trigger the autoload.  While the IFILE may define the VARi
+  as any type of object, the autoload feature only works as intended
+  if the VARi are defined as interpreted or built-in functions.  The
+  only way it makes sense for a VARi to be a built-in function, is
+  if the IFILE executes a plug_in command to dynamically load an
+  associated compiled library.
+
+  If IFILE (or a file with the same name) has already been included,
+  autoload is a silent no-op.  This is exactly analogous to the
+  behavior of the require function; it does not harm to call either
+  require or autoload if the IFILE has already been included.  Note
+  that you may want to place a require at the beginning of a file
+  you expect to be autoloaded, in preference to providing separate
+  autoloads for the second file.
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#include">include</a>, <a href="std-include.html#include">require</a>, <a href="std-plugin.html#plug_in">plug_in</a>, <a href="std-query.html#is_func">is_func</a></p>
+</div>
+<div class="docblock"><a name="current_include"></a><h3>current_include</h3>
+  <pre>DOCUMENT current_include()
+  If Yorick is parsing a file, this function returns the absolute path
+  of this file; otherwise, this function returns nil.
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#include">include</a>, <a href="std-include.html#include">require</a>.</p>
+</div>
+<div class="docblock"><a name="funcdef"></a><h3>funcdef</h3>
+  <pre>DOCUMENT function = funcdef(command_line)
+  creates an anonymous interpreted function from the input
+  COMMAND_LINE, equivalent to
+  func function {
+    command_line;
+  }
+  The COMMAND_LINE string is restricted to the following
+  format:
+    "funcname arg1 arg2 ..."
+  where each of the arguments is one of
+  (a) a symbol (that is, a yorick variable name)
+  (b) a decimal integer
+  (c) a real number
+  (d) a quoted string
+  The quoted string is enclosed in double quotes, and a
+  backslash can be used to escape a double quote or a
+  backslash (but the other backslash escape sequences are
+  not recognized and unnecessary - just insert the ascii code).
+
+  Note that funcdef merely creates the function; if you want
+  to execute it and discard it, use the following statement:
+    funcdef(command_line);
+
+  The huge advantage of funcdef over the full yorick parser
+  is that it is stateless, which means you can invoke it to
+  generate actions for event callbacks.  The extreme simplicity
+  of the permitted COMMAND_LINE is not a limitation for this
+  application, because you are free to invoke an arbitrarily
+  complex "funcname", and to provide it with arbitrary inputs.
+
+  The intent with funcdef is not to permit you to create an
+  arbitrary toolkit of interpreted functions, but merely to
+  allow you to invoke such a toolkit; the toolkit itself is
+  supposed to be parsed by the ordinary include, require, or
+  autoload mechanisms.  Generally, you will have to design
+  an interpreted toolkit somewhat differently if it is to be
+  invoked by funcdef.  For example, funcdef does not allow
+  you to set variables as in x=value, but you can use the
+  funcset (or similarly designed) function to set variables
+  like this:
+    funcdef("funcset x value")
+
+  Do not attempt to use funcdef to input vast amounts of data.
+  As a rule of thumb, if your funcdef strings have more than a
+  couple of dozen tokens, you probably haven't thought hard
+  enough about what you are doing.
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#include">include</a>, <a href="std-system.html#spawn">spawn</a>, <a href="std-include.html#funcset">funcset</a></p>
+</div>
+<div class="docblock"><a name="funcset"></a><h3>funcset</h3>
+  <pre>DOCUMENT funcset var1 val1 var2 val2 ...
+
+  Equivalent to
+    var1=val1; var2=val2; ...
+
+  This function it is not useful for yorick programs.  It is intended
+  to be used to create functions with funcdef that set variable values.
+
+  Handles at most 8 var/val pairs.
+  As a special case, if given an odd number of arguments, funcset
+  sets the final var to [], e.g.-
+    funcset var1 12.34 var2
+  is equivalent to
+    var1=12.34; var2=[];
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#funcdef">funcdef</a></p>
+</div>
+<div class="docblock"><a name="get_includes"></a><h3>get_includes</h3>
+  <pre>DOCUMENT get_includes()
+  Returns an array of strings with the names of all included files so
+  far.
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_path">set_path</a>, <a href="std-include.html#current_include">current_include</a>, <a href="std-include.html#include">include</a>, <a href="std-include.html#include">require</a>.</p>
+</div>
+<div class="docblock"><a name="include"></a><h3>include</h3>
+  <pre>DOCUMENT #include "yorick_source.i"
+         require, source
+         include, source
+      or include, source, now
+
+  The SOURCE argument can be a scalar string, interpreted as a
+  filename like "yorick_source.i", the text in a char array, or
+  the text in a 1D array of strings (as returned by a two argument
+  call to rdline).
+
+  #include is a parser directive, not a Yorick statement.  Use it
+  to read Yorick source code which you have saved in a file; the
+  file yorick_source.i will be read one line at a time, exactly as
+  if you had typed those lines at the keyboard.  The following
+  directories are searched (in this order) to find yorick_source.i:
+
+     .               (current working directory)
+     ~/yorick        (your personal directory of Yorick functions)
+     ~/Yorick        (your personal directory of Yorick functions)
+     Y_SITE/i        (Yorick distribution library)
+     Y_SITE/contrib  (contributed source at your site)
+     Y_SITE/i0       (Yorick startup and package include files)
+     Y_HOME/lib      (Yorick architecture dependent include files)
+
+  To find out what is available in the Y_SITE/i directory,
+  type:
+      library
+  You can also type
+      Y_SITE
+  to find the name of the site directory at your site, go to the
+  include or contrib subdirectory, and browse through the *.i files.
+  This is a good way to learn how to write a Yorick program.  Be
+  alert for files like README as well.
+
+  The require function checks to see whether FILENAME has already
+  been included (actually whether any file with the same final
+  path component has been included).  If so, require is a no-op,
+  otherwise, the action is the same as the include function with
+  NOW == 1.
+
+  The include function causes Yorick to parse and execute FILENAME
+  immediately.  The effect is similar to the #include parser
+  directive, except the finding, parsing, and execution of FILENAME
+  occurs at runtime.  The NOW argument has the following meanings:
+    NOW == -1   filename pushed onto stack, popped and parsed
+                when all pending input is exhausted
+    NOW == 0    (or nil, default) parsed just before next input
+                line would be parsed
+    NOW == 1    parsed immediately, resuming current interpreted
+                program when finished (like require)
+    NOW == 2    like 0, except no error if filename does not exist
+    NOW == 3    like 1, except no error if filename does not exist
+
+  Unless you are writing a startup file, or have some truly bizarre
+  technical reason for using the include function, use #include
+  instead.  The functional form of include may involve recursive
+  parsing, which you will not be able to understand without deep
+  study.  Stick with #include.
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_path">set_path</a>, <a href="paths.html#Y_SITE">Y_SITE</a>, <a href="std-plugin.html#plug_in">plug_in</a>, <a href="std-include.html#autoload">autoload</a>, <a href="std-include.html#include_all">include_all</a>, <a href="std-include.html#funcdef">funcdef</a>, <a href="std-include.html#include1">include1</a></p>
+</div>
+<div class="docblock"><a name="include1"></a><h3>include1</h3>
+  <pre>DOCUMENT function = include1(source)
+  is similar to include, but parses SOURCE only until the first
+  executable *main* program, which it returns as an interpreted
+  function rather than executing immediately.
+
+  The SOURCE argument can be a scalar string, interpreted as a
+  filename like "yorick_source.i", the text in a char array, or
+  the text in a 1D array of strings (as returned by a two argument
+  call to rdline).
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#include">include</a>, <a href="std-include.html#funcdef">funcdef</a></p>
+</div>
+<div class="docblock"><a name="include_all"></a><h3>include_all</h3>
+  <pre>DOCUMENT include_all, dir1, dir2, ...
+  include all files in directories DIR1, DIR2, ..., with names
+  ending in the ".i" extension.  (This is mostly for use to load
+  the i-start directories when yorick starts; see i0/stdx.i.)
+  If any of the DIRi do not exist, or are empty, they are
+  silently skipped.  Filenames beginning with "." are also skipped,
+  even if they end in ".i".  The files are included in alphabetical
+  order, DIR1 first, then DIR2, and so on.
+</pre>
+  <p>SEE ALSO: <a href="std-include.html#include">include</a>, <a href="std-include.html#include1">include1</a>, <a href="std-include.html#autoload">autoload</a></p>
+</div>
+<div class="docsee">
+  <h3>require</h3><p>SEE: <a href="#include">include</a></p>
+</div>

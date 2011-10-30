@@ -1,0 +1,56 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Writing Text</h2>
+
+<table><tbody>
+<tr><td><tt>write, <i>f, expr1, expr2, .., exprN</i></tt></td>
+<td>writes the <i>exprI</i> to file <i>f</i></td></tr>
+<tr><td><tt>write, <i>expr1, expr2, .., exprN</i></tt></td>
+<td>writes the <i>exprI</i> to terminal</td></tr>
+<tr><td><tt>swrite(<i>expr1, expr2, .., exprN</i>)</tt></td>
+<td>returns the <i>exprI</i> as a string</td></tr>
+</tbody></table>
+<p>The <tt>swrite</tt> function returns an array of strings - one string
+for each line that would have been produced by the <tt>write</tt> function.
+</p>
+<p>The <i>exprI</i> may be arrays, provided the arrays are conformable.
+In this case, the <i>exprI</i> are broadcast to the same length <b>L</b>,
+then the <tt>write</tt> is applied as if called <b>L</b> times, with successive
+elements of the <i>exprI</i> written on each call.
+</p>
+<p>Both functions accept an optional <tt>format</tt> keyword. Write format
+strings in Yorick have (nearly) the same meaning as the format strings
+for the ANSI stacndard C library <tt>printf</tt> routine. In brief, a format
+string consists of:
+</p>
+<ul>
+<li> characters other than <tt>%</tt>
+<br>which are copied directly to output</li>
+<li> conversion specifiers beginning with <tt>%</tt>
+<br>of the general format <tt>%</tt><i>FW.PSC</i> where:
+<ul>
+<li><i>F</i> is zero or more of the optional flags <tt>-</tt> (left justify),
+<tt>+</tt> (always print sign), (space) (leave space if +), <tt>0</tt> (leading zeroes)</li>
+<li><i>W</i> is an optional decimal integer specifying the minimum number
+of characters to output</li>
+<li><i>.P</i> is an optional decimal integer specifying the number of digits
+of precision</li>
+<li><i>S</i> is one of <tt>h</tt>, <tt>l</tt>, or <tt>L</tt>, ignored by
+Yorick</li>
+<li><i>C</i> is <tt>d</tt> or <tt>i</tt> (decimal integer), <tt>o</tt>
+(octal integer), <tt>x</tt> (hex integer), <tt>f</tt> (fixed point real),
+<tt>e</tt>
+(scientific real), <tt>g</tt> (fixed or scientific real), <tt>s</tt> (string),
+<tt>c</tt>
+(ASCII character), or <tt>%</tt> (the <tt>%</tt> character - not a conversion)</li>
+</ul></li></ul>
+<p>For example,
+<br><tt>> write, format="&nbsp;&nbsp; tp %7.4f %e\n", [1.,2.], [.5,.6]</tt>
+<br><tt>&nbsp;&nbsp; tp&nbsp; 1.0000 5.000000e-01</tt>
+<br><tt>&nbsp;&nbsp; tp&nbsp; 2.0000 6.000000e-01</tt>
+<br><tt>></tt>
+</p>
+
+

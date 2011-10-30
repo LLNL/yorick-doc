@@ -1,0 +1,32 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Positioning a Text File</h2>
+<p>The <tt>write</tt> function always appends to the end of a file.
+</p>
+<p>A sequence of <tt>read</tt> operations may be intermixed with <tt>write</tt>
+operations on the same file. The two types of operations do not interact.
+</p>
+<p>The <tt>read</tt> and <tt>rdline</tt> functions read the file in complete
+lines; a file cannot be positioned in the middle of a line - although the
+<tt>read</tt>
+function may ignore a part of the last line read, subsequent <tt>read</tt>
+operations will begin with the next full line. The following functions
+allow the file to be reset to a previously read line.
+</p>
+<table><tbody>
+<tr><td><tt>backup, <i>f</i></tt></td>
+<td>back up file <i>f</i> one line</td></tr>
+<tr><td><tt><i>m</i> = bookmark(<i>f</i>)</tt></td>
+<td>record position of file <i>f</i> in <i>m</i></td></tr>
+<tr><td><tt>backup, <i>f</i>, <i>m</i></tt></td>
+<td>back up file <i>f</i> to <i>m</i></td></tr>
+</tbody></table>
+<p>The bookmark <i>m</i> records the current position of the file; it has
+a distinct Yorick data type, and the <tt>info</tt> or <tt>print</tt> function
+can be used to examine it. Without a bookmark, the <tt>backup</tt> function
+can back up only a single line.
+</p>
+
+

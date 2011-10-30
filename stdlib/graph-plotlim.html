@@ -1,0 +1,172 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotlim (in graph.i) - plot limits and axis scaling </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>G</h3>
+    <p><a href="graph-plotlim.html#gridxy">gridxy</a></p>
+    <h3>L</h3>
+    <p><a href="graph-plotlim.html#limits">limits</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plotlim.html#logxy">logxy</a></p>
+    <h3>R</h3>
+    <p><a href="graph-plotlim.html#range">range</a></p>
+    <h3>U</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotlim.html#unzoom">unzoom</a></p>
+    <h3>Z</h3>
+    <p><a href="graph-plotlim.html#zoom_factor">zoom_factor</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="gridxy"></a><h3>gridxy</h3>
+  <pre>DOCUMENT gridxy, flag
+      or gridxy, xflag, yflag
+  Turns on or off grid lines according to FLAG.  In the first form, both
+  the x and y axes are affected.  In the second form, XFLAG and YFLAG
+  may differ to have different grid options for the two axes.  In either
+  case, a FLAG value of 0 means no grid lines (the default), a value of
+  1 means grid lines at all major ticks (the level of ticks which get
+  grid lines can be set in the style sheet), and a FLAG value of 2 means
+  that the coordinate origin only will get a grid line.  In styles with
+  multiple coordinate systems, only the current coordinate system is
+  affected.
+  The keywords can be used to affect the style of the grid lines.
+
+  You can also turn the ticks off entirely.  (You might want to do this
+  to plot your own custom set of tick marks when the automatic tick
+  generating machinery will never give the ticks you want.  For example
+  a latitude axis in degrees might reasonably be labeled "0, 30, 60,
+  90", but the automatic machinery considers 3 an "ugly" number - only
+  1, 2, and 5 are "pretty" - and cannot make the required scale.  In
+  this case, you can turn off the automatic ticks and labels, and use
+  plsys, pldj, and plt to generate your own.)
+  To fiddle with the tick flags in this general manner, set the
+  0x200 bit of FLAG (or XFLAG or YFLAG), and "or-in" the 0x1ff bits
+  however you wish.  The meaning of the various flags is described
+  in the file Y_SITE/gist/work.gs.  Additionally, you can use the
+  0x400 bit to turn on or off the frame drawn around the viewport.
+  Here are some examples:
+     gridxy,0x233        work.gs default setting
+     gridxy,,0x200       like work.gs, but no y-axis ticks or labels
+     gridxy,,0x231       like work.gs, but no y-axis ticks on right
+     gridxy,0x62b        boxed.gs default setting
+
+  The three keywords base60=, degrees=, and hhmm= can be used to get
+  alternative tick intervals for base 60 systems instead of the
+  usual base 10 systems.  The keyword values are 0 to restore the
+  default behavior, 1 to set the feature for the x axis, 2 to set it
+  for the y axis, and 3 to set it for both axes.  The base60 feature
+  allows ticks and labels at multiples of 30 (up to +-3600).  The
+  degrees feature causes labels to be printed modulo 360 (so that a
+  scale which runs from, say, 90 to 270 will be printed as 90 to 180
+  then -180 to -90, mostly for longitude scales).  The hhmm feature
+  causes labels to be printed in the form hh:mm (so that, for example,
+  150 will be printed as 02:30, mostly for time of day scales).
+
+KEYWORDS: color, type, width, base60, degrees, hhmm</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotout.html#viewport">viewport</a></p>
+</div>
+<div class="docblock"><a name="limits"></a><h3>limits</h3>
+  <pre>DOCUMENT limits
+      or limits, xmin, xmax, ymin, ymax,
+                 square=0/1, nice=0/1, restrict=0/1
+      or old_limits= limits()
+      or limits, old_limits
+
+  In the first form, restores all four plot limits to extreme values.
+
+  In the second form, sets the plot limits in the current coordinate
+  system to XMIN, XMAX, YMIN, YMAX, which may be nil or omitted to
+  leave the corresponding limit unchanged, a number to fix the
+  corresponding limit to a specified value, or the string "e" to
+  make the corresponding limit take on the extreme value of the
+  currently displayed data.
+
+  If present, the square keyword determines whether limits marked
+  as extreme values will be adjusted to force the x and y scales
+  to be equal (square=1) or not (square=0, the default).
+  If present, the nice keyword determines whether limits will be
+  adjusted to nice values (nice=1) or not (nice=0, the default).
+  There is a subtlety in the meaning of "extreme value" when one
+  or both of the limits on the OPPOSITE axis have fixed values --
+  does the "extreme value" of the data include points which
+  will not be plotted because their other coordinate lies outside
+  the fixed limit on the opposite axis (restrict=0, the default),
+  or not (restrict=1)?
+
+  If called as a function, limits returns an array of 5 doubles;
+  OLD_LIMITS(1:4) are the current xmin, xmax, ymin, and ymax,
+  and int(OLD_LIMITS(5)) is a set of flags indicating extreme
+  values and the square, nice, restrict, and log flags.
+
+  In the fourth form, OLD_LIMITS is as returned by a previous
+  limits call, to restore the limits to a previous state.
+
+  In an X window, the limits may also be adjusted interactively
+  with the mouse.  Drag left to zoom in and pan (click left to zoom
+  in on a point without moving it), drag middle to pan, and click
+  (and drag) right to zoom out (and pan).  If you click just above
+  or below the plot, these operations will be restricted to the
+  x-axis; if you click just to the left or right, the operations
+  are restricted to the y-axis.  A ctrl-left click, drag, and
+  release will expand the box you dragged over to fill the plot
+  (other popular software zooms with this paradigm).  If the
+  rubber band box is not visible with ctrl-left zooming, try
+  ctrl-middle or ctrl-right for alternate XOR masks.  Such
+  mouse-set limits are equivalent to a limits command specifying
+  all four limits EXCEPT that the unzoom command can revert to
+  the limits before a series of mouse zooms and pans.
+
+  Holding the shift key and pressing the left mouse button is
+  equivalent to pressing the middle mouse button.  Similarly,
+  pressing meta-left is equivalent to the right button.  This
+  permits access to the middle and right button functions on
+  machines (e.g.- most laptops) with two button or one button
+  mice.
+
+  The limits you set using the limits or range functions carry over
+  to the next plot -- that is, an fma operation does NOT reset the
+  limits to extreme values.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#zoom_factor">zoom_factor</a>, <a href="graph-plotlim.html#unzoom">unzoom</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotout.html#viewport">viewport</a></p>
+</div>
+<div class="docblock"><a name="logxy"></a><h3>logxy</h3>
+  <pre>DOCUMENT logxy, xflag, yflag
+  sets the linear/log axis scaling flags for the current coordinate
+  system.  XFLAG and YFLAG may be nil or omitted to leave the
+  corresponding axis scaling unchanged, 0 to select linear scaling,
+  or 1 to select log scaling.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotlim.html#gridxy">gridxy</a></p>
+</div>
+<div class="docblock"><a name="range"></a><h3>range</h3>
+  <pre>DOCUMENT range, ymin, ymax
+  sets the y-axis plot limits in the current coordinate system to
+  YMIN, YMAX, which may be nil or omitted to leave the corresponding
+  limit unchanged, a number to fix the corresponding limit to a
+  specified value, or the string "e" to make the corresponding limit
+  take on the extreme value of the currently displayed data.
+  Use    limits, xmin, xmin
+  to accomplish the same function for the x-axis plot limits.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="unzoom"></a><h3>unzoom</h3>
+  <pre>DOCUMENT unzoom
+  restores limits to their values before zoom and pan operations
+  performed interactively using the mouse.
+  Use    old_limits=  limits()
+         ...
+         limits, old_limits
+  to save and restore plot limits generally.</pre>
+  <p>SEE ALSO: <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotlim.html#zoom_factor">zoom_factor</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="zoom_factor"></a><h3>zoom_factor</h3>
+  <pre>DOCUMENT zoom_factor, factor
+  sets the zoom factor for mouse-click zoom in and zoom out operations.
+  The default FACTOR is 1.5; FACTOR should always be greater than 1.0.</pre>
+  <p>SEE ALSO: <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotlim.html#unzoom">unzoom</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>

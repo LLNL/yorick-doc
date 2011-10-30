@@ -1,0 +1,77 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Include-path"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_24.html#DOCUMENT" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.3 DOCUMENT comments" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_26.html#Customizing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.5 The custom.i file and i-start/ directory" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Where-Yorick-looks-for-include-files"></a>
+<h4 class="subsubsection">1.3.2.4 Where Yorick looks for include files</h4>
+
+<p>You can specify a complete path name (including directories) for the
+file in an <kbd>#include</kbd> directive.  More usually, you will use a
+relative path name.  In that case, Yorick tries to find the file
+relative to these four directories, in this order:
+</p>
+<ol>
+<li>
+Your current working directory.
+</li><li>
+&lsquo;<tt>~/yorick</tt>&rsquo;, that is, the &lsquo;<tt>yorick</tt>&rsquo; subdirectory of your home
+directory.
+</li><li>
+&lsquo;<tt>Y_SITE/i</tt>&rsquo;, where &lsquo;<tt>Y_SITE</tt>&rsquo; is the directory where
+Yorick was installed at your site (<kbd>help</kbd> will tell you where
+this is).
+</li><li>
+&lsquo;<tt>Y_SITE/contrib</tt>&rsquo;
+</li></ol>
+
+<p>You can use the <kbd>set_path</kbd> command in your &lsquo;<tt>custom.i</tt>&rsquo; file
+in order to change this path, but you should be very cautious if you
+do this.
+</p>
+<p>The &lsquo;<tt>~/yorick</tt>&rsquo; directory is where you put all of the Yorick
+include files you frequently use, which have not been placed in the
+include or contrib directories at your site.  You can also override an
+include file in one of these places by placing a file of the same name
+in your &lsquo;<tt>~/yorick</tt>&rsquo; directory.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_24.html#DOCUMENT" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.3 DOCUMENT comments" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_26.html#Customizing" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.5 The custom.i file and i-start/ directory" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

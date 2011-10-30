@@ -1,0 +1,103 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package style (in style.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>G</h3>
+    <p><a href="style.html#get_style">get_style</a></p>
+    <h3>R</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="style.html#read_style">read_style</a></p>
+    <h3>S</h3>
+    <p><a href="style.html#set_style">set_style</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>W</h3>
+    <p><a href="style.html#write_style">write_style</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="get_style"></a><h3>get_style</h3>
+  <pre>DOCUMENT get_style, landscape, systems, legends, clegends
+
+  get the detailed style of the current drawing.  The arguments
+  are all outputs:
+
+  landscape: 1 if drawing is landscape orientation, 0 if portrait
+  system:    an array of GfakeSystem struct instances, one per
+             coordinate system in this drawing (ordinarily just one).
+  legends:   a GeLegendBox structure instance describing the layout
+             of the plot legends
+  clegends:  a GeLegendBox structure instance describing the layout
+             of the contour legends
+
+  See the help for the GeLegendBox and GpTextAttribs structs for
+  the details of the legends and clegends arguments.  Basically,
+  you can adjust the location of the legends on the page, the
+  font and height of the characters used to render legends, and
+  whether the legends are split into two columns.
+
+  The coordinate systems are the systems accessible via the
+  plsys command.  The index of the system in the system array is
+  the index you use to switch to it in the plsys command.  Simple
+  styles have only one coordinate system, and you should carefully
+  consider whether you should design a graphic style with multiple
+  coordinate systems -- most likely, you can do a better job by
+  combining several separate Yorick pictures with some sort of
+  page layout program, rather than trying to do this work within
+  Yorick itself.
+
+  See the help for the GfakeSystem struct for complete details of
+  what you can adjust.  The most interesting features you can
+  control are the location and aspect ratio of the viewport, and
+  the details of the axis ticks and labels.  The gridxy function
+  provides a simpler interface for fiddling with ticks and labels
+  if that is all you need.  The system.viewport member is the
+  [xmin,xmax,ymin,ymax] of the rectangle on the page where your
+  plots will appear, expressed in NDC coordinates (0.0013 NDC units
+  equals one point, and there are 72.27 points per inch, and 2.54
+  cm per inch; the NDC origin is always at the lower left hand
+  corner of the paper, with x increasing leftward and y increasing
+  upward).  If you change the size of the viewport, you will also
+  need to change the parameters of the tick-generating model; like
+  other problems in typography and page layout, this is harder
+  than you might think.
+</pre>
+  <p>SEE ALSO: <a href="style.html#set_style">set_style</a>, <a href="style.html#read_style">read_style</a>, <a href="style.html#write_style">write_style</a></p>
+</div>
+<div class="docblock"><a name="read_style"></a><h3>read_style</h3>
+  <pre>DOCUMENT read_style, file, landscape, systems, legends, clegends
+
+  read a Gist style sheet (.gs file), and return the data
+  structures as described in the get_style function.  The FILE
+  can be a filename or a text file stream.
+</pre>
+  <p>SEE ALSO: <a href="style.html#get_style">get_style</a>, <a href="style.html#set_style">set_style</a>, <a href="style.html#write_style">write_style</a></p>
+</div>
+<div class="docblock"><a name="set_style"></a><h3>set_style</h3>
+  <pre>DOCUMENT set_style, landscape, systems, legends, clegends
+
+  set the detailed style of the current drawing.  The arguments
+  are all inputs, having the same meanings as for get_style (which
+  see).  All arguments are required, so you may need to call
+  get_style as a starting point, if you only want to make a few
+  changes.  See the Y_SITE/g/work.gs and the other .gs files for
+  examples of reasonable values to choose.
+
+  Calling set_style destroys anything that was plotted in the
+  window, like the style= keyword of the window command.
+</pre>
+  <p>SEE ALSO: <a href="style.html#get_style">get_style</a>, <a href="style.html#read_style">read_style</a>, <a href="style.html#write_style">write_style</a></p>
+</div>
+<div class="docblock"><a name="write_style"></a><h3>write_style</h3>
+  <pre>DOCUMENT write_style, file, landscape, systems, legends, clegends
+
+  write a Gist style sheet (.gs file), using the data structures
+  as described in the get_style function.  The FILE can be a
+  filename or a text file stream.
+</pre>
+  <p>SEE ALSO: <a href="style.html#get_style">get_style</a>, <a href="style.html#set_style">set_style</a>, <a href="style.html#read_style">read_style</a></p>
+</div>

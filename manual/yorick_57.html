@@ -1,0 +1,113 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="plc"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_56.html#plm" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.3 plm" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_58.html#plf" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.5 plf" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="plc-and-plfc"></a>
+<h3 class="subsection">3.1.4 plc and plfc</h3>
+
+<p>The plc command plots contours of a function <kbd>z(x,y)</kbd>.  If z is a two
+dimensional array of the same shape as the x and y mesh coordinate
+arrays, then
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plc, z, y, x
+</pre></td></tr></table>
+
+<p>plots contours of z.  The <kbd>levs=</kbd> keyword specifies particular contour
+levels, that is, the values of z at which contours are drawn; by
+default you get eight equally spaced contours spanning the full range
+of z.  Each contour is actually a set of polylines.  Here is the
+algorithm Yorick uses to find contour polylines:
+</p>
+<p>Each edge of the mesh has a z value specified at either end.  For
+those edges with one end above and the other below the desired contour
+level, linearly interpolate z along the edge to find the (x,y) point
+on the edge where z has the level value.
+</p>
+<p>Start at any such point, choose one of the two zones containing that
+edge, and move to the point on another edge of that zone, stepping
+across the new edge to the zone on its opposite side.  Continue until
+you reach the boundary of the mesh or the point at which you started.
+If any points remain, repeat the process to get another disjoint
+contour.  If you start at boundary points as long as any remain, you
+will first walk all open contours &ndash; those which run from one point on
+the mesh boundary to another &ndash; then all closed contours.  Note that
+each contour level may consist of several polylines.
+</p>
+<p>One additional complication can arise: Some zones might have two
+diagonal corners above the contour value and the two other corners
+below, so all four edges have points on the contour.  In a sense, your
+mesh does not resolve this contour &ndash; it could represent a true
+X-point where contour lines cross, in which case you want to move
+directly across the zone to the point on the opposite edge.
+Unfortunately, if you connect the opposite edges, you will make very
+ugly contour plots.  (Even if you disagree on my taste in other
+places, trust me on this one.)
+</p>
+<p>So the question is, which adjacent edge do you pick?  If you don&rsquo;t
+make the same choice for every contour level you plot, contours at
+different levels cross (and so will your eyes when you try to
+interpret the picture).  By default, plc will use a sort of minimum
+curvature algorithm: it turns the opposite direction that it turned
+crossing the previous zone.  The <kbd>triangulate=</kbd> keyword to plc can be
+used both to force a particular triangulation of any or all zones in
+the mesh, and to return automatic triangulation decisions made during
+the course of the plc command.  Again, if triangulation decisions
+become important to you, your mesh is probably not fine enough to
+resolve the contour you are trying to draw.
+</p>
+<p>Making a good contour plot is an art, not an algorithm.  Contours work
+best if used sparingly; more than a half dozen levels is likely to
+result in an unintelligible picture.  I suggest you try drawing a very
+few levels on top of a filled mesh plot (draw with plf).  You will need
+to select a contrasting color, and you may want to call plc once per
+level to get a different line type for each level.
+</p>
+<p>If you need lots of levels, you should try the plfc function, which
+fills the regions between successive contour levels with different
+colors.  Beyond about six levels, contour lines drawn with plc will be
+unintelligible, but with plfc you can get perhaps as many as twenty
+distinguishable levels.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plfc, z, y, x, levs=span(zmin,zmax,101);
+</pre></td></tr></table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_56.html#plm" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.1.3 plm" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_58.html#plf" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1.5 plf" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

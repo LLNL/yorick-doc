@@ -1,0 +1,93 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Environment"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_18.html#local" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.5.2 local statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_20.html#Starting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.1 Starting, stopping, and interrupting Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="The-Interpreted-Environment"></a>
+<h2 class="section">1.3 The Interpreted Environment</h2>
+
+<p>The Yorick program accepts only complete input lines typed at your
+keyboard.  Typing a command to Yorick presumes a &ldquo;command line
+interface&rdquo; or a &ldquo;terminal emulator&rdquo; which is not a part of Yorick.
+I designed Yorick on the assumption that you have a good terminal
+emulator program.  In particular, Yorick is much easier to use if you
+can recall and edit previous input lines; as in music, repitition with
+variations is at the heart of programming.  My personal recommendation
+is the yorick command in GNU Emacs (defined in yorick.el).
+</p>
+<p>Therefore, Yorick inherits most of its &ldquo;look and feel&rdquo; from your
+terminal emulator.  Yorick&rsquo;s distinctive prompts and error messages
+are described later in this section.
+</p>
+<p>Any significant Yorick program will be stored in a text file, called
+an <em>include</em> file, after the command which reads it.  Use your
+favorite text editor to create and modify your include files.  Again,
+GNU Emacs is my favorite &mdash; use the yorick-mode (defined in
+yorick.el) to edit Yorick include files as well as C programs.  Just
+as C source file names should end in &lsquo;<tt>.c</tt>&rsquo; or &lsquo;<tt>.h</tt>&rsquo;, and
+Fortran source file names should end in &lsquo;<tt>.f</tt>&rsquo;, so Yorick include
+file names should end in &lsquo;<tt>.i</tt>&rsquo;.
+</p>
+<p>This section begins with additional stylistic suggestions concerning
+include files.  In particular, Yorick&rsquo;s <kbd>help</kbd> command can find
+documentation comments in your include files if you format them
+properly.  All of the built-in Yorick functions, such as <kbd>sin</kbd>,
+<kbd>write</kbd>, or <kbd>plg</kbd>, come equipped with such comments.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_20.html#Starting">&bull; Starting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Starting, stopping, and interrupting Yorick.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_21.html#Include">&bull; Include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     How to read Yorick statements from a file.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_27.html#Help">&bull; Help</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Using the help command.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_28.html#Info">&bull; Info</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Getting information about a variable.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_29.html#Prompts">&bull; Prompts</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     What Yorick prompts mean.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_30.html#Shell-commands">&bull; Shell commands</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Issuing shell commands from within Yorick.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_31.html#Errors">&bull; Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      What to do when Yorick detects an error.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_18.html#local" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.5.2 local statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_20.html#Starting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.1 Starting, stopping, and interrupting Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

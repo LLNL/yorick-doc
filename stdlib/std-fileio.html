@@ -1,0 +1,228 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-fileio (in std.i) - generic file i/o </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>C</h3>
+    <p><a href="std-fileio.html#close">close</a></p>
+    <p><a href="std-fileio.html#create">create</a></p>
+    <h3>F</h3>
+    <p><a href="std-fileio.html#fflush">fflush</a></p>
+    <p><a href="std-fileio.html#filepath">filepath</a></p>
+    <h3>O</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-fileio.html#open">open</a></p>
+    <h3>P</h3>
+    <p><a href="std-fileio.html#popen">popen</a></p>
+    <h3>R</h3>
+    <p><a href="std-fileio.html#rename">remove</a></p>
+    <p><a href="std-fileio.html#rename">rename</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>V</h3>
+    <p><a href="std-fileio.html#vclose">vclose</a></p>
+    <p><a href="std-fileio.html#vopen">vopen</a></p>
+    <p><a href="std-fileio.html#vpack">vpack</a></p>
+    <p><a href="std-fileio.html#vsave">vsave</a></p>
+    <p><a href="std-fileio.html#vunpack">vunpack</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="close"></a><h3>close</h3>
+  <pre>DOCUMENT close, f
+  closes the I/O stream F (returned earlier by the open function).
+  If F is a simple variable reference (as opposed to an expression),
+  the close function will set F to nil.  If F is the only reference
+  to the I/O stream, then "close, f" is equivalent to "f= []".
+  Otherwise, "close, f" will close the file (so that subsequent
+  I/O operations will fail) and print a warning message about the
+  outstanding ("stale") references.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#open">open</a>, <a href="std-filetxt.html#read">read</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-filetxt.html#bookmark">bookmark</a>, <a href="std-filetxt.html#bookmark">backup</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-fileio.html#rename">rename</a>, <a href="std-fileio.html#rename">remove</a></p>
+</div>
+<div class="docblock"><a name="create"></a><h3>create</h3>
+  <pre>DOCUMENT f= create(filename)
+  is a synonym for       f= open(filename, "w")
+  Creates a new text file FILENAME, destroying any existing file of
+  that name.  Use the write function to write into the file F.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#write">write</a>, <a href="std-fileio.html#close">close</a>, <a href="std-fileio.html#open">open</a></p>
+</div>
+<div class="docblock"><a name="fflush"></a><h3>fflush</h3>
+  <pre>DOCUMENT fflush, file
+  flush the I/O buffers for the text file FILE.  (Binary files are
+  flushed at the proper times automatically.)  You should only need
+  this after a write, especially to a pipe.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#write">write</a>, <a href="std-fileio.html#popen">popen</a></p>
+</div>
+<div class="docblock"><a name="filepath"></a><h3>filepath</h3>
+  <pre>DOCUMENT filepath(file);
+  Return full path name of file(s).  Argument FILE can be either an open
+  binary/text file or an array of file names (in the latter case tilde
+  expansion is performed and the result will have the same shape as the
+  input).
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#cd">cd</a>, <a href="std-system.html#lsdir">lsdir</a>, <a href="std-system.html#mkdir">mkdir</a>, <a href="std-fileio.html#open">open</a>.</p>
+</div>
+<div class="docblock"><a name="open"></a><h3>open</h3>
+  <pre>DOCUMENT f= open(filename)
+      or f= open(filename, filemode)
+      or f= open(filename, filemode, errmode)
+  opens the file FILENAME according to FILEMODE (both are strings).
+  If ERRMODE is non-nil and non-zero, fail by returning nil F,
+  otherwise failure to open or create the file is a runtime error.
+
+  To use ERRMODE to check for the existence of a file:
+     if (open(filename,"r",1)) file_exists;
+     else file_does_not_exist;
+
+  The return value F is an IOStream (or just stream for short).  When
+  the last reference to this return value is discarded, the file will
+  be closed.  The file can also be explicitly closed with the close
+  function.  The FILEMODE determines whether the file is to be
+  opened in read, write, or update mode, and whether writes are
+  restricted to the end-of-file (append mode).  FILEMODE also
+  determines whether the file is opened as a text file or as a
+  binary file.  FILEMODE can have the following values, which are
+  the same as for the ANSI standard fopen function:
+     "r"     - read only
+     "w"     - write only, random access, existing file overwritten
+     "a"     - write only, forced to end-of-file,
+             existing file preserved
+     "r+"    - read/write, random access, existing file preserved
+     "w+"    - read/write, random access, existing file overwritten
+     "a+"    - read/write, reads random access,
+             writes forced to end-of-file, existing file preserved
+     "rb"  "wb"  "ab"  "r+b"  "rb+"  "w+b"  "wb+"  "a+b"  "ab+"
+             without b means text file, with b means binary file
+  The default FILEMODE is "r" -- open an existing text file for
+  reading.
+
+  The read and write functions perform I/O on text files.
+  I/O to binary files may be performed explicitly using the save
+  and restore functions, or implicitly by using the stream variable
+  F as if it were a data structure instance (e.g.- f.x refers to
+  variable x in the binary file f).</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#create">create</a>, <a href="std-fileio.html#close">close</a>, <a href="std-filetxt.html#read">read</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-filetxt.html#bookmark">bookmark</a>, <a href="std-filetxt.html#bookmark">backup</a>, <a href="std-fileio.html#popen">popen</a>, <a href="std-fileio.html#vopen">vopen</a>, <a href="std-fileio.html#rename">rename</a>, <a href="std-fileio.html#rename">remove</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a></p>
+</div>
+<div class="docblock"><a name="popen"></a><h3>popen</h3>
+  <pre>DOCUMENT f= popen(command, mode)
+  opens a pipe to COMMAND, which is executed as with the system
+  function.  If MODE is 0, the returned file handle is open for
+  reading, and you are reading the stdout produced by COMMAND.
+  If MODE is 1, f is opened for writing and you are writing to
+  the stdin read by COMMAND.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#open">open</a>, <a href="std-system.html#system">system</a></p>
+</div>
+<div class="docsee">
+  <h3>remove</h3><p>SEE: <a href="#rename">rename</a></p>
+</div>
+<div class="docblock"><a name="rename"></a><h3>rename</h3>
+  <pre>DOCUMENT rename, old_filename, new_filename
+         remove filename
+  rename or remove a file.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#open">open</a>, <a href="std-fileio.html#close">close</a>, <a href="std-filebin.html#openb">openb</a></p>
+</div>
+<div class="docblock"><a name="vclose"></a><h3>vclose</h3>
+  <pre>DOCUMENT contents = vclose(handle)
+  closes a file handle opened with vopen, returning the contents as
+  an array.  As a side effect, the handle is set to nil [], as in
+  close.  For a read-only handle, the contents will be the same as
+  the array passed to the vopen call which returned the handle.
+  For a read-write handle, vclose is the only way to get back what
+  you have written to the file; if you close such a file using the
+  ordinary close function, you will lose what you have written.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#vsave">vsave</a>, <a href="std-fileio.html#vopen">vopen</a>, <a href="std-fileio.html#close">close</a></p>
+</div>
+<div class="docblock"><a name="vopen"></a><h3>vopen</h3>
+  <pre>DOCUMENT f = vopen(source)
+      or f = vopen(source, 1)
+  opens SOURCE, which can be a string or char array, as if it were a
+  file, returning a file handle.  The file handle will be a text file
+  unless the optional second argument is non-nil and non-zero, as in
+  the second form.  For the case of a binary file, SOURCE must be a
+  char array.  Any dimensions of a char array are ignored in either
+  case.  For a text file, if SOURCE is a string array, each array element
+  is treated as one line of text.  For a text file char array, "\n",
+  "\r", "\r\n", or "\0" are all recognized as newline markers.  These
+  are read only files.
+
+  If SOURCE is nil, the file handle will be read-write.  After writing
+  the in-memory file, you can retrieve the finished array with the
+  vclose function.  If the file is text, the array will be an array of
+  strings, one per line.  If the file is binary, the array will be an
+  array of char.
+</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#vsave">vsave</a>, <a href="std-fileio.html#vclose">vclose</a>, <a href="std-fileio.html#open">open</a>, <a href="std-system.html#system">system</a></p>
+</div>
+<div class="docblock"><a name="vpack"></a><h3>vpack</h3>
+  <pre>DOCUMENT bytes = vpack(var1, var2, ...);
+      or vfile = vopen(,1);
+         vpack, vfile, var1, var2, ...;
+         vpack, vfile, var3, var4, ...;
+         ...
+         bytes = vpack(vfile);
+  pack variables into a byte stream, preserving data types and dimensions.
+  If the first argument is an in-memory file created by vopen(,1), then
+  vpack appends the variables to the file; to close the file, supply
+  no new variables to pack.  The VARi must be arrays, and may not be
+  pointers or struct instances.  If you want to store pointers or struct
+  instances and preserve variable names, use vsave.
+  The returned byte stream contains the primitive data formats (as
+  returned by get_primitives), so it can be used on a platform other
+  than the one on which vpack was run.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#vunpack">vunpack</a>, <a href="std-fileio.html#vsave">vsave</a></p>
+</div>
+<div class="docblock"><a name="vsave"></a><h3>vsave</h3>
+  <pre>DOCUMENT c = vsave(var1, var2, ...);
+      or c = vsave(var1, ..., string(namea), vara, ...);
+      or vfile = createb(char);
+         vsave, vfile, var1, var2, ...;
+         vsave, vfile, var3, var4, ...;
+         ...
+         c = vsave(vfile);
+  save the array variables VAR1, VAR2, ..., in the char array that is
+  returned.  Any of the variables may instead be a string expression
+  NAMEA followed by the value VARA of the variable.  The NAMEA argument
+  is recognized as the name of the following argument by being an
+  expression; arguments that are to be stored in f must be simple
+  variable references.  You can achieve this as shown by placing the
+  argument inside a call to string(), or by adding "", or simply by
+  passing a constant string value like "myvarname".
+
+  If you wish to build up a char array over several calls to vsave,
+  pass the first argument VFILE, which you create with createb(char).
+  A final call with no variables returns the char array and closes
+  VFILE.
+
+  You can pass the returned char array to openb, f=openb(c), to get
+  an in-memory file handle f like any other binary file handle,
+  allowing you to use the restore function, or the f.var1 syntax,
+  or the get_member function.
+
+  You can set the internal primitives using the prims= keyword; see
+  createb for details.</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="std-fileio.html#vopen">vopen</a>, <a href="std-fileio.html#vpack">vpack</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#get_member">get_member</a>, <a href="std-advanced.html#wrap_args">wrap_args</a></p>
+</div>
+<div class="docblock"><a name="vunpack"></a><h3>vunpack</h3>
+  <pre>DOCUMENT eof = vunpack(bytes, var1, var2, ...);
+      or nextvar = vunpack(bytes,-);
+      or vunpack, bytes;
+  unpack variables VAR1, VAR2, ... from a byte stream BYTES created
+  with vpack.  The vunpack call modifies BYTES to save the number of
+  variables which have already been unpacked, so you can perform the
+  unpack operation with multiple calls.  Calling vunpack as a
+  subroutine with no VARi arguments resets this information, restoring
+  BYTES to its original value (that is, as vpack returned it).
+  Called as a function, vunpack returns 1 if more variables remain
+  to be unpacked, or 0 if no more variables remain.
+  For example, if BYTES contains 5 variables:
+    bytes = vpack(var1, var2, var3, var4, var5);
+  You can retrieve the variables by a single call to vunpack:
+    vunpack, bytes, var1, var2, var3, var4, var5;
+  Or by a sequence of calls to vunpack:
+    vunpack, bytes, var1, var2;
+    vunpack, bytes, var3, var4, var5;</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#vunpack">vunpack</a>, <a href="std-fileio.html#vsave">vsave</a></p>
+</div>

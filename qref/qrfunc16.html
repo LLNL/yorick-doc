@@ -1,0 +1,20 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Reshaping Arrays</h2>
+<p><tt>reshape, <i>x, type_name, dimlist</i>&nbsp;&nbsp;&nbsp;</tt> masks shape of <i>x</i>
+</p>
+<p>Don't try to use this unless (1) you're an expert, and (2) you're desperate.
+It is intended mainly for recovering from misfeatures of other programs,
+although there are a few legitimate uses within Yorick. In case you want
+to change the dimensions of an array but conserve the data use the following:
+</p>
+<p><tt>new=array(0.,dim1,dim2)</tt>
+<br><tt>new(*)=old</tt>
+</p>
+<p>this copies the data of array <tt>old</tt> into array <tt>new</tt> but
+preserves the dimensions of the array <tt>new</tt>.
+</p>
+
+

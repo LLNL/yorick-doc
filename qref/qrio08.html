@@ -1,0 +1,41 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Opening Non-PDB Files</h2>
+<p>Yorick expects binary files to be in PDB format, but it can be trained
+to recognize any file whose format can be described using its Contents
+Log file description language. The basic idea is that if you can figure
+out how to compute the names, data types, dimensions, and disk addresses
+of the data in the file, you can train Yorick to open the file; once open,
+all of Yorick's machinery to manipulate the data will grind away as usual.
+</p>
+<p>The following functions can be used to teach Yorick about a non-PDB
+file; use <tt>help</tt> to get complete details:
+</p>
+<dl>
+<dt><tt>_read, <i>f, address, var</i></tt></dt>
+<dd>raw binary read</dd>
+<dt><tt>install_struct, <i>f, struct_name, size, align, order, layout</i></tt></dt>
+<dd>define a primitive data type</dd>
+<dt><tt>add_variable, <i>f, address, name, type, dimlist</i></tt></dt>
+<dd>add a variable</dd>
+<dt><tt>add_member, <i>f, struct_name, offset, name, type, dimlist</i></tt></dt>
+<dd>build up a data structure</dd>
+<dt><tt>install_struct, <i>f, struct_name</i></tt></dt>
+<dd>finish <tt>add_member</tt> struct</dd>
+<dt><tt>data_align, <i>f, alignment</i></tt></dt>
+<dd>specify default data alignment</dd>
+<dt><tt>struct_align, <i>f, alignment</i></tt></dt>
+<dd>specify default struct alignment</dd>
+<dt><tt>add_record, <i>f, time, ncyc, address</i></tt></dt>
+<dd>declare record</dd>
+<dt><tt>add_next_file, <i>f, filename</i></tt></dt>
+<dd>open new family member</dd>
+</dl>
+<p>To write a plain text description of any binary file, use:
+</p>
+<p><tt>dump_clog, <i>f, clogname</i>&nbsp;</tt> write Contents Log for <i>f</i>
+</p>
+
+

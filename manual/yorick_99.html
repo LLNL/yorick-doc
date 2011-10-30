@@ -1,0 +1,79 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Embedding-example"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_98.html#API-for-embedding" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4.2 API for embedding" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_100.html#Using-PROTOTYPE" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.3.1 Using PROTOTYPE" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Embedding-example-1"></a>
+<h2 class="section">4.3 Embedding example</h2>
+
+<p>Suppose you want to write a function which returns
+<kbd>sqrt(r^2-x^2)</kbd>, with some of the nice features of the <kbd>abs</kbd>
+function, to be called <kbd>rtleg</kbd> for &ldquo;right triangle leg&rdquo;.  Your
+first option is to simply write an interpreted function:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func rtleg(r,x,..)
+{
+  rr = 1./r;
+  x *= rr;  /* prevent overflow for very large or small r */
+  y = 1. - x*x;
+  while (!is_void((x=next_arg()))) { x *= rr; y -= x*x; }
+  return r*sqrt(y);
+}
+</pre></td></tr></table>
+
+<p>This interpreted function is likely the best solution, because the
+required function is simple and vectorizes naturally.  For the sake of
+argument, however, suppose that you wanted to create a compiled
+version of <kbd>rtleg</kbd> instead.  Now you need not only interpreted
+code, in a file &lsquo;<tt>rtleg.i</tt>&rsquo;, but also compiled code in a file
+&lsquo;<tt>rtleg.c</tt>&rsquo;.  Let&rsquo;s consider two cases: First, let&rsquo;s use the
+<kbd>PROTOTYPE</kbd> comment and let codger generate the required wrapper
+code.  Second, let&rsquo;s write the wrapper code using &lsquo;<tt>yapi.h</tt>&rsquo;
+directly.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_100.html#Using-PROTOTYPE">&bull; Using PROTOTYPE</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Example of PROTOTYPE comment.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_101.html#Using-yapi_002eh">&bull; Using yapi.h</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Example of &lsquo;<tt>yapi.h</tt>&rsquo; API.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_98.html#API-for-embedding" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4.2 API for embedding" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_100.html#Using-PROTOTYPE" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4.3.1 Using PROTOTYPE" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

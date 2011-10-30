@@ -1,0 +1,93 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="fma"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_74.html#multiple-windows" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3.2 Multiple graphics windows" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="fma-and-redraw"></a>
+<h3 class="subsection">3.3.1 fma and redraw</h3>
+
+<p>The fma command (mnemonic for frame advance) performs two functions:
+First, if the current display list has changed, Yorick re-walks it,
+ensuring that your screen is up to date.  Afterwards, fma clears the
+display list.
+</p>
+<p>In normal interactive use, you think of the first function &ndash; making
+sure what you see on your screen matches the display list &ndash; as a side
+effect.  Your aim is to clear the display list so you can begin a
+fresh picture.  However, in a Yorick program that is making a movie,
+the point is to draw the current frame of the movie, and clearing the
+display list is the side effect which prepares for the next movie
+frame.
+</p>
+<p>Another side effect of fma is more subtle: Since Yorick no longer
+remembers the sequence of commands required to draw the screen,
+attempts to change plot limits (zoom or pan), rescale axes, or any
+other operation requiring a redraw will not change your screen after
+an fma, even though you may still see the picture on your screen.
+</p>
+<p>Once set, limits are persistent across frame advances.  That is, after
+an fma, the next plot will inherit the limits of the previous plot.  I
+concede that this is not always desirable, but forgetting the previous
+limits can also be very annoying.  Another possibility would be to
+provide a means for setting the initial limits for new plots; I judged
+this confusing.  You get used to typing
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">fma; limits
+</pre></td></tr></table>
+
+<p>when you know the old limits are incorrect for the new plot.  The axis
+scaling set by logxy, and grid lines set by gridxy are also persistent
+across frame advances.
+</p>
+<p>On rare occasions, Yorick may not update your screen properly.  The
+redraw command erases your screen and walks the entire display list.
+You can also use this in Yorick programs to force the current picture
+to appear on your screen immediately, without the side effect of
+clearing the display list with fma.  (Perhaps you want to start
+looking at a rapidly completed part of a picture while a more lengthy
+calculation of the rest of the picture is in progress.)
+</p>
+<p>Note that redraw unconditionally walks the entire display list, while
+fma only walks the part that hasn&rsquo;t been previously walked or damaged
+by operations (like limits changes) that have occurred since the last
+walk.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_74.html#multiple-windows" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3.2 Multiple graphics windows" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

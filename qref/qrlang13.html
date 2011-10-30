@@ -1,0 +1,34 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Variable Scope</h2>
+<table><tbody>
+<tr><td><tt>local</tt> <i>var1, var2, ..., varN</i></td>
+<td>give the <i>varI</i> local scope</td></tr>
+<tr><td><tt>extern</tt> <i>var1, var2, ..., varN</i></td>
+<td>give the <i>varI</i> external scope</td></tr>
+</tbody></table>
+<p>If a variable <i>var</i> has local scope within a function, any value
+associated with <i>var</i> is temporarily replaced by nil on entry to the
+function. On return from the function, the external value of <i>var</i>
+is restored, and the local value is discarded.
+</p>
+<p>If a variable <i>var</i> has external scope within a function, references
+to <i>var</i> within the function refer to the <i>var</i> in the ``nearest''
+calling function for which <i>var</i> has local scope (that is, to the
+most recently created <i>var</i>).
+</p>
+<p>The <tt>*main*</tt> function has no variables of local scope; all variables
+created at this outermost level persist until they are explicitly undefined
+or redefined.
+</p>
+<p>Dummy or keyword arguments always have local scope.
+</p>
+<p>In the absence of a <tt>extern</tt> or <tt>local</tt> declaration, a
+variable
+<i>var</i> has local scope if, and only if, its first use within
+the function is as the left operand of a redefinition, <i>var </i><tt>=</tt><i>expr</i>.
+</p>
+
+

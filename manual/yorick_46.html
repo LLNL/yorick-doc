@@ -1,0 +1,155 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Statistical"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_45.html#Matrix-Multiply" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.8 Marking an index for matrix multiplication" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_47.html#Finite-Difference" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.10 Rank preserving (finite difference) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Rank-reducing-_0028statistical_0029-range-functions"></a>
+<h3 class="subsection">2.3.9 Rank reducing (statistical) range functions</h3>
+
+<p>The beauty of Yorick&rsquo;s matrix multiplication syntax is that you &ldquo;point&rdquo;
+to the dimension which is to be contracted by placing the <kbd>+</kbd> marker
+in the corresponding subscript.  In this section and the following
+section, I introduce Yorick&rsquo;s range functions, which share the &ldquo;this
+dimension right here&rdquo; syntax with matrix multiplication.  The topic in
+this section is the statistical range functions.  These functions reduce
+the rank of an array, as if they were a simple scalar index, but instead
+of selecting a particular element along the dimension, a statistical
+range function selects a value based on an examination of all of the
+elements along the selected dimension.  The statistical function is
+repeated separately for each value of any spectator dimensions.  The
+available functions are:
+</p>
+<dl compact="compact">
+<dt> <kbd>min</kbd></dt>
+<dt> <kbd>max</kbd></dt>
+<dd><p>returns the minimum (or maximum) value.  These are also available as
+ordinary functions.
+</p>
+</dd>
+<dt> <kbd>sum</kbd></dt>
+<dd><p>returns the sum of all the values.  This is also available as an
+ordinary function.
+</p>
+</dd>
+<dt> <kbd>avg</kbd></dt>
+<dd><p>returns the arithmetic mean of all the values.  The result will be a
+real number, even if the input is an integer array.  This is also
+available as an ordinary function.
+</p>
+</dd>
+<dt> <kbd>ptp</kbd></dt>
+<dd><p>returns the peak-to-peak difference (difference between the maximum
+and the minimum) among all the values.  The result will be positive
+if the maximum occurs at a larger index than the minimum, otherwise
+the result will be negative.
+</p>
+</dd>
+<dt> <kbd>rms</kbd></dt>
+<dd><p>returns the root mean square deviation from the arithmetic mean of the
+values.  The result will be a real number, even if the input is an
+integer array.
+</p>
+</dd>
+<dt> <kbd>mnx</kbd></dt>
+<dt> <kbd>mxx</kbd></dt>
+<dd><p>returns the index of the element with the smallest (or largest) value.
+The result is always an integer index value, independent of the data
+type of the array being subscripted.  If more than one element reaches
+the extreme value, the result will be the smallest index.
+</p></dd>
+</dl>
+
+<p>The <kbd>min</kbd>, <kbd>max</kbd>, <kbd>sum</kbd>, and <kbd>avg</kbd> functions may also
+be applied using ordinary function syntax, which is preferred if you
+want the function to be applied across all the dimensions of an array
+to yield a single scalar result.
+</p>
+<p>Given the <kbd>brightness</kbd> array representing the spectrum incident on a
+detector or set of detectors, the <kbd>mxx</kbd> function can be used to find
+the photon energy at which the incident light is brightest.  Assume that
+the final dimension of <kbd>brightness</kbd> is always the spectral
+dimension, and that the 1-D array <kbd>gav</kbd> of photon energies (with the
+same length as the final dimension of <kbd>brightness</kbd>) is also
+given:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">max_index_list = brightness(.., mxx);
+gav_at_max = gav(max_index_list);
+</pre></td></tr></table>
+
+<p>Note that <kbd>gav_at_max</kbd> would be a scalar if <kbd>brightness</kbd> were
+a 1-D spectrum for a single detector, a 2-D array if <kbd>brightness</kbd>
+were a 3-D array of spectra for each point of an image, and so on.
+</p>
+
+<p>An arbitrary index range (<kbd>start:stop</kbd> or <kbd>start:stop:step</kbd>) may
+be specified for any range function, by separating the function name
+from the range by another colon.  For example, to select only a relative
+maximum of <kbd>brightness</kbd> for photon energies above 1.0, ignoring
+possible larger values at smaller energies, you could use:
+</p>
+
+<table><tr><td>&nbsp;</td><td><pre class="example">i = min(where(gav &gt; 1.0));
+max_index_list = brightness(.., mxx:i:0);
+gav_at_max = gav(max_index_list);
+</pre></td></tr></table>
+
+<p>Note the use of <kbd>min</kbd> invoked as an ordinary function in the first
+line of this example.  (Recall that <kbd>where</kbd> returns a list of
+indices where some conditional expression is true.)  In the second line,
+<kbd>mxx:i:0</kbd> is equivalent to <kbd>mxx:i:</kbd>.  Because of the details of
+Yorick&rsquo;s current implementation, the former executes slightly faster.
+</p>
+
+<p>More than one range function may appear in a single subscript list.  If
+so, they are computed from left to right.  In order to execute them in
+another order, you must explicitly subscript the expression resulting
+from the first application:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x = [[1, 3, 2], [8, 0, 9]];
+max_min = x(max, min);
+min_max = x(, min)(max);
+</pre></td></tr></table>
+
+<p>The value of <kbd>max_min</kbd> is 3; the value of <kbd>min_max</kbd> is 2.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_45.html#Matrix-Multiply" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.8 Marking an index for matrix multiplication" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_47.html#Finite-Difference" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.10 Rank preserving (finite difference) range functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

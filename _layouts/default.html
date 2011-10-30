@@ -1,0 +1,21 @@
+{%include doctype.html%}
+  <title>Yorick {{page.headline}}</title>
+{%if page.prefix%}{%assign prefix=page.prefix%}
+{%else%}{%assign prefix=site.prefix%}{%endif%}
+{%include meta.html%}
+
+<div id="header">{{page.anchor}}<h1>
+   <a href="http://yorick.github.com"><img id="banner" src="{{prefix}}/images/skull-banner.png" alt="Yorick"/></a>
+&nbsp;{{page.headline}}
+</h1></div>
+
+{%include content.html%}
+{%include sidebar.html%}
+{%include trailer.html%}
+
+<div id="footer">
+{%include footer.html%}
+</div>
+
+</body>
+</html>

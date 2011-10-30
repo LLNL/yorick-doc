@@ -1,0 +1,176 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package random (in random.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="random.html#build_dimlist">build_dimlist</a></p>
+    <h3>I</h3>
+    <p><a href="random.html#ipq_setup">ipq_setup</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>P</h3>
+    <p><a href="random.html#poisson">poisson</a></p>
+    <h3>R</h3>
+    <p><a href="random.html#random_ipq">random_ipq</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="random.html#random_n">random_n</a></p>
+    <p><a href="random.html#random_rej">random_rej</a></p>
+    <p><a href="random.html#random_u">random_u</a></p>
+    <p><a href="random.html#random_x">random_x</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="build_dimlist"></a><h3>build_dimlist</h3>
+  <pre>DOCUMENT build_dimlist, dimlist, next_argument
+  build a DIMLIST, as used in the array function.  Use like this:
+
+  func your_function(arg1, arg2, etc, dimlist, ..)
+  {
+    while (more_args()) build_dimlist, dimlist, next_arg();
+    ...
+  }
+
+  After this, DIMLIST will be an array of the form
+  [#dims, dim1, dim2, ...], compounded from the multiple arguments
+  in the same way as the array function.  If no DIMLIST arguments
+  given, DIMLIST will be [] instead of [0], which will act the
+  same in most situations.  If that possibility is unacceptible,
+  you may add
+    if (is_void(dimlist)) dimlist= [0];
+  after the while loop.</pre>
+  
+</div>
+<div class="docblock"><a name="ipq_setup"></a><h3>ipq_setup</h3>
+  <pre>DOCUMENT model= ipq_setup(x, u)
+      or model= ipq_setup(x, u, power=[pleft,prght])
+      or model= ipq_setup(x, u, power=[pleft,prght], slope=[sleft,srght])
+
+  compute a model for the ipq_compute function, which computes the
+  inverse of a piecewise quadratic function.  This function occurs
+  when computing random numbers distributed according to a piecewise
+  linear function.  The piecewise linear function is u(x), determined
+  by the discrete points X and U input to ipq_setup.  None of the
+  values of U may be negative, and X must be strictly increasing,
+  X(i)<X(i+1).
+
+  If U(1) or U(0) is not zero, you may want to model the "tail" of
+  the distribution, which is not well modeled by a piecewise linear
+  function.  You can specify a power law tail using the power=
+  keyword; the left tail has initial slope (U(2)-U(1))/(X(2)-X(1)),
+  and decays to the left as 1/X^PLEFT.  Similarly for the right tail.
+  If U(1)==0, PLEFT is ignored, as is PRGHT when U(0)==0.  Use the
+  slope= keyword to specify an alternative value for the slope.
+  Note that PLEFT and PRGHT must each be greater than 1.0, and that
+  SLEFT>0 while SRGHT<0.  If either power is greater than or equal to
+  100, an exponential tail will be used.  As a convenience, you may
+  also specify PLEFT or PRGHT of 0 to get an exponential tail.
+
+  Note: ipq_function(model, xp) returns the function values u(xp) at
+  the points xp, including the tails (if any).  ipq_compute(model, yp)
+  returns the xp for which (integral from -infinity to xp) of u(x)
+  equals yp; i.e.- the inverse of the piecewise quadratic.
+</pre>
+  <p>SEE ALSO: <a href="random.html#random_ipq">random_ipq</a>, <a href="random.html#random_rej">random_rej</a></p>
+</div>
+<div class="docblock"><a name="poisson"></a><h3>poisson</h3>
+  <pre>DOCUMENT poisson(navg)
+
+  returns a Poisson distributed random value with mean NAVG.
+  (This is the integer number of events which actually occur
+   in some time interval, when the probability per unit time of
+   an event is constant, and the average number of events during
+   the interval is NAVG.)
+  The return value has the same dimensions as the input NAVG.
+  The return value is an integer, but its type is double.
+  The algorithm is taken from Numerical Recipes by Press, et. al.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="random.html#random_n">random_n</a></p>
+</div>
+<div class="docblock"><a name="random_ipq"></a><h3>random_ipq</h3>
+  <pre>DOCUMENT random_ipq(ipq_model, dimlist)
+
+  returns an array of double values with the given DIMLIST (see array
+  function, nil for a scalar result).  The numbers are distributed
+  according to a piecewise linear function (possibly with power law
+  or exponential tails) specified by the IPQ_MODEL.  The "IPQ" stands
+  for "inverse piecewise quadratic", which the type of function
+  required to transform a uniform random deviate into the piecewise
+  linear distribution.  Use the ipq_setup function to compute
+  IPQ_MODEL.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="random.html#random_x">random_x</a>, <a href="random.html#random_u">random_u</a>, <a href="random.html#random_n">random_n</a>, <a href="random.html#random_rej">random_rej</a>, <a href="random.html#ipq_setup">ipq_setup</a></p>
+</div>
+<div class="docblock"><a name="random_n"></a><h3>random_n</h3>
+  <pre>DOCUMENT random_n(dimlist)
+
+  returns an array of normally distributed random double values with
+  the given DIMLIST (see array function, nil for a scalar result).
+  The mean is 0.0 and the standard deviation is 1.0.
+  The algorithm follows the Box-Muller method (see Numerical Recipes
+  by Press et al.).
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="random.html#random_x">random_x</a>, <a href="random.html#random_u">random_u</a>, <a href="random.html#random_ipq">random_ipq</a>, <a href="random.html#random_rej">random_rej</a>, <a href="random.html#poisson">poisson</a></p>
+</div>
+<div class="docblock"><a name="random_rej"></a><h3>random_rej</h3>
+  <pre>DOCUMENT random_rej(target_dist, ipq_model, dimlist)
+      or random_rej(target_dist, bounding_dist, bounding_rand, dimlist)
+
+  returns an array of double values with the given DIMLIST (see array
+  function, nil for a scalar result).  The numbers are distributed
+  according to the TARGET_DIST function:
+     func target_dist(x)
+  returning u(x)>=0 of same number and dimensionality as x, normalized
+  so that the integral of target_dist(x) from -infinity to +infinity
+  is 1.0.  The BOUNDING_DIST function must have the same calling
+  sequence as TARGET_DIST:
+     func bounding_dist(x)
+  returning b(x)>=u(x) everywhere.  Since u(x) is normalized, the
+  integral of b(x) must be >=1.0.  Finally, BOUNDING_RAND is a
+  function which converts an array of uniformly distributed random
+  numbers on (0,1) -- as returned by random -- into an array
+  distributed according to BOUNDING_DIST:
+     func bounding_rand(uniform_x_01)
+  Mathematically, BOUNDING_RAND is the inverse of the integral of
+  BOUNDING_DIST from -infinity to x, with its input scaled to (0,1).
+
+  If BOUNDING_DIST is not a function, then it must be an IPQ_MODEL
+  returned by the ipq_setup function.  In this case BOUNDING_RAND is
+  omitted -- ipq_compute will be used automatically.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="random.html#random_x">random_x</a>, <a href="random.html#random_u">random_u</a>, <a href="random.html#random_n">random_n</a>, <a href="random.html#random_ipq">random_ipq</a>, <a href="random.html#ipq_setup">ipq_setup</a></p>
+</div>
+<div class="docblock"><a name="random_u"></a><h3>random_u</h3>
+  <pre>DOCUMENT random_u(a, b, dimlist)
+
+  return uniformly distributed random numbers between A and B.
+  (Will never exactly equal A or B.)  The DIMLIST is as for the
+  array function.  Same as (b-a)*random(dimlist)+a.  If A==0,
+  you are better off just writing B*random(dimlist).
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a>, <a href="random.html#random_x">random_x</a>, <a href="random.html#random_n">random_n</a>, <a href="random.html#random_ipq">random_ipq</a>, <a href="random.html#random_rej">random_rej</a></p>
+</div>
+<div class="docblock"><a name="random_x"></a><h3>random_x</h3>
+  <pre>DOCUMENT random_x(dimlist)
+
+  same as random(DIMLIST), except that random_x calls random
+  twice at each point, to avoid the defect that random only
+  can produce about 2.e9 numbers on the interval (0.,1.) (see
+  random for an explanation of these bins).
+
+  You may set random=random_x to get these "better" random
+  numbers in every call to random.
+
+  Unlike random, there is a chance in 1.e15 or so that random_x
+  may return exactly 1.0 or 0.0 (the latter may not be possible
+  with IEEE standard arithmetic, while the former apparently is).
+  Since cosmic rays are far more likely, you may as well not
+  worry about this.  Also, because of rounding errors, some bit
+  patterns may still be more likely than others, but the 0.5e-9
+  wide bins of random will be absent.
+</pre>
+  <p>SEE ALSO: <a href="std-math.html#random">random</a></p>
+</div>

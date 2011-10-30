@@ -1,0 +1,276 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package multi (in multi.i) - multiple mesh support for drat package </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+    <p><a href="multi.html#multic">multic</a></p>
+    <p><a href="multi.html#multif">multif</a></p>
+    <p><a href="multi.html#multi_bav">multi_bav</a></p>
+    <p><a href="multi.html#multi_bins">multi_bins</a></p>
+    <p><a href="multi.html#multi_opac">multi_emiss</a></p>
+    <p><a href="multi.html#multi_gb">multi_gav</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="multi.html#multi_gb">multi_gb</a></p>
+    <p><a href="multi.html#multi_gb">multi_gexist</a></p>
+    <p><a href="multi.html#multi_line">multi_line</a></p>
+    <p><a href="multi.html#multi_memory">multi_memory</a></p>
+    <p><a href="multi.html#multi_no_dups">multi_no_dups</a></p>
+    <p><a href="multi.html#multi_opac">multi_opac</a></p>
+    <p><a href="multi.html#multi_opac">multi_srcf</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="multi.html#multi_streak">multi_streak</a></p>
+    <p><a href="multi.html#multi_streak_save">multi_streak_save</a></p>
+    <p><a href="multi.html#multi_times">multi_times</a></p>
+    <p><a href="multi.html#multi_zonelist">multi_zonelist</a></p>
+    <h3>_</h3>
+    <p><a href="multi.html#_multi_bins">_multi_bins</a></p>
+    <p><a href="multi.html#_multi_integrate">_multi_integrate</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="multic"></a><h3>multic</h3>
+  <pre>DOCUMENT multic, mf
+      or multic, [mf1, mf2, mf3, ...]
+  closes a MultiFile created with multif.
+  Presented with an array of multifiles, closes them all.</pre>
+  <p>SEE ALSO: multio, <a href="multi.html#multif">multif</a></p>
+</div>
+<div class="docblock"><a name="multif"></a><h3>multif</h3>
+  <pre>DOCUMENT multif(mf)
+  returns an ordinary file pointer for the MultiFile MF.
+  Do not use close to close this pointer; just set it to [] when
+  you are done.  Use multic to properly close the MF.</pre>
+  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a></p>
+</div>
+<div class="docblock"><a name="multi_bav"></a><h3>multi_bav</h3>
+  <pre>DOCUMENT multi_bav(gav)
+  returns bin boundaries for the bin centers gav.
+  The bin boundaries are taken at the geometric means between
+  consecutive gav(i), with the endpoints extended slightly beyond
+  the endpoints of gav.</pre>
+  
+</div>
+<div class="docblock"><a name="multi_bins"></a><h3>multi_bins</h3>
+  <pre>DOCUMENT multi_bins(mf)
+  The MF parameter is an array of MultiFiles, each created by multif.
+  Automatically generates the bin structure which will be used by
+  multi_streak (if the GB keyword is not specified).</pre>
+  
+</div>
+<div class="docsee">
+  <h3>multi_emiss</h3><p>SEE: <a href="#multi_opac">multi_opac</a></p>
+</div>
+<div class="docsee">
+  <h3>multi_gav</h3><p>SEE: <a href="#multi_gb">multi_gb</a></p>
+</div>
+<div class="docblock"><a name="multi_gb"></a><h3>multi_gb</h3>
+  <pre>DOCUMENT multi_gb, multi_gav, multi_gexist
+  are the default names of the group boundary, group center, and group
+  existence arrays in post-processing files.  By default, they are
+  "gb", "gav", and "gexist".  If neither is present, drat_gb and
+  drat_gav will also be tried.
+  If present, gb is the photon bin boundary array, and gexist (if
+  present) has one fewer element and is non-zero in bins which exist.
+  Otherwise, gav is the photon energy array, and gexist (if present)
+  has one fewer element and is zero between elements of gav which are
+  not connected.  Isolated points in gav are removed entirely.
+  Either gb or gav must be strictly increasing, and has units of
+  photon energy.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>multi_gexist</h3><p>SEE: <a href="#multi_gb">multi_gb</a></p>
+</div>
+<div class="docblock"><a name="multi_line"></a><h3>multi_line</h3>
+  <pre>DOCUMENT gb= multi_line(nbins, hnu0, dhnu, dhnu_min)
+  returns 2*NBINS+1 bin boundary energies for 2*NBINS bins
+  cenetered around a spectral line at HNU0 of width DHNU.  The
+  result begins at HNU0-DHNU and ends at HNU0+DHNU.  The finest
+  two bins (nearest HNU0) has width DHNU_MIN, and the remaining
+  bins have equal ratio widths as you move away from HNU0.</pre>
+  
+</div>
+<div class="docblock"><a name="multi_memory"></a><h3>multi_memory</h3>
+  <pre>DOCUMENT multi_memory
+  amount of memory used to determine size of spectral chunks.
+  Default is 2000000, which keeps the memory required per chunk
+  to under a few megabytes.</pre>
+  
+</div>
+<div class="docblock"><a name="multi_no_dups"></a><h3>multi_no_dups</h3>
+  <pre>DOCUMENT xnd= multi_no_dups(x)
+  returns its input vector X with any duplicate values removed.
+  X must be non-decreasing and of length at least two.</pre>
+  
+</div>
+<div class="docblock"><a name="multi_opac"></a><h3>multi_opac</h3>
+  <pre>DOCUMENT multi_opac, multi_emiss, multi_srcf
+  are the default names of the opacity, emissivity, and source function
+  arrays in post-processing files.  By default, they are "opac",
+  "emiss", and "srcf", respectively.  If none of these are present,
+  drat_akap and drat_ekap will also be tried for the opacity and
+  source function, respectively.  If emissivity is present, source
+  function will be ignored.
+  The units of opacity are inverse length, of emissivity power per
+  photon energy per sterradian per volume, and source function
+  power per photon energy per sterradian per area.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>multi_srcf</h3><p>SEE: <a href="#multi_opac">multi_opac</a></p>
+</div>
+<div class="docblock"><a name="multi_streak"></a><h3>multi_streak</h3>
+  <pre>DOCUMENT result= multi_streak(mf, rays, slimits, gb=common_bins)
+  like the streak function, but allows opacity to be built up from
+  "slave files", in addition to the "master file" MF(1).  The MF
+  parameter is an array of MultiFiles, each created by multif.
+  The master file MF(1) contains the mesh, and the master list of dump
+  times.  Only dump times which are present in this master list, and
+  in every slave file, will be processed.
+  The master file MF(1) need not contain any opacity or emissivity data
+  at all; each of the slave files MF(2:0) must contain data for at
+  least one zone.
+
+  The emissivities and opacities from each file are interpolated onto
+  a common group structure.  This common group structure can be
+  provided via the GB keyword to multi_streak.  If it is not provided,
+  GB is computed by examining the group boundary (or center) arrays
+  from the master and every slave file, and building a group structure
+  which is at least as fine as every component group structure, at every
+  point in the spectrum.
+
+  Example:
+    File family "prob_p00" contains the mesh and opacities and
+    emissivities for all zones.  Family "pp_h00" contains post
+    processed opacities and emissivities on a much finer spectral
+    mesh, but only for zones in regions 1 and 2 of the original
+    problem.  You want to transport the emission from the
+    inner regions 1 and 2 through the overlying material:
+
+      restore, openb("prob_p00"), ireg;
+      master= multif("prob_p00", zoneuse=where(ireg>2));
+      slave= multif("pp_h00", zonelist=where(ireg==1|ireg==2));
+      rays= ...
+      slimits= ...
+      drat_start= ...
+      drat_stop= ...
+      result= multi_streak([master,slave], rays, slimits);
+      multic, master;
+      multic, slave;
+</pre>
+  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
+</div>
+<div class="docblock"><a name="multi_streak_save"></a><h3>multi_streak_save</h3>
+  <pre>DOCUMENT multi_streak_save, outname, mf, rays, slimits, gb=common_bins
+      or multi_streak_save, outfile, mf, rays, slimits, gb=common_bins
+  like the streak function, but allows opacity to be built up from
+  "slave files", in addition to the "master file" MF(1) and 
+  saves the streak in a PDB history file.  The MF parameter
+  is an array of MultiFiles, each created by multif.
+  The master file MF(1) contains the mesh, and the master list of dump
+  times.  Only dump times which are present in this master list, and
+  in every slave file, will be processed.
+  The master file MF(1) need not contain any opacity or emissivity data
+  at all; each of the slave files MF(2:0) must contain data for at
+  least one zone.
+
+  If the first argument is OUTFILE, a file variable instead of a
+  file name, then that file is used for output.  You can create
+  OUTFILE and add static variables to it with save (but do NOT call
+  add_record) which streak_save otherwise wouldn't know about.
+
+  The output file has history records at the same times as the
+  input file.  Each record contains "time" (a double scalar),
+  and the two arrays "transp", the transparency (between 0 and 1),
+  and "selfem", the self emission (which has the same units as
+  ekap in the file F).  The dimensions of transp and selfem
+  are ngroup-by-2-by-nrays (where nrays represents zero or more
+  dimensions, copied from the RAYS input array).  The RAYS and
+  SLIMITS inputs are placed into the output file as non-record
+  variables, and any variables in the drat_static option are
+  copied form F to the output file.  The gb and gav variables
+  are copied from F into the output file as well.  If the drat_glist
+  option is present, that is stored in the output file also.
+
+  The emissivities and opacities from each file are interpolated onto
+  a common group structure.  This common group structure can be
+  provided via the GB keyword to multi_streak.  If it is not provided,
+  GB is computed by examining the group boundary (or center) arrays
+  from the master and every slave file, and building a group structure
+  which is at least as fine as every component group structure, at every
+  point in the spectrum.
+
+  Example:
+    File family "prob_p00" contains the mesh and opacities and
+    emissivities for all zones.  Family "pp_h00" contains post
+    processed opacities and emissivities on a much finer spectral
+    mesh, but only for zones in regions 1 and 2 of the original
+    problem.  File "prob_strk" contains the streak history. 
+    You want to transport the emission from the
+    inner regions 1 and 2 through the overlying material:
+
+      restore, openb("prob_p00"), ireg;
+      master= multif("prob_p00", zoneuse=where(ireg>2));
+      slave= multif("pp_h00", zonelist=where(ireg==1|ireg==2));
+      fout= openb("prob_strk");
+      save, fout, kmax, lmax;
+      rays= ...
+      slimits= ...
+      drat_start= ...
+      drat_stop= ...
+      result= multi_streak_save(fout, [master,slave], rays, slimits);
+      multic, master;
+      multic, slave;
+</pre>
+  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_streak">multi_streak</a>, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
+</div>
+<div class="docblock"><a name="multi_times"></a><h3>multi_times</h3>
+  <pre>DOCUMENT times= multi_times(mf)
+  returns the list of times which will be used by multi_streak.  This
+  is the subset of streak_times(mf(1)) which occur in all of the slave
+  files.  The drat_start and drat_stop times work as usual.</pre>
+  
+</div>
+<div class="docblock"><a name="multi_zonelist"></a><h3>multi_zonelist</h3>
+  <pre>DOCUMENT multi_zonelist
+  is the default name of the variable which is a list of 1-origin
+  zone indices in the mesh of the master file.</pre>
+  
+</div>
+<div class="docblock"><a name="_multi_bins"></a><h3>_multi_bins</h3>
+  <pre>DOCUMENT gb= _multi_bins(nfinal, gb1, gb2, ...)
+  returns NFINAL+1 boundaries of NFINAL bins constructed by combining
+  the input bin structures GB1, GB2, etc.
+  Use NFINAL=0 to get at least the resolution in the finest GBi in
+  every region of the spectrum.
+
+  This is done by constructing a total bin density function
+  (#bins/energy width), as the maximum of the bin density of each
+  component.  This total bin density function is integrated, and
+  the integral is divided into NFINAL equal parts; the points in
+  energy at which this division must be made are the returned bin
+  boundaries.
+
+  In the returned bin structure, the density of bins is everywhere
+  proportional to the densest bins in any of the GBi.</pre>
+  
+</div>
+<div class="docblock"><a name="_multi_integrate"></a><h3>_multi_integrate</h3>
+  <pre>DOCUMENT atten_emit= _multi_integrate(f, mesh, time, irays, slimits)
+  is the default drat_integrate routine.
+  On entry, file F is positioned at TIME, from which MESH has already
+  been read.  IRAYS and SLIMITS are the rays coordinates (in internal
+  format) and integration limits.
+  The result should be ngroup-by-2-by-raydims, where the second index
+  is 1 for the attenuation factor, 2 for the self-emission (specific
+  intensity due to emission along the ray).
+OPTIONS: drat_linear, drat_ocompute, drat_oadjust,
+         drat_emult, drat_amult, drat_omult, drat_nomilne,
+         drat_ekap, drat_akap, drat_glist</pre>
+  <p>SEE ALSO: <a href="drat.html#streak">streak</a>, <a href="multi.html#multi_streak">multi_streak</a></p>
+</div>

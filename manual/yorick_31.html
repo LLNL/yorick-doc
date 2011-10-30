@@ -1,0 +1,81 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Errors"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_30.html#Shell-commands" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.6 Shell commands, removing and renaming files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_32.html#Runtime-errors" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7.1 Runtime errors" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Error-Messages"></a>
+<h3 class="subsection">1.3.7 Error Messages</h3>
+
+<p>When Yorick cannot decipher the meaning of a statement, you have made
+a <em>syntax</em> error.  Syntax errors are mostly simple typos, but a
+mechanical language like Yorick can be exasperatingly picky:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; th= span(0,2*pi,200)
+&gt; for (i=1 ; i&lt;=5 ; ++i) { r=cos(i*th); plg,r*sin(th),r*cos(th) }
+SYNTAX: parse error near }
+&gt;
+</pre></td></tr></table>
+
+<p>The only mistake here is that Yorick wants a semicolon (or newline)
+before the close curly brace completing a compound statement.  If you
+think &ldquo;fixing&rdquo; this type of behavior would be simple, I suggest you
+study parsers.  Every programming language has its quirks.
+</p>
+<p>When Yorick detects a syntax error, the error message always begins with
+<kbd>SYNTAX:</kbd>.  The entire block containing the error will be discarded;
+no statements will be executed which might lead to the execution of the
+statement containing the error.  If the error is in a function body, the
+function will not be defined.  However, if the sytax error occurs
+reading an include file, Yorick continues to parse the file looking for
+additional syntax errors.  After about a dozen syntax errors in a single
+file, Yorick gives up and waits for keyboard input.  Therefore, you may
+be able to repair several syntax errors before you re-include the file.
+</p>
+<p>All other errors are <em>runtime</em> errors.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_32.html#Runtime-errors">&bull; Runtime errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_33.html#Simple-debugging">&bull; Simple debugging</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_30.html#Shell-commands" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.6 Shell commands, removing and renaming files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_32.html#Runtime-errors" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7.1 Runtime errors" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

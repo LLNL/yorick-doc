@@ -1,0 +1,85 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Color-model"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_70.html#palette" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.4 palette" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Color-model-1"></a>
+<h3 class="subsection">3.2.5 Color model</h3>
+
+<p>The line drawing primitives plg, pldj, plm, plc, and plv accept a
+<kbd>color=</kbd> keyword.  You can use an index into the current palette, in
+which case the color of the line becomes dependent on the palette.
+However, you can also choose one of ten colors which are always
+defined, and which do not change when the palette changes.  For
+example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plg, sin(theta),cos(theta), color=&quot;red&quot;
+</pre></td></tr></table>
+
+<p>draws a red circle (assuming theta runs from zero to two pi).  The
+colors you can specify in this way are: <kbd>&quot;black&quot;</kbd>, <kbd>&quot;white&quot;</kbd>,
+<kbd>&quot;red&quot;</kbd>, <kbd>&quot;green&quot;</kbd>, <kbd>&quot;blue&quot;</kbd>, <kbd>&quot;cyan&quot;</kbd>, <kbd>&quot;magenta&quot;</kbd>,
+<kbd>&quot;yellow&quot;</kbd>, <kbd>&quot;fg&quot;</kbd>, and <kbd>&quot;bg&quot;</kbd>.
+</p>
+<p>Black and white, and the primary and secondary colors need no further
+explanation.  But <kbd>&quot;fg&quot;</kbd> stands for foreground and <kbd>&quot;bg&quot;</kbd> for
+background.  The default color of all curves is <kbd>&quot;fg&quot;</kbd>; the color of
+the blank page or screen is <kbd>&quot;bg&quot;</kbd>.  These colors are intentionally
+indefinite; unlike the others, they may differ on your screen and in
+print.  By default, <kbd>&quot;fg&quot;</kbd> is black and <kbd>&quot;bg&quot;</kbd> is white.  If you
+use the X window system, you can change these defaults by setting X
+resources.  For example, set
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Gist*foreground: white
+Gist*background: black
+</pre></td></tr></table>
+
+<p>to make Yorick draw in reversed polarity on your screen (white lines
+on a black background).  (The X utility xrdb is the easiest way to set
+X resources for your screen.)
+</p>
+<p>As of yorick 1.5, the color may also be an array of three values (red,
+green, blue), with 0 minimum intensity and 255 maximum.  If you specify
+a true color on a display which only supports pseudocolor, that window
+will switch irreversibly to a 5x9x5 color cube, which causes a
+significant degradation in rendering quality with smooth palettes.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_70.html#palette" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.4 palette" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_72.html#Display-list" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.3 Managing a display list" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

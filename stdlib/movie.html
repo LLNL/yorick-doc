@@ -1,0 +1,66 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package movie (in movie.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="movie.html#movie">movie</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="movie.html#movie_stats">movie_stats</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="movie"></a><h3>movie</h3>
+  <pre>DOCUMENT movie, draw_frame
+      or movie, draw_frame, time_limit
+      or movie, draw_frame, time_limit, min_interframe
+  runs a movie based on the given DRAW_FRAME function.  The movie
+  stops after a total elapsed time of TIME_LIMIT seconds, which
+  defaults to 60 (one minute), or when the DRAW_FRAME function
+  returns zero.
+
+  func draw_frame(i)
+  {
+    // Input argument i is the frame number.
+    // draw_frame should return non-zero if there are more
+    // frames in this movie.  A zero return will stop the
+    // movie.
+    // draw_frame must NOT include any fma command if the
+    // making_movie variable is set (movie sets this variable
+    // before calling draw_frame)
+  }
+
+  If MIN_INTERFRAME is specified, a pauses will be added as
+  necessary to slow down the movie.  MIN_INTERFRAME is a time
+  in seconds (default 0).
+
+  The keyword bracket_time= (again a time in seconds) can be
+  used to adjust the duration of the pauses after the first
+  and last frames.  It may also be a two element array [beg, end].
+  If the pause at the end is greater than five seconds, you will
+  be prompted to explain that hitting <RETURN> will abort the final
+  pause.
+
+  If every frame of your movie has the same limits, use the
+  limits command to fix the limits before you call movie.
+
+BUG:  If you hit <RETURN> to start a movie early, it will not
+      pause at the end of the movie at all.  You probably should
+      not use long initial pauses.
+</pre>
+  <p>SEE ALSO: <a href="movie.html#movie_stats">movie_stats</a></p>
+</div>
+<div class="docblock"><a name="movie_stats"></a><h3>movie_stats</h3>
+  <pre>DOCUMENT movie_stats
+      or movie_stats, timing
+  prints statistics from the last movie command, or from the
+  command which produced TIMING.  TIMING is the contents of the
+  movie_timing external variable after the movie command completes.
+</pre>
+  <p>SEE ALSO: <a href="movie.html#movie">movie</a></p>
+</div>

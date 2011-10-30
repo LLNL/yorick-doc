@@ -1,0 +1,45 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package demo2 (in demo2.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>D</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="demo2.html#demo2">demo2</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="demo2"></a><h3>demo2</h3>
+  <pre>DOCUMENT demo2
+  Exhibit quadrilateral mesh plots in 3 movies of a drumhead.
+  The drumhead is initially stationary, but has a bump near one
+  edge.  Yorick is solving a 2D wave equation to compute the
+  evolution of this bump.
+
+  The first movie is a filled mesh plot with color "proportional"
+  to the height of the surface of the drum.  A few well chosen
+  contour levels (here 3) add a lot to a filled mesh plot.
+
+  The second movie is a "3D" perspective plot of the height of the
+  drumhead.  In this movie, the mesh lines are drawn, which is
+  slightly confusing since the cells are not all the same shape.
+
+  The second movie is a "3D" shaded plot of the height of the
+  drumhead.  Yorick computes surface shading based on the angle
+  of each cell from a light source.
+
+  As you watch this, you might reflect on the two dimensionality
+  of your retina.  What Yorick lacks by way of 3D graphics is
+  really just fancy hidden surface algorithms; the simple
+  painter's algorithm used here and in plwf.i is easy to
+  implement.
+
+  There are two optional arguments to demo2: the first is the
+  number fo the movie (1, 2, or 3) you want to watch; the second
+  is a time limit on the duration of each movie in seconds (default
+  is 60 seconds each).</pre>
+  
+</div>

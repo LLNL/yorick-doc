@@ -1,0 +1,56 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package fermii (in fermii.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="fermii.html#fdi12">fdi12</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="fermii.html#fdi32">fdi32</a></p>
+    <p><a href="fermii.html#fdi52">fdi52</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="fermii.html#fdim12">fdim12</a></p>
+    <p><a href="fermii.html#fermii">fermii</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="fdi12"></a><h3>fdi12</h3>
+  <pre>DOCUMENT fdi12(x, b)
+  return incomplete Fermi-Dirac integral of order 1/2,
+     fdi12(x, b) = integral[b to inf]{ dt * t^0.5 / (exp(t-x)+1) }
+  default accuracy to about 1e-10</pre>
+  <p>SEE ALSO: <a href="fermii.html#fdim12">fdim12</a>, <a href="fermii.html#fdi32">fdi32</a>, <a href="fermii.html#fdi52">fdi52</a></p>
+</div>
+<div class="docblock"><a name="fdi32"></a><h3>fdi32</h3>
+  <pre>DOCUMENT fdi32(x, b)
+  return incomplete Fermi-Dirac integral of order 1/2,
+     fdi32(x, b) = integral[b to inf]{ dt * t^1.5 / (exp(t-x)+1) }
+  default accuracy to about 1e-10</pre>
+  <p>SEE ALSO: <a href="fermii.html#fdim12">fdim12</a>, <a href="fermii.html#fdi12">fdi12</a>, <a href="fermii.html#fdi52">fdi52</a></p>
+</div>
+<div class="docblock"><a name="fdi52"></a><h3>fdi52</h3>
+  <pre>DOCUMENT fdi52(x, b)
+  return incomplete Fermi-Dirac integral of order 1/2,
+     fdi32(x, b) = integral[b to inf]{ dt * t^2.5 / (exp(t-x)+1) }
+  default accuracy to about 1e-10</pre>
+  <p>SEE ALSO: <a href="fermii.html#fdim12">fdim12</a>, <a href="fermii.html#fdi12">fdi12</a>, <a href="fermii.html#fdi32">fdi32</a></p>
+</div>
+<div class="docblock"><a name="fdim12"></a><h3>fdim12</h3>
+  <pre>DOCUMENT fdim12(x, b)
+  return incomplete Fermi-Dirac integral of order -1/2,
+     fdim12(x, b) = integral[b to inf]{ dt * t^-0.5 / (exp(t-x)+1) }
+  default accuracy to about 1e-10</pre>
+  <p>SEE ALSO: <a href="fermii.html#fdi12">fdi12</a>, <a href="fermii.html#fdi32">fdi32</a>, <a href="fermii.html#fdi52">fdi52</a></p>
+</div>
+<div class="docblock"><a name="fermii"></a><h3>fermii</h3>
+  <pre>DOCUMENT #include "fermii.i"
+Incomplete Fermi-Dirac integrals of orders -1/2, 1/2, 3/2, 5/2
+
+after M. Goano, Algorithm 745, ACM TOMS 21, #3, pp 221-232 (Sept. 95)
+</pre>
+  <p>SEE ALSO: <a href="fermii.html#fdim12">fdim12</a>, <a href="fermii.html#fdi12">fdi12</a>, <a href="fermii.html#fdi32">fdi32</a>, <a href="fermii.html#fdi52">fdi52</a></p>
+</div>

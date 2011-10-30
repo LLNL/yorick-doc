@@ -1,0 +1,119 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Conditionals"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_8.html#Define-procedure" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.2 Defining Procedures" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_10.html#if_002delse-constructs" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.3.1 General if and else constructs" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Conditional-Execution"></a>
+<h3 class="subsection">1.2.3 Conditional Execution</h3>
+
+<p>The design of the <kbd>q_out</kbd> function can be improved.  As written,
+each output file will contain only a single wave.  You might want the
+option of writing several waves into a single file.  Consider this
+alternative:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func q_out(Q, file)
+{
+  if (structof(file)==string) file = create(file);
+  write, file, &quot;Q = &quot;+pr1(Q);
+  write, file, &quot;   theta       amplitude&quot;;
+  write, file, theta, damped_wave(theta,Q);
+  return file;
+}
+</pre></td></tr></table>
+
+<p>The <kbd>if</kbd> statement executes its body (the redefinition of
+<kbd>file</kbd>) if and only if its condition
+(<kbd>structof(file)==string</kbd>) is true.  Any scalar number may serve
+as a condition &ndash; a non-zero value is &ldquo;true&rdquo;, and the value zero is
+&ldquo;false&rdquo;.
+</p>
+<p>The <kbd>structof()</kbd> function returns the data type object when its
+argument is an array, and nil (<kbd>[]</kbd>) otherwise.  In particular, if
+<kbd>file</kbd> is a text string (like <kbd>&quot;q.out&quot;</kbd>), <kbd>structof</kbd>
+returns string, which is the data type of strings.  The binary
+operator <kbd>==</kbd> (as distinguished from assignment <kbd>=</kbd>) tests for
+equality, returning &ldquo;true&rdquo; or &ldquo;false&rdquo;.  Note that the test works
+even for non-numeric objects, like the data type string.
+</p>
+<p>Hence, if the <kbd>file</kbd> argument is a string, the new <kbd>q_out</kbd>
+presumes it is the name of a file, which it creates, redefining
+<kbd>file</kbd> as the associated file object.  Thus, after the first line
+of the function body, <kbd>file</kbd> will be a file object, even if a file
+name was passed into the function.  Furthermore, since the parameter
+<kbd>file</kbd> is local to <kbd>q_out</kbd>, none of this hocus pocus will have
+any effect outside <kbd>q_out</kbd>.
+</p>
+<p>The second trick in the new <kbd>q_out</kbd> is the reappearance of a
+<kbd>return</kbd> statement.  The original calling sequence:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">q_out, 3, &quot;q.out&quot;
+</pre></td></tr></table>
+<p>has the same result as before &ndash; the <kbd>if</kbd> condition is true, so
+the file is created, then the wave data is written.  This time the
+file object is returned, only to be discarded because <kbd>q_out</kbd>
+was invoked as a procedure.  When the file object disappears, the
+file closes.  But if <kbd>q_out</kbd> were invoked as a function, the file
+object can be saved, which keeps the file open:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">f = q_out(3,&quot;q.out&quot;)
+q_out,2,f
+q_out,1,f
+close,f
+</pre></td></tr></table>
+
+<p>Now the file &lsquo;<tt>q.out</tt>&rsquo; contains the Q=3 wave, followed by the Q=2
+and Q=1 waves.  In the second and third calls to <kbd>q_out</kbd>, the
+<kbd>file</kbd> parameter is already a file object, so the <kbd>if</kbd>
+condition is false, and <kbd>create</kbd> is not called.  Notice that the
+file does not close when the return value from the second (or third)
+call is discarded; the variable <kbd>f</kbd> refers to the same file object
+as the discarded return value.  Without an explicit call to
+<kbd>close</kbd>, a file only closes when the <em>final</em> reference to it
+disappears.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_10.html#if_002delse-constructs">&bull; if-else constructs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_11.html#logical-operators">&bull; logical operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_8.html#Define-procedure" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.2 Defining Procedures" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_10.html#if_002delse-constructs" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.3.1 General if and else constructs" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

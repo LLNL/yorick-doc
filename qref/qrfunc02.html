@@ -1,0 +1,42 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Issuing Shell Commands</h2>
+<p>You can execute a system command, returning to Yorick when the command
+completes, by prefixing the command line with <tt>$</tt>:
+</p>
+<p><tt>$</tt>any shell command line
+</p>
+<p>This is a shorthand for the <tt>system</tt> function:
+</p>
+<p><tt>system, <i>shell_string</i>&nbsp;&nbsp;&nbsp;</tt> pass <i>shell_string</i> to a system
+shell
+</p>
+<p>You need to use the <tt>system</tt> function if you want to compute
+the
+<i>shell_string</i>; otherwise <tt>$</tt> is more convenient.
+</p>
+<p>Note that the cd (change directory) shell command and its relatives
+will not have any effect on Yorick's working directory. Instead, use Yorick's
+<tt>cd</tt>
+function to change it's working directory:
+</p>
+<table><tbody>
+<tr><td><tt>cd, <i>path_name</i></tt></td>
+<td>change Yorick's default directory</td></tr>
+<tr><td><tt>get_cwd()</tt></td>
+<td>return Yorick's current working directory</td></tr>
+</tbody></table>
+<p>The following functions also relate to the operating system:
+</p>
+<table><tbody>
+<tr><td><tt>get_home()</tt></td>
+<td>return your home directory</td></tr>
+<tr><td><tt>get_env(<i>env_string</i>)</tt></td>
+<td>return environment variable <i>env_string</i></td></tr>
+<tr><td><tt>get_argv()</tt></td>
+<td>return the command line arguments</td></tr>
+</tbody></table>
+
+

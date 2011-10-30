@@ -1,0 +1,50 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package digit2 (in digit2.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>D</h3>
+    <p><a href="digit2.html#digit2">digit2</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>I</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="digit2.html#interp2">interp2</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="digit2"></a><h3>digit2</h3>
+  <pre>DOCUMENT digit2(y0,x0, y,x)
+      or digit2(y0,x0, y,x,reg)
+
+  return the index of the zone of the point or points (X0,Y0)
+  in the quadrilateral mesh (X,Y) with the optional region
+  array REG.  The result has the same dimensions as the input
+  X0 and Y0 arrays.  The result is <=0 at points outside the mesh.
+
+  By default, the zone index is an index into an (M-1)-by-(N-1)
+  array, if X and Y are M-by-N.  However, if the keyword pt= is
+  non-nil and non-zero, the return value is the index into an
+  M-by-N array in which the first row and column are non-existent
+  (like the optional REG array).
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#digitize">digitize</a>, <a href="digit2.html#interp2">interp2</a>, <a href="graph-plotmisc.html#mesh_loc">mesh_loc</a>, <a href="graph-plotter.html#plm">plm</a></p>
+</div>
+<div class="docblock"><a name="interp2"></a><h3>interp2</h3>
+  <pre>DOCUMENT z0= interp2(y0,x0, z,y,x)
+      or z0= interp2(y0,x0, z,y,x,reg)
+
+  return the bilinear interpolate of the function Z(X,Y) at the
+  points (X0,Y0).  The X, Y, and optional REG arrays specify a
+  quadrilateral mesh as for the plm function.  The Z values are
+  specified at the vertices of this mesh, so Z must have the
+  same dimensions as X and Y.
+
+  Points outside the mesh get the value 0.0, unless the outside
+  keyword is non-nil, in which case they get that value.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#interp">interp</a>, <a href="digit2.html#digit2">digit2</a>, <a href="graph-plotmisc.html#mesh_loc">mesh_loc</a>, <a href="graph-plotter.html#plm">plm</a></p>
+</div>

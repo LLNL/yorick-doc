@@ -1,0 +1,109 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="if_002delse-constructs"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_11.html#logical-operators" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.3.2 Combining conditions with &amp;&amp; and ||" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="General-if-and-else-constructs"></a>
+<h4 class="subsubsection">1.2.3.1 General <kbd>if</kbd> and <kbd>else</kbd> constructs</h4>
+
+<p>The most general form of the <kbd>if</kbd> statement is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if (condition) statement_if_true;
+else statement_if_false;
+</pre></td></tr></table>
+
+<p>When you need to choose among several alternatives, make the <kbd>else</kbd>
+clause itself an <kbd>if</kbd> statement:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if (condition_1) statement_if_1;
+else if (condition_2) statement_if_2;
+else if (condition_3) statement_if_3;
+...
+else statement_if_none;
+</pre></td></tr></table>
+
+<p>The final <kbd>else</kbd> is always optional &ndash; if it is not present,
+nothing at all happens if none of the conditions is satisfied.
+</p>
+<p>Often you need to execute more than one statement conditionally.
+Quite generally in Yorick, you may group several statements into a
+single compound statement by means of curly braces:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">{ statement_1; statement_2; statement_3; statement_4; }
+</pre></td></tr></table>
+
+<p>Ordinarily, both curly braces and each of the statements should be
+written on a separate line, with the statements indented to make their
+membership in the compound more obvious.  Further, in an if-else
+construction, when one branch requires more than one statement, you
+should write every branch as a compound statement with curly braces.
+Therefore, for a four branch <kbd>if</kbd> in which the second <kbd>if</kbd>
+requires two statements, and the <kbd>else</kbd> three, write this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if (condition_1) {
+  statement_if_1;
+} else if (condition_2) {
+  statement_if_2_A;
+  statement_if_2_B;
+} else if (condition_3) {
+  statement_if_3;
+} else {
+  statement_if_none_A;
+  statement_if_none_B;
+  statement_if_none_C;
+}
+</pre></td></tr></table>
+
+<p>The <kbd>else</kbd> statement has a very unusual syntax: It is the only
+statement in Yorick which depends on the form of the <em>previous</em>
+statement; an <kbd>else</kbd> must follow an <kbd>if</kbd>.  Because Yorick
+statements outside functions (and compound statements) are executed
+immediately, you must be very careful using <kbd>else</kbd> in such a
+situation.  If the <kbd>if</kbd> has already been executed (as it would be
+in the examples without curly braces), the following <kbd>else</kbd> leads
+to a syntax error!
+</p>
+<p>The best way to avoid this puzzling problem is to always use the curly
+brace syntax of the latest example when you use <kbd>else</kbd> outside a
+function.  (You don&rsquo;t often need it in such a context anyway.)
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_11.html#logical-operators" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.3.2 Combining conditions with &amp;&amp; and ||" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

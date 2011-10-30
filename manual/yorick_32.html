@@ -1,0 +1,83 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Runtime-errors"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_33.html#Simple-debugging" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7.2 How to respond to a runtime error" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Runtime-errors-1"></a>
+<h4 class="subsubsection">1.3.7.1 Runtime errors</h4>
+
+<p>Runtime errors in Yorick are often simple typos, like syntax errors:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; theta = span(0,2*pi,200)
+&gt; wave = sin(thta)*exp(-0.5*theta)
+ERROR (*main*) expecting numeric argument
+WARNING source code unavailable (try dbdis function)
+now at pc= 1 (of 23), failed at pc= 5
+ To enter debug mode, type &lt;RETURN&gt; now (then dbexit to get out)
+&gt; 
+</pre></td></tr></table>
+
+<p>Many errors of this sort would be detected as syntax errors if you had
+to declare Yorick variables.  Yorick&rsquo;s free-and-easy attitude toward
+declaration of variables is particularly annoying when the offending
+statement is in a conditional branch which is very rarely executed.
+When a bug like that ambushes you, be philosophical: Minutely declared
+languages will just ambush you in more subtle ways.
+</p>
+<p>Other runtime errors are more interesting; often such a bug will teach
+you about the algorithm or even about the physical problem:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; #include &quot;damped.i&quot;
+&gt; theta = span(0, 6*pi, 300)
+&gt; amplitude = damped_wave(theta, 0.25)
+ERROR (damped_wave) math library exception handler called
+  LINE: 19  FILE: /home/icf/munro/damped.i
+ To enter debug mode, type &lt;RETURN&gt; now (then dbexit to get out)
+&gt;
+</pre></td></tr></table>
+
+<p>What is an oscillator with a Q of less than one half?  Maybe you don&rsquo;t
+care about the so-called <em>overdamped</em> case &mdash; you really wanted
+Q to be 2.5, not 0.25.  On the other hand, maybe you need to modify
+the <kbd>damped_wave</kbd> function to handle the overdamped case.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_33.html#Simple-debugging" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.7.2 How to respond to a runtime error" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

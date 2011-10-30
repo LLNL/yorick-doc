@@ -1,0 +1,86 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="gridxy"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_68.html#logxy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.2 logxy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_70.html#palette" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.4 palette" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="gridxy-1"></a>
+<h3 class="subsection">3.2.3 gridxy</h3>
+
+<p>The gridxy command changes the appearance of your plot in a more
+subjective way than logxy or limits.  Ordinarily, Yorick draws tick
+marks resembling ruler scales around the edges of your plot.  With
+gridxy, you can cause the major ticks to extend all the way across the
+middle of your plot like the lines on a sheet of graph paper.  Like
+logxy, with gridxy you get separate control over horizontal and
+vertical grid lines.  However, with gridxy, if you supply only one
+argument, both axes are affected (usually you want grid lines for
+neither axis, or grid lines for both axes).  For example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gridxy, 1      // full grid, like graph paper
+gridxy, 0, 1   // only y=const grid lines
+gridxy, , 0    // turn off y=const lines, x unchanged
+gridxy, 1,     // turn on x=const lines, y unchanged
+gridxy, 0      // ticks only, no grid lines
+</pre></td></tr></table>
+
+<p>If the flag value is 2 instead of 1, then instead of a full grid, only
+a single grid line is drawn at the &ldquo;roundest number&rdquo; in the range
+(zero if it is present).  If you need a reference line at y = 0, but
+you don&rsquo;t want your graph cluttered by a complete set of grid lines,
+try this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gridxy, 0, 2
+</pre></td></tr></table>
+
+<p>The appearance of the ticks and labels is actually part of the
+graphics style.  You will want to change other details of your
+graphics style far less frequently than you want to turn grid lines on
+or off, which explains the separate gridxy function controlling this
+one aspect of graphics style.
+</p>
+<p>The gridxy command also accepts keyword arguments which change the
+default algorithm for computing tick locations, so that ticks can appear
+at multiples of 30.  This makes axes representing degrees look better
+sometimes.  By default, ticks can appear only at &ldquo;decimal&rdquo; locations,
+whose last non-zero digit is 1, 2, or 5.  See the online help for gridxy
+for a more complete description of these options.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_68.html#logxy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.2 logxy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_70.html#palette" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.4 palette" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

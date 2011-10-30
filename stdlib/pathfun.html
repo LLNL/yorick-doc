@@ -1,0 +1,122 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package pathfun (in pathfun.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="pathfun.html#add_y_home">add_y_home</a></p>
+    <h3>B</h3>
+    <p><a href="pathfun.html#basename">basename</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>D</h3>
+    <p><a href="pathfun.html#dirname">dirname</a></p>
+    <h3>F</h3>
+    <p><a href="pathfun.html#find_in_path">find_in_path</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>P</h3>
+    <p><a href="pathfun.html#pathform">pathform</a></p>
+    <p><a href="pathfun.html#pathsplit">pathsplit</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="add_y_home"></a><h3>add_y_home</h3>
+  <pre>DOCUMENT add_y_home, y_home, y_site;
+      or add_y_home, y_both;
+
+  Set all Yorick paths to take into account y_home as a new (additional)
+  root for architecture-dependent files and y_site as the corresponding
+  root for architecture-independent files.  Note that separating
+  architecture-independent and architecture-dependent files is a
+  deprecated practice.  If you work on two architectures, maintain two
+  copies of y_home and y_site and keep your sanity.
+
+  The paths taken care of are:
+    - the main path for .i files (see set_path(), get_path();
+    - the plug_dir path for compiled add-ons (see plug_dir());
+    - GISTPATH (.gp and .gs files).
+    
+  In addition, we perform an include_all (which see) on y_home/i-start and
+  y_site/i-start (unless we are not in batch mode and y_home or y_site is
+  "~/yorick" or "~/Yorick", in which case this is done by i0/stdx.i).
+
+  "add_y_home, y_both" is the same as setting y_site=y_home.
+  
+  See pkg_mngr.i for more.</pre>
+  
+</div>
+<div class="docblock"><a name="basename"></a><h3>basename</h3>
+  <pre>DOCUMENT file = basename(pathname)
+  returns the file part of PATHNAME (like GNU basename), which
+  can be an array of names
+
+  Examples:
+    pathname         basename(pathname)
+    /                /
+    /path/to/file    file
+    /path/to/dir/    dir
+    path/to/file     file
+    file             file
+    c:               c:
+    c:/              c:
+</pre>
+  <p>SEE ALSO: <a href="pathfun.html#dirname">dirname</a></p>
+</div>
+<div class="docblock"><a name="dirname"></a><h3>dirname</h3>
+  <pre>DOCUMENT dir = dirname(pathname)
+  returns the directory part of PATHNAME (like GNU dirname), which
+  can be an array of names
+
+  Examples:
+    pathname         dirname(pathname)
+    /                /
+    /path/to/file    /path/to
+    /path/to/dir/    /path/to
+    path/to/file     path/to
+    file             .
+    c:               c:
+    c:/              c:
+</pre>
+  <p>SEE ALSO: <a href="pathfun.html#basename">basename</a></p>
+</div>
+<div class="docblock"><a name="find_in_path"></a><h3>find_in_path</h3>
+  <pre>DOCUMENT find_in_path(filename,takefirst=,path=)
+  returns the full path (including filename) where filename has been found.
+
+  Rules:
+   - If filename has not been found, [] is returned
+   - if filename has been found at several locations, a string vector
+     with all locations is returned (unless takefirst is set, see below)
+
+  If takefirst=1, will return when the first occurence of filename is
+   found (returns a string scalar).
+  If path= is set, it will be used instead of the default yorick path as
+   returned by get_path(). Note that path must use the same syntax as
+   the result of get_path(), i.e. a single string with ":" delimiters
+   between the directories (and entries MUST end with a "/"), e.g.:
+   path="/usr/local/share/yao/:/home/frigaut/Yorick/"
+  </pre>
+  <p>SEE ALSO: <a href="std-system.html#get_path">get_path</a>, <a href="pathfun.html#dirname">dirname</a>, <a href="pathfun.html#basename">basename</a></p>
+</div>
+<div class="docblock"><a name="pathform"></a><h3>pathform</h3>
+  <pre>DOCUMENT path = pathform(list)
+  combine a LIST (that is, an array) of strings into a single colon
+  delimited path.  For example,
+    pathform(["one","two","three"]) --> "one:two:three"
+  The delim= keyword can be used to specify an alternative separator
+  for the components of the path, delim=":" is the default.
+</pre>
+  <p>SEE ALSO: <a href="pathfun.html#pathsplit">pathsplit</a>, <a href="std-system.html#set_path">set_path</a>, <a href="std-system.html#get_path">get_path</a>, <a href="std-plugin.html#plug_dir">plug_dir</a></p>
+</div>
+<div class="docblock"><a name="pathsplit"></a><h3>pathsplit</h3>
+  <pre>DOCUMENT list = pathsplit(path)
+  split a colon delimited PATH into a list of strings.  For example,
+    pathsplit("one:two:three") --> ["one","two","three"]
+  The delim= keyword can be used to specify an alternative separator
+  for the components of the path, delim=":" is the default.
+</pre>
+  <p>SEE ALSO: <a href="pathfun.html#pathform">pathform</a>, <a href="std-system.html#set_path">set_path</a>, <a href="std-system.html#get_path">get_path</a>, <a href="std-plugin.html#plug_dir">plug_dir</a></p>
+</div>

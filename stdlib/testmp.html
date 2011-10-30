@@ -1,0 +1,60 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package testmp (in testmp.i) - mpy simple parallel test suite </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>T</h3>
+    <p><a href="testmp.html#testmp">testmp</a></p>
+    <p><a href="testmp.html#testmp1">testmp1</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="testmp.html#testmp2">testmp2</a></p>
+    <p><a href="testmp.html#testmp3">testmp3</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="testmp.html#testmp4">testmp4</a></p>
+    <p><a href="testmp.html#testmpool">testmpool</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="testmp"></a><h3>testmp</h3>
+  <pre>DOCUMENT testmp
+  runs testmp2, testmp3, and testmpool</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp1">testmp1</a>, <a href="testmp.html#testmp2">testmp2</a>, <a href="testmp.html#testmp3">testmp3</a>, <a href="testmp.html#testmp4">testmp4</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>
+<div class="docblock"><a name="testmp1"></a><h3>testmp1</h3>
+  <pre>DOCUMENT testmp1, n
+  test mp_send and mp_recv between rank 0 and rank N.
+  Other ranks will be inactive during this exchange.</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp">testmp</a>, <a href="testmp.html#testmp2">testmp2</a>, <a href="testmp.html#testmp3">testmp3</a>, <a href="testmp.html#testmp4">testmp4</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>
+<div class="docblock"><a name="testmp2"></a><h3>testmp2</h3>
+  <pre>DOCUMENT testmp2, n
+  test star communication ring among all ranks. Specifically,
+  every rank sends to rank+N.  N defaults to 1.
+  One message of each type handled by mp_send and mp_recv is
+  sent and received for each distance.</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp1">testmp1</a>, <a href="testmp.html#testmp">testmp</a>, <a href="testmp.html#testmp3">testmp3</a>, <a href="testmp.html#testmp4">testmp4</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>
+<div class="docblock"><a name="testmp3"></a><h3>testmp3</h3>
+  <pre>DOCUMENT testmp3
+  test mp_handout and mp_handin for a variety of message types.</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp1">testmp1</a>, <a href="testmp.html#testmp2">testmp2</a>, <a href="testmp.html#testmp">testmp</a>, <a href="testmp.html#testmp4">testmp4</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>
+<div class="docblock"><a name="testmp4"></a><h3>testmp4</h3>
+  <pre>DOCUMENT testmp4, n
+  test error recovery by causing fault on rank N, which
+  defaults to mp_size-1.  N can be a small array to cause
+  faults on a few ranks at once.  (If it takes more than
+  one line to print N, all ranks will get syntax errors.)
+  The testmp4 function has a local variable x, non-nil
+  on the ranks which faulted.</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp1">testmp1</a>, <a href="testmp.html#testmp2">testmp2</a>, <a href="testmp.html#testmp3">testmp3</a>, <a href="testmp.html#testmp">testmp</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>
+<div class="docblock"><a name="testmpool"></a><h3>testmpool</h3>
+  <pre>DOCUMENT testmpool
+  test mpool function (and mpool_test with non-nil non-zero arg).</pre>
+  <p>SEE ALSO: <a href="testmp.html#testmp1">testmp1</a>, <a href="testmp.html#testmp2">testmp2</a>, <a href="testmp.html#testmp3">testmp3</a>, <a href="testmp.html#testmp">testmp</a>, <a href="testmp.html#testmpool">testmpool</a></p>
+</div>

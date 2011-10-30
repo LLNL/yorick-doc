@@ -1,0 +1,113 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="palette"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_69.html#gridxy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.3 gridxy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_71.html#Color-model" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.5 Color model" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="palette-1"></a>
+<h3 class="subsection">3.2.4 palette</h3>
+
+<p>The plf, pli, and plfp commands require a color scale or palette,
+which is a continuum of colors to represent the continuous values of a
+variable.  Actually, a palette consists of a finite number of (red,
+green, blue) triples, which represent a color for each of a finite
+list of values.  A Yorick palette can never have more than 256 colors,
+so that a type char variable (one byte per item) can hold any index
+into a palette.  Because many screens can display only 256 colors
+simultaneously, however, you shouldn&rsquo;t have more than about 200 colors
+in a palette; that is the size of all of Yorick&rsquo;s predefined palettes.
+</p>
+<p>The palette command allows you to change palettes.  The Yorick
+distribution comes with predefined palettes called &lsquo;<tt>earth.gp</tt>&rsquo; (the
+default palette), &lsquo;<tt>gray.gp</tt>&rsquo;, &lsquo;<tt>yarg.gp</tt>&rsquo;, &lsquo;<tt>heat.gp</tt>&rsquo;,
+&lsquo;<tt>stern.gp</tt>&rsquo;, and &lsquo;<tt>rainbow.gp</tt>&rsquo;.  To load the gray palette, you
+would type:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">palette, &quot;gray.gp&quot;
+</pre></td></tr></table>
+
+<p>These palettes tend to start with dark colors and progress toward
+lighter colors.  The exceptions are &lsquo;<tt>yarg.gp</tt>&rsquo;, which is a reversed
+version of &lsquo;<tt>gray.gp</tt>&rsquo; (your picture looks like the photographic
+negative of the way it looks with the &lsquo;<tt>gray.gp</tt>&rsquo; palette), and
+&lsquo;<tt>rainbow.gp</tt>&rsquo;, which runs through the colors in spectral order at
+nearly constant intensity.  Besides &lsquo;<tt>gray.gp</tt>&rsquo; (or &lsquo;<tt>yarg.gp</tt>&rsquo;)
+and &lsquo;<tt>rainbow.gp</tt>&rsquo;, it&rsquo;s tough to find color sequences that people
+have been trained to think have an order.  The &lsquo;<tt>heat.gp</tt>&rsquo; palette is
+a red-orange scale resembling the colors of an iron bar as it grows
+hotter.  The default &lsquo;<tt>earth.gp</tt>&rsquo; is loosely based on mapmaker&rsquo;s
+colors from dark blue deep ocean to green lowlands to brown highlands to
+white mountains.
+</p>
+<p>Instead of a file name, you may pass palette three arrays of numbers
+ranging from 0 to 255, which are relative intensities of red, green,
+and blue.  For example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">scale = bytscl(indgen(200),top=255);
+palette, scale,scale,scale;
+</pre></td></tr></table>
+
+<p>produces the same palette as &lsquo;<tt>gray.gp</tt>&rsquo;, but by direct specification
+of RGB values, rather than by reading a palette file.
+</p>
+<p>Yorick internally uses the bytscl function to map the z values in a
+plf, pli, or plfp command into a (0-origin) index into the palette.
+Occasionally, as here, you will also want to call bytscl explicitly.
+</p>
+<p>The predefined palette files are in the directory <kbd>Y_SITE+&quot;gist&quot;</kbd>;
+you should be able to figure out their format easily if you want to
+produce your own.  If you create a directory &lsquo;<tt>~/Gist</tt>&rsquo; and put your
+custom palette files there, Yorick will find them no matter what its
+current working directory.  The library include file &lsquo;<tt>color.i</tt>&rsquo;
+includes functions to help you construct palettes, and a dump_palette
+function which writes a palette in Yorick&rsquo;s standard format.
+</p>
+<p>You can use the <kbd>query=</kbd> keyword to retrieve the RGB values for the
+currently installed palette:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">local r,g,b;
+palette,query=1, r,g,b;
+</pre></td></tr></table>
+
+<p>There is also a <kbd>private=</kbd> keyword to palette, which you should
+investigate if you are interested in color table animation, or if
+other programs steal all your colors.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_69.html#gridxy" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.3 gridxy" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_71.html#Color-model" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.5 Color model" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

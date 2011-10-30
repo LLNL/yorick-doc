@@ -1,0 +1,95 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package textload (in textload.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>T</h3>
+    <p><a href="textload.html#text_cells">text_cells</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="textload.html#text_csv">text_csv</a></p>
+    <p><a href="textload.html#text_lines">text_lines</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="textload.html#text_load">text_load</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="text_cells"></a><h3>text_cells</h3>
+  <pre>DOCUMENT text = text_cells(filename, delim)
+  returns a 2D array of strings containing the spreadsheet data
+  in FILENAME.  FILENAME can be comma separated values (.csv),
+  or tab-delimited columns.  DELIM is the field delimiter character,
+  which can be omitted to get the following default behavior:
+  1. If FILENAME ends in ".csv" (any case), DELIM = ",".
+  2. If the file contains any tab characters, DELIM = "\t".
+  3. Otherwise, DELIM = ",".
+  If DELIM = ",", an attempt is made to conform with.csv format
+  conventions with respect to quoted fields.
+  The quote= keyword controls whether or not to exclude field
+  separators (delim or newline) enclosed in "...".  The default
+  is quote=1 (yes) for DELIM=",", otherwise quote=0 (no).</pre>
+  <p>SEE ALSO: <a href="textload.html#text_lines">text_lines</a>, <a href="textload.html#text_load">text_load</a>, <a href="textload.html#text_csv">text_csv</a></p>
+</div>
+<div class="docblock"><a name="text_csv"></a><h3>text_csv</h3>
+  <pre>DOCUMENT text_csv, file, col1, col2, ..., colN
+         f = text_csv(file, col1, col2, ..., colN)
+  write comma or tab delimited columns COL1, ... COLN to FILE, which
+  may be a filename, a text file handle, or nil [] to write to the
+  terminal.  Called as a function, returns the open text file handle.
+  The default delimiter between columns is a comma, unless FILE is
+  nil, in which case the default delimiter is tab.  You can force tab
+  delimited columns using the tab=1 keyword, and comma delimited columns
+  using tab=0.
+
+  Each COLi may be nil to leave an empty column, a 1D array to
+  produce a single column, or a 2D array to produce several columns.
+  For 2D arrays, the first index is the row index, and the second is
+  the column index.  Acceptable data types are string or any numeric
+  data type.  The columns need not have the same length; the first
+  row will be shared.  Numeric types are converted to strings using
+  the totxt function.  You can pass a format argument to totxt using
+  a fmt= keyword to text_csv.  If fmt=[fmt1,fmt2,...,fmtM], the
+  formats will apply to the first M columns (note that one COLi spans
+  multiple columns if it is 2D, so multiple fmtM may apply).  The
+  fmtI only apply to non-string COLi; the fmtI corresponding to a
+  string COLi are ignored.
+
+  Finally, text_csv accepts a head=[head1,head2,...,headM] to write
+  a first row of column headings.  Thus,
+    text_csv, filename, head=[h1,h2,h3], c1, c2, c3;
+  is equivalent to
+    text_csv, text_csv(filename, h1, h2, h3), c1, c2, c3;
+  assuming that h1, h2, and h3 are scalar strings.  Like fmt=, the
+  head= are per column, not per COLi argument.
+
+  Different platforms (e.g.- MSWindows, MacOS X, Linux, etc) behave
+  differently, but here are some things to try in order to move your
+  yorick arrays into a spreadsheet: If you write tab delimited columns
+  to your terminal, you may find that cutting the output from your
+  terminal window and pasting it into your spreadsheet window properly
+  preserves your columns.  Additionally, if you write a file whose
+  name ends in ".csv", your file manager will probably recognize that
+  it should be opened in a spreadsheet program.  (You might also want
+  to experiment with comma or tab delimited text file names ending in
+  ".xls", which often behave like actual spreadsheet files.)  Finally,
+  if you are an emacs user, don't miss csv-mode in recent versions.</pre>
+  <p>SEE ALSO: <a href="textload.html#text_cells">text_cells</a>, <a href="std-filetxt.html#totxt">totxt</a></p>
+</div>
+<div class="docblock"><a name="text_lines"></a><h3>text_lines</h3>
+  <pre>DOCUMENT string_array = text_lines(filename)
+  returns string array representing the text file FILENAME, one
+  string per line.  Unlike rdline, text_lines handles old Mac and
+  Windows/DOS end-of-lines correctly.</pre>
+  <p>SEE ALSO: <a href="textload.html#text_cells">text_cells</a>, <a href="textload.html#text_load">text_load</a></p>
+</div>
+<div class="docblock"><a name="text_load"></a><h3>text_load</h3>
+  <pre>DOCUMENT char_array = text_load(filename)
+  returns char array representing the text file FILENAME.  If FILENAME
+  contains old Mac OS CR end-of-line characters, or Windows/DOS CRLF
+  end-of-line sequences, these are converted to the single LF UNIX
+  end-of-line.  Adds final newline if not present.</pre>
+  <p>SEE ALSO: <a href="textload.html#text_lines">text_lines</a>, <a href="textload.html#text_cells">text_cells</a></p>
+</div>

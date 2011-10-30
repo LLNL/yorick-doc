@@ -1,0 +1,95 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="for"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_13.html#while-and-do" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.1 The while and do while statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_15.html#goto" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4.3 Using break, continue, and goto" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="The-for-statement"></a>
+<h4 class="subsubsection">1.2.4.2 The <kbd>for</kbd> statement</h4>
+
+<p>The <kbd>for</kbd> statement is a &ldquo;packaged&rdquo; form of a <kbd>while</kbd> loop.
+The meaning of this generic <kbd>for</kbd> statement is the same as the
+following <kbd>while</kbd>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">for (start_statements ; condition ; step_statements) body_statements
+
+start_statments
+while (condition) {
+  body_statements
+  step_statements
+}
+</pre></td></tr></table>
+
+<p>There only two reasons to prefer <kbd>for</kbd> over <kbd>while</kbd>: Most
+importantly, <kbd>for</kbd> can show &ldquo;up front&rdquo; how a loop index is
+initialized and incremented, rather than relegating the increment
+operation (<kbd>step_statements</kbd>) to the end of the loop.  Secondly,
+the <kbd>continue</kbd> statement (see <a href="yorick_15.html#goto">goto</a>) branches just past the body of
+the loop, which would include the <kbd>step_statements</kbd> in a
+<kbd>while</kbd> loop, but not in a <kbd>for</kbd> loop.
+</p>
+<p>In order to make Yorick loop syntax agree with C, Yorick&rsquo;s <kbd>for</kbd>
+statement has a syntactic irregularity: If the <kbd>start_statements</kbd>
+and <kbd>step_statements</kbd> consist of more than one statement, then
+commas (not semicolons) separate the statements.  (The C comma
+operator is not available in any other context in Yorick.)  The two
+semicolons separate the start, condition, and step clauses and must
+always be present, but any or all of the three clauses themselves may
+be blank.  For example, in order to increment two variables <kbd>i</kbd>
+and <kbd>j</kbd>, a loop might look like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">for (i=1000, j=1 ; i&gt;j ; i+=1000, j*=2);
+</pre></td></tr></table>
+
+<p>This example also illustrates that the <kbd>body_statements</kbd> may be
+omitted; the point of this loop is merely to compute the first <kbd>i</kbd>
+and <kbd>j</kbd> for which the condition is not satisfied.  The trailing
+semicolon is necessary in this case, since otherwise the line would
+be continued (on the assumption that the loop body was to follow).
+</p>
+
+<p>The <kbd>+=</kbd> and <kbd>*=</kbd> are special forms of the <kbd>=</kbd> operator;
+<kbd>i=i+1000</kbd> and <kbd>j=j*2</kbd> mean the same thing.  Any binary
+operator may be used in this short-hand form in order to increment a
+variable.  Like <kbd>++i</kbd> and <kbd>--i</kbd>, these are particularly useful
+in loop increment expressions.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_13.html#while-and-do" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.1 The while and do while statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_15.html#goto" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4.3 Using break, continue, and goto" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

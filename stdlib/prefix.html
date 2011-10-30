@@ -1,0 +1,78 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package prefix (in prefix.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+    <p><a href="prefix.html#prefix_comment">prefix_comment</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="prefix.html#prefix_find">prefix_find</a></p>
+    <p><a href="prefix.html#prefix_read">prefix_read</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="prefix.html#prefix_write">prefix_write</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="prefix_comment"></a><h3>prefix_comment</h3>
+  <pre>DOCUMENT prefix_comment(line)
+  the default comment detector function for prefix_read, makes
+  blank lines and any line beginning with "#" as its first non-blank
+  character a comment.</pre>
+  
+</div>
+<div class="docblock"><a name="prefix_find"></a><h3>prefix_find</h3>
+  <pre>DOCUMENT prefix_find(f, prefix)
+  scan to the first line of text file F which begins with the
+  blank delimited prefix PREFIX.  (You may specify other delimiters
+  by giving prefix_find a DELIMIT keyword, whose value will be
+  passed to the strtok function.)  The return value is 1 if such
+  a line was found, 0 if not.  In the first case, F will be positioned
+  to reread the prefixed line; in the second case, F will be at the
+  end-of-file.
+</pre>
+  <p>SEE ALSO: <a href="prefix.html#prefix_read">prefix_read</a>, <a href="prefix.html#prefix_write">prefix_write</a>, <a href="std-string.html#strtok">strtok</a></p>
+</div>
+<div class="docblock"><a name="prefix_read"></a><h3>prefix_read</h3>
+  <pre>DOCUMENT value_array= prefix_read(f, prefix)
+  reads lines of text file F which begin with the blank delimited
+  prefix PREFIX.  (You may specify other delimiters by giving
+  prefix_read a DELIMIT keyword, whose value will be passed to the
+  strtok function.)  Stops when a line not beginning with that
+  prefix is encountered.  You may also supply a COMMENT keyword,
+  which should be a function accepting a string argument and
+  returning 0 to indicate that the line is not a comment line,
+  and 1 to indicate that it is a comment.  By default, blank lines
+  and lines beginning with "#" are taken as comments and skipped.
+
+  The returned VALUE_ARRAY is [] if no PREFIX lines were found,
+  and an array of type double and length equal to the total number
+  of numbers Ni:
+
+    prefix N1 N2 N3 N4
+    prefix N5 N6
+    prefix ... Nn
+</pre>
+  <p>SEE ALSO: <a href="prefix.html#prefix_find">prefix_find</a>, <a href="prefix.html#prefix_write">prefix_write</a>, <a href="prefix.html#prefix_comment">prefix_comment</a>, <a href="std-string.html#strtok">strtok</a></p>
+</div>
+<div class="docblock"><a name="prefix_write"></a><h3>prefix_write</h3>
+  <pre>DOCUMENT prefix_read, f, prefix, value_array
+  writes lines of text file F which begin with the prefix PREFIX:
+  
+    prefix N1 N2 N3 N4 N5
+    prefix N6 N7 N8 N9 N10
+    prefix N11 N12
+
+  The format is %14.6e by default, but you can adjust the ".6" by
+  specifying an NDIGITS keyword (6 is the default).
+
+  Yorick will put as many numbers as fit within 79 characters by
+  default, and each successive line begins with PREFIX.  You can
+  change this default line width by specifying a WIDTH keyword
+  (default 79).
+</pre>
+  <p>SEE ALSO: <a href="prefix.html#prefix_find">prefix_find</a>, <a href="prefix.html#prefix_read">prefix_read</a></p>
+</div>

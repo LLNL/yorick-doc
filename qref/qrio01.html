@@ -1,0 +1,55 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Reading Text</h2>
+<table><tbody>
+<tr><td><tt>read, <i>f, var1, var2, ..., varN</i></tt></td>
+<td>reads the <i>varI</i> from file <i>f</i></td></tr>
+<tr><td><tt>read, <i>var1, var2, ..., varN</i></tt></td>
+<td>reads the <i>varI</i> from keyboard</td></tr>
+<tr><td><tt>read_n, <i>f, var1, var2, ..., varN</i></tt></td>
+<td>read, skip non-numeric tokens</td></tr>
+<tr><td><tt>rdline(<i>f</i>)</tt></td>
+<td>returns next line from file <i>f</i></td></tr>
+<tr><td><tt>rdline(<i>f, n</i>)</tt></td>
+<td>returns next <i>n</i> lines from file <i>f</i></td></tr>
+<tr><td><tt>sread, <i>s, var1, var2, ..., varN</i></tt></td>
+<td>reads the <i>varI</i> from string <i>s</i></td></tr>
+</tbody></table>
+<p>The data type and dimensions of the <i>varI</i> determine how the text
+is converted as it is read. The <i>varI</i> may be arrays, provided the
+arrays have identical dimensions. If the <i>varI</i> have length <b>L</b>,
+then the <tt>read</tt> is applied as if called <b>L</b> times, with successive
+elements of each of the <i>varI</i> read on each call.
+</p>
+<p>The <tt>read</tt> function takes the <tt>prompt</tt> keyword to set
+the prompt string, which defaults to <tt>"read> "</tt>.
+</p>
+<p>Both <tt>read</tt> and <tt>sread</tt> accept the <tt>format</tt> keyword.
+The format is a string containing conversion specifiers for the <i>varI</i>.
+The number of conversion specifiers should match the number of <i>varI</i>.
+If the <i>varI</i> are arrays, the format string is applied repeatedly
+until the arrays are filled.
+</p>
+<p>Read format strings in Yorick have (nearly) the same meaning as the
+format strings for the ANSI standard C library <tt>scanf</tt> routine.
+In brief, a format string consists of:
+</p>
+<ul>
+<li> whitespace
+<br>means to skip any number of whitespace characters in the source</li>
+<li> characters other than whitespace and <tt>%</tt>
+<br>must match characters in the source exactly or the read operation stops</li>
+<li> conversion specifiers beginning with <tt>%</tt>
+<br>each specifier ends with one of the characters <tt>d</tt> (decimal
+integer), <tt>i</tt> (decimal, octal, or hex integer), <tt>o</tt> (octal
+integer), <tt>x</tt> (hex integer), <tt>s</tt> (whitespace delimited string),
+any of <tt>e</tt>, <tt>f</tt>, or <tt>g</tt> (real),
+<tt>[<i>xxx</i>]</tt> to match the longest string of characters in the list,
+<tt>[^<i>xxx</i>]</tt>
+to match the longest string of characters not in the list, or <tt>%</tt>
+(the <tt>%</tt> character - not a conversion)</li>
+</ul>
+
+

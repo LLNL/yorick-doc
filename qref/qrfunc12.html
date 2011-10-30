@@ -1,0 +1,32 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Manipulating Strings</h2>
+<p>Yorick type <tt>string</tt> is a pointer to a 0-terminated array of
+<tt>char</tt>.
+A string with zero characters - <tt>""</tt> - differs from a zero pointer
+- <tt>string(0)</tt>. A <tt>string</tt> variable <i>s</i> can be converted
+to a <tt>pointer</tt> to a 1-D array of <tt>char</tt>, and such a <tt>pointer</tt><i>p</i> can be converted back to a <tt>string</tt>:
+<tt><i>p</i>=pointer(<i>s</i>); <i>s</i>=string(<i>p</i>);</tt>
+These conversions copy the characters, so you can't use the pointer <i>p</i> to
+alter the characters of <i>s</i>.  The <tt>strchar</tt> function directly
+converts between <tt>string</tt> and <tt>char</tt> data.
+</p>
+<p>Given a string or an array of strings <i>s</i>:
+</p>
+<p><tt>strlen(<i>s </i>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> number of characters in each element of <i>s</i>
+<br><tt>strpart(<i>s, rng</i>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> returns substring <i>rng</i> of <i>s</i>
+<br><tt>strfind(<i>pat, s</i>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> returns <i>rng</i> where <i>pat</i> occurs in <i>s</i>
+<br><tt>strgrep(<i>pat, s</i>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> regular expression version of <tt>strfind</tt>
+<br><tt>strword(<i>s, delims</i>)&nbsp;&nbsp;</tt> returns <i>rng</i> of words in <i>s</i>
+<br><tt>streplace(<i>s, rng, to</i>)&nbsp;</tt> replaces <i>rng</i> of <i>s</i> by <i>to</i>
+</p>
+<p>The <tt>strfind</tt>, <tt>strgrep</tt>, and <tt>strword</tt> functions
+return <i>rng</i> lists suitable as inputs to <tt>strpart</tt> or
+<tt>streplace</tt>.  Other string manipulation functions include
+<tt>strmatch</tt>, <tt>strglob</tt>, <tt>strcase</tt>, and <tt>strtrim</tt>.
+Use <tt>help</tt> for details.
+</p>
+
+

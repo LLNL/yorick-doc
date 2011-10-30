@@ -1,0 +1,445 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package pkg_mngr (in pkg_mngr.i) - yorick package manager </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>G</h3>
+    <p><a href="pkg_mngr.html#get_international_date">get_international_date</a></p>
+    <h3>H</h3>
+    <p><a href="pkg_mngr.html#has_write_permissions">has_write_permissions</a></p>
+    <h3>P</h3>
+    <p><a href="pkg_mngr.html#parse_info_file">parse_info_file</a></p>
+    <p><a href="pkg_mngr.html#pkg_fetch_url">pkg_fetch_url</a></p>
+    <p><a href="pkg_mngr.html#pkg_get_keyword_value">pkg_get_keyword_value</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="pkg_mngr.html#pkg_info">pkg_info</a></p>
+    <p><a href="pkg_mngr.html#pkg_install">pkg_install</a></p>
+    <p><a href="pkg_mngr.html#pkg_list">pkg_list</a></p>
+    <p><a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a></p>
+    <p><a href="pkg_mngr.html#pkg_remove">pkg_remove</a></p>
+    <p><a href="pkg_mngr.html#pkg_reset">pkg_reset</a></p>
+    <p><a href="pkg_mngr.html#pkg_save">pkg_save</a></p>
+    <p><a href="pkg_mngr.html#pkg_setup">pkg_setup</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="pkg_mngr.html#pkg_sync">pkg_sync</a></p>
+    <p><a href="pkg_mngr.html#pkg_sys">pkg_sys</a></p>
+    <p><a href="pkg_mngr.html#pkg_upgrade">pkg_upgrade</a></p>
+    <h3>R</h3>
+    <p><a href="pkg_mngr.html#recursive_rename">recursive_rename</a></p>
+    <p><a href="pkg_mngr.html#recursive_rmdir">recursive_rmdir</a></p>
+    <h3>V</h3>
+    <p><a href="pkg_mngr.html#vers_cmp">vers_cmp</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="get_international_date"></a><h3>get_international_date</h3>
+  <pre>DOCUMENT get_intern_date(date)
+meant to convert date returned by getdate() into something
+clear and understandable by people from europe and US</pre>
+  
+</div>
+<div class="docblock"><a name="has_write_permissions"></a><h3>has_write_permissions</h3>
+  <pre>DOCUMENT has_write_permissions(dir)
+Test if user has write permission in "dir"
+returns 1 if the user has write permission, 0 if not.
+Create and delete a file "test_permissions_$USER", with
+$USER = name of the user as defined in this session environment</pre>
+  
+</div>
+<div class="docblock"><a name="parse_info_file"></a><h3>parse_info_file</h3>
+  <pre>DOCUMENT parse_info_file(file)
+Parse a .info file (file describing a package in the
+yorick package manager, similar to fink/debian info files)
+Return a structure with elements = parsed keywords values</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_fetch_url"></a><h3>pkg_fetch_url</h3>
+  <pre>DOCUMENT pkg_fetch_url(url,dest,verbose=)
+wrap the url fetch command (e.g. curl) with error checking</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_get_keyword_value"></a><h3>pkg_get_keyword_value</h3>
+  <pre>DOCUMENT pkg_get_keyword_value(text,keyw)
+return parsed value of keyword read from a .info
+file, in the form:
+keyword: value
+or
+keyword: >>
+multi
+line value
+>></pre>
+  
+</div>
+<div class="docblock"><a name="pkg_info"></a><h3>pkg_info</h3>
+  <pre>DOCUMENT pkg_info,pkgname
+Prints out more information about package "pkgname" (string).
+Does nothing else.</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_install"></a><h3>pkg_install</h3>
+  <pre>DOCUMENT pkg_install,pkgname,force=,check=,verbose=
+Install package "pkgname" (string vector)
+Grabs the tarball from a central server, untar it, copy the files
+according to the directory structure specified in the untared
+package, possibly run a preflight and postflight include files (for
+special needs), and place the package info file and a list of
+installed files in package/installed/.
+
+pkgname can be a string scalar, vector, and contains wildcard to
+install multiple packages in one call.
+examples: pkg_install,"y*" or pkg_install,["soy","yao"] or pkg_install,"*"
+
+Keywords:
+force: force installation
+check: run checks after install
+verbose: 0 (silent), 1 (some messages), 2 (chatty), 3 (more chatty)
+</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a>, <a href="pkg_mngr.html#pkg_remove">pkg_remove</a>.</p>
+</div>
+<div class="docblock"><a name="pkg_list"></a><h3>pkg_list</h3>
+  <pre>DOCUMENT pkg_list,server,sync=,verbose=
+Print out a list of available packages, including
+version number, whether it is installed (installed
+version), and a short description.
+server: overrides the PKG_SERVER variable definition
+sync= : if set, equivalent to "pkg_sync; pkg_list;"</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a>, <a href="pkg_mngr.html#pkg_sync">pkg_sync</a>, <a href="pkg_mngr.html#pkg_install">pkg_install</a></p>
+</div>
+<div class="docblock"><a name="pkg_mngr"></a><h3>pkg_mngr</h3>
+  <pre>DOCUMENT pkg_mngr.i
+
+Yorick Package Manager. Main functions
+
+pkg_setup               Set up pkg_mngr parameters (see below for details)
+pkg_sync                Sync the local package repository with server
+pkg_list                List all available packages (list install status
+                        ("i" marks installed packages), the package name,
+                        the last available version, the installed version
+                        (when applicable) and a short description.
+pkg_install,"pkg_name"  Install package "pkg_name"
+pkg_upgrade,"pkg_name"  Upgrade package "pkg_name"
+pkg_remove,"pkg_name"   Remove package "pkg_name"
+pkg_info,"pkg_name"     Print detail info about package "pkg_name"
+pkg_save                Saves PKG global variables in default file,
+                         which will be re-read each time pkg-mngr.i
+                         is included. Called by pkg_setup.
+pkg_reset               Delete all tarballs (in case of problem).
+
+ --- INTRODUCTION TO THE YORICK PACKAGE INSTALLER
+
+ --- TYPICAL USE
+
+ FIRST TIME USE:
+
+ > pkg_setup
+ ... will ask for parameters for your OS/installation
+ ... just set the OS, most of the other defaults should be OK.
+
+  PKG_FETCH_CMD       : system cmd to fetch a file through an
+                         internet connection [ex: curl]
+  PKG_SERVER          : URL of central server with info files
+  PKG_OS              : OSTYPE-ARCHTYPE. There is a limited number
+                         of these available. pkg_setup will fetch
+                         available value from the server and propose
+                         a list to the user.
+  PKG_GUNTAR_CMD      : system cmd to gunzip and untar a tgz file
+                         [ex; "tar -zxf"]
+  PKG_TMP_DIR         : temporary directory. Normaly Y_HOME/packages/tmp
+  PKG_VERBOSE         : verbose level
+  PKG_ASK_CONFIRM     : ask for confirmation in critical operations
+  PKG_RUN_CHECK       : run check after install
+
+ > pkg_sync
+ ...to sync your local info file repository with the server
+ ...this should be done from time to time.
+
+ ---
+
+ > pkg_list
+ ...fetch all packages .info files on the server, and prints out
+ the available & installed packages, with their version.
+
+ > pkg_install,"pkgname"
+ ... will install package "pkgname"
+
+ FURTHER USE:
+pkg_list, pkg_install, and pkg_remove are the only 3 functions
+that should be necessary for further use.
+
+ --- IN CASE OF PROBLEMS:
+ In case something went wrong and you downloaded a bad tarball:
+ Solution 1: try reloading with force=1
+ Solution 2: Go in Y_HOME/packages/tarballs
+ and remove the offensive tgz file. In doubt, you can just wipe
+ up the whole directory content. tarballs will be downloaded again
+ if pkg_mngr does not find existing local ones.
+
+ --- SERVER / CLIENT ORGANIZATION
+
+ The yorick package manager (pkg_mngr.i) is organized with several
+ central servers (sourceforge, maumae), being repositories of binary
+ packages. These packages are self-contained plugins for yorick, and
+ include yorick include files, autoload files and libraries. Necessary
+ dependencies have been linked in. Other yorick package dependecies
+ are cared for, and dependent packages are installed automatically.
+
+ Locally, the directory package is the home of the packager. It contains
+ 3 subdirectories:
+ packages/info: home of the info files that describe all available
+                packages.
+ packages/installed: info files for installed packages.
+ packages/tarballs:  tarballs for installed packages.
+
+ --- PACKAGE STRUCTURE:
+
+ A standard package includes (once tar zxvf'd):
+
+
+ root/
+ root/pkg.info         : package info file
+ root/preflight.i      : if present, will be run, from Y_HOME/packages,
+                          before the copying of the other files (but
+                          after the tar -zxvf or equivalent).
+ root/postflight.i     : if present, will be run, from Y_HOME/packages,
+                          after the copying of the other files (but
+                          before the dist tree cleanup).
+ root/dist/            : distribution root
+ root/dist/y_site/     : all the files under this will be copied
+                          recursively into Y_SITE.
+ root/dist/y_home/     : all the files under this will be copied
+                          recursively into Y_HOME.
+
+ I recommend to include and distribute a copy of the package source:
+ It is (1) educational, (2) easier to rebuild if needed and (3) that's
+ a good place to store a check.i and other example for the package (and
+ perhaps a doc). A good place to store the source is Y_SITE/contrib/pkg.
+
+ Here is an example for the HDF5 package:
+ 
+ poliahu:tarballs% tar zxvf hdf5-0.5.tgz
+ hdf5/
+ hdf5/dist/
+ hdf5/dist/check.i
+ hdf5/dist/y_home/
+ hdf5/dist/y_home/i-start/
+ hdf5/dist/y_home/i-start/yhdf5.i
+ hdf5/dist/y_home/lib/
+ hdf5/dist/y_home/lib/hdf5.so
+ hdf5/dist/y_site/
+ hdf5/dist/y_site/contrib/
+ hdf5/dist/y_site/contrib/hdf5/
+ hdf5/dist/y_site/contrib/hdf5/check.i
+ hdf5/dist/y_site/contrib/hdf5/hdf5.c
+ hdf5/dist/y_site/contrib/hdf5/hdf5.i
+ hdf5/dist/y_site/contrib/hdf5/Makefile
+ hdf5/dist/y_site/contrib/hdf5/yhdf5.i
+ hdf5/dist/y_site/i0/
+ hdf5/dist/y_site/i0/hdf5.i
+ hdf5/hdf5.info          
+
+ --- INSTALLER MECHANICS
+
+ The operation of installing a packages goes through two main parts:
+
+ part 1. Get the tarball from the server.
+
+ part 2. Once the tarball is local, it is installed. All the libraries
+   and other files are put where they belong. Usually:
+   libraries (*.so) are put in Y_HOME/lib
+   include files (*.i) are put in Y_SITE/i0
+   autoload files are put in Y_HOME/i-start
+   However, this is not mandatory, and depends on how the maintainer
+   has arrange the files in the tarball.
+   The installer also scans for a preflight and postflight include files,
+   and run them (include them) if present.
+
+ In more details:
+
+ pkgname example = hdf5;
+
+ I.  check for depenency tree. Announce dependencies, possibly
+     ask for confirm.
+ II. Start by lowest dependency:
+    1.  check if already on disk locally [to come]
+    2.  if yes, check that local version is the last one [to come]
+    3.  if not, offer the choice to re-install local version
+          or fetch and install new one [to come]
+    4.  fetch tarball (if necessary)
+    5.  md5 it [to come]
+    6.  gunzip + untar it (e.g. tar -zxvf)
+    7.  cd in pkgname directory
+    8.  check if preflight exist. If it does, execute it (include it).
+    9.  recursively copy the distributed files in Y_SITE and Y_HOME
+    10. copy the info file in the installed directory, with a list
+          of the installed files.
+    11. check if postflight exist. If it does, execute it (include it).
+    12. clean up after ourselves (temp dist tree). Keep tarball.
+          
+ III. Update installed pkg. This is done automatically by putting
+      the info file of the installed package in package/installed
+
+
+ --- .INFO FILE
+
+ Here is an example of a .info file (from the hdf5 package):
+
+ Package: hdf5
+ Kind: plugin
+ Version: 0.5
+ Revision: 1
+ Description: Hierarchical Data Format 5 interface
+ License: GPL
+ Maintainer: Francois Rigaut <frigaut@users.sf.net>
+ OS: macosx
+ Depends: yorick(>=1.6.02)
+ Source: http://www.maumae.net/yorick/packages/%o/tarballs/hdf5-%v.tgz
+ Source-MD5: 6f8038cd09f72f4ff060e2d278256b6f
+ Source-Directory: contrib/hdf5
+ DocFiles: README NEWS doc/*.doc doc/*.pdf doc/*.ps doc/*.tex
+ Homepage: http://www.maumae.net/yorick/doc/plugins.php
+ DescDetail: <<
+ HDF5 is the yorick interface plugin to the NCSA Hierarchical Data Format
+ version 5. It includes function for reading, writing, updating, getting
+ information on HDF5 files.
+ <<
+ DescUsage: <<
+ See i/hdf5_tests.i for a test suite. Type 
+ "yorick -batch hdf5_tests.i" in a terminal to run it.
+ <<
+ DescPort: <<
+ This package will compile Yorick only on MacOSX 10.3.4 or later, because
+ of a bug in the system math library libm (part of /usr/lib/LibSystem.dylib)
+ in earlier versions of MacOSX 10.3.
+ <<
+
+ Right now, the only important (used) keywords are:
+ Version, Description, OS, Depends, Source
+
+ If you want to contribute a package, you will have to generate a
+ .info file:
+
+ Instructions and tips:
+ - Keep the description short (< 45 characters), you can expand ad lib in
+   the DescDetail
+ - Depends can include several members, separated by a comma (e.g.
+   yorick(>=1.6.02),imutil(>0.4)
+ - OS has to be "macosx","linux" or "windows" for now. lowercase pls.
+ - Source if the URL where the tarball can be fetched. In the near future,
+   I'm planning to make that compatible with a vector (several URL that
+   will be tried after another in case a link is down) but for now,
+   keep that a single URL.
+ - Version can only contain integer (e.g. 2.1.4-r2 does *not* work).
+ 
+
+ --- HISTORY
+
+ * v. 0.7, Sun, 21 May 2006 19:00:55 +0200
+   Francois Rigaut & Thibaut Paumard
+   Allow installations in other locations than the Y_SITE and Y_HOME.
+   Some users may not have access to these and still want to install
+   packages for their personnal use.
+
+ --- TO DO
+
+ * Check documentation relative to new functionalities in v. 0.7
+
+ * At one point, we should have, to complement this installer, a 
+   utility to check for symbols conflicts (e.g. same function names
+   in 2 different packages)</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_remove"></a><h3>pkg_remove</h3>
+  <pre>DOCUMENT pkg_remove,pkgname,verbose=
+Remove package "pkgname" (string)
+Remove all files (libraries, include files, autoload)
+that were installed by the installer.
+
+pkgname can be a string scalar, vector, and contains wildcard to
+remove multiple packages in one call.
+examples: pkg_remove,"y*" or pkg_remove,["soy","yao"] or pkg_remove,"*"
+
+help,pkg_mngr for more details.
+</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a>, <a href="pkg_mngr.html#pkg_install">pkg_install</a></p>
+</div>
+<div class="docblock"><a name="pkg_reset"></a><h3>pkg_reset</h3>
+  <pre>DOCUMENT pkg_reset(verbose=)
+Brute force solution: if a bad tarball has been downloaded,
+pkg_mngr will try and try using it and fail. One can remove
+it by hand in Y_HOME/packages/tarballs/ or use this routine
+to remove them all.</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_save"></a><h3>pkg_save</h3>
+  <pre>DOCUMENT pkg_save
+Save the packager parameters in the file
+Y_HOME/packages/pkg_setup.i</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_setup">pkg_setup</a></p>
+</div>
+<div class="docblock"><a name="pkg_setup"></a><h3>pkg_setup</h3>
+  <pre>DOCUMENT pkg_setup
+Simply print out the global variables relative to this
+package manager.</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a>, <a href="pkg_mngr.html#pkg_save">pkg_save</a>.</p>
+</div>
+<div class="docblock"><a name="pkg_sync"></a><h3>pkg_sync</h3>
+  <pre>DOCUMENT pkg_sync(server)
+sync the info tree with the central server
+server: overrides the PKG_SERVER variable definition</pre>
+  <p>SEE ALSO: <a href="pkg_mngr.html#pkg_mngr">pkg_mngr</a>, <a href="pkg_mngr.html#pkg_list">pkg_list</a>, <a href="pkg_mngr.html#pkg_install">pkg_install</a></p>
+</div>
+<div class="docblock"><a name="pkg_sys"></a><h3>pkg_sys</h3>
+  <pre>DOCUMENT pkg_sys(cmd,verbose=)
+simple interface to the system command.
+Allows echoing of commands output to system</pre>
+  
+</div>
+<div class="docblock"><a name="pkg_upgrade"></a><h3>pkg_upgrade</h3>
+  <pre>DOCUMENT pkg_upgrade,pkgnames,verbose=
+Upgrade requested packages, or all upgradable packages if no arguments
+Upgrade to highest available version.
+
+pkg_upgrade,packages
+pkgname can be a string scalar, vector, and contains wildcard to
+install multiple packages in one call.
+
+examples: pkg_upgrade,"y*" or pkg_upgrade,["soy","yao"] or pkg_upgrade,"*"
+
+Without arguments, upgrade all upgradable packages.
+
+bug: I don't correctly parse the version, so 0.5.03 is considered
+lower than 0.5.2</pre>
+  
+</div>
+<div class="docblock"><a name="recursive_rename"></a><h3>recursive_rename</h3>
+  <pre>DOCUMENT recursive_rename,dir1,dir2,&list,verbose=,init=
+As it says. This routine will move the whole content of
+dir1 to dir2, recursively.
+Absolute equivalent to the linux/unix command
+cp -pr dir1 dir1
+Except that the files get moved, not copied.</pre>
+  
+</div>
+<div class="docblock"><a name="recursive_rmdir"></a><h3>recursive_rmdir</h3>
+  <pre>DOCUMENT recursive_rmdir,dir,verbose=
+Recursively delete all files and directories under dir, dir
+included.
+Equivalent to the linux/unix command
+rm -rf dir
+Note that recursive_rmdir,"." will fail removing "." (for
+some reason).</pre>
+  
+</div>
+<div class="docblock"><a name="vers_cmp"></a><h3>vers_cmp</h3>
+  <pre>DOCUMENT vers_cmp(v1,op,v2)
+Compare (software) version, using operator op.
+Returns 0 (fail) or 1 (pass).
+Operators allowed are >=, >, ==, < and <=
+Will possibly fails for subversion # > 99 (will exit in error if
+case arises)</pre>
+  
+</div>

@@ -1,0 +1,127 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package make (in make.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+    <p><a href="make.html#make">make</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>W</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="make.html#write_home">write_home</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="make"></a><h3>make</h3>
+  <pre>DOCUMENT make
+      or make, path
+      or make, path, template=1
+      or make, path, template="Makefile_name"
+ creates or updates the Makefile for a compiled package (plugin).
+ If PATH is given, it is the directory containing the source code
+ for the package; by default, PATH is ".", the current working
+ directory.
+
+ With the template= keyword, a template Makefile is written, which
+ you can use as a starting point, filling in all the necessary
+ information by hand.  In this case, make makes no further checks
+ on the contents of the directory.  In the first form, the name of
+ the Makefile template is "Makefile", but if the template= keyword
+ is a string, that name is used instead.  The template Makefile
+ will not function at all until you edit it.
+
+ Alternatively, without the template= keyword, make looks at the
+ contents of the directory, and fills in as much of the Makefile
+ as it can using what it sees.  There are two cases:
+ 1. A Makefile (or makefile) already exists.  Provided the file
+    contains a Y_MAKEDIR= line, make merely updates Y_MAKEDIR,
+    Y_EXE, and Y_EXE_PKGS to reflect this running yorick, and
+    attempts no other modifications of the existing Makefile.
+ 2. No such Makefile exists.  Then make writes a template Makefile,
+    and reads all the .i interpreted source files, .c and .h C source
+    files, and .f or .F or .m Fortran source files in the directory,
+    filling in as much of the Makefile as possible.  In simple cases,
+    the resulting Makefile will be perfectly adequate.  (If there
+    is any Fortran source, however, it will never be adequate.)
+
+ In case 2, the following steps are taken:
+ A. Any .i files containing lines of the form
+     plug_in, "pkname"
+   or
+     if (!is_void(plug_in)) plug_in, "pkgname"
+   are identified as the "package include file(s)" which define
+   the interpreted API for the package.  The make function takes
+   the name of the package from the "pkgname" in these lines.
+   At least one .i file must contain at least one plug_in line;
+   at most one "pkgname" must occur in all the plug_in lines in
+   all the .i files in the directory.  This information is used
+   to fill in the PKG_NAME macro and the PKG_I macro in the
+   Makefile (the latter becomes a list of every .i file containing
+   a plug_in statement).
+ B. All .c, .f, .F, or .m files are assumed to be required compiled
+   source, and the OBJS macro in the Makefile is set to a list of
+   all corresponding .o object files.
+ C. If there are any .h C header files in the directory, every .c
+   C source file is scanned for an include directive which reads
+   the header.  An approriate dependency line for each .o file which
+   is discovered to depend on local .h files in this manner.
+ These steps will be sufficient to produce a finished Makefile in
+ many simple cases; an example is given in the extend/ directory of
+ the yorick distribution (a compiled complementary error function).
+
+ These same steps will be attempted for C++ source code.  The gcc
+ compiler recognizes the file extensions .cc, .cp, .cxx, .cpp, .c++,
+ .C, and .CPP as C++ source code, and so does this make function.
+ Similarly, .hh and .H are recognized as C++ header files, in addition
+ to .h.  Microsoft Visual C++ recognizes only the .cpp and .cxx
+ extensions, and several other popular Windows compilers recognize
+ only .cpp (which is the extension used by Trolltech's Qt library).
+ All of this is by way of warning you to be prepared for portability
+ problems if you attempt to use C++.  The make function will emit
+ rules for building C++ objects (cribbed from gmake); see the comments
+ at that point in the Makefile if these don't work for you.  Be sure
+ that any C++ compiled functions which will be called by yorick are
+ declared as extern "C" in your C++ source.
+
+ However, it is impossible for yorick to automatically discover
+ complicated Makefile rules your package may require.  The most
+ common example is dependency on a third party library, which
+ requires a -l loader option, and very possibly a -L option as
+ well.  You need to add these flags to PKG_DEPLIBS in the Makefile
+ by hand.  If you want such a package to be buildable by non-experts,
+ you will need to provide a configure script in order to fill in
+ the required information across a wide variety of platforms.  This
+ can be exceptionally challenging, which is why yorick itself has
+ no dependencies beyond what is guaranteed to be present on every
+ system where it can run (libc, libm, and, on Unix systems, libX11).
+
+ Once the Makefile has been built it becomes part of the source code
+ of your package, and should not be removed.  (You may want it to
+ have an include directive to get the results of any configure script
+ which must be run, however.)  Thereafter, use
+   yorick -batch make.i
+   (or simply make in a running yorick)
+ to set Y_MAKEDIR, Y_EXE, and Y_EXE_PKGS appropriately for the
+ particular platform where you are building (case 1 above).
+
+ Read Y_HOME/Makepkg for a description of the various make targets
+ available.  In a nutshell:
+   make debug          builds a debugging version (never a plugin)
+   make                builds a release version (a plugin if possible)
+   make install        installs the release version (may require root)
+   make install2       installs to relocate subdirectory
+   make clean          removes all results, leaving only original source
+</pre>
+  <p>SEE ALSO: <a href="make.html#write_home">write_home</a>, <a href="std-plugin.html#plug_in">plug_in</a>, <a href="std-include.html#autoload">autoload</a>, <a href="std-system.html#cd">cd</a></p>
+</div>
+<div class="docblock"><a name="write_home"></a><h3>write_home</h3>
+  <pre>DOCUMENT write_home, dir
+  writes file Y_HOME.txt to directory DIR (current working directory
+  by default).  This file contains the path of Y_HOME, used by yorick
+  to find its public installation when started as a private pacakge.</pre>
+  
+</div>

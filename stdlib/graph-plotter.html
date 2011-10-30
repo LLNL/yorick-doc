@@ -1,0 +1,291 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotter (in graph.i) - plotting functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+    <p><a href="graph-plotter.html#plc">plc</a></p>
+    <p><a href="graph-plotter.html#pldj">pldj</a></p>
+    <p><a href="graph-plotter.html#plf">plf</a></p>
+    <p><a href="graph-plotter.html#plfp">plfp</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plotter.html#plg">plg</a></p>
+    <p><a href="graph-plotter.html#pli">pli</a></p>
+    <p><a href="graph-plotter.html#plm">plm</a></p>
+    <p><a href="graph-plotter.html#plmesh">plmesh</a></p>
+    <p><a href="graph-plotter.html#plt">plt</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotter.html#plt1">plt1</a></p>
+    <p><a href="graph-plotter.html#pltitle">pltitle</a></p>
+    <p><a href="graph-plotter.html#plv">plv</a></p>
+    <h3>X</h3>
+    <p><a href="graph-plotter.html#xytitles">xytitles</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="plc"></a><h3>plc</h3>
+  <pre>DOCUMENT plc, z, y, x, levs=z_values
+      or plc, z, y, x, ireg, levs=z_values
+      or plc, z, levs=z_values
+  plots a contours of Z on the mesh Y versus X.  Y, X, and IREG are
+  as for plm.  The Z array must have the same shape as Y and X.
+  The function being contoured takes the value Z at each point
+  (X,Y) -- that is, the Z array is presumed to be point-centered.
+  The Y, X, and IREG arguments may all be omitted to default to the
+  mesh set by the most recent plmesh call.
+  The LEVS keyword is a list of the values of Z at which you want
+  contour curves.  The default is eight contours spanning the
+  range of Z.
+  See plfc if you want to color the regions between contours.
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          type, width, color, smooth
+          marks, marker, mspace, mphase
+          smooth, triangle, region</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plothi.html#plfc">plfc</a>, <a href="graph-plotmisc.html#contour">contour</a>, <a href="graph-plotmisc.html#spann">spann</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="pldj"></a><h3>pldj</h3>
+  <pre>DOCUMENT pldj, x0, y0, x1, y1
+  plots disjoint lines from (X0,Y0) to (X1,Y1).  X0, Y0, X1, and Y1
+  may have any dimensionality, but all must have the same number of
+  elements.
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          type, width, color</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="plf"></a><h3>plf</h3>
+  <pre>DOCUMENT plf, z, y, x
+      or plf, z, y, x, ireg
+      or plf, z
+  plots a filled mesh Y versus X.  Y, X, and IREG are as for plm.
+  The Z array must have the same shape as Y and X, or one smaller
+  in both dimensions.  If Z is of type char, it is used "as is",
+  otherwise it is linearly scaled to fill the current palette, as
+  with the bytscl function.
+  (See the bytscl function for explanation of top, cmin, cmax.)
+  The mesh is drawn with each zone in the color derived from the Z
+  function and the current palette; thus Z is interpreted as a
+  zone-centered array.
+
+  As for pli and plfp, Z may also be a 3x(NX-1)x(NY-1) array
+  of char giving the [r,g,b] components of each color.  See the
+  color keyword for cautions about using this if you do not have
+  a true color display.
+
+  The Y, X, and IREG arguments may all be omitted to default to the
+  mesh set by the most recent plmesh call.
+  A solid edge can optionally be drawn around each zone by setting
+  the EDGES keyword non-zero.  ECOLOR and EWIDTH determine the edge
+  color and width.  The mesh is drawn zone by zone in order from
+  IREG(2+imax) to IREG(jmax*imax) (the latter is IREG(imax,jmax)),
+  so you can achieve 3D effects by arranging for this order to
+  coincide with back-to-front order.  If Z is nil, the mesh zones
+  are filled with the background color, which you can use to
+  produce 3D wire frames.
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          region, top, cmin, cmax, edges, ecolor, ewidth</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#palette">palette</a>, <a href="graph-plotmisc.html#bytscl">bytscl</a>, <a href="graph-plotmisc.html#histeq_scale">histeq_scale</a></p>
+</div>
+<div class="docblock"><a name="plfp"></a><h3>plfp</h3>
+  <pre>DOCUMENT plfp, z, y, x, n
+  plots a list of filled polygons Y versus X, with colors Z.
+  The N array is a 1D list of lengths (number of corners) of the
+  polygons; the 1D colors array Z has the same length as N.  The
+  X and Y arrays have length sum(N).
+  If Z is of type char, it is used "as is", otherwise it is linearly
+  scaled to fill the current palette, as with the bytscl function.
+  If Z is nil, the background color is used for every polygon.
+  (See the bytscl function for explanation of top, cmin, cmax.)
+
+  As for plf and pli, Z may also be a 3-by-numberof(N) array of
+  char giving the [r,g,b] components of each color.  See the
+  color keyword for cautions about using this if you do not have
+  a true color display.
+
+  As a special case, if n(2:)==1, the first polygon is assumed
+  to have NDC coordinates, while the remaining individual X and Y
+  values are in world coordinates.  The first polygon is drawn
+  numberof(n)-1 times, with its (0,0) placed at each of the
+  individual (X,Y) values in succession.  This is a hack to enable
+  plotting of more elaborate data markers than plg,type=0 -- see
+  the plmk function for details.
+
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide, top, cmin, cmax, edges, ecolor, ewidth</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plothi.html#plfc">plfc</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="plg"></a><h3>plg</h3>
+  <pre>DOCUMENT plg, y, x
+      or plg, y
+  plots a graph of Y versus X.  Y and X must be 1-D arrays of equal
+  length; if X is omitted, it defaults to [1, 2, ..., numberof(Y)].
+  A keyword n=[n1,n2,n3,...nN] can be used to add N curves.  In this
+  case, sum(n) must be numberof(y).
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          type, width, color, closed, smooth
+          marks, marker, mspace, mphase
+          rays, arrowl, arroww, rspace, rphase</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plothi.html#plmk">plmk</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="pli"></a><h3>pli</h3>
+  <pre>DOCUMENT pli, z
+      or pli, z, x1, y1
+      or pli, z, x0, y0, x1, y1
+  plots the image Z as a cell array -- an array of equal rectangular
+  cells colored according to the 2-D array Z.  The first dimension
+  of Z is plotted along x, the second dimension is along y.
+  If Z is of type char, it is used "as is", otherwise it is linearly
+  scaled to fill the current palette, as with the bytscl function.
+  (See the bytscl function for explanation of top, cmin, cmax.)
+
+  As for plf and plfp, Z may also be a 3D array with 1st dimension 3
+  of char giving the [r,g,b] components of each color.  See the
+  color keyword for cautions about using this if you do not have
+  a true color display.
+
+  If X1 and Y1 are given, they represent the coordinates of the
+  upper right corner of the image.  If X0, and Y0 are given, they
+  represent the coordinates of the lower left corner, which is at
+  (0,0) by default.  If only the Z array is given, each cell will be
+  a 1x1 unit square, with the lower left corner of the image at (0,0).
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide, top, cmin, cmax</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotout.html#palette">palette</a>, <a href="graph-plotmisc.html#bytscl">bytscl</a>, <a href="graph-plotmisc.html#histeq_scale">histeq_scale</a></p>
+</div>
+<div class="docblock"><a name="plm"></a><h3>plm</h3>
+  <pre>DOCUMENT plm, y, x, boundary=0/1, inhibit=0/1/2
+      or plm, y, x, ireg, boundary=0/1, inhibit=0/1/2
+      or plm, boundary=0/1, inhibit=0/1/2
+  plots a mesh of Y versus X.  Y and X must be 2-D arrays with equal
+  dimensions.  If present, IREG must be a 2-D region number array
+  for the mesh, with the same dimensions as X and Y.  The values of
+  IREG should be positive region numbers, and zero for zones which do
+  not exist.  The first row and column of IREG never correspond to any
+  zone, and should always be zero.  The default IREG is 1 everywhere
+  else.  If present, the BOUNDARY keyword determines whether the
+  entire mesh is to be plotted (boundary=0, the default), or just the
+  boundary of the selected region (boundary=1).  If present, the
+  INHIBIT keyword causes the (X(,j),Y(,j)) lines to not be plotted
+  (inhibit=1), or the (X(i,),Y(i,)) lines to not be plotted (inhibit=2).
+  By default (inhibit=0), mesh lines in both logical directions are
+  plotted.
+  The Y, X, and IREG arguments may all be omitted to default to the
+  mesh set by the most recent plmesh call.
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          type, width, color
+          region</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="plmesh"></a><h3>plmesh</h3>
+  <pre>DOCUMENT plmesh, y, x, ireg, triangle=tri_array
+      or plmesh
+  sets the default mesh for subsequent plm, plc, plv, and plf calls.
+  In the second form, deletes the default mesh (until you do this,
+  or switch to a new default mesh, the default mesh arrays persist and
+  take up space in memory).  The Y, X, and IREG arrays should all be
+  the same shape; Y and X will be converted to double, and IREG will
+  be converted to int.  If IREG is omitted, it defaults to IREG(1,)=
+  IREG(,1)= 0, IREG(2:,2:)=1; that is, region number 1 is the whole
+  mesh.  The triangulation array TRI_ARRAY is used by plc; the
+  correspondence between TRI_ARRAY indices and zone indices is the
+  same as for IREG, and its default value is all zero.
+  The IREG or TRI_ARRAY arguments may be supplied without Y and X
+  to change the region numbering or triangulation for a given set of
+  mesh coordinates.  However, a default Y and X must already have been
+  defined if you do this.
+  If Y is supplied, X must be supplied, and vice-versa.</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#plfp">plfp</a></p>
+</div>
+<div class="docblock"><a name="plt"></a><h3>plt</h3>
+  <pre>DOCUMENT plt, text, x, y, tosys=0/1
+  plots TEXT (a string) at the point (X,Y).  The exact relationship
+  between the point (X,Y) and the TEXT is determined by the
+  justify keyword.  TEXT may contain newline ("\n") characters
+  to output multiple lines of text with a single call.  The
+  coordinates (X,Y) are NDC coordinates (outside of any coordinate
+  system) unless the tosys keyword is present and non-zero, in
+  which case the TEXT will be placed in the current coordinate
+  system.  However, the character height is NEVER affected by the
+  scale of the coordinate system to which the text belongs.
+  Note that the pledit command takes dx and/or dy keywords to
+  adjust the position of existing text elements.
+
+  The characters ^, _, and ! are treated specially in TEXT.
+  ^ begins a superscript, _ begins a subscript, and ! causes the
+  following character to be rendered using the symbol font.  As
+  special cases, !^, !_, and !! render the ^, _, and ! characters
+  themselves.  However, if ! is the final character of TEXT
+  (or immediately before a newline in multiline text), it
+  loses its special meaning.  TEXT has just three modes: ordinary,
+  superscript, and subscript.  A ^ character enters superscript
+  mode from ordinary or subscript mode, and returns to ordinary
+  mode from superscript mode.  A _ enters subscript mode, except
+  from subscript mode it returns to ordinary mode.  For example,
+  Euclid said, "!pr^2", and Einstein said, "G_!s!n_=8!pT_!s!n".
+  One final special escape: !] produces the ^ character in the
+  symbol font (it is a perpendicular sign, whereas ] is just ]).
+
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          color, font, height, opaque, orient, justify</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plt1">plt1</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotq.html#pledit">pledit</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a>, <a href="graph-plotter.html#pltitle">pltitle</a></p>
+</div>
+<div class="docblock"><a name="plt1"></a><h3>plt1</h3>
+  <pre>DOCUMENT plt1, text, x, y
+  same as plt, but TEXT, X, and Y may be arrays to plot multiple
+  strings.  The tosys= keyword works as for plt.
+KEYWORDS: color, font, height, opaque, orient, justify</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plt">plt</a></p>
+</div>
+<div class="docblock"><a name="pltitle"></a><h3>pltitle</h3>
+  <pre>DOCUMENT pltitle, title
+  Plot TITLE centered above the coordinate system for any of the
+  standard Gist styles.  You may want to customize this for other
+  plot styles.</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#xytitles">xytitles</a></p>
+</div>
+<div class="docblock"><a name="plv"></a><h3>plv</h3>
+  <pre>DOCUMENT plv, vy, vx, y, x, scale=dt
+      or plv, vy, vx, y, x, ireg, scale=dt
+      or plv, vy, vx, scale=dt
+  plots a vector field (VX,VY) on the mesh (X,Y).  Y, X, and IREG are
+  as for plm.  The VY and VX arrays must have the same shape as Y and X.
+  The Y, X, and IREG arguments may all be omitted to default to the
+  mesh set by the most recent plmesh call.
+  The SCALE keyword is the conversion factor from the units of
+  (VX,VY) to the units of (X,Y) -- a time interval if (VX,VY) is a velocity
+  and (X,Y) is a position -- which determines the length of the
+  vector "darts" plotted at the (X,Y) points.  If omitted, SCALE is
+  chosen so that the longest ray arrows have a length comparable
+  to a "typical" zone size.
+  You can use the scalem keyword in pledit to make adjustments to the
+  SCALE factor computed by default.
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: legend, hide
+          type, width, color, smooth
+          marks, marker, mspace, mphase
+          triangle, region</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plotq.html#pledit">pledit</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="xytitles"></a><h3>xytitles</h3>
+  <pre>DOCUMENT xytitles, xtitle, ytitle
+      or xytitles, xtitle, ytitle, [deltax,deltay]
+  Plot XTITLE horizontally under the viewport and YTITLE vertically
+  to the left of the viewport.  If the tick numbers interfere with
+  the labels, you can specify the [DELTAX,DELTAY] in NDC units to
+  displace the labels.  (Especially for the y title, the adjustment
+  may depend on how many digits the numbers on your scale actually
+  have.)  Note that DELTAX moves YTITLE and DELTAY moves XTITLE.
+  WARNING: There is no easy way to ensure that this type of title
+           will not interfere with the tick numbering.  Interference
+           may make the numbers or the title or both illegible.</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pltitle">pltitle</a></p>
+</div>

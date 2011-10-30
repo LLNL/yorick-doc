@@ -1,0 +1,54 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package msort (in msort.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="msort.html#msort">msort</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="msort.html#msort_rank">msort_rank</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="msort"></a><h3>msort</h3>
+  <pre>DOCUMENT msort(x1, x2, x3, ...)
+  returns an index list which sorts the array X1 into increasing
+  order.  Where X1 values are equal, the list will sort X2 into
+  increasing order.  Where both X1 and X2 are equal, X3 will be
+  in increasing order, and so on.  Finally, where all of the keys
+  are equal, the returned list will leave the order unchanged
+  from the input keys.
+
+  The Xi may be numbers or strings (e.g.- X1 could be an integer
+  while X2 was a string, and X3 was a real).  The Xi must all be
+  conformable, and each dimension of X1 must be as large as the
+  corresponding dimension of any otehr Xi.
+
+  Hence, msort(x) will return the same list as sort(x), except
+  where the values of x are equal, in which case msort leaves
+  the order unchanged, while sort non-deterministically permutes
+  equal elements.  This feature may cost a factor of two in speed,
+  so don't use it unless you really need it.  In general, msort
+  will call sort up to twice per input argument.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#sort">sort</a>, <a href="msort.html#msort_rank">msort_rank</a></p>
+</div>
+<div class="docblock"><a name="msort_rank"></a><h3>msort_rank</h3>
+  <pre>DOCUMENT msort_rank(x)
+         msort_rank(x, list)
+  returns a list of longs the same size and shape as X, whose
+  values are the "rank" of the corresponding element of X among
+  all the elements of X -- the smallest element has rank 0 and
+  the largest has the largest rank, which is equal to one less
+  than the number of distinct values in the array X.
+
+  If LIST is present, it is set to the order list returned by
+  sort(x(*)).
+</pre>
+  <p>SEE ALSO: <a href="msort.html#msort">msort</a>, <a href="std-array.html#sort">sort</a></p>
+</div>

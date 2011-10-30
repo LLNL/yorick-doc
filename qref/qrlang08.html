@@ -1,0 +1,26 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Creating Arrays</h2>
+<table><tbody>
+<tr><td><tt>[</tt> <i>obj1, obj2, ..., objN</i><tt>]</tt></td>
+<td>build an array of N objects<br>
+The <i>objI</i> may be arrays to build multi-dimensional arrays.</td></tr>
+<tr><td><tt>array(</tt><i>value, dimlist</i><tt>)</tt></td>
+<td>add dimensions <i>dimlist</i> to <i>value</i><br></td></tr>
+<tr><td><tt>array(</tt><i>type_name, dimlist</i><tt>)</tt></td>
+<td>return specified array, all zero</td></tr>
+<tr><td><tt>span(</tt><i>start, stop, n</i><tt>)</tt></td>
+<td><i>n</i> equal stepped values from <i>start </i>to <i>stop</i></td></tr>
+<tr><td><tt>spanl(</tt><i>start, stop, n</i><tt>)</tt></td>
+<td><i>n</i> equal ratio values from <i>start </i>to <i>stop</i></td></tr>
+<tr><td><tt>grow, </tt><i>var, sfx1, sfx2, ...</i></td>
+<td>append <i>sfx1</i>, <i>sfx1</i>, etc. to <i>var</i></td></tr>
+</tbody></table>
+<p>These functions may be used to generate multi-dimensional arrays; use
+<tt>help</tt>
+for details.
+</p>
+
+

@@ -1,0 +1,80 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Prompts"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_28.html#Info" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.4 The info function" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_30.html#Shell-commands" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.6 Shell commands, removing and renaming files" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Prompts-1"></a>
+<h3 class="subsection">1.3.5 Prompts</h3>
+
+<p>Yorick occasionally prompts you with something other than <kbd>&gt;</kbd>.
+The usual <kbd>&gt;</kbd> prompt tells you that Yorick is waiting for a new
+input line.  The other prompts alert you to unusual situations:
+</p>
+<dl compact="compact">
+<dt> <kbd>cont&gt;</kbd></dt>
+<dd><p>The previous input line was not complete; Yorick is waiting for its
+continuation before it does anything.  Type several close brackets or
+control-C if you don&rsquo;t want to complete the line.
+</p></dd>
+<dt> <kbd>dbug&gt;</kbd></dt>
+<dd><p>When an error occurs during the execution of a Yorick program, Yorick
+offers you the choice of entering &ldquo;debug mode&rdquo;.  In this mode, you
+are &ldquo;inside&rdquo; the function where the error occurred.  You can type
+any Yorick statement you wish, but until you explicitly exit from
+debug mode by means of the <kbd>dbexit</kbd> function, Yorick will prompt
+you with <kbd>dbug&gt;</kbd> instead of its usual prompt.  (see <a href="yorick_33.html#Simple-debugging">Simple debugging</a>)
+</p></dd>
+<dt> <kbd>quot&gt;</kbd></dt>
+<dd><p>It is possible to continue a long string constant across multiple lines.
+If you do, this will be your prompt until you type the closing <kbd>&quot;</kbd>.
+Don&rsquo;t ever do this intentionally; use the string concatenation operator
+<kbd>+</kbd> instead, and break long strings into pieces that will fit on
+a single line.
+</p></dd>
+<dt> <kbd>comm&gt;</kbd></dt>
+<dd><p>For some reason, you began a comment on the previous line, and Yorick
+is waiting for the <kbd>*/</kbd> to finish the comment.  I can&rsquo;t imagine why
+you would put comments in what you were typing at the terminal.
+</p></dd>
+</dl>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_28.html#Info" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.4 The info function" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_30.html#Shell-commands" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.6 Shell commands, removing and renaming files" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_19.html#Environment" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3 The Interpreted Environment" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

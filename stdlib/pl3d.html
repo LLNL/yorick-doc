@@ -1,0 +1,359 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package pl3d (in pl3d.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="pl3d.html#aim3">aim3</a></p>
+    <h3>C</h3>
+    <p><a href="pl3d.html#cage3">cage3</a></p>
+    <p><a href="pl3d.html#clear3">clear3</a></p>
+    <h3>D</h3>
+    <p><a href="pl3d.html#draw3">draw3</a></p>
+    <h3>G</h3>
+    <p><a href="pl3d.html#get3_centroid">get3_centroid</a></p>
+    <p><a href="pl3d.html#get3_light">get3_light</a></p>
+    <p><a href="pl3d.html#get3_normal">get3_normal</a></p>
+    <p><a href="pl3d.html#get3_xy">get3_xy</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="pl3d.html#gnomon">gnomon</a></p>
+    <h3>L</h3>
+    <p><a href="pl3d.html#light3">light3</a></p>
+    <p><a href="pl3d.html#limit3">limit3</a></p>
+    <h3>M</h3>
+    <p><a href="pl3d.html#mov3">mov3</a></p>
+    <h3>O</h3>
+    <p><a href="pl3d.html#orient3">orient3</a></p>
+    <h3>R</h3>
+    <p><a href="pl3d.html#range3">range3</a></p>
+    <p><a href="pl3d.html#restore3">restore3</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="pl3d.html#rot3">rot3</a></p>
+    <h3>S</h3>
+    <p><a href="pl3d.html#save3">save3</a></p>
+    <p><a href="pl3d.html#set3_object">set3_object</a></p>
+    <p><a href="pl3d.html#setz3">setz3</a></p>
+    <p><a href="pl3d.html#sort3d">sort3d</a></p>
+    <p><a href="pl3d.html#spin3">spin3</a></p>
+    <h3>U</h3>
+    <p><a href="pl3d.html#undo3">undo3</a></p>
+    <h3>W</h3>
+    <p><a href="pl3d.html#window3">window3</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="aim3"></a><h3>aim3</h3>
+  <pre>DOCUMENT aim3, xa,ya,za
+  move the current 3D plot to put the point (XA,YA,ZA) in object
+  coordinates at the point (0,0,0) -- the aim point -- in the
+  viewer's coordinates.  If any of XA, YA, or ZA is nil, it defaults
+  to zero.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#mov3">mov3</a>, <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#orient3">orient3</a>, <a href="pl3d.html#setz3">setz3</a>, <a href="pl3d.html#undo3">undo3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="cage3"></a><h3>cage3</h3>
+  <pre>DOCUMENT cage3
+      or cage3, onoff
+  Toggle the cage display.  If ONOFF is non-nil and non-zero,
+  turn on the cage.  If ONOFF is zero, turn off the cage.
+
+  The cage draws a rectangular box "behind" the 3D object and
+  attempts to put ticks and labels around the edge of the box.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#limit3">limit3</a>, <a href="plwf.html#plwf">plwf</a>, </p>
+</div>
+<div class="docblock"><a name="clear3"></a><h3>clear3</h3>
+  <pre>DOCUMENT clear3
+  Clear the current 3D display list.</pre>
+  
+</div>
+<div class="docblock"><a name="draw3"></a><h3>draw3</h3>
+  <pre>DOCUMENT draw3
+  Draw the current 3D display list.
+  (Ordinarily triggered automatically when the drawing changes.)</pre>
+  
+</div>
+<div class="docblock"><a name="get3_centroid"></a><h3>get3_centroid</h3>
+  <pre>DOCUMENT get3_centroid(xyz, nxyz)
+      or get3_centroid(xyz)
+
+  return 3D centroids for polygons with vertices XYZ.  If NXYZ is
+  specified, XYZ should be 3-by-sum(nxyz), with NXYZ being the
+  list of numbers of vertices for each polygon (as for the plfp
+  function).  If NXYZ is not specified, XYZ should be a quadrilateral
+  mesh, 3-by-ni-by-nj (as for the plf function).  In the first case,
+  the return value is 3-by-numberof(NXYZ); in the second case, the
+  return value is 3-by-(ni-1)-by-(nj-1).
+
+  The centroids are constructed as the mean value of all vertices
+  of each polygon.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#get3_normal">get3_normal</a>, <a href="pl3d.html#get3_light">get3_light</a></p>
+</div>
+<div class="docblock"><a name="get3_light"></a><h3>get3_light</h3>
+  <pre>DOCUMENT get3_light(xyz, nxyz)
+      or get3_light(xyz)
+
+  return 3D lighting for polygons with vertices XYZ.  If NXYZ is
+  specified, XYZ should be 3-by-sum(nxyz), with NXYZ being the
+  list of numbers of vertices for each polygon (as for the plfp
+  function).  If NXYZ is not specified, XYZ should be a quadrilateral
+  mesh, 3-by-ni-by-nj (as for the plf function).  In the first case,
+  the return value is numberof(NXYZ); in the second case, the
+  return value is (ni-1)-by-(nj-1).
+
+  The parameters of the lighting calculation are set by the
+  light3 function.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#light3">light3</a>, <a href="pl3d.html#set3_object">set3_object</a>, <a href="pl3d.html#get3_normal">get3_normal</a>, <a href="pl3d.html#get3_centroid">get3_centroid</a></p>
+</div>
+<div class="docblock"><a name="get3_normal"></a><h3>get3_normal</h3>
+  <pre>DOCUMENT get3_normal(xyz, nxyz)
+      or get3_normal(xyz)
+
+  return 3D normals for polygons with vertices XYZ.  If NXYZ is
+  specified, XYZ should be 3-by-sum(nxyz), with NXYZ being the
+  list of numbers of vertices for each polygon (as for the plfp
+  function).  If NXYZ is not specified, XYZ should be a quadrilateral
+  mesh, 3-by-ni-by-nj (as for the plf function).  In the first case,
+  the return value is 3-by-numberof(NXYZ); in the second case, the
+  return value is 3-by-(ni-1)-by-(nj-1).
+
+  The normals are constructed from the cross product of the lines
+  joining the midpoints of two edges which as nearly quarter the
+  polygon as possible (the medians for a quadrilateral).  No check
+  is made that these not be parallel; the returned "normal" is
+  [0,0,0] in that case.  Also, if the polygon vertices are not
+  coplanar, the "normal" has no precisely definable meaning.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#get3_centroid">get3_centroid</a>, <a href="pl3d.html#get3_light">get3_light</a></p>
+</div>
+<div class="docblock"><a name="get3_xy"></a><h3>get3_xy</h3>
+  <pre>DOCUMENT get3_xy, xyz, x, y
+      or get3_xy, xyz, x, y, z, 1
+
+  Given 3-by-anything coordinates XYZ, return X and Y in viewer's
+  coordinate system (set by rot3, mov3, orient3, etc.).  If the
+  fifth argument is present and non-zero, also return Z (for use
+  in sort3d or get3_light, for example).  If the camera position
+  has been set to a finite distance with setz3, the returned
+  coordinates will be tangents of angles for a perspective
+  drawing (and Z will be scaled by 1/zc).
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#sort3d">sort3d</a>, <a href="pl3d.html#get3_light">get3_light</a>, <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#setz3">setz3</a>, <a href="pl3d.html#set3_object">set3_object</a></p>
+</div>
+<div class="docblock"><a name="gnomon"></a><h3>gnomon</h3>
+  <pre>DOCUMENT gnomon
+      or gnomon, onoff
+  Toggle the gnomon display.  If ONOFF is non-nil and non-zero,
+  turn on the gnomon.  If ONOFF is zero, turn off the gnomon.
+
+  The gnomon shows the X, Y, and Z axis directions in the
+  object coordinate system.  The directions are labeled.
+  The gnomon is always infinitely far behind the object
+  (away from the camera).
+
+  There is a mirror-through-the-screen-plane ambiguity in the
+  display which is resolved in two ways: (1) The (X,Y,Z)
+  coordinate system is right-handed, and (2) If the tip of an
+  axis projects into the screen, it's label is drawn in opposite
+  polarity to the other text on the screen.</pre>
+  
+</div>
+<div class="docblock"><a name="light3"></a><h3>light3</h3>
+  <pre>DOCUMENT light3, ambient=a_level,
+                 diffuse=d_level,
+                 specular=s_level,
+                 spower=n,
+                 sdir=xyz
+  Sets lighting properties for 3D shading effects.
+  A surface will be shaded according to its to its orientation
+  relative to the viewing direction.
+
+  The ambient level A_LEVEL is a light level (arbitrary units)
+  that is added to every surface independent of its orientation.
+
+  The diffuse level D_LEVEL is a light level which is proportional
+  to cos(theta), where theta is the angle between the surface
+  normal and the viewing direction, so that surfaces directly
+  facing the viewer are bright, while surfaces viewed edge on are
+  unlit (and surfaces facing away, if drawn, are shaded as if they
+  faced the viewer).
+
+  The specular level S_LEVEL is a light level proportional to a high
+  power spower=N of 1+cos(alpha), where alpha is the angle between
+  the specular reflection angle and the viewing direction.  The light
+  source for the calculation of alpha lies in the direction XYZ (a
+  3 element vector) in the viewer's coordinate system at infinite
+  distance.  You can have ns light sources by making S_LEVEL, N, and
+  XYZ (or any combination) be vectors of length ns (3-by-ns in the
+  case of XYZ).  (See source code for specular_hook function
+  definition if powers of 1+cos(alpha) aren't good enough for you.)
+
+  With no arguments, return to the default lighting.
+
+EXAMPLES:
+  light3, diffuse=.1, specular=1., sdir=[0,0,-1]
+    (dramatic "tail lighting" effect)
+  light3, diffuse=.5, specular=1., sdir=[1,.5,1]
+    (classic "over your right shoulder" lighting)
+  light3, ambient=.1,diffuse=.1,specular=1.,
+          sdir=[[0,0,-1],[1,.5,1]],spower=[4,2]
+    (two light sources combining previous effects)
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a></p>
+</div>
+<div class="docblock"><a name="limit3"></a><h3>limit3</h3>
+  <pre>DOCUMENT limit3, xmin,xmax, ymin,ymax
+      or limit3, xmin,xmax, ymin,ymax, zmin,zmax
+  Set the 3D axis limits for use with the cage.
+  Use keyword aspect=[ax,ay,az] to set the aspect ratios of the
+  cage to ax:ay:az -- that is, the ratios of the lengths of the
+  cage axes will become ax:ay:az.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#cage3">cage3</a>, <a href="pl3d.html#range3">range3</a>, <a href="plwf.html#plwf">plwf</a>, <a href="pl3d.html#orient3">orient3</a></p>
+</div>
+<div class="docblock"><a name="mov3"></a><h3>mov3</h3>
+  <pre>DOCUMENT mov3, xa,ya,za
+  move the current 3D plot by XA along viewer's x-axis,
+  YA along viewer's y-axis, and ZA along viewer's z-axis.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#orient3">orient3</a>, <a href="pl3d.html#setz3">setz3</a>, <a href="pl3d.html#undo3">undo3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="orient3"></a><h3>orient3</h3>
+  <pre>DOCUMENT orient3, phi, theta
+      or orient3, phi
+      or orient3, , theta
+      or orient3
+  Set the "orientation" of the object to (PHI,THETA).  "Orientations"
+  are a subset of the possible rotation matrices in which the z-axis
+  of the object appears vertical on the screen (that is, the object
+  z-axis projects onto the viewer y-axis).  The THETA angle is the
+  angle from the viewer y-axis to the object z-axis, positive if
+  the object z-axis is tilted toward you (toward viewer +z).  PHI is
+  zero when the object x-axis coincides with the viewer x-axis.  If
+  neither PHI nor THETA is specified, PHI defaults to -pi/4 and
+  THETA defaults to pi/6.  If only one of PHI or THETA is specified,
+  the other remains unchanged, unless the current THETA is near pi/2,
+  in which case THETA returns to pi/6, or unless the current
+  orientation does not have a vertical z-axis, in which case the
+  unspecified value returns to its default.
+
+  Unlike rot3, orient3 is not a cumulative operation.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#mov3">mov3</a>, <a href="pl3d.html#aim3">aim3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#light3">light3</a>, <a href="pl3d.html#limit3">limit3</a></p>
+</div>
+<div class="docblock"><a name="range3"></a><h3>range3</h3>
+  <pre>DOCUMENT range3, zmin,zmax
+  Set the 3D axis z limits for use with the cage.
+  Use keyword aspect=[ax,ay,az] to set the aspect ratios of the
+  cage to ax:ay:az -- that is, the ratios of the lengths of the
+  cage axes will become ax:ay:az.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#cage3">cage3</a>, <a href="pl3d.html#limit3">limit3</a>, <a href="plwf.html#plwf">plwf</a>, <a href="pl3d.html#orient3">orient3</a></p>
+</div>
+<div class="docblock"><a name="restore3"></a><h3>restore3</h3>
+  <pre>DOCUMENT restore3, view
+  Restore a previously saved 3D viewing transformation and lighting.
+  If VIEW is nil, rotate object to viewer's coordinate system.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#mov3">mov3</a>, <a href="pl3d.html#aim3">aim3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="rot3"></a><h3>rot3</h3>
+  <pre>DOCUMENT rot3, xa,ya,za
+  rotate the current 3D plot by XA about viewer's x-axis,
+  YA about viewer's y-axis, and ZA about viewer's z-axis.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#orient3">orient3</a>, <a href="pl3d.html#mov3">mov3</a>, <a href="pl3d.html#aim3">aim3</a>, <a href="pl3d.html#setz3">setz3</a>, <a href="pl3d.html#undo3">undo3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="save3"></a><h3>save3</h3>
+  <pre>DOCUMENT view= save3()
+  Save the current 3D viewing transformation and lighting.</pre>
+  <p>SEE ALSO: <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#mov3">mov3</a>, <a href="pl3d.html#aim3">aim3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="set3_object"></a><h3>set3_object</h3>
+  <pre>DOCUMENT set3_object, drawing_function, _lst(arg1,arg2,...)
+
+  set up to trigger a call to draw3, adding a call to the
+  3D display list of the form:
+
+     DRAWING_FUNCTION, _lst(ARG1, ARG2, ...)
+
+  When draw3 calls DRAWING_FUNCTION, the external variable _draw3
+  will be non-zero, so DRAWING_FUNCTION can be written like this:
+
+  func drawing_function(arg1,arg2,...)
+  {
+    require, "pl3d.i";
+    if (_draw3) {
+      list= arg1;
+      arg1= _nxt(list);
+      arg2= _nxt(list);
+      ...
+      ...<calls to get3_xy, sort3d, get3_light, etc.>...
+      ...<calls to graphics functions plfp, plf, etc.>...
+      return;
+    }
+    ...<verify args>...
+    ...<do orientation and lighting independent calcs>...
+    set3_object, drawing_function, _lst(arg1,arg2,...);
+  }
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#get3_xy">get3_xy</a>, <a href="pl3d.html#get3_light">get3_light</a>, <a href="pl3d.html#sort3d">sort3d</a></p>
+</div>
+<div class="docblock"><a name="setz3"></a><h3>setz3</h3>
+  <pre>DOCUMENT setz3, zc
+  Set the camera position to z=ZC (x=y=0) in the viewer's coordinate
+  system.  If ZC is nil, set the camera to infinity (default).</pre>
+  <p>SEE ALSO: <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#orient3">orient3</a>, <a href="pl3d.html#undo3">undo3</a>, <a href="pl3d.html#save3">save3</a>, <a href="pl3d.html#restore3">restore3</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="sort3d"></a><h3>sort3d</h3>
+  <pre>DOCUMENT sort3d(z, npolys, &list, &vlist)
+
+  given Z and NPOLYS, with numberof(Z)==sum(npolys), return
+  LIST and VLIST such that Z(VLIST) and NPOLYS(LIST) are
+  sorted from smallest average Z to largest average Z, where
+  the averages are taken over the clusters of length NPOLYS.
+  Within each cluster (polygon), the cyclic order of Z(VLIST)
+  remains unchanged, but the absolute order may change.
+
+  This sorting order produces correct or nearly correct order
+  for a plfp command to make a plot involving hidden or partially
+  hidden surfaces in three dimensions.  It works best when the
+  polys form a set of disjoint closed, convex surfaces, and when
+  the surface normal changes only very little between neighboring
+  polys.  (If the latter condition holds, then even if sort3d
+  mis-orders two neighboring polys, their colors will be very
+  nearly the same, and the mistake won't be noticeable.)  A truly
+  correct 3D sorting routine is impossible, since there may be no
+  rendering order which produces correct surface hiding (some polys
+  may need to be split into pieces in order to do that).  There
+  are more nearly correct algorithms than this, but they are much
+  slower.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#get3_xy">get3_xy</a></p>
+</div>
+<div class="docblock"><a name="spin3"></a><h3>spin3</h3>
+  <pre>DOCUMENT spin3
+      or spin3, nframes
+      or spin3, nframes, axis
+  Spin the current 3D display list about AXIS over NFRAMES.  Keywords
+  tlimit= the total time allowed for the movie in seconds (default 60),
+  dtmin= the minimum allowed interframe time in seconds (default 0.0),
+  bracket_time= (as for movie function in movie.i)
+
+  The default AXIS is [-1,1,0] and the default NFRAMES is 30.
+</pre>
+  <p>SEE ALSO: <a href="pl3d.html#rot3">rot3</a></p>
+</div>
+<div class="docblock"><a name="undo3"></a><h3>undo3</h3>
+  <pre>DOCUMENT undo3
+      or undo3, n
+  Undo the effects of the last N (default 1) rot3, orient3, mov3, aim3,
+  setz3, or light3 commands.</pre>
+  
+</div>
+<div class="docblock"><a name="window3"></a><h3>window3</h3>
+  <pre>DOCUMENT window3
+      or window3, n
+  initialize style="nobox.gs" window for 3D graphics</pre>
+  
+</div>

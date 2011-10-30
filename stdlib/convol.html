@@ -1,0 +1,128 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package convol (in convol.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="convol.html#boxcar">boxcar</a></p>
+    <h3>C</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="convol.html#convol">convol</a></p>
+    <p><a href="convol.html#convoln">convoln</a></p>
+    <h3>F</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="convol.html#fft_good">fft_good</a></p>
+    <h3>G</h3>
+    <p><a href="convol.html#gaussm">gaussm</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="boxcar"></a><h3>boxcar</h3>
+  <pre>DOCUMENT boxcar(a, n)
+
+  returns array A smoothed by a boxcar of 2*N+1 pixels.
+  If A is multi-dimensional, N may be a vector with as many
+  components as A has dimensions, specifying how many pixels
+  to smooth in that dimension.  N may be shorter than the number
+  of dimensions of A; unspecified dimensions are unsmoothed
+  (as if N were 0).  If A is multi-dimensional and N is scalar,
+  that N is applied to all dimensions.
+
+  Each pixel of the result is averaged with the N pixels to
+  its left and N pixels to its right (so N=0 means no averaging).
+  For pixels less than N from the left edge, the averaging includes
+  fewer pixels on the left, but still N on the right, and similarly
+  for pixels less than N from the right edge.  Hence, the effective
+  smoothing is reduced and the centering is skewed, near the edges
+  of the array.
+</pre>
+  <p>SEE ALSO: <a href="convol.html#convoln">convoln</a>, <a href="convol.html#gaussm">gaussm</a></p>
+</div>
+<div class="docblock"><a name="convol"></a><h3>convol</h3>
+  <pre>DOCUMENT convol(a,b)
+
+  returns convolution of vector a with vector b, a vector
+  of length na+nb-1 where na=numberof(a), nb=numberof(b).
+
+  In detail, for i=[1 to na+nb-1]
+    result(i) = sum j=[max(1,1+i-nb) to min(na,i)] (a(j)*b(1+i-j))
+
+  The n0= and n1= keywords can be used to control the section of
+  the full array that is actually returned, 1<=n0<n1<=na+nb-1.
+
+  Use the convoln function for multi-dimensional convolution, and
+  see gaussm and boxcar for smoothing array data.
+</pre>
+  <p>SEE ALSO: <a href="convol.html#fft_good">fft_good</a>, <a href="fft.html#fft">fft</a>, <a href="convol.html#convoln">convoln</a>, <a href="convol.html#gaussm">gaussm</a>, <a href="convol.html#boxcar">boxcar</a></p>
+</div>
+<div class="docblock"><a name="convoln"></a><h3>convoln</h3>
+  <pre>DOCUMENT convoln(a, b)
+
+  returns convolution of array A with array B.  This is naturally
+  of length na+nb-1 where na=length of A, nb=length of B.  However,
+  convoln returns a result the same size as A, which is extracted
+  from the center of this full array.  Typically, B will be a much
+  smaller array than A, which you are using to smooth A.  If the
+  dimensions of B are odd, then the elements of the returned array
+  will be centered as you would expect.
+
+  In detail, for i=[1 to na+nb-1]
+    result(i) = sum j=[max(1,1+i-nb) to min(na,i)] (A(j)*B(1+i-j))
+  with this operation repeated along each dimension of A and B.
+
+  The n0= and n1= keywords can be used to control the section of
+  the full array that is actually returned, 1<=n0<n1<=na+nb-1.
+  Both n0 and n1 must be vectors with length equal to the number
+  of dimensions of A and B.  By default,
+    n0 = (1+nb)/2
+    n1 = na + n0 - 1
+  which gives the expected centering when nb is odd.  If nb is
+  even, you might want to consider returning a result of length
+  na-1 which is "zone centered" relative to A.  You can do this
+  by setting the zc=1 keyword, which gives n0 = 1 + nb/2 and
+  n1 = n1 = na + n0 - 2 when nb is even.
+
+  Note that if some dimension of B is length 1, there will be
+  no smoothing along that dimension of A.  The pseudo-index -
+  is useful for generating such dimensions.  For example, if x
+  is a 2D array and y is a 1D smoothing function which you want
+  to apply to the second dimension of x, use convoln(x, y(-,)).
+</pre>
+  <p>SEE ALSO: <a href="convol.html#convol">convol</a>, <a href="convol.html#gaussm">gaussm</a>, <a href="convol.html#boxcar">boxcar</a></p>
+</div>
+<div class="docblock"><a name="fft_good"></a><h3>fft_good</h3>
+  <pre>DOCUMENT fft_good(n)
+
+  returns the smallest number of the form 2^x*3^y*5^z greater
+  than or equal to n.  An fft of this length will be much faster
+  than a number with larger prime factors; the speed difference
+  can be an order of magnitude or more.
+
+  For n>100, the worst cases result in a little over a 11% increase
+  in n; for n>1000, the worst are a bit over 6%; still larger n are
+  better yet.  The median increase for n<=10000 is about 1.5%.
+</pre>
+  <p>SEE ALSO: <a href="fft.html#fft">fft</a>, <a href="fft.html#fft_setup">fft_setup</a>, <a href="convol.html#convol">convol</a></p>
+</div>
+<div class="docblock"><a name="gaussm"></a><h3>gaussm</h3>
+  <pre>DOCUMENT gaussm(a, n)
+
+  returns array A smoothed by a Gaussian with a sigma of N pixels.
+  If A is multi-dimensional, N may be a vector with as many
+  components as A has dimensions, specifying how many pixels
+  to smooth in that dimension.  N may be shorter than the number
+  of dimensions of A; unspecified dimensions are unsmoothed
+  (as if N were 0.0).  If A is multi-dimensional and N is scalar,
+  that N is applied to all dimensions.
+
+  With the fwhm=1 keyword, N is the full width at half maximum
+  of the Guassian.  The fwhm= keyword may also be a vector of
+  the same length as N, 1 where N is to be interpreted as a FWHM
+  and 0 where N is to be interpreted as a sigma.
+</pre>
+  <p>SEE ALSO: <a href="convol.html#convoln">convoln</a>, <a href="convol.html#boxcar">boxcar</a></p>
+</div>

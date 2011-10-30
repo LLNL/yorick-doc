@@ -1,0 +1,207 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-debug (in std.i) - debug commands </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>C</h3>
+    <p><a href="std-debug.html#catch">catch</a></p>
+    <h3>D</h3>
+    <p><a href="std-debug.html#dbexit">dbauto</a></p>
+    <p><a href="std-debug.html#dbexit">dbcont</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-debug.html#dbexit">dbdis</a></p>
+    <p><a href="std-debug.html#dbexit">dbexit</a></p>
+    <p><a href="std-debug.html#dbexit">dbinfo</a></p>
+    <p><a href="std-debug.html#dbexit">dbret</a></p>
+    <p><a href="std-debug.html#dbexit">dbskip</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-debug.html#dbexit">dbup</a></p>
+    <p><a href="std-debug.html#disassemble">disassemble</a></p>
+    <h3>E</h3>
+    <p><a href="std-debug.html#error">error</a></p>
+    <p><a href="std-debug.html#error">exit</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="catch"></a><h3>catch</h3>
+  <pre>DOCUMENT catch(category)
+  Catch errors of the specified category.  Category may be -1 to
+  catch all errors, or a bitwise or of the following bits:
+
+     0x01 math errors (SIGFPE, math library)
+     0x02 I/O errors
+     0x04 keyboard interrupts (e.g.- control C interrupt)
+     0x08 other compiled errors (YError)
+     0x10 interpreted errors (error)
+
+  Use catch by placing it in a function before the section of code
+  in which you are trying to catch errors.  When catch is called,
+  it always returns 0, but it records the virtual machine program
+  counter where it was called, and longjumps there if an error is
+  detected.  The most recent matching call to catch will catch the
+  error.  Returning from the function in which catch was called
+  pops that call off the list of catches the interpreter checks.
+
+  To use catch, place the call near the top of a function:
+
+     if (catch(category)) {
+       ...<code to execute if error is caught>...
+     }
+     ...<code "protected" by the catch>...
+
+  If an error with the specified category occurs in the "protected"
+  code, the program jumps back to the point of the catch and acts
+  as if the catch function had returned 1 (remember that when catch
+  is actually called it always returns 0).
+
+  In order to lessen the chances of infinite loops, the catch is
+  popped off the active list if it is actually used, so that a
+  second error will *not* be caught.  Often, this is only desirable
+  for the error handling code itself -- if you want to re-execute
+  the "protected" code, do this, and take care of the possibility
+  of infinite loops in your interpreted code:
+
+     while (catch(category)) {
+       ...<code to execute if error is caught>...
+     }
+     ...<code "protected" by the catch>...
+
+  After an error has been caught, the associated error message
+  (what would have been printed had it not been caught) is left
+  in the variable catch_message.
+
+  ***WARNING***
+  If the code protected by the catch contains include or require
+  calls, or function references which force autoloads, and the
+  fault occurs while yorick is interpreting an included file,
+  catch will itself fault, and the error code will not execute.
+  If a fault occurs after an include has pushed a file onto
+  the include stack for delayed parsing and you catch that fault,
+  the include stack will not unwind to its condition at the time
+  catch was called.  That is, catch is incapable of protecting
+  you completely during operations involving nested levels of
+  include files.
+
+  In some cases, after_error is a more appropriate way to recover
+  from errors.
+</pre>
+  <p>SEE ALSO: <a href="std-debug.html#error">error</a>, <a href="std-system.html#after_error">after_error</a></p>
+</div>
+<div class="docsee">
+  <h3>dbauto</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docsee">
+  <h3>dbcont</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docsee">
+  <h3>dbdis</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docblock"><a name="dbexit"></a><h3>dbexit</h3>
+  <pre>DOCUMENT Debug mode.
+
+Yorick errors fall into two general categories: Syntax errors discovered
+during parsing, and runtime errors discovered when a Yorick program is
+actually running.  When a runtime error occurs, Yorick offers the
+choice of entering "debug mode", which you can do by typing the <RETURN>
+key immediately after the error occurs.  Typing a non-blank line exits
+debug mode automatically by default.  In debug mode, the Yorick prompt
+becomes "dbug>" instead of the usual ">".  When you see this prompt,
+Yorick has halted "in the middle of" the function in which the error
+occurred, and you can print, plot, modify, or save the local variables
+in that function by means of ordinary Yorick commands.  Debug mode is
+recursive; that is, you can debug an error which occurred during
+debugging to any number of levels.
+
+You can exit from debug mode in several ways:
+
+   dbexit            -- exit current debug level, discarding all
+                        active functions and their local variables
+   dbexit, 0         -- exit all debug levels
+   dbexit, n         -- exit (at most) N debug levels
+
+   dbcont            -- continue execution of the current function
+      Continuing is useful if you have managed to repair the
+      problem which caused the error.  The expression in which the
+      error occurred will be evaluated a second time, so beware of
+      side effects.
+
+   dbret, value      -- continue execution by returning VALUE (which
+                        may be nil or omitted) to the caller of the
+                        function in which the error occurred.
+      This is useful if the function in which the error occurred is
+      hopelessly confounded, but you know the value it should return.
+
+Yorick does not allow "single stepping" directly, although you can
+execute the statements in a function by copying them, then tell
+Yorick to skip those statements you have executed "by hand".  There
+are two functions for skipping execution:
+
+   dbskip            -- skip the next logical line (This will be only
+                        a portion of a source line if several statements
+                        are stacked on the source line.)
+   dbskip, n         -- skip next N (positive or negative) logical lines
+
+   dbup              -- discard the current function, so that you are
+                        debugging its caller -- there is no way to go
+                        back "down", so be careful
+
+There are two functions which print information (like other print
+functions, if called as functions instead of subroutines, their
+result is returned as a string array with one line per string):
+
+   dbinfo            -- returns current function and source line
+
+   dbdis             -- returns disassembled virtual machine code
+                        for the next line (use the disassemble function
+                        to get the entire function)
+      This allows you to see exactly where in a line the error occurred.
+
+Finally,
+
+   dbauto            -- toggles whether debug mode will be entered
+                        automatically when a runtime error occurs
+   dbauto, 1         -- enter debug mode automatically after an error
+   dbauto, 0         -- type <RETURN> after error to enter debug mode</pre>
+  
+</div>
+<div class="docsee">
+  <h3>dbinfo</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docsee">
+  <h3>dbret</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docsee">
+  <h3>dbskip</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docsee">
+  <h3>dbup</h3><p>SEE: <a href="#dbexit">dbexit</a></p>
+</div>
+<div class="docblock"><a name="disassemble"></a><h3>disassemble</h3>
+  <pre>DOCUMENT disassemble(function)
+      or disassemble, function
+  Disassembles the specified function.  If called as a function, the
+  result is returned as a vector of strings; if called as a subroutine,
+  the disassembly is printed at the terminal.  If the function is nil,
+  the current *main* program is disassembled -- you must include the
+  call to disassemble in the main program, of course, NOT on its own
+  line as a separate main program.</pre>
+  
+</div>
+<div class="docblock"><a name="error"></a><h3>error</h3>
+  <pre>DOCUMENT exit, msg
+         error, msg
+  Exits the current interpreted *main* program, printing the MSG.
+  (MSG can be omitted to print a default.)
+  In the case of exit, the result is equivalent to an immediate
+  return from every function in the current calling chain.
+  In the case of error, the result is the same as if an error had
+  occurred in a compiled routine.</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print">print</a>, <a href="std-filetxt.html#write">write</a>, <a href="std-system.html#batch">batch</a>, <a href="std-debug.html#catch">catch</a></p>
+</div>
+<div class="docsee">
+  <h3>exit</h3><p>SEE: <a href="#error">error</a></p>
+</div>

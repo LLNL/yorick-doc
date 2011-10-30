@@ -1,0 +1,77 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Scoping"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_15.html#goto" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.3 Using break, continue, and goto" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_17.html#extern" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.5.1 extern statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Variable-scope"></a>
+<h3 class="subsection">1.2.5 Variable scope</h3>
+
+<p>By default, dummy parameters and variables which are defined in a
+function body before any other use are <em>local</em> variables.
+Variables (or functions) used before their definition are
+<em>external</em> variables (see <a href="yorick_8.html#Define-procedure">Define procedure</a>, see <a href="yorick_7.html#Define-function">Define function</a>).  A variable (or function) defined outside of all functions
+is just that &mdash; external to all functions and local to none.
+</p>
+<p>Whenever a function is called, Yorick remembers the external values of
+all its local variables, then replaces them by their local values.
+Thus, all of its local variables are potentially &ldquo;visible&rdquo; as external
+variables to any function it calls.  When it returns, the function
+replaces all its local variables by the values it remembered.  Neither
+that function, nor any function it calls can affect these remembered
+values; Yorick provides no means of &ldquo;unmasking&rdquo; a local variable.
+</p>
+<p>The default rule for determining whether a variable should have local or
+external scope fails in two cases: First, you may want to redefine an
+external variable without looking at its value.  Second, a few
+procedures set the values of their parameters when they return; it may
+appear to Yorick&rsquo;s parser that such a variable has been used without
+being defined, even though you intend it to be local to the function.
+The <kbd>extern</kbd> and <kbd>local</kbd> statements solve these two problems,
+respectively.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_17.html#extern">&bull; extern</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_18.html#local">&bull; local</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_15.html#goto" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.4.3 Using break, continue, and goto" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_17.html#extern" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.5.1 extern statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

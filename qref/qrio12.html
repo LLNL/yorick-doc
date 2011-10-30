@@ -1,0 +1,34 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Managing Graphics Windows</h2>
+<p><tt>window, <i>n</i>&nbsp;&nbsp;</tt> switch to window <i>n</i> (0-7)
+<br><tt>winkill, <i>n</i>&nbsp;</tt> delete window <i>n</i> (0-7)
+</p>
+<p>The <tt>window</tt> command takes several keywords, for example:
+</p>
+<ul>
+<li><tt>dpi=75</tt> makes a smaller X window than the default <tt>dpi=100</tt>,
+</li><li><tt>private=1</tt>
+forces use of private instead of shared colors,</li>
+<li><tt>dump=1</tt> forces
+the palette to be dumped to the <tt>hcp</tt> file, and <tt>style</tt> specifies
+an alternative style sheet for tick and label style (<tt>"work.gs"</tt>
+and <tt>"boxed.gs"</tt> are two predefined style sheets).</li>
+</ul>
+<p>The <tt>plf</tt> and <tt>pli</tt> commands require a color palette:
+</p>
+<p><tt>palette, <i>name</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> load the standard palette <i>name</i>
+<br><tt>palette,
+<i>r, g, b</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> load a custom palette
+<br><tt>palette, query=1, <i>r, g, b</i>&nbsp;</tt> retrieve current palette
+</p>
+<p>Standard palette names: <tt>"earth.gp"</tt> (the default), <tt>"gray.gp"</tt>,
+<tt>"yarg.gp"</tt>,
+<tt>"stern.gp"</tt>,
+<tt>"heat.gp"</tt>,
+and <tt>"rainbow.gp"</tt>.
+</p>
+
+

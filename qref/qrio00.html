@@ -1,0 +1,25 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Opening and Closing Text Files</h2>
+<table><tbody>
+<tr><td><tt><i>f </i>= open(<i>filename, mode</i>)</tt></td>
+<td>open <i>filename</i> in <i>mode</i></td></tr>
+<tr><td><tt>close, <i>f</i></tt></td>
+<td>close file <i>f</i> (automatic if <i>f</i> redefined)</td></tr>
+</tbody></table>
+<p>The <i>mode</i> is a string which announces the type of operations you
+intend to perform: <tt>"r"</tt> (the default if <i>mode</i> is omitted)
+means read operations only, <tt>"w"</tt> means write only, and destroy
+any existing file <i>filename</i>, <tt>"r+"</tt> means read/write, leaving
+any existing file <i>filename </i>intact. Other <i>mode</i> values are
+also meaningful; see <tt>help</tt>.
+</p>
+<p>The file variable <i>f</i> is a distinct data type in Yorick; text files
+have a different data type than binary files. The <tt>print</tt> or <tt>info</tt>
+function will describe the file. The <tt>close</tt> function is called
+implicitly when the last reference to a file disappears.
+</p>
+
+

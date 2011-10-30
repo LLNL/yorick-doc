@@ -1,0 +1,138 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-list (in std.i) - list objects (deprecated, use oxy) </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>_</h3>
+    <p><a href="std-list.html#_lst">_car</a></p>
+    <p><a href="std-list.html#_lst">_cat</a></p>
+    <p><a href="std-list.html#_lst">_cdr</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-list.html#_lst">_cpy</a></p>
+    <p><a href="std-list.html#_lst">_len</a></p>
+    <p><a href="std-list.html#_lst">_lst</a></p>
+    <p><a href="std-list.html#_map">_map</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-list.html#_nxt">_nxt</a></p>
+    <p><a href="std-list.html#_prt">_prt</a></p>
+    <p><a href="std-list.html#_rev">_rev</a></p>
+  </div>
+</div>
+<div class="docsee">
+  <h3>_car</h3><p>SEE: <a href="#_lst">_lst</a></p>
+</div>
+<div class="docsee">
+  <h3>_cat</h3><p>SEE: <a href="#_lst">_lst</a></p>
+</div>
+<div class="docsee">
+  <h3>_cdr</h3><p>SEE: <a href="#_lst">_lst</a></p>
+</div>
+<div class="docsee">
+  <h3>_cpy</h3><p>SEE: <a href="#_lst">_lst</a></p>
+</div>
+<div class="docsee">
+  <h3>_len</h3><p>SEE: <a href="#_lst">_lst</a></p>
+</div>
+<div class="docblock"><a name="_lst"></a><h3>_lst</h3>
+  <pre>DOCUMENT list= _lst(item1, item2, item3, ...)
+         list= _cat(item_or_list1, item_or_list2, item_or_list3, ...)
+         list= _cpy(list)
+           list= _cpy(list, i)
+         length= _len(list)
+         item= _car(list)
+           item_i= _car(list, i)
+           _car, list, i, new_item_i
+         list= _cdr(list)
+           list= _cdr(list, i)
+           _cdr, list, i, new_list_i
+
+  **** DEPRECATED, object extensions in new code, see help,oxy 
+
+  implement rudimentary Lisp-like list handling in Yorick.
+  However, in Yorick, a list must have a simple tree structure
+  - no loops or rings are allowed (loops break Yorick's memory
+  manager - beware).  You need to be careful not to do this as
+  the error will not be detected.
+
+  Lists are required in Yorick whenever you need to hold an
+  indeterminate amount of non-array data, such as file handles,
+  bookmarks, functions, index ranges, etc.  Note that Yorick
+  pointers cannot point to these objects.  For array data, you have
+  a choice between a list and a struct or an array of pointers.
+  Note that a list cannot be written into a file with the save
+  function, since it may contain unsaveable items.
+
+  The _lst (list), _cat (catenate), and _cpy (copy) functions
+  are the principal means for creating and maintaining lists.
+  _lst makes a list out of its arguments, so that each argument
+  becomes one item of the new list.  Unlike Yorick array data
+  types, a statement like x=list does not make a copy of the
+  list, it merely makes an additional reference to the list.
+  You must explicitly use the _cpy function to copy a list.  Note
+  that _cpy only copies the outermost list itself, not the items
+  in the list (even if those items are lists).  With the second
+  argument i, _cpy copies only the first i items in the list.
+  The _cat function concatentates several lists together,
+  "promoting" any arguments which are not lists.  This operation
+  changes the values of list arguments to _cat, except for the
+  final argument, since after _cat(list, item), the variable list
+  will point to the new longer list returned by _cat.
+
+  Nil, or [], functions as an empty list.  This leads to ambiguity
+  in the argument list for _cat, since _cat "promotes" non-list
+  arguments to lists; _cat treats [] as an empty list, not as a
+  non-list item.  Also, _lst() or _lst([]) returns a single item list,
+  not [] itself.
+
+  The _len function returns the number of items in a list, or 0
+  for [].
+
+  The _car and _cdr functions (the names are taken from Lisp,
+  where they originally stood for something like "address register"
+  and "data register" of some long forgotten machine) provide
+  access to the items stored in a list.  _car(list,i) returns the
+  i-th item of the list, and i defaults to 1, so _car(list) is the
+  first item.  Also, _car,list,i,new_item_i sets the i-th item
+  of the list.  Finally, _cdr(list,i) returns a list of all the
+  items beyond the i-th, where i again defaults to 1.  The form
+  _cdr,list,i,new_list_i can be used to reset all list items
+  beyond the i-th to new values.  In the _cdr function, i=0 is
+  allowed.  When used to set values, both _car and _cdr can also
+  be called as functions, in which case they return the item or
+  list which has been replaced.  The _cdr(list) function returns
+  nil if and only if LIST contains only a single item; this is
+  the usual means of halting a loop over items in a list.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#array">array</a>, <a href="std-array.html#grow">grow</a>, <a href="std-list.html#_prt">_prt</a>, <a href="std-list.html#_map">_map</a>, <a href="std-list.html#_rev">_rev</a>, <a href="std-list.html#_nxt">_nxt</a></p>
+</div>
+<div class="docblock"><a name="_map"></a><h3>_map</h3>
+  <pre>DOCUMENT _map(f, list)
+  return a list of the results of applying function F to each
+  element of the input LIST in turn, as if by
+    _lst(f(_car(list,1)),f(_car(list,2)),...)</pre>
+  <p>SEE ALSO: <a href="std-list.html#_lst">_lst</a></p>
+</div>
+<div class="docblock"><a name="_nxt"></a><h3>_nxt</h3>
+  <pre>DOCUMENT item= _nxt(list)
+  return first item in LIST, and set LIST to list of remaining
+  items.  If you are iterating through a list, this is the way
+  to do it, since a loop on _car(list,i) with i varying from 1
+  to _len(list) scales quadratically with the length of the list,
+  while a loop on _nxt(list) scales linearly.</pre>
+  <p>SEE ALSO: <a href="std-list.html#_lst">_car</a>, <a href="std-list.html#_lst">_lst</a></p>
+</div>
+<div class="docblock"><a name="_prt"></a><h3>_prt</h3>
+  <pre>DOCUMENT _prt, list
+  print every item in a list, recursing if some item is itself a list.</pre>
+  <p>SEE ALSO: <a href="std-list.html#_lst">_lst</a></p>
+</div>
+<div class="docblock"><a name="_rev"></a><h3>_rev</h3>
+  <pre>DOCUMENT _rev(list)
+  returns the input list in reverse order</pre>
+  <p>SEE ALSO: <a href="std-list.html#_lst">_lst</a></p>
+</div>

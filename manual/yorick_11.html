@@ -1,0 +1,100 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="logical-operators"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_10.html#if_002delse-constructs" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3.1 General if and else constructs" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Combining-conditions-with-_0026_0026-and-_007c_007c"></a>
+<h4 class="subsubsection">1.2.3.2 Combining conditions with <kbd>&amp;&amp;</kbd> and <kbd>||</kbd></h4>
+
+<p>The logical operators <kbd>&amp;&amp;</kbd> (&ldquo;and&rdquo;) and <kbd>||</kbd> (&ldquo;or&rdquo;) combine
+conditional expressions; the <kbd>!</kbd> (&ldquo;not&rdquo;) operator negates them.
+The <kbd>!</kbd> has the highest precedence, then <kbd>&amp;&amp;</kbd>, then <kbd>||</kbd>;
+you will need parentheses to force a different order.
+</p>
+<p>(Beware of the bitwise &ldquo;and&rdquo; and &ldquo;or&rdquo; operators <kbd>&amp;</kbd> and
+<kbd>|</kbd> &ndash; these should <em>never</em> be used to combine conditions;
+they are for set-and-mask bit fiddling.)
+</p>
+<p>The operators for comparing numeric values are <kbd>==</kbd> (equal),
+<kbd>!=</kbd> (not equal), <kbd>&gt;</kbd> (greater), <kbd>&lt;</kbd> (less), <kbd>&gt;=</kbd>
+(greater or equal), and <kbd>&lt;=</kbd> (less or equal).  These all have
+higher precedence than <kbd>&amp;&amp;</kbd>, but lower than <kbd>!</kbd> or any
+arithmetic operators.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if ((a&lt;b &amp;&amp; x&gt;a &amp;&amp; x&lt;b) || (a&gt;b &amp;&amp; x&lt;a &amp;&amp; x&gt;b))
+  write, &quot;x is between a and b&quot;
+</pre></td></tr></table>
+
+<p>Here, the expression for the right operand to <kbd>&amp;&amp;</kbd> will execute
+only if its left operand is actually true.  Similarly, the right
+operand to <kbd>||</kbd> executes only if its left proves false.
+Therefore, it is important to order the operands of <kbd>&amp;&amp;</kbd> and
+<kbd>||</kbd> to put the most computationally expensive expression on the
+right &mdash; even though the logical &ldquo;and&rdquo; and &ldquo;or&rdquo; functions are
+commutative, the order of the operands to <kbd>&amp;&amp;</kbd> and <kbd>||</kbd> can be
+critical.
+</p>
+<p>In the example, if <kbd>a&gt;b</kbd>, the <kbd>x&gt;a</kbd> and <kbd>x&lt;b</kbd>
+subexpressions will not actually execute since <kbd>a&lt;b</kbd> proved false.
+Since the left operand to <kbd>||</kbd> was false, its right operand will
+be evaluated.
+</p>
+<p>Despite the cleverness of the <kbd>&amp;&amp;</kbd> and <kbd>||</kbd> operators in not
+executing the expression for their right operands unless absolutely
+necessary, the example has obvious inefficiencies: First, if
+<kbd>a&gt;=b</kbd>, then both <kbd>a&lt;b</kbd> and <kbd>a&gt;b</kbd> are checked.  Second, if
+<kbd>a&lt;b</kbd>, but <kbd>x</kbd> is not between <kbd>a</kbd> and <kbd>b</kbd>, the right
+operand to <kbd>||</kbd> is evaluated anyway.  Yorick has a ternary operator
+to avoid this type of inefficiency:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">expr_A_or_B= (condition? expr_A_if_true : expr_B_if_false);
+</pre></td></tr></table>
+
+<p>The <kbd>?:</kbd> operator evaluates the middle expression if the condition
+is true, the right expression otherwise.  Is that so? Yes : No.  The
+efficient betweeness test reads:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">if (a&lt;b? (x&gt;a &amp;&amp; x&lt;b) : (x&lt;a &amp;&amp; x&gt;b))
+  write, &quot;x is between a and b&quot;;
+</pre></td></tr></table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_10.html#if_002delse-constructs" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3.1 General if and else constructs" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_12.html#Loops" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4 Loops" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_9.html#Conditionals" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2.3 Conditional Execution" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

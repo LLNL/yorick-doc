@@ -1,0 +1,40 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Advanced Array Indexing</h2>
+
+<ul>
+<li> A scalar index or the <tt>start</tt>
+and <tt>stop</tt> of an index range may be non-positive to reference the
+elements near the end of a dimension. Hence, 0 refers to the final element,
+-1 refers to the next to last element, -2 to the element before that, and
+so on. For example,
+<i>x</i><tt>(2:-1)</tt> refers to all but the first
+and last elements of the 1-D array <i>x</i>. This convention does <b>NOT</b>
+work for an index list.</li>
+<li> A range function <i>ifunc</i> may
+be followed by a colon and an index range <tt>start:stop</tt> or <tt>start:stop:step</tt>
+in order to restrict the indices to which the range function applies to
+a subset of the entire dimension. Hence, <i>x</i><tt>(min:2:-1)</tt> returns
+the minimum of all the elements of the 1-D array <i>x</i>, excluding the
+first and last elements.</li>
+<li> An index specified as a scalar,
+the <tt>start</tt> or <tt>stop</tt> of an index range, or an element of
+an index list may exceed the length of the indexed dimension <b>ID</b>,
+provided that the entire indexing operation does not overreach the bounds
+of the array. Thus, if <i>y</i>is a 5-by-6 array, then <i>y</i><tt>(22)</tt>
+refers to the same datum as <i>y</i><tt>(2,5)</tt>.</li>
+<li> The expression <i>z</i><tt>(..)</tt>
+- using the rubber-index operator <tt>..</tt> - refers to the entire array
+<i>z</i>.
+This is occasionally useful as the left hand side of an assignment statement
+in order to force broadcasting and type conversion of the right hand expression
+to the preallocated type and shape <i>z</i>.</li>
+<li> The expression <i>z</i><tt>(*)</tt>
+- using the rubber-index operator <tt>*</tt> - collapses a multidimensional
+array <i>z</i> into a one-dimensional array. Even more useful as <i>z</i><tt>(*,)</tt>
+to preserve the final index of an array and force a two-dimensional result.</li>
+</ul>
+
+

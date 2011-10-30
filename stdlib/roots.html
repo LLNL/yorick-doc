@@ -1,0 +1,120 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package roots (in roots.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="roots.html#f_inverse">f_inverse</a></p>
+    <h3>M</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="roots.html#mnbrent">mnbrent</a></p>
+    <p><a href="roots.html#mxbrent">mxbrent</a></p>
+    <h3>N</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="roots.html#nraphson">nraphson</a></p>
+    <h3>R</h3>
+    <p><a href="roots.html#roots">roots</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="f_inverse"></a><h3>f_inverse</h3>
+  <pre>DOCUMENT f_inverse(f_and_dfdx, y, x0, x1, xerr)
+      or f_inverse(f_and_dfdx, y, x0, x1, xerr)
+
+  Find values of an inverse function by Newton-Raphson iteration,
+  backed up by bisection if the convergence seems poor.  The
+  subroutine F_AND_DFDX must be defined as:
+       func F_AND_DFDX (x, &f, &dfdx)
+  returning both the function value f(x) and derivative dfdx(x).
+  If the input x is an array, the returned f and dfdx must have
+  the same shape as the input x.  If F_AND_DFDX always returns
+  zero dfdx, f_inverse will use bisection.
+
+  The result x will have the same shape as the input Y values.
+
+  The values of x are constrained to lie within the interval from
+  X0 to X1; the function value must be on opposite sides of the
+  required Y at these interval endpoints.  The iteration stops
+  when the root is known to within XERR, or to machine precision
+  if XERR is nil or zero.  X0, X1, and XERR may be arrays conformable
+  with Y.
+
+  f_inverse takes the same number of iterations for every Y value;
+  it does not notice that some may have converged before others.
+</pre>
+  <p>SEE ALSO: <a href="roots.html#nraphson">nraphson</a></p>
+</div>
+<div class="docblock"><a name="mnbrent"></a><h3>mnbrent</h3>
+  <pre>DOCUMENT fmin= mnbrent(f, x0, x1, x2)
+      or fmin= mnbrent(f, x0, x1, x2, xmin)
+      or fmin= mnbrent(f, x0, x1, x2, xmin, xerr)
+
+  returns the minimum of the function F (of a single argument x),
+  given three points X0, X1, and X2 such that F(X1) is less than
+  either F(X0) or F(X2), and X1 is between X0 and X2.  If the
+  XMIN argument is provided, it is set to the x value which
+  produced FMIN.  If XERR is supplied, the search stops when
+  a fractional error of XERR in x is reached; note that XERR
+  smaller than the square root of the machine precision (or
+  omitted) will cause convergence to machine precision in FMIN.
+
+  The algorithm is Brent's method - a combination of inverse
+  parabolic interpolation and golden section search - as adapted
+  from Numerical Recipes Ch. 10 (Press, et. al.).
+</pre>
+  <p>SEE ALSO: <a href="roots.html#mxbrent">mxbrent</a>, <a href="roots.html#nraphson">nraphson</a>, <a href="roots.html#f_inverse">f_inverse</a></p>
+</div>
+<div class="docblock"><a name="mxbrent"></a><h3>mxbrent</h3>
+  <pre>DOCUMENT fmax= mxbrent(f, x0, x1, x2)
+      or fmax= mxbrent(f, x0, x1, x2, xmax)
+      or fmax= mxbrent(f, x0, x1, x2, xmax, xerr)
+
+  returns the maximum of the function F (of a single argument x),
+  given three points X0, X1, and X2 such that F(X1) is greater than
+  either F(X0) or F(X2), and X1 is between X0 and X2.  If the
+  XMAX argument is provided, it is set to the x value which
+  produced FMAX.  If XERR is supplied, the search stops when
+  a fractional error of XERR in x is reached; note that XERR
+  smaller than the square root of the machine precision (or
+  omitted) will cause convergence to machine precision in FMAX.
+
+  The algorithm is Brent's method - a combination of inverse
+  parabolic interpolation and golden section search - as adapted
+  from Numerical Recipes Ch. 10 (Press, et. al.).
+</pre>
+  <p>SEE ALSO: <a href="roots.html#mxbrent">mxbrent</a>, <a href="roots.html#nraphson">nraphson</a>, <a href="roots.html#f_inverse">f_inverse</a></p>
+</div>
+<div class="docblock"><a name="nraphson"></a><h3>nraphson</h3>
+  <pre>DOCUMENT nraphson(f_and_dfdx, x0, x1)
+      or nraphson(f_and_dfdx, x0, x1, xerr)
+
+  Find a root of a function by Newton-Raphson iteration, backed
+  up by bisection if the convergence seems poor.  The subroutine
+  F_AND_DFDX must be defined as:
+       func F_AND_DFDX (x, &f, &dfdx)
+  returning both the function value f(x) and derivative dfdx(x).
+  If F_AND_DFDX always returns dfdx==0, nraphson uses bisection.
+  The value of x is constrained to lie within the interval from
+  X0 to X1; the function values at these two points must have
+  opposite sign.  The iteration stops when the root is known to
+  within XERR, or to machine precision if XERR is nil or zero.
+
+  f_inverse is a "vectorized" version of nraphson.
+
+  Based on rtsafe from Press, et. al. Numerical Recipes, Ch 9.
+</pre>
+  <p>SEE ALSO: <a href="roots.html#mnbrent">mnbrent</a>, <a href="roots.html#mxbrent">mxbrent</a>, <a href="roots.html#f_inverse">f_inverse</a></p>
+</div>
+<div class="docblock"><a name="roots"></a><h3>roots</h3>
+  <pre>DOCUMENT roots.i
+    defines:
+  nraphson     - Newton-Raphson/bisection root solver (scalar)
+  f_inverse    - function inverse by Newton-Raphson (vectorized)
+  mnbrent      - Brent's method minimizer (scalar)
+  mxbrent      - Brent's method maximizer (scalar)</pre>
+  
+</div>

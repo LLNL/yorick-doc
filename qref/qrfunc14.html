@@ -1,0 +1,33 @@
+---
+layout: qrfunc
+headline: Quick Reference
+---
+<h2>Using Pointers</h2>
+<p>A scalar of type <tt>pointer</tt> points to a Yorick array of any data
+type or dimensions. Unary <tt>&amp;</tt> returns a <tt>pointer</tt> to
+its argument, which can be any array valued expression. Unary <tt>*</tt>
+dereferences its argument, which must be a scalar of type
+<tt>pointer</tt>,
+returning the original array. A dereferenced pointer may itself be an array
+of type <tt>pointer</tt>. The unary <tt>&amp;</tt> and
+<tt>*</tt> bind
+more tightly than any other Yorick operator except
+<tt>.</tt> and <tt>-></tt>
+(the member extraction operators), and array indexing <i>x </i><tt>(..)</tt>:
+</p>
+<p><tt>&amp;</tt><i>expr</i>&nbsp;&nbsp;&nbsp; return a scalar <tt>pointer</tt> to <i>expr</i>
+<br><tt>*</tt><i>expr</i>&nbsp;&nbsp;&nbsp; dereference <i>expr</i>, a scalar pointer
+</p>
+<p>Since a <tt>pointer</tt> always points to a Yorick array, Yorick can
+handle all necessary memory management. Dereference <tt>*</tt> or
+<tt>-></tt>,
+copy by assignment <tt>=</tt>, or compare to another pointer with <tt>==</tt>
+or <tt>!=</tt> are the only legal operations on a <tt>pointer</tt>. A pointer
+to a temporary <i>expr</i> makes sense and may be useful.
+</p>
+<p>The purpose of the <tt>pointer</tt> data type is to deal with several
+related objects of different types or shapes, where the type or shape changes,
+making <tt>struct</tt> inapplicable.
+</p>
+
+

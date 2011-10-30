@@ -1,0 +1,86 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="style-keyword"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_81.html#style_002ei" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.2 style.i functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Style-keyword"></a>
+<h3 class="subsection">3.5.1 Style keyword</h3>
+
+<p>Graphics styles are ordinarily read from files, which you load by
+means of the style= keyword to the window command.  The Yorick
+distribution comes with several style files:
+</p>
+<p>The &lsquo;<tt>work.gs</tt>&rsquo; file is the default style and my own preference.
+Many people prefer the &lsquo;<tt>boxed.gs</tt>&rsquo; style, which looks more like
+other graphics packages (baaa baaa).  The &lsquo;<tt>vg.gs</tt>&rsquo; file stands for
+&ldquo;viewgraph graphics style&rdquo;, which I recommend as the starting point
+for high quality graphics.  There is a &lsquo;<tt>vgbox.gs</tt>&rsquo; style as well.
+The &lsquo;<tt>axes.gs</tt>&rsquo; style has coordinate axes with ticks running through
+the middle of the viewport, similar to the style of many elementary math
+textbooks.  The &lsquo;<tt>nobox.gs</tt>&rsquo; style has no tick marks, labels, or
+other distractions; use it for drawing geometrical figures or imitating
+photographs.  The &lsquo;<tt>work2.gs</tt>&rsquo; and &lsquo;<tt>boxed2.gs</tt>&rsquo; styles are
+variants which allow you to put a second set of tick marks and labels on
+the right hand side of the plot, independent of the ones on the left
+side.  (This is a little cumbersome in Yorick, but if you really need
+it, that&rsquo;s how you&rsquo;re supposed get it.)  Finally, &lsquo;<tt>l_nobox.gs</tt>&rsquo; is a
+variant of the nobox style in landscape orientation; all the other
+styles give portrait orientation.
+</p>
+<p>For example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">window, style=&quot;nobox.gs&quot;
+</pre></td></tr></table>
+
+
+<p>switches to the nobox style.  This clears the current display list;
+the new style will take effect with your next plot.  If you have
+several different windows, they may have different styles; each window
+has its own style, just as it has its own display list.
+</p>
+<p>The style files are in the <kbd>Y_SITE+&quot;gist&quot;</kbd> directory; the file
+&lsquo;<tt>work.gs</tt>&rsquo; in that directory contains enough comments for you to see
+how to write your own variants of the distribution style files.  You can
+put variants into either that public directory, or into a private
+directory called &lsquo;<tt>~/Gist</tt>&rsquo;, or in Yorick&rsquo;s current working directory
+to enable the style= keyword to find them.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_81.html#style_002ei" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.2 style.i functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

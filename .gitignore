@@ -1,0 +1,11 @@
+# generic (probably also in global .gitignore)
+*~
+/#*
+core
+*.core
+*.dSYM/
+
+_site/
+# yorick-doc specific build files
+gh-pages.src
+gh-pages/

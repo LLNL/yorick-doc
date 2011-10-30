@@ -1,0 +1,87 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package unsigned (in unsigned.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>S</h3>
+    <p><a href="unsigned.html#s_char">s_char</a></p>
+    <h3>U</h3>
+    <p><a href="unsigned.html#u_cast">u_cast</a></p>
+    <p><a href="unsigned.html#u_div">u_div</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="unsigned.html#u_eq">u_eq</a></p>
+    <p><a href="unsigned.html#u_ge">u_ge</a></p>
+    <p><a href="unsigned.html#u_gt">u_gt</a></p>
+    <p><a href="unsigned.html#u_le">u_le</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="unsigned.html#u_lt">u_lt</a></p>
+    <p><a href="unsigned.html#u_mod">u_mod</a></p>
+    <p><a href="unsigned.html#u_ne">u_ne</a></p>
+    <p><a href="unsigned.html#u_shr">u_shr</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="s_char"></a><h3>s_char</h3>
+  <pre>DOCUMENT s_char(x)
+  return short(x) interpreting char x as a signed integer.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_cast"></a><h3>u_cast</h3>
+  <pre>DOCUMENT u_cast(x, structof(y))
+      or u_cast(x, y)
+  return x as an unsigned integer of type y.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#s_char">s_char</a></p>
+</div>
+<div class="docblock"><a name="u_div"></a><h3>u_div</h3>
+  <pre>DOCUMENT u_div(n,d)
+      or u_div(n,d, r)
+  return n/d treating n and d as unsigned integers.
+  The optional third argument R is an output, set to n%d</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_eq"></a><h3>u_eq</h3>
+  <pre>DOCUMENT u_eq(x,y)
+  return x==y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_ge"></a><h3>u_ge</h3>
+  <pre>DOCUMENT u_gt(x,y)
+  return x>=y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_gt"></a><h3>u_gt</h3>
+  <pre>DOCUMENT u_gt(x,y)
+  return x>y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_le"></a><h3>u_le</h3>
+  <pre>DOCUMENT u_gt(x,y)
+  return x<=y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_lt"></a><h3>u_lt</h3>
+  <pre>DOCUMENT u_gt(x,y)
+  return x<y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_mod"></a><h3>u_mod</h3>
+  <pre>DOCUMENT u_mod(n,d)
+      or u_mod(n,d, q)
+  return n%d treating n and d as unsigned integers.
+  The optional third argument Q is an output, set to n/d</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_ne"></a><h3>u_ne</h3>
+  <pre>DOCUMENT u_ne(x,y)
+  return x!=y treating x and y as unsigned integers.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>
+<div class="docblock"><a name="u_shr"></a><h3>u_shr</h3>
+  <pre>DOCUMENT u_shr(x,n)
+  return x>>n treating x as an unsigned integer.</pre>
+  <p>SEE ALSO: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>, <a href="unsigned.html#u_cast">u_cast</a></p>
+</div>

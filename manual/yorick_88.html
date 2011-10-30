@@ -1,0 +1,116 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Custom-plot-functions"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_87.html#pldefault" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.7 Defaults for keywords" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_89.html#Animation" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.9 Animation" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Writing-new-plotting-functions"></a>
+<h2 class="section">3.8 Writing new plotting functions</h2>
+
+<p>You may want to plot something not directly supported by one of the
+plotting primitive functions.  Usually, you can write your own
+plotting function to perform such a task.  As an example, suppose you
+want to plot a histogram &ndash; that is, instead of a smooth curve
+connecting a series of (x,y) points, you want to draw a line
+consisting of a horizontal segment at each value of y, joined by
+vertical segments (this is sometimes called a Manhattan plot for its
+resemblance to the New York City skyline).
+</p>
+<p>You quickly realize that to draw a histogram, you really need the x
+values at the vertical segments.  This function works:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func plh(y,x)
+{
+  yy = xx = array(0.0, 2*numberof(y));
+  yy(1:-1:2) = yy(2:0:2) = y;
+  xx(2:-2:2) = xx(3:-1:2) = x(2:-1);
+  xx(1) = x(1);
+  xx(0) = x(0);
+  plg, yy, xx;
+}
+</pre></td></tr></table>
+
+<p>Notice that the x array must have one more element that the y array;
+otherwise the assignment operations to xx will fail for lack of
+conformability.
+</p>
+<p>A more sophistocated version would include the possibility for the
+caller to pass plh the keywords accepted by the plg function.  Also,
+you might want to allow y to have one more element than x instead of x
+one more than y, in order to start and end the plot with a vertical
+segment instead of a horizontal segment.  Here is a more complete
+version of plh:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func plh(y,x,marks=,color=,type=,width=)
+/* DOCUMENT plh, y, x
+     plot a histogram (Manhattan plot) of Y versus X.  That is,
+     the result of a plh is a set of horizontal segments at the Y
+     values connected by vertical segments at the X values.  If X
+     has one more element than Y, the plot will begin and end with
+     a horizontal segment; if Y has one more element than X, the
+     plot will begin and end with a vertical segment.  The keywords
+     are a subset of those for plg.
+   KEYWORDS: marks, color, type, width
+   SEE ALSO: plg
+ */
+{
+  swap = numberof(x)&lt;numberof(y);
+  if (swap) { yy = y; y = x; x = yy; }
+  yy = xx = array(0.0, 2*min(numberof(y),numberof(x)));
+  yy(1:-1:2) = yy(2:0:2) = y;
+  xx(2:-2:2) = xx(3:-1:2) = x(2:-1);
+  xx(1) = x(1);
+  xx(0) = x(0);
+  if (swap) { y = yy; yy = xx; xx = y }
+  plg, yy, xx, marks=marks, color=color, type=type, width=width;
+}
+</pre></td></tr></table>
+
+<p>The point of an interpreted language is to allow you to easily alter
+the user interface to suit your own needs.  Designing an interface for
+a wide variety of users is much harder than designing one for your own
+use.  (The first version of plh might be adequate for your own use; I
+wouldn&rsquo;t release less than the second version to a larger public.)
+Linking your routines to the Yorick help command via a document
+comment is useful even if never anticipate anyone other than yourself
+will use them.  Public interface routines should always have a
+document comment.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_87.html#pldefault" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.7 Defaults for keywords" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_89.html#Animation" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.9 Animation" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

@@ -1,0 +1,84 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package pixels (in pixels.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+    <p><a href="pixels.html#pixels">pixels</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="pixels.html#pix_dpi">pix_dpi</a></p>
+    <p><a href="pixels.html#pix_origin">pix_origin</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="pixels.html#pix_window">pix_window</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="pixels"></a><h3>pixels</h3>
+  <pre>DOCUMENT pixels, z
+      or pixels, z, dx0, dy0
+  plots the image Z as a cell array -- an array of equal rectangular
+  cells colored according to the 2-D array Z.  The first dimension
+  of Z is plotted along x, the second dimension is along y.
+  If Z is of type char, it is used "as is", otherwise it is linearly
+  scaled to fill the current palette, as with the bytscl function.
+  (See the bytscl function for explanation of top, cmin, cmax.)
+
+  The image is placed in "coordinate system zero"; that is, outside
+  Yorick's ordinary coordinate system, so zooming and coordinate
+  system changes will not effect it.  Unlike pli, Yorick attempts
+  to make each X pixel correspond to one cell of the Z array.
+  In order to do this, the pix_dpi variable must be set to the
+  dots-per-inch (either 75 or 100) of the X window in which the
+  result of pixels will be displayed (see the dpi keyword of the
+  window command).
+
+  The default position of the upper left hand corner of the picture
+  is specified by the pix_origin variable.  If DX0 and/or DY0 are
+  present, they adjust this origin for this image.  The units of
+  DX0 and DY0 are in pixels; DY0 is positive downwards.  (However,
+  the 2nd index of the image increases upwards.)  Resizing the X
+  window will probably necessitate changing pix_origin.
+
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: top, cmin, cmax</pre>
+  <p>SEE ALSO: <a href="pixels.html#pix_window">pix_window</a>, <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#palette">palette</a>, <a href="graph-plotmisc.html#bytscl">bytscl</a>, <a href="graph-plotmisc.html#histeq_scale">histeq_scale</a>, <a href="pixels.html#pix_dpi">pix_dpi</a>, <a href="pixels.html#pix_origin">pix_origin</a></p>
+</div>
+<div class="docblock"><a name="pix_dpi"></a><h3>pix_dpi</h3>
+  <pre>DOCUMENT pix_dpi= 75
+      or pix_dpi= 100
+  set the number of dots per inch for the pixels function.
+  X displays are either 75 dpi (default) or 100 dpi in Yorick.
+  The pix_dpi number must match the dpi of the window in which
+  the pixels command is to be issued; the other number will
+  result in blurred images.
+</pre>
+  <p>SEE ALSO: <a href="pixels.html#pixels">pixels</a>, <a href="pixels.html#pix_window">pix_window</a>, <a href="graph-plotout.html#window">window</a></p>
+</div>
+<div class="docblock"><a name="pix_origin"></a><h3>pix_origin</h3>
+  <pre>DOCUMENT pix_origin= [0.12,0.91]
+  set [x,y] for the default upper left hand corner of the pixels
+  image.  The default value is shown.  [0,0] is the lower left of
+  an 8.5-by-11 sheet of paper.  Yorick units are 0.0013/point or
+  0.0013*72.27/inch (11 inches is a little more than 1.0);  Yorick
+  keeps the "middle" of an 8.5-by-11 sheet centered in the visible
+  part of its X windows, so you might want to change the default
+  pix_origin if you resize the Yorick window.
+</pre>
+  <p>SEE ALSO: <a href="pixels.html#pixels">pixels</a>, <a href="graph-plotout.html#window">window</a></p>
+</div>
+<div class="docblock"><a name="pix_window"></a><h3>pix_window</h3>
+  <pre>DOCUMENT pix_window, dpi
+      or pix_window, dpi, n
+  create a new window for the pixels command with the given DPI
+  (dots per inch).  If N is specified, the new window will be
+  number N (0-7).  Also sets the pix_dpi variable appropriately.
+
+  pix_window, 75           // makes a small window
+  pix_window, 100          // makes a large window
+</pre>
+  <p>SEE ALSO: <a href="pixels.html#pix_dpi">pix_dpi</a>, <a href="pixels.html#pixels">pixels</a>, <a href="graph-plotout.html#window">window</a></p>
+</div>

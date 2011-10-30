@@ -1,0 +1,112 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package mpool (in mpool.i) - mpy pool of tasks programming paradigm </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="mpool.html#mpool">mpool</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="mpool.html#mpool_stats">mpool_stats</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="mpool"></a><h3>mpool</h3>
+  <pre>DOCUMENT pool_stats = mpool(fsow, fwork, freap)
+  perform a pool-of-jobs parallel calculation, in which a master
+  process farms out jobs to many slave processes.  The FSOW function
+  defines one job, which mpool sends via MPI to an idle slave.  The
+  slave calls the FWORK function to do the job, which mpool sends
+  back to the master.  The master calls the FREAP function to assimilate
+  the result of one job.  The whole cycle repeats until FSOW signals
+  there are no more jobs.  The return value of mpool is a mpool_t struct
+  instance containing statistics about the pool.
+
+  The mpool function can be called in serial mode on rank 0, or in
+  parallel mode on all participating ranks (by default that is all ranks).
+  The FSOW, FWORK, and FREAP functions must conform to the following
+  templates:
+  func FSOW(njob, job_define_handle) {
+    if (no_more_jobs) return 0;
+    <compute parameters p1,p2,... for job number njob>
+    vpack, job_define_handle, p1, p2, ...;
+    return 1;
+  }
+  func FWORK(njob, job_define_handle, job_result_handle) {
+    local p1, p2, ...;
+    vunpack, job_define_handle, p1, p2, ...;
+    <do job number njob defined by p1, p2, ...>
+    <produce results r1, r2, ...>
+    vpack, job_result_handle, r1, r2, ...;
+  }
+  func FREAP(njob, job_result_handle) {
+    local r1, r2, ...;
+    vunpack, job_result_handle, r1, r2, ...;
+    <assimilate results r1,r2,... of job number njob>
+  }
+
+  Several keywords are accepted by mpool:
+  use_vsave=1   if FSOW, FWORK, and FREAP use vsave instead of vpack
+    and restore instead of vunpack.
+  self=1        if the FWORK function should be called on the master
+    process when all slaves are busy.  (This is usually not a good idea,
+    because many slaves can become idle while the master is working.)
+  list=[master_rank, slave_rank1, slave_rank2, ...]
+    to specify a subset of processes to participate in the pool.  If mpool
+    is called in serial mode, any processes not in list will be idle.  If
+    mpool is called in parallel mode, the list= keyword must be identical
+    in every participating process, but mpool will generate no message
+    traffic outside the listed processes.  You can use this mechanism to
+    permit FWORK functions to themselves call mpool.
+    Without list=, rank 0 is the master and all other ranks are slaves.
+  nmax=   do not use more than this many processes as slaves
+
+  If tsow is the time to generate a job with FSOW, twork is the time to
+  do a job with FWORK, and treap is the time to reap a job with FREAP,
+  then mpool will employ twork/tsow slaves before the first slave finishes.
+  In the long run, however, mpool can employ only twork/(tsow+treap) slaves
+  in steady state, so unless treap is negligible compared to tsow, you risk
+  starting more jobs than you can handle.  Since all slaves send messages
+  back to the master, there is a serious risk that mpool will create a
+  "denial of service attack" against the master process, if a large number
+  of slaves is available.  By default, nmax=100, but even this may be too
+  large, and you should consider carefully raising the limit.  You don't
+  want more than a couple of dozen slaves whose job results are in the
+  master's mp_recv queue waiting to be reaped.
+
+  The return value of mpool is meaningful only on the master process.
+  Among other things, it contains the following information:
+    pool.njobs   total number of jobs done
+    pool.nused   maximum number of slaves employed
+    pool.navg    average number of slaves employed = twork/(tsow+treap)
+    pool.nqmax   largest number of jobs in mp_recv queue
+    pool.nignore  number of non-pool messages in mp_recv queue
+    pool.nself   number of jobs done by master
+    pool.tsow    total FSOW time [cpu,sys,wall] (help,timer)
+    pool.twork   total FWORK time [cpu,sys,wall]
+    pool.treap   total FREAP time [cpu,sys,wall]
+
+  Algorithm:
+    if no more jobs,
+      if no slaves active, quit
+      else block until message pending from slave
+    if message pending from slave,
+      reap pending, then sow next job to that slave
+    else if nused<nmax
+      sow to new slave, increment nused
+    else if self work allowed
+      sow to self, then reap from self
+    else
+      block until message pending from slave
+</pre>
+  <p>SEE ALSO: mpool_test, <a href="mpool.html#mpool_stats">mpool_stats</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_recv">mp_recv</a>, <a href="std-fileio.html#vpack">vpack</a>, <a href="std-fileio.html#vsave">vsave</a>, <a href="std-system.html#timer">timer</a></p>
+</div>
+<div class="docblock"><a name="mpool_stats"></a><h3>mpool_stats</h3>
+  <pre>DOCUMENT mpool_stats, pool_stats
+  print statistics from POOL_STATS returned by mpool or mpool_test.</pre>
+  <p>SEE ALSO: <a href="mpool.html#mpool">mpool</a>, mpool_test</p>
+</div>

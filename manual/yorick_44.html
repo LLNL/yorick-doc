@@ -1,0 +1,103 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Rubber_002dIndex"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_43.html#Negative-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.6 Numbering a dimension from its last element" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_45.html#Matrix-Multiply" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.8 Marking an index for matrix multiplication" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Using-a-rubber-index"></a>
+<h3 class="subsection">2.3.7 Using a rubber index</h3>
+
+<p>Many Yorick functions must work on arrays with an unknown number of
+dimensions.  Consider a filter response function, which takes as input a
+spectrum (brightness as a function of photon energy), and returns the
+response of a detector.  Such a function could be passed a spectrum and
+return a scalar value.  Or, it might be passed a two dimensional array
+of spectra for each of a list of rays, and be expected to return the
+corresponding list of responses.  Or a three dimensional array of
+spectra at each pixel of a two dimensional image, returning a two
+dimensional array of response values.
+</p>
+<p>In order to write such a function, you need a way to say, &ldquo;and all other
+indices this array might have&rdquo;.  Yorick&rsquo;s rubber-index, <kbd>..</kbd>, stands
+for zero or more actual indices of the array being indexed.  Any indices
+preceding a rubber-index are &ldquo;left justified&rdquo;, and any following it are
+&ldquo;right justified&rdquo;.  Using this syntax, you can easily index an array, as
+long as you know that the dimension (or dimensions) you are interested
+in will always be first, or last &ndash; even if you don&rsquo;t know how many
+spectator dimensions might be present in addition to the one your
+routine processes.
+</p>
+<p>Thus, as long as the spectral dimension is always the final dimension
+of the input <kbd>brightness</kbd> array,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">brightness(..,i)
+</pre></td></tr></table>
+
+<p>will always place the <kbd>i</kbd> index in the spectral dimension, whether
+<kbd>brightness</kbd> itself is a 1-D, 2-D, or 3-D array.
+</p>
+<p>Similarly, <kbd>x(i,..)</kbd> selects a value of the first index of <kbd>x</kbd>,
+leaving intact all following dimensions, if any.  Constructions such as
+<kbd>x(i,j,..,k,l)</kbd> are also legal, albeit rarely necessary.
+</p>
+<p>A second form of rubber-index collapses zero or more dimensions into a
+single index.  The length of the collapsed dimension will be the product
+of the lengths of all of the dimensions it replaces (or 1, if it
+replaces zero dimensions).  The symbol for this type of rubber index is
+an asterisk <kbd>*</kbd>.  For example, if <kbd>x</kbd> were a
+five-by-three-by-four-by-two array, then <kbd>x(*)</kbd> would be a 1-D array
+of 120 elements, while <kbd>x(,*,)</kbd> would be a five-by-twelve-by-two
+array.
+</p>
+<p>If the last actual index in a subscripted array is nil, and if this
+index does not correspond to the final actual dimension of the array,
+Yorick will append a <kbd>..</kbd> rubber-index to the end of the subscript
+list.  Hence, in the previous example, <kbd>x()</kbd> is equivalent to
+<kbd>x(,..)</kbd>, which is equivalent to <kbd>x(..)</kbd>, which is equivalent to
+simply <kbd>x</kbd>.  This rule is the only rogue in Yorick&rsquo;s array
+subscripting stable, and I am mightily tempted to remove it on grounds
+of linguistic purity.  When you mean, &ldquo;and any other dimensions which
+might be present,&rdquo; use the <kbd>..</kbd> rubber-index, not a nil index.  Use
+a trailing nil index only when you mean, &ldquo;and the single remaining
+dimension (which I know is present).&rdquo;
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_43.html#Negative-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.6 Numbering a dimension from its last element" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_45.html#Matrix-Multiply" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.8 Marking an index for matrix multiplication" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

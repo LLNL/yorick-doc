@@ -1,0 +1,66 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Making Plots</h2>
+<p><tt>plg, <i>y, x</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> plot graph of 1-D <i>y</i> vs. <i>x</i>
+<br><tt>plm, <i>mesh_args</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> plot quadrilateral mesh&nbsp;
+<br><tt>plc, <i>z, mesh_args</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> plot contours of <i>z</i>
+<br><tt>plf, <i>z, mesh_args</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> plot filled mesh, filling with <i>z</i>
+<br><tt>plv, <i>v, u, mesh_args</i>&nbsp;&nbsp;&nbsp;</tt> plot vector field (<i>u,v)</i>)&nbsp;
+<br><tt>pli, <i>z, x0, y0, x1, y1</i>&nbsp;</tt> plot image
+<i>z</i>
+<br><tt>pldj, <i>x0, y0, x1, y1</i>&nbsp;&nbsp;&nbsp;</tt> plot disjoint lines&nbsp;
+<br><tt>plt, <i>text, x, y</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> plot <i>text</i> at (<i>x,y</i> )
+</p>
+
+<p>The <i>mesh_args</i> may be zero, two, or three arguments as follows:
+</p>
+<ul>
+<li> omitted to use the current default mesh set by:
+<br><tt>plmesh, <i>mesh_args</i>&nbsp;</tt> set default quadrilateral mesh&nbsp;
+<br><tt>plmesh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> delete current default quadrilateral mesh</li>
+<li> <i>y, x</i>
+<br>To set mesh points to (<i>x, y</i> ), which must be 2-D arrays of the
+same shape, with at least two elements in each dimension.</li>
+<li> <i>y, x, ireg</i>
+<br>To set mesh points to (<i>x, y</i> ), as above, with a region number
+array <i>ireg</i>. The <i>ireg</i> should be an integer array of the same
+shape as <i>y</i> and <i>x</i>, which has a non-zero ``region number''
+for every meaningful zone in the problem. The first row and column of
+<i>ireg</i> do
+not correspond to any zone, since there are one fewer zones along each
+dimension than points in <i>y</i> and <i>x</i>.</li>
+</ul>
+
+<p>The <tt>plc</tt> command accepts the <tt>levs</tt> keyword to specify
+the list of <i>z</i> values to be contoured; by default, eight linearly
+spaced levels are generated.
+</p>
+<p>The <tt>plc</tt> and <tt>plmesh</tt> commands accept the <tt>triangle</tt>
+keyword to specify a detailed triangulation map for the contouring algorithm.
+Use the <tt>help, triangle</tt> for details.
+</p>
+<p>The <tt>plv</tt> command accepts the <tt>scale</tt> keyword to specify
+the scaling factor to be applied to (<i>u, v</i>) before rendering the
+vectors in (<i>x, y</i>) space; by default, the vector lengths are chosen
+to be comparable to typical zone dimensions.
+</p>
+<p>The <tt>plm</tt> command accepts the <tt>boundary</tt> keyword, which
+should be set to 1 if only the mesh boundary, rather than the mesh interior,
+is to be plotted.
+</p>
+<p>The <tt>plm</tt>, <tt>plc</tt>, <tt>plf</tt>, and <tt>plv</tt> commands
+accept the
+<tt>region</tt> keyword to restrict the plot to only one region
+of the mesh, as numbered by the <i>ireg</i> argument. The default <tt>region</tt>
+is 0, which is interpreted to mean the every non-0 region of the mesh.
+</p>
+<p>The <tt>pli</tt> command produces a cell array; the <i>x0, y0, x1, y1</i>,
+which are optional, specify the coordinates of the opposite corners of
+the cell array.
+</p>
+<p>Numerous other keywords adjust the style of lines, text, etc.
+</p>
+
+

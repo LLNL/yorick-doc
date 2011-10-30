@@ -1,0 +1,215 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package matrix (in matrix.i) - LAPACK linear algebra functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>L</h3>
+    <p><a href="matrix.html#LUrcond">LUrcond</a></p>
+    <p><a href="matrix.html#LUsolve">LUsolve</a></p>
+    <h3>Q</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="matrix.html#QRsolve">QRsolve</a></p>
+    <h3>S</h3>
+    <p><a href="matrix.html#SVdec">SVdec</a></p>
+    <p><a href="matrix.html#SVsolve">SVsolve</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>T</h3>
+    <p><a href="matrix.html#TDsolve">TDsolve</a></p>
+    <h3>U</h3>
+    <p><a href="matrix.html#unit">unit</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="LUrcond"></a><h3>LUrcond</h3>
+  <pre>DOCUMENT LUrcond(a)
+      or LUrcond(a, one_norm=1)
+  returns the reciprocal condition number of the N-by-N matrix A.
+  If the ONE_NORM argument is non-nil and non-zero, the 1-norm
+  condition number is returned, otherwise the infinity-norm condition
+  number is returned.
+
+  The condition number is the ratio of the largest to the smallest
+  singular value, max(singular_values)*max(1/singular_values) (or
+  sum(abs(singular_values)*sum(abs(1/singular_values)) if ONE_NORM
+  is selected?).  If the reciprocal condition number is near zero
+  then A is numerically singular; specifically, if
+       1.0+LUrcond(a) == 1.0
+  then A is numerically singular.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#LUsolve">LUsolve</a></p>
+</div>
+<div class="docblock"><a name="LUsolve"></a><h3>LUsolve</h3>
+  <pre>DOCUMENT LUsolve(a, b)
+      or LUsolve(a, b, which=which)
+      or a_inverse= LUsolve(a)
+
+  returns the solution x of the matrix equation:
+     A(,+)*x(+) = B
+  If A is an n-by-n matrix then B must have length n, and the returned
+  x will also have length n.
+
+  B may have additional dimensions, in which case the returned x
+  will have the same additional dimensions.  The WHICH dimension of B,
+  and of the returned x is the one of length n which participates
+  in the matrix solve.  By default, WHICH=1, so that the equations
+  being solved are:
+     A(,+)*x(+,..) = B
+  Non-positive WHICH counts from the final dimension (as for the
+  sort and transpose functions), so that WHICH=0 solves:
+     x(..,+)*A(,+) = B
+  Other examples:
+     A_ij X_jklm = B_iklm   (WHICH=1)
+     A_ij X_kjlm = B_kilm   (WHICH=2)
+     A_ij X_klmj = B_klmi   (WHICH=4 or WHICH=0)
+
+  If the B argument is omitted, the inverse of A is returned:
+  A(,+)*x(+,) and A(,+)*x(,+) will be unit matrices.
+
+  LUsolve works by LU decomposition using Gaussian elimination with
+  pivoting.  It is the fastest way to solve square matrices.  QRsolve
+  handles non-square matrices, as does SVsolve.  SVsolve is slowest,
+  but can deal with highly singular matrices sensibly.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#QRsolve">QRsolve</a>, <a href="matrix.html#TDsolve">TDsolve</a>, <a href="matrix.html#SVsolve">SVsolve</a>, <a href="matrix.html#SVdec">SVdec</a>, <a href="matrix.html#LUrcond">LUrcond</a></p>
+</div>
+<div class="docblock"><a name="QRsolve"></a><h3>QRsolve</h3>
+  <pre>DOCUMENT QRsolve(a, b)
+      or QRsolve(a, b, which=which)
+
+  returns the solution x (in a least squares or least norm sense
+  described below) of the matrix equation:
+     A(,+)*x(+) = B
+  If A is an m-by-n matrix (i.e.- m equations in n unknowns), then B
+  must have length m, and the returned x will have length n.
+
+  If n<m, the system is overdetermined -- no solutions are possible
+          -- the returned x minimizes sqrt(sum((A(,+)*x(+) - B)^2))
+  If n>m, the system is underdetermined -- many solutions are possible
+          -- the returned x has minimum L2 norm among all solutions
+
+  B may have additional dimensions, in which case the returned x
+  will have the same additional dimensions also have those dimensions.
+  The WHICH dimension of B and the returned x is the one of length m
+  or n which participates in the matrix solve.  By default, WHICH=1,
+  so that the equations being solved are:
+     A(,+)*x(+,..) = B
+  Non-positive WHICH counts from the final dimension (as for the
+  sort and transpose functions), so that WHICH=0 solves:
+     A(,+)*x(..,+) = B
+
+  QRsolve works by QR factorization if n<m, or LQ factorization if n>m.
+  QRsolve is slower than LUsolve.  Its main attraction is that it can
+  handle overdetermined or underdetermined systems of equations
+  (nonsquare matrices).  QRsolve may fail for singular systems; try
+  SVsolve in this case.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#LUsolve">LUsolve</a>, <a href="matrix.html#TDsolve">TDsolve</a>, <a href="matrix.html#SVsolve">SVsolve</a>, <a href="matrix.html#SVdec">SVdec</a></p>
+</div>
+<div class="docblock"><a name="SVdec"></a><h3>SVdec</h3>
+  <pre>DOCUMENT s= SVdec(a, u, vt)
+      or s= SVdec(a, u, vt, full=1)
+
+  performs the singular value decomposition of the m-by-n matrix A:
+     A = (U(,+) * SIGMA(+,))(,+) * VT(+,)
+  where U is an m-by-m orthogonal matrix, VT is an n-by-n orthogonal
+  matrix, and SIGMA is an m-by-n matrix which is zero except for its
+  min(m,n) diagonal elements.  These diagonal elements are the return
+  value of the function, S.  The returned S is always arranged in
+  order of descending absolute value.  U(,1:min(m,n)) are the left
+  singular vectors corresponding to the min(m,n) elements of S;
+  VT(1:min(m,n),) are the right singular vectors.  (The original A
+  matrix maps a right singular vector onto the corresponding left
+  singular vector, stretched by a factor of the singular value.)
+
+  Note that U and VT are strictly outputs; if you don't need them,
+  they need not be present in the calling sequence.
+
+  By default, U will be an m-by-min(m,n) matrix, and V will be
+  a min(m,n)-by-n matrix (i.e.- only the singular vextors are returned,
+  not the full orthogonal matrices).  Set the FULL keyword to a
+  non-zero value to get the full m-by-m and n-by-n matrices.
+
+  On rare occasions, the routine may fail; if it does, the
+  first SVinfo values of the returned S are incorrect.  Hence,
+  the external variable SVinfo will be 0 after a successful call
+  to SVdec.  If SVinfo>0, then external SVe contains the superdiagonal
+  elements of the bidiagonal matrix whose diagonal is the returned
+  S, and that bidiagonal matrix is equal to (U(+,)*A(+,))(,+) * V(+,).
+
+  Numerical Recipes (Press, et. al. Cambridge University Press 1988)
+  has a good discussion of how to use the SVD -- see section 2.9.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#SVsolve">SVsolve</a>, <a href="matrix.html#LUsolve">LUsolve</a>, <a href="matrix.html#QRsolve">QRsolve</a>, <a href="matrix.html#TDsolve">TDsolve</a></p>
+</div>
+<div class="docblock"><a name="SVsolve"></a><h3>SVsolve</h3>
+  <pre>DOCUMENT SVsolve(a, b)
+      or SVsolve(a, b, rcond)
+      or SVsolve(a, b, rcond, which=which)
+
+  returns the solution x (in a least squares sense described below) of
+  the matrix equation:
+     A(,+)*x(+) = B
+  If A is an m-by-n matrix (i.e.- m equations in n unknowns), then B
+  must have length m, and the returned x will have length n.
+
+  If n<m, the system is overdetermined -- no solutions are possible
+          -- the returned x minimizes sqrt(sum((A(,+)*x(+) - B)^2))
+  If n>m, the system is underdetermined -- many solutions are possible
+          -- the returned x has minimum L2 norm among all solutions
+
+  SVsolve works by singular value decomposition, therefore it is
+  immune to failure due to singularity of the A matrix.  The optional
+  RCOND argument defaults to 1.0e-9; singular values less than RCOND
+  times the largest singular value (absolute value) will be set to 0.0.
+  If RCOND<=0.0, machine precision is used.  The effective rank of the
+  matrix is returned as the external variable SVrank.
+
+  You can examine the details of the SVD by calling the SVdec routine,
+  which returns the singular vectors as well as the singular values.
+  Numerical Recipes (Press, et. al. Cambridge University Press 1988)
+  has a good discussion of how to use the SVD -- see section 2.9.
+
+  B may have additional dimensions, in which case the returned x
+  will have the same additional dimensions.  The WHICH argument
+  (default 1) controls which dimension of B takes part in the matrix
+  solve.  See QRsolve or LUsolve for a complete discussion.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#SVdec">SVdec</a>, <a href="matrix.html#LUsolve">LUsolve</a>, <a href="matrix.html#QRsolve">QRsolve</a>, <a href="matrix.html#TDsolve">TDsolve</a></p>
+</div>
+<div class="docblock"><a name="TDsolve"></a><h3>TDsolve</h3>
+  <pre>DOCUMENT TDsolve(c, d, e, b)
+      or TDsolve(c, d, e, b, which=which)
+
+  returns the solution to the tridiagonal system:
+     D(1)*x(1)       + E(1)*x(2)                       = B(1)
+     C(1:-1)*x(1:-2) + D(2:-1)*x(2:-1) + E(2:0)*x(3:0) = B(2:-1)
+                       C(0)*x(-1)      + D(0)*x(0)     = B(0)
+  (i.e.- C is the subdiagonal, D the diagonal, and E the superdiagonal;
+  C and E have one fewer element than D, which is the same length as
+  both B and x)
+
+  B may have additional dimensions, in which case the returned x
+  will have the same additional dimensions.  The WHICH dimension of B,
+  and of the returned x is the one of length n which participates
+  in the matrix solve.  By default, WHICH=1, so that the equations
+  being solved involve B(,..) and x(+,..).
+  Non-positive WHICH counts from the final dimension (as for the
+  sort and transpose functions), so that WHICH=0 involves B(..,)
+  and x(..,+).
+
+  The C, D, and E arguments may be either scalars or vectors; they
+  will be broadcast as appropriate.
+</pre>
+  <p>SEE ALSO: <a href="matrix.html#LUsolve">LUsolve</a>, <a href="matrix.html#QRsolve">QRsolve</a>, <a href="matrix.html#SVsolve">SVsolve</a>, <a href="matrix.html#SVdec">SVdec</a></p>
+</div>
+<div class="docblock"><a name="unit"></a><h3>unit</h3>
+  <pre>DOCUMENT unit(n)
+      or unit(n, m)
+  returns n-by-n (or n-by-m) unit matrix, i.e.- matrix with diagonal
+  elements all 1.0, off diagonal elements 0.0</pre>
+  
+</div>

@@ -1,0 +1,216 @@
+Layout:
+
+[Yorick Banner][Heading = Title minus "Yorick"]
+[  Sidebar    ][      Page Content            ]
+[              Footer??                       ]
+
+   1. banner image scaled to width of sidebar
+   2. sidebar navigation constant in major site sections
+   3. links to information not in this format use target="_blank"
+   4. plugin documentation stored in separate gh-pages repos
+      - when these become publicly available, add to content
+
+Site map
+--------
+  Home
+  Download - source direct, binary redirect to sf, distros?
+  Documentation
+    Quick Reference
+      qref/ subdirectory, Languge, Function, I/O subsections
+    Manual
+      manual/ subdirectory
+    Standard Library
+      stdlib/ subdirectory
+        subsections: per file, except std.i further broken down?
+        -- how to automatically generate top level contents/index?
+    Other Libraries
+      drat/ subdirectory
+      hex/ subdirectory
+      <links to other gh-pages public repo sites>
+       --idea: maintain html-pages for non-gh sites??  php-pages??
+  User Forums (redirect)
+  Wiki (redirect)
+  Browse Source (redirect) -- different for plugins
+
+  unique files:
+home.html = welcome page
+download.html
+plugins.html
+
+Should sidebar be same for everything?
+  - special one for quickref with sections?
+    [Yorick] Quick Reference  [home sidebar]
+      [Yorick] Quick Language Reference  [language sidebar]
+      [Yorick] Quick Function Reference  [function sidebar]
+      [Yorick] Quick I/O Reference       [i/o sidebar]
+        Home
+        Manual
+        Standard Library
+        Other Libraries
+        ---
+        Language Reference
+        Function Reference
+        I/O Reference
+          --- with exactly one of these expanded
+
+quick-ref html structure:
+  First <table, then first <ul> to matching </ul> (one nested) is lower sidebar
+  Next <h1> is title (remove "Yorick"), body goes to </td>
+
+stripped manual.init html structure:
+  first line is page anchor (place in header before banner <img>)
+  %TITLE% and %HEADLINE% should be all the same [Yorick] User Manual
+
+<div class="ndex0">
+  <div class="ndex1">  first column  simple <p> for items, <h3> for headings?
+  <div class="ndex2">  second column
+  <div class="ndex3">  third column
+
+------------------------------------------------------------------------
+template.html keys:
+%TITLE%        <title>
+%DESCRIPTION%  description <meta>
+%KEYWORDS%     keywords <meta>
+%PREFIX%       stylesheet URL prefix %PREFIX%/css/yorick.css <link>
+%ANCHOR%       whole page anchor in header
+%HEADLINE%     visible title in header (%TITLE% minus "Yorick")
+%BODY%         page content
+%SIDEBAR%      page sidebar
+%FOOTER%       page footer
+
+sidebar.html keys:
+%PREFIX%       prefix for documentation pages
+
+sidebarq.html keys:
+%QRSIDE%       quick reference sidebar (from html)
+
+------------------------------------------------------------------------
+mkdoc.i versus help:
+
+help picks up multiple names on both extern, local lines,
+  mkdoc only on local lines
+  -- both very flawed...
+
+------------------------------------------------------------------------
+jekyll notes:
+
+{{ site.time | date_to_string }} => 17 Nov 2008
+
+By default, jekyll will copy everything in the source directory into
+_site, but there’s an undocumented feature that lets you exclude or
+ignore files. A configuration variable named exclude exists. Any files
+or directories listed will be ignored. For example, the following is
+in my _config.yml file:
+
+exclude: makelive.sh, ideas.txt, newpost.rb
+
+------------------------------------------------------------------------
+Working with gh-pages branch:
+
+  http://book.git-scm.com/5_creating_new_empty_branches.html
+
+  git symbolic-ref HEAD refs/heads/newbranch 
+  rm .git/index 
+  git clean -fdx 
+  <do work> 
+  git add your files 
+  git commit -m 'Initial commit'
+    but isn't this easier:
+  git checkout --orphan newbranch
+  git rm -rf .
+  <do work>
+  git add your files 
+  git commit -m 'Initial commit'
+
+  To work on the gh-pages branch after cloning a repo:
+    git branch --track gh-pages origin/gh-pages
+  Do this once only, thereafter "git checkout gh-pages" as usual.
+
+Whole workflow, starting with no gh-pages:
+
+  # first time:
+  git checkout --orphan gh-pages
+  git rm -rf
+  cp -r ../yorick-doc/gh-pages/* ../yorick-doc/.gitignore .
+  git add -A
+  git commit -m 'Initial commit'
+  # push updated gh-pages and return to master branch
+  git push -u origin
+  git checkout master
+
+  # subsequent times:
+  git checkout gh-pages
+  rm -rf *
+  cp -r ../yorick-doc/gh-pages/* ../yorick-doc/.gitignore .
+  git add -A
+  git commit -m 'updated website'
+  # push updated gh-pages and return to master branch
+  git push
+  git checkout master
+
+  git stash
+  current=`git name-rev --name-only HEAD`
+  git checkout -f gh-pages
+  ...update gh-pages...
+  git add -A
+  git commit -m "updated website"
+  git checkout -f $current
+  git stash pop
+
+In perl:
+
+following git script is relevant:
+require_clean_work_tree () {
+    # Update the index
+    git update-index -q --ignore-submodules --refresh
+    err=0
+
+    # Disallow unstaged changes in the working tree
+    if ! git diff-files --quiet --ignore-submodules --
+    then
+        echo >&2 "cannot $1: you have unstaged changes."
+        git diff-files --name-status -r --ignore-submodules -- >&2
+        err=1
+    fi
+
+    # Disallow uncommitted changes in the index
+    if ! git diff-index --cached --quiet HEAD --ignore-submodules --
+    then
+        echo >&2 "cannot $1: your index contains uncommitted changes."
+        git diff-index --cached --name-status -r --ignore-submodules HEAD -- >&2
+        err=1
+    fi
+
+    if [ $err = 1 ]
+    then
+        echo >&2 "Please commit or stash them."
+        exit 1
+    fi
+}
+
+system "git describe --always gh-pages >/dev/null 2>&1";
+if ($? >> 8) { gh-pages branch does not exist }
+
+my $cfg = `git show gh-pages:_config.yml 2>&1`;
+if ($? >> 8) { no _config.yml in gh-pages branch }
+
+  https://github.com/ePaul/jsch-documentation
+    is example of auto-generated docs in gh-pages
+  <git-src>/contrib/workdir/git-new-workdir
+    multiple working directories
+    https://github.com/git/git/blob/master/contrib/workdir/git-new-workdir
+
+Alternatively, put auto-generated docs from master branch into a
+directory ignored in both master and gh-pages, then generate in
+master, switch to gh-pages, and copy into the version controlled
+location.  The latter step potentially requires git add or rm it the
+files have changed.  Use "git add -A" to do exactly that.  Thus,
+sequence looks like this:
+
+In yorick plugin repo master branch:
+  yorick-docs  # generate docs in gitignored doc-gh/ subdirectory
+  git checkout gh-pages  # switch to gh-pages branch (doc-gh/ unchanged)
+  mv doc-gh/* .
+  rmdir doc-gh
+  git add -A   # dangerous, must make sure everything else is clean
+  git commit -m "updated docs"

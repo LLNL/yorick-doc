@@ -1,0 +1,92 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Graphics"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_51.html#Dimension-Lists" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.7 Dimension Lists" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Graphics-1"></a>
+<h1 class="chapter">3. Graphics</h1>
+
+<p>Yorick&rsquo;s graphics functions produce most of the generic kinds of
+pictures you see in scientific publications.  However, providing the
+perfect graphics interface for every user is not a realistic design
+goal.  Instead, my aim has been to provide the simplest possible
+graphics model and the most basic plotting functions.  If you want more,
+I expect you to build your own &ldquo;perfect&rdquo; interface from the parts I
+supply.
+</p>
+<p>My dream is to eventually supply several interfaces as interpreted code
+in the Yorick distribution.  Currently, the best example of this
+strategy is the &lsquo;<tt>pl3d.i</tt>&rsquo; interface, which I describe at the end of
+this chapter.  Not every new graphics interface needs to be a major
+production like &lsquo;<tt>pl3d.i</tt>&rsquo;, however.  Modest little functions are
+arguably more useful; the plh function discussed below is an
+example.
+</p>
+<p>As you will see, the simplest possible graphics model is still very
+complicated.  Unfortunately, I don&rsquo;t see any easy remedies, but I can
+promise that careful study pays off.  I recommend the books &ldquo;The Visual
+Display of Quantitative Information&rdquo; and &ldquo;Envisioning Information&rdquo; by
+Edward Tufte for learning the fundamentals of scientific graphics.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_53.html#Plotting-primitives">&bull; Plotting primitives</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         The basic drawing functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_63.html#Plot-limits">&bull; Plot limits</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Setting plot limits, log scaling, etc.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_72.html#Display-list">&bull; Display list</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                The display list model.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_75.html#Hardcopy">&bull; Hardcopy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    How to get it.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_79.html#Graphics-style">&bull; Graphics style</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              How to change it.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_84.html#Query-and-edit">&bull; Query and edit</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Seeing legends and making minor changes.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_87.html#pldefault">&bull; pldefault</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Setting (non-default) defaults.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_88.html#Custom-plot-functions">&bull; Custom plot functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       Combining the plotting primitives.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_89.html#Animation">&bull; Animation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Spielberg look out.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_90.html#g_t3D-graphics">&bull; 3D graphics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 An experimental interface.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_51.html#Dimension-Lists" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.7 Dimension Lists" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_53.html#Plotting-primitives" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.1 Primitive plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

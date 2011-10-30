@@ -1,0 +1,126 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Indexing"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_36.html#Interpolating" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.2 Interpolating" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_38.html#Scalar-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.1 Scalar indices and array order" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Indexing-1"></a>
+<h2 class="section">2.3 Indexing</h2>
+
+<p>Yorick has a bewildering variety of different ways to refer to
+individual array elements or subsets of array elements.  In order to
+master the language, you must learn to use them all.  Nearly all of the
+examples later in this manual use one or more of these indexing
+techniques, so trust me to show you how to use them later:
+</p>
+<ul>
+<li>
+A scalar integer index refers to a specific array element.  In a
+multi-dimensional array, this &ldquo;element&rdquo; is itself an array &ndash; the
+specified row, column, or hyperplane.
+
+</li><li>
+An index which is nil or omitted refers to the entire range of the
+corresponding array dimension.
+
+</li><li>
+An index range of the form <kbd>start:stop</kbd> or <kbd>start:stop:step</kbd>
+refers to an evenly spaced subset of the corresponding array
+dimension.
+
+</li><li>
+An array of integers refers to an arbitrary subset, possibly including
+repeated values, of the corresponding array dimension.
+
+</li><li>
+The special symbol <kbd>-</kbd>, or <kbd>-:start:stop</kbd>, is the pseudo-index.
+It inserts an index in the result which was not present in the array
+being indexed.  Although this sounds recondite, the pseudo-index is
+often necessary in order to make two arrays conformable for a binary
+operation.
+
+</li><li>
+The special symbol <kbd>..</kbd> or <kbd>*</kbd> is a rubber-index.  A
+rubber-index stands for zero or more dimensions of the array being
+indexed.  This syntax allows you to specify a value for the final index
+of an array, even when you don&rsquo;t know how many dimensions the array has.
+The <kbd>..</kbd> version leaves the original dimension count intact; the
+<kbd>*</kbd> version collapses all dimensions into a single long dimension in
+the result.
+
+</li><li>
+The special symbol <kbd>+</kbd> marks an index for matrix multiplication.
+
+</li><li>
+Many statistical functions, such as <kbd>sum</kbd>, <kbd>avg</kbd>, and <kbd>max</kbd>
+can be applied along a specific dimension of an array.  These reduce the
+rank of the resulting array, just like a scalar integer index value.
+
+</li><li>
+Several finite difference functions, such as <kbd>zcen</kbd> (zone center)
+and <kbd>cum</kbd> (cumulative sums) can be applied along a specific array
+dimension.  You can use these to construct numerical analogues to the
+operations of differential and integral calculus.
+</li></ul>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_38.html#Scalar-Index">&bull; Scalar Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Scalar indices and array order.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_39.html#Index-Range">&bull; Index Range</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Selecting a range of indices.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_40.html#Nil-Index">&bull; Nil Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Nil index refers to an entire dimension.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_41.html#Index-List">&bull; Index List</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Selecting an arbitrary list of indices.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_42.html#Pseudo_002dIndex">&bull; Pseudo-Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Creating a pseudo-index.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_43.html#Negative-Index">&bull; Negative Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Numbering a dimension from its last element.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_44.html#Rubber_002dIndex">&bull; Rubber-Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Using a rubber index.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_45.html#Matrix-Multiply">&bull; Matrix Multiply</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Marking an index for matrix multiplication.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_46.html#Statistical">&bull; Statistical</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Rank reducing (statistical) range functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_47.html#Finite-Difference">&bull; Finite Difference</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Rank preserving (finite difference) range functions.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_36.html#Interpolating" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.2 Interpolating" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_38.html#Scalar-Index" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.1 Scalar indices and array order" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

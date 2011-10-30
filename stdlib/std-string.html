@@ -1,0 +1,578 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-string (in std.i) - string manipulation </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>S</h3>
+    <p><a href="std-string.html#strcase">strcase</a></p>
+    <p><a href="std-string.html#strchar">strchar</a></p>
+    <p><a href="std-string.html#streplace">streplace</a></p>
+    <p><a href="std-string.html#strfind">strfind</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-string.html#strglob">strglob</a></p>
+    <p><a href="std-string.html#strgrep">strgrep</a></p>
+    <p><a href="std-string.html#strgrepm">strgrepm</a></p>
+    <p><a href="std-string.html#string">string</a></p>
+    <p><a href="std-string.html#strlen">strlen</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-string.html#strmatch">strmatch</a></p>
+    <p><a href="std-string.html#strpart">strpart</a></p>
+    <p><a href="std-string.html#strtok">strtok</a></p>
+    <p><a href="std-string.html#strtrim">strtrim</a></p>
+    <p><a href="std-string.html#strword">strword</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="strcase"></a><h3>strcase</h3>
+  <pre>DOCUMENT strcase(upper, string_array)
+      or strcase, upper, string_array
+  returns STRING_ARRAY with all strings converted to upper case
+  if UPPER is non-zero.  If UPPER is zero, result is lower case.
+  (For characters >=0x80, the case conversion assumes the ISO8859-1
+   character set.)
+  Called as a subroutine, strcase converts STRING_ARRAY in place.</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strlen">strlen</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strglob">strglob</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strgrep">strgrep</a>, <a href="std-string.html#strword">strword</a></p>
+</div>
+<div class="docblock"><a name="strchar"></a><h3>strchar</h3>
+  <pre>DOCUMENT strchar(string_array)
+      or strchar(char_array)
+  converts STRING_ARRAY to an array of characters, or CHAR_ARRAY
+  to an array of strings.  The return value is always a 1D array,
+  except in the second form if CHAR_ARRAY contains only a single
+  string, the result will be a scalar string.  Each string is
+  stored in sequence including its trailing '\0' character, with
+  any string(0) elements treated as if they were "".  Going in
+  the opposite direction, a '\0' before any non-'\0' characters
+  produces string(0), so that "" can never be an element of
+  the result, and if the final char (of the leading dimension)
+  is not '\0', an implicit '\0' is assumed beyond the end of the
+  input char array.  For example,
+     strchar(["a","b","c"]) --> ['a','\0','b','\0','c','\0']
+     strchar([['a','\0','b'],['c','\0','\0']]) --> ["a","b","c",string(0)]
+  The string and pointer data types themselves also convert between
+  string and char data, avoiding the quirks of strchar.</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strfind">strfind</a></p>
+</div>
+<div class="docblock"><a name="streplace"></a><h3>streplace</h3>
+  <pre>DOCUMENT streplace(string_array, start_end, to_string)
+  replaces the part(s) START_END of STRING_ARRAY by TO_STRING.
+  The leading dimension of START_END must be a multiple of 2,
+  while any trailing dimensions must be conformable with the
+  dimensions of STRING_ARRAY.  The TO_STRING must be conformable
+  with STRING_ARRAY if the leading dimension of START_END is 2.
+  An element of START_END may represent "no match" (for example,
+  when end<start), in which case streplace silently skips the
+  replacement.  Note that when start==end, streplace functions
+  as text insertion.
+
+  However, if the leading dimension of START_END = 2*n > 2, then
+  TO_STRING must have a leading dimension conformable with n
+  (that is, of length either 1 or n).  In this case, streplace
+  performs multiple replacements within each string.  In order
+  for multiple replacements to be meaningful, the START_END
+  must be disjoint and sorted, as returned by strfind or
+  strgrep with a repeat count, or by strword.  In other words,
+  the first dimension of START_END should be non-decreasing,
+  except where end<start indicates no replacement.
+
+  Invoked as a subroutine, streplace operates on STRING_ARRAY
+  in place.
+
+  Examples:
+  s = "Hello, world!"
+  streplace(s,[0,5], "Goodbye")
+    -->  "Goodbye, world!"
+  streplace(s,[0,5,7,7], ["Goodbye","cruel "])
+    -->  "Goodbye, cruel world!"
+  streplace(s,[0,5,7,7,12,13], ["Goodbye","cruel ","?"])
+    -->  "Goodbye, cruel world?"
+  streplace(s,[0,5,0,-1,12,13], ["Goodbye","cruel ","?"])
+    -->  "Goodbye, world?"
+  streplace([s,s],[0,5], ["Goodbye", "Good bye"])
+    -->  ["Goodbye, world!", "Good bye, world!"]
+  streplace([s,s],[0,5,7,7], [["Goodbye","cruel "], ["Good bye",""]])
+    -->  ["Goodbye, cruel world!", "Good bye, world!"]
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strgrep">strgrep</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strpart">strpart</a></p>
+</div>
+<div class="docblock"><a name="strfind"></a><h3>strfind</h3>
+  <pre>DOCUMENT strfind(pat, string_array)
+      or strfind(pat, string_array, off)
+  finds pattern PAT in STRING_ARRAY.  Optional OFF is an integer
+  array conformable with STRING_ARRAY or 0-origin offset(s) within
+  the string(s) at which to begin the search(es).  The return value
+  is a [start,end] offset pair specifying the beginning and end
+  of the first match, or [len,-1] if none, with trailing dimensions
+  the same as the dimensions of STRING_ARRAY.  This return value
+  is suitable as an input to the strpart or streplace functions.
+
+  The strfind function is the simpler string pattern matcher:
+  strfind - just finds a literal pattern (possibly case insensitive)
+  strgrep - matches a pattern containing complex regular expressions
+  Additionally, the strglob function does filename wildcard matching.
+
+  Keywords:
+  n=  (default 1) returns list of first n matches, so leading
+      dimension of result will be 2*n
+  case=  (default 1) zero for case-insensitive search
+  back=  (default 0) non-zero for backwards search
+          If back!=0 and n>1, the last match is listed as the
+          last start-end pair, so the output pairs still appear
+          in increasing order, and the first few may be 0,-1
+          to indicate no match.
+
+  Examples:
+  s = ["one two three", "four five six"]
+  strfind("o",s)  -->  [[0,1], [1,2]]
+  strfind(" t",s)  -->   [[3,5], [13,-1]]
+  strfind(" t",s,n=2)  -->   [[3,5,7,9], [13,-1,13,-1]]
+  strfind("e",s,n=2,back=1)  -->   [[11,12,12,13], [0,-1,8,9]]
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strglob">strglob</a>, <a href="std-string.html#strgrep">strgrep</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#streplace">streplace</a></p>
+</div>
+<div class="docblock"><a name="strglob"></a><h3>strglob</h3>
+  <pre>DOCUMENT strglob(pat, string_array)
+      or strglob(pat, string_array, off)
+  test if pattern PAT matches STRING_ARRAY.  Optional OFF is an integer
+  array conformable with STRING_ARRAY or 0-origin offset(s) within
+  the string(s) at which to begin the search(es).  The return value
+  is an int with the same dimensions as STRING_ARRAY, 1 for a match,
+  and 0 for no match.
+
+  PAT can contain UNIX shell wildcard or "globbing" characters:
+      matches any number of characters
+  ?   matches any single character
+  [abcd]  matches any single character in the list, which may
+          contain ranges such as [a-z0-9A-Z]
+  \c  matches the character c (useful for c= a special character)
+      (note that this is "\\c" in a yorick string)
+
+  The strglob function is mostly intended for matching lists of
+  file names.  Note, in particular, that unlike strfind or strgrep,
+  the entire string must match PAT.
+
+  Keywords:
+  case=  (default 1) zero for case-insensitive search
+  path=  (default 0) 1 bit set means / must be matched by /
+                     2 bit set means leading . must be matched by .
+  esc=   (default 1) zero means \ is not treated as an escape
+
+  The underlying compiled routine is based on the BSD fnmatch
+  function, contributed by Guido van Rossum.
+
+  Examples:
+  return all files in current directory with .pdb extension:
+    d=lsdir("."); d(where(strglob("*.pdb", d)));
+  return all subdirectories of the form "hackNN", case insensitive:
+    d=lsdir(".",1);
+    d(where(strglob("hack[0-9][0-9]", d, case=0)));
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strgrep">strgrep</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#streplace">streplace</a></p>
+</div>
+<div class="docblock"><a name="strgrep"></a><h3>strgrep</h3>
+  <pre>DOCUMENT strgrep(pat, string_array)
+      or strgrep(pat, string_array, off)
+ finds pattern PAT in STRING_ARRAY.  Optional OFF is an integer
+ array conformable with STRING_ARRAY or 0-origin offset(s) within
+ the string(s) at which to begin the search(es).  The return value
+ is a [start,end] offset pair specifying the beginning and end
+ of the first match, or [len,-1] if none, with trailing dimensions
+ the same as the dimensions of STRING_ARRAY.  This return value
+ is suitable as an input to the strpart or streplace functions.
+
+ The underlying compiled routine is based on the regexp package
+ written by Henry Spencer (copyright University of Toronto 1986),
+ slightly modified for yorick.
+
+ PAT is a regular expression, simliar to the UNIX grep utility.
+ Every "regular expression" syntax is slightly different; here is
+ the syntax supported by strgrep:
+
+ The following characters in PAT have special meanings:
+
+ '[' followed by any sequence of characters followed by ']' is a
+     "range", which matches any single one of those characters
+     '^' first means to match any character NOT one in the sequence
+     '-' in such a sequence indicates a range of characters
+       (e.g.- "[A-Za-z0-9_]" matches any alphanumeric character
+        or underscore, while "[^A-Za-z0-9_]" matches anything else)
+     to include ']' in the sequence, place it first,
+     to include '-' in the sequence, place it first or last
+       (or first after a leading '^' in either case)
+     Note that the following special characters lose their special
+     meanings inside a range.
+ '.' matches any single character
+ '^' matches the beginning of the string (but no characters)
+ '$' matches the end of the string (but no characters)
+     (that is, ^ and $ serve to anchor a search so that it will
+      only find a match at the beginning or end of the string)
+ '\' (that is, a single backslash, which can only be entered
+      into a yorick string by a double backslash "\\")
+     followed by any single character eliminates any special
+     meaning for that character, for example "\\." matches
+     period, rather than any single character (its special meaning)
+ '(' followed by a regular expression followed by ')' matches the
+     regular expression, creating a sub-pattern, which is a type
+     of atom (see below)
+ '|' means "or"; it separates branches in a regular expression
+ '*' after an atom matches 0 or more matches of the atom
+ '+' after an atom matches 1 or more matches of the atom
+ '?' after an atom matches 0 or 1 matches of the atom
+
+ The definitions of "atom", "branch", and "regular expression" are:
+
+ A "regular expression" (which is what PAT is) consists of zero
+ or more "branches" separated by '|'; it matches anything that
+ matches one of the branches.
+
+ A "branch" consists of zero or more "pieces", concatenated; it
+ matches a match for the first followed by a match for the second,
+ etc.
+
+ A "piece" is an "atom", optionally followed by '*', '+', or '?';
+ it matches the atom, or zero or more repetitions of the atom, as
+ specified by the optional suffix.
+
+ Finally, an "atom" is an ordinary single character, or a
+ '\'-escaped single character (matching that character), or
+ one of the special characters '.', '^', or '$', or a
+ []-delimited range (matching any single character in the range),
+ or a sub-pattern enclosed in () (matching the sub-pattern).
+
+ A maximum of nine sub-patterns is allowed in PAT; these are
+ numbered 1 through 9, in order of their opening '(' in PAT.
+
+ This recursive definition of regular expressions often leads to
+ ambiguities, both subtle and glaring.  Here is Henry Spencer's
+ synopsis of how his routines behave:
+
+ -------------------------------------------------------------------
+ If a regular expression could match two different parts of the
+ input string, it will match the one which begins earliest.  If both
+ begin in the same place but match different lengths, or match the
+ same length in different ways, life gets messier, as follows.
+
+ In general, the possibilities in a list of branches are considered
+ in left-to-right order, the possibilities for `*', `+', and `?' are
+ considered longest-first, nested constructs are considered from the
+ outermost in, and concatenated constructs are considered leftmost-
+ first.  The match that will be chosen is the one that uses the
+ earliest possibility in the first choice that has to be made.  If
+ there is more than one choice, the next will be made in the same
+ manner (earliest possibility) subject to the decision on the first
+ choice.  And so forth.
+
+ For example, `(ab|a)b*c' could match `abc' in one of two ways. The
+ first choice is between `ab' and `a'; since `ab' is earlier, and
+ does lead to a successful overall match, it is chosen. Since the
+ `b' is already spoken for, the `b*' must match its last possibility
+ -the empty string- since it must respect the earlier choice.
+
+ In the particular case where no `|'s are present and there is only
+ one `*', `+', or `?', the net effect is that the longest possible
+ match will be chosen.  So `ab*', presented with `xabbbby', will
+ match `abbbb'.  Note that if `ab*' is tried against `xabyabbbz', it
+ will match `ab' just after `x', due to the begins-earliest rule.
+ (In effect, the decision on where to start the match is the first
+ choice to be made, hence subsequent choices must respect it even if
+ this leads them to less-preferred alternatives.)
+ -------------------------------------------------------------------
+
+ When PAT contains parenthesized sub-patterns, strgrep returns
+ the [start,end] of the entire match by default, but you can
+ also get the [start,end] of any or all of the sub-patterns
+ using the sub= keyword (see below).
+
+ If PAT does not contain any regular expression constructs, you
+ should use the strfind function instead of strgrep.  The strglob
+ function, if appropriate, will also be faster than strgrep.
+
+ Keywords:
+ n=  (default 1) returns list of first n matches, so leading
+     dimension of result will be 2*n
+ sub=[n1,n2,...] is a list of the sub-pattern [start,end] pairs
+     to be returned.  Thus 0 is the whole PAT, 1 is the first
+     parenthesized sub-pattern, and so on.  The leading
+     dimension of the result will be 2*numberof(sub)*n.  The
+     sequence n1,n2,... must strictly increase: n1<n2<...
+     The default is sub=0, which returns only the whole match.
+
+ Examples:
+ s = "Hello, world!"
+ strgrep("(Hello|Goodbye), *([a-zA-Z]+)!", s)
+   --> [0,13]
+ strgrep("(Hello|Goodbye), *([a-z]*|[A-Z]*)!", s, sub=[1,2])
+   --> [0,5,7,12]
+ strgrep("(Hello|Goodbye), *([a-z]*|[A-Z]*)!", s, sub=[0,2])
+   --> [0,13,7,12]
+ strgrep("(Hello|Goodbye), *(([A-Z]*)|([a-z]*))!", s, sub=[0,2,3,4])
+   --> [0,13,7,12,13,-1,7,12]
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strglob">strglob</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#streplace">streplace</a>, <a href="std-string.html#strgrepm">strgrepm</a></p>
+</div>
+<div class="docblock"><a name="strgrepm"></a><h3>strgrepm</h3>
+  <pre>DOCUMENT strgrepm(pat, string_array)
+      or strgrepm(pat, string_array, off)
+  call strgrep, but simply return mask of same dimensions as STRING_ARRAY
+  set to 1 where it matches the PAT, and 0 where it does not match.
+  The strgrepm function does not accept any of the strgrep keywords,
+  but it does accept the strglob case= keyword to indicate a case
+  insensitive search.</pre>
+  <p>SEE ALSO: <a href="std-string.html#strglob">strglob</a>, <a href="std-string.html#strgrep">strgrep</a></p>
+</div>
+<div class="docblock"><a name="string"></a><h3>string</h3>
+  <pre>DOCUMENT string
+
+The yorick string datatype is a character string, e.g.- "Hello, world!".
+Internally, strings are stored as 0-terminated sequences of characters,
+which are 8-bit bytes, the same as the char datatype..
+
+Like numeric datatypes, string behaves as a function to convert objects
+to the string datatype.  There are only two interesting conversions:
+  string(0) is the nil string, like a 0 pointer
+    This is the only string which is "false" in an if test.
+  string(pc) where pc is an array of type pointer where each pointer
+    is either 0 or points to an array of type char, copies the chars
+    into an array of strings, adding a trailing '\0' if necessary
+  pointer(sa) where sa is an array of stringa is the inverse
+    conversion, copying each string to an array of char (including the
+    terminal '\0') and returning an array of pointers to them
+The strchar() function may be a more convenient way to convert from
+string to char and back.
+
+Yorick provides the following means of manipulating string variables:
+
+s+t         when s and t are strings, + means concatentation
+            (this is not perfect nomenclature, since t+s != s+t)
+s(,sum,..)  the sum index range concatentates along a dimension of
+            an array of strings
+sum(s)      concatenates all the strings in an array (in storage order)
+
+strlen(s)          returns length(s) of string(s) s
+strcase(upper, s)  converts s to upper or lower case
+strchar(s_or_c)    converts between string and char arrays
+                   (quick and dirty alternative to string<->pointer)
+strpart(s, m:n)
+strpart(s, sel)    extracts substrings (sel is a [start,end] list)
+  string search functions:
+strglob(pat, s)    shell-like wildcard pattern match, returns 0 or 1
+strword(s, delim)  parses s into word(s), returns a sel
+strfind(pat, s)    simple pattern match, returns a sel
+strgrep(pat, s)    regular expression pattern match, returns a sel
+streplace(s, sel, t)  replaces sel in s by t
+
+strtrim trims leading and/or trailing blanks (based on strword)
+strmatch is a wrapper for strfind that simply returns whether there
+  was a match or not rather than its exact offset
+strtok is a variant of strword that calls strpart in order to
+  return the substrings rather than an sel index list
+
+The strword, strfind, and strgrep functions produce a sel, that is,
+a list of [start,end] offsets into an array of strings.
+These sel indicate portions of a string to be operated on for the
+strpart and streplace functions.
+
+The sread, swrite, and print functions operate on or produce strings.
+The rdline, rdfile, read, and write functions perform I/O on strings
+to text files.</pre>
+  
+</div>
+<div class="docblock"><a name="strlen"></a><h3>strlen</h3>
+  <pre>DOCUMENT strlen(string_array)
+  returns an long array with dimsof(STRING_ARRAY) containing the
+  lengths of the strings.  Both string(0) and "" have length 0.</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strchar">strchar</a>, <a href="std-string.html#strcase">strcase</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strword">strword</a></p>
+</div>
+<div class="docblock"><a name="strmatch"></a><h3>strmatch</h3>
+  <pre>DOCUMENT strmatch(string_array, pattern)
+      or strmatch(string_array, pattern, case_fold)
+      or strmatch(string_array, pattern, case_fold)
+  returns an int array with dimsof(STRING_ARRAY) with 0 where
+  PATTERN was not found in STRING_ARRAY and 1 where it was found.
+  If CASE_FOLD is specified and non-0, the pattern match is
+  insensitive to case, that is, an upper case letter will match
+  the same lower case letter and vice-versa.
+  (Consider using strfind directly.)</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strlen">strlen</a></p>
+</div>
+<div class="docblock"><a name="strpart"></a><h3>strpart</h3>
+  <pre>DOCUMENT strpart(string_array, m:n)
+      or strpart(string_array, start_end)
+      or strpart, string_array, start_end
+ returns another string array with the same dimensions as
+ STRING_ARRAY which consists of characters M through N of
+ the original strings.  M and N are 1-origin indices; if
+ M is omitted, the default is 1; if N is omitted, the default
+ is the end of the string.  If M or N is non-positive, it is
+ interpreted as an index relative to the end of the string,
+ with 0 being the last character, -1 next to last, etc.
+ Finally, the returned string will be shorter than N-M+1
+ characters if the original doesn't have an Mth or Nth
+ character, with "" (note that this is otherwise impossible)
+ if neither an Mth nor an Nth character exists.  A 0
+ is returned for any string which was 0 on input.
+
+ In the second form, START_END is an array of [start,end] indices.
+ A single pair [start,end] is equivalent to the range start+1:end,
+ that is, start is the index of the character immediately before
+ the substring (which is to say start is the number of characters
+ skipped at the beginning of the string).  If end<start, or if
+ either start or end are <0 or >length, or if the original string
+ is string(0), strpart returns string(0); otherwise, if end==start,
+ strpart returns "".
+
+ However, the START_END array may have any additional dimensions
+ (beyond the leading dimension of length 2) which are conformable
+ with the dimensions of the STRING_ARRAY.  The result will be a
+ string array with dimensions dimsof(STRING_ARRAY,START_END(1,..)).
+ Furthermore, the leading dimension of START_END may have any
+ even length, say 2*n, in which case the leading dimension of
+ the result will be n.  For example,
+   strpart(a, [s1,e1,s2,e2,s3,e3,s4,e4])
+ is equivalent to (or shorthand for)
+   strpart(a(-,..), [[s1,e1],[s2,e2],[s3,e3],[s4,e4]])(1,..)
+
+ In the third form, called a subroutine, strpart operates on
+ STRING_ARRAY in place.  In this case START_END must have
+ leading dimension of length 2, although it may have trailing
+ dimensions as usual.
+
+ Examples:
+ strpart("Hello, world!", 4:6) --> "lo,"
+ strpart("Hello, world!", [3,6]) --> "lo,"
+   -it may help to think of [start,end] as the 0-origin offset
+    of a "cursor" between the characters of the string
+ strpart("Hello, world!", [3,3]) --> ""
+ strpart("Hello, world!", [3,2]) --> string(0)
+ strpart("Hello, world!", [3,20]) --> string(0)
+ strpart("Hello, world!", [3,6,7,9]) --> ["lo,","wo"]
+ strpart(["one","two"], [[1,2],[0,1]]) --> ["n","t"]
+ strpart(["one","two"], [1,2,0,1]) --> [["n","o"],["w","t"]]
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strcase">strcase</a>, <a href="std-string.html#strlen">strlen</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strword">strword</a></p>
+</div>
+<div class="docblock"><a name="strtok"></a><h3>strtok</h3>
+  <pre>DOCUMENT strtok(string_array, delim)
+      or strtok(string_array)
+      or strtok(string_array, delim, n)
+  strips the first token off of each string in STRING_ARRAY.
+  A token is delimited by any of the characters in the string
+  DELIM.  If DELIM is blank, nil, or not given, the
+  default DELIM is " \t\n" (blanks, tabs, or newlines).
+  The result is a string array ts with dimensions
+  2-by-dimsof(STRING_ARRAY); ts(1,) is the first token, and
+  ts(2,) is the remainder of the string (the character which
+  terminated the first token will be in neither of these parts).
+  The ts(2,) part will be 0 (i.e.- the null string) if no more
+  characters remain after ts(1,); the ts(1,) part will be 0 if
+  no token was present.  A STRING_ARRAY element may be 0, in
+  which case (0, 0) is returned for that element.
+
+  With yorick-1.6, strtok has been extended to accept multiple
+  delimiter sets DELIM for successive words, and a repeat count
+  N for the final DELIM set.  The operation is the same as for
+  strword, except that the N<=0 special cases are illegal, and
+  if DELIM consists of only a single set, N=2 is the default
+  rather than N=1.  The dimensions of the return value are thus
+  min(2,numberof(DELIM)+N-1)-by-dimsof(STRING_ARRAY).
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strword">strword</a>, <a href="std-string.html#strmatch">strmatch</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strlen">strlen</a></p>
+</div>
+<div class="docblock"><a name="strtrim"></a><h3>strtrim</h3>
+  <pre>DOCUMENT strtrim(string_array)
+      or strtrim(string_array, which)
+      or strtrim, string_array, which
+  returns STRING without leading and/or trailing blanks.  WHICH=1
+  means to trim leading blanks only, WHICH=2 trims trailing blanks
+  only, while WHICH=3 (the default) trims both leading and trailing
+  blanks.  Called as a subroutine, strtrim performs this operation
+  in place.
+  The blank= keyword, if present, is a list of characters to be
+  considered "blanks".  Use blank=[lead_delim,trail_delim] to get
+  different leading and trailing "blanks" definitions.  By default,
+  blank=" \t\n".  (See strword for more about delim syntax.)</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strword">strword</a></p>
+</div>
+<div class="docblock"><a name="strword"></a><h3>strword</h3>
+  <pre>DOCUMENT strword(string_array)
+      or strword(string_array, delim)
+      or strword(string_array, delim, n)
+      or strword(string_array, off, delim, n)
+  scans to the first character in STRING_ARRAY which is not in
+  the DELIM list.  DELIM defaults to " \t\n", that is, whitespace.
+  The return value is a [start,end] offset pair, with trailing
+  dimensions matching the dimensions of the given STRING_ARRAY.
+  Note that this return value is suitable for use in the strpart
+  or streplace functions.
+
+  If the first character of DELIM is "^", the sense is reversed;
+  strword scans to the first character in DELIM.  (Except that
+  if DELIM is the single character "^", it has its usual meaning.)
+  Also, a "-" which is not the first (or second after "^") or last
+  character of DELIM indicates a range of characters.  Finally,
+  if DELIM is "" or string(0), the scan stops immediately, since
+  the first character (no matter what it is) is not in DELIM.
+
+  Furthermore, DELIM can be a list of delimiter sets, where each
+  element of the list delimits a new word, so the return value will
+  be [start1,end1, ..., startN,endN], where N=numberof(DELIM),
+  and start1 is the offset of the first character not in DELIM(1),
+  characters with offset between end1 and start2 are in DELIM(2),
+  characters with offset between end2 and start3 are in DELIM(3),
+  and so on.  If endM is the length of the string for some M<N,
+  then all subsequent start,end pairs will be endM,-1.  Note that
+  endN is always the length of the string.
+
+  If N is specified, the final DELIM will be repeated N times, so
+  the leading dimension of the result is 2*(numberof(DELIM)+N-1).
+  Thus, instead of DELIM = [d1,d2,d3,d3,d3,d3,d3], you may specify
+  DELIM = [d1,d2,d3] and N = 5.  (By default, N=1.)
+
+  If OFF is supplied (it is distinguished from DELIM by the
+  fact that DELIM is a string or [], while OFF is an integer),
+  it represents the offset (0-origin character index) in
+  STRING_ARRAY at which the word search is to begin.  (DELIM
+  or N may be omitted to get their default values.)  The OFF
+  may be a scalar or an array conformable with STRING_ARRAY.
+  The returned offsets include OFF; you do not need to add OFF
+  to the return value to get the offsets into STRING_ARRAY.
+
+  The action of strword can be described as follows: If d1 is
+  the first delimiter, d2 is the second delimiter, and so on,
+  then the input element of STRING_ARRAY looks like this:
+       d1 word1 d2 word2 d3 word3 d4 word4 ...
+  The offset array returned by strword will select word1, word2,
+  word3, etc., if used in strpart.  One defect of this system is
+  that the final word has no trailing delimiter - it always
+  extends to the end of the string.
+
+  To remedy this defect, N<0 is interpreted as follows: It is
+  the same as abs(N), except that the final [start,end] pair is
+  supressed; that is, if you have specified N delimiters, only
+  N-1 words will be returned.
+
+  As a second special case, N=0 forces the final delimeter to be
+  at the end of the string, rather than as soon after the previous
+  endM as possible.  Like N<0, this reduces the number of start,end
+  pairs by one.  (N=0 is useful, for example, in order to trim
+  trailing blanks.)
+
+  Examples:
+  strword("  Hello, world!") --> [2,15]
+  strword("Hello, world!") --> [0,13]
+  strword("Hello, world!", , 2) --> [0,6,7,13]
+  strword("Hello, world!", , -2) --> [0,6]
+  strword("Hello, world!", ".!, \t\n", -2) --> [0,5]
+  strword("Hello, world!", [string(0), ".!, \t\n"], 0) --> [0,12]
+  strword("Hello, world!", "A-Za-z", 2) --> [5,7,12,13]
+  strword("Hello, world!", "^A-Za-z", 2) --> [0,5,7,13]
+  strword("Hello, world!", "^A-Za-z", 3) --> [0,5,7,12,13,-1]
+  strword("  Hello, world!", [" \t\n",".!, \t\n"]) --> [2,7,9,15]
+  strword("  Hello, world!", [" \t\n",".!, \t\n"], 2) --> [2,7,9,14,15,-1]
+</pre>
+  <p>SEE ALSO: <a href="std-string.html#string">string</a>, <a href="std-string.html#strlen">strlen</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strfind">strfind</a>, <a href="std-string.html#strtok">strtok</a>, <a href="std-string.html#strtrim">strtrim</a></p>
+</div>

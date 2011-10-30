@@ -1,0 +1,208 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-info (in std.i) - help and information </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-info.html#about">about</a></p>
+    <h3>C</h3>
+    <p><a href="std-info.html#copyright">copyright</a></p>
+    <h3>G</h3>
+    <p><a href="std-info.html#get_pkgnames">get_pkgnames</a></p>
+    <h3>H</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-info.html#help">help</a></p>
+    <h3>I</h3>
+    <p><a href="std-info.html#info">info</a></p>
+    <h3>L</h3>
+    <p><a href="std-info.html#legal">legal</a></p>
+    <p><a href="std-info.html#library">library</a></p>
+    <h3>S</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-info.html#split_path">split_path</a></p>
+    <p><a href="std-info.html#symbol_def">symbol_def</a></p>
+    <p><a href="std-info.html#symbol_exists">symbol_exists</a></p>
+    <p><a href="std-info.html#symbol_names">symbol_names</a></p>
+    <p><a href="std-info.html#symbol_set">symbol_set</a></p>
+    <h3>W</h3>
+    <p><a href="std-info.html#copyright">warranty</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="about"></a><h3>about</h3>
+  <pre>DOCUMENT about, pattern;
+      or about, pattern, 1;
+  Search and display documentation about functions (or all symbols if
+  second argument is true) matching regular expression PATTERN.  If
+  multiple matches are found, the user is prompted to select a subject.
+  PATTERN may be a string, or a function or structure definition.  If
+  PATTERN is a string with a trailing "/i", the other part of the
+  regular expression is interpreted so as to ignore case.
+
+  Set
+    about_glob = strglob;
+  to use UNIX shell style matching (e.g.- ls command line) to match
+  PATTERN instead of grep style matching.  The default about_glob
+  function is strgrepm.
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#help">help</a>, <a href="std-info.html#info">info</a>, <a href="std-string.html#strgrep">strgrep</a>, <a href="std-string.html#strglob">strglob</a></p>
+</div>
+<div class="docblock"><a name="copyright"></a><h3>copyright</h3>
+  <pre>DOCUMENT copyright, (no) warranty
+
+  Copyright (c) 2005.  The Regents of the University of California.
+                All rights reserved.
+
+  Yorick is provided "as is" without any warranty, either expressed or
+  implied.  For a complete statement, type:
+
+     legal
+
+  at the Yorick prompt.
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#legal">legal</a></p>
+</div>
+<div class="docblock"><a name="get_pkgnames"></a><h3>get_pkgnames</h3>
+  <pre>DOCUMENT get_pkgnames(all)
+  returns list of package names, ALL non-zero means to return both
+  statically and dynamically loaded packages, otherwise just the
+  initial statically loaded packages.</pre>
+  <p>SEE ALSO: <a href="std-system.html#get_path">get_path</a></p>
+</div>
+<div class="docblock"><a name="help"></a><h3>help</h3>
+  <pre>DOCUMENT help, topic
+      or help
+  Prints DOCUMENT comment from include file in which the variable
+  TOPIC was defined, followed by the line number and filename.
+  By opening the file with a text editor, you may be able to find
+  out more, especially if no DOCUMENT comment was found.
+  Examples:
+    help, set_path
+  prints the documentation for the set_path function.
+    help
+  prints the DOCUMENT comment you are reading.
+
+  This copy of Yorick was launched from the directory:
+  **** Y_LAUNCH (computed at runtime) ****
+  Yorick's "site directory" at this site is:
+  **** Y_SITE (computed at runtime) ****
+  You can find out a great deal more about Yorick by browsing
+  through these directories.  Begin with the site directory,
+  and pay careful attention to the subdirectories doc/ (which
+  contains documentation relating to Yorick), and i/ and
+  contrib/ (which contain many examples of Yorick programs).
+  Look for files called README (or something similar) in any
+  of these directories -- they are intended to assist browsers.
+  The site directory itself contains std.i and graph.i, which
+  are worth reading.
+
+  Type:
+    help, dbexit
+  for help on debug mode.  If your prompt is "dbug>" instead of
+  ">", dbexit will return you to normal mode.
+
+  Type:
+    quit
+  to quit Yorick.
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#about">about</a>, <a href="std-system.html#quit">quit</a>, <a href="std-info.html#info">info</a>, <a href="std-filetxt.html#print">print</a>, <a href="std-info.html#copyright">copyright</a>, <a href="std-info.html#copyright">warranty</a>, <a href="std-info.html#legal">legal</a></p>
+</div>
+<div class="docblock"><a name="info"></a><h3>info</h3>
+  <pre>DOCUMENT info, expr [, expr2, expr3, ...]
+  prints the data type and array dimensions of EXPR.  Multiple
+  expressions result in multiple descriptions.  You can also
+  invoke info as a function to return a string or array of strings
+  instead of printing the result.</pre>
+  <p>SEE ALSO: <a href="std-info.html#about">about</a>, <a href="std-info.html#help">help</a>, <a href="std-filetxt.html#print">print</a></p>
+</div>
+<div class="docblock"><a name="legal"></a><h3>legal</h3>
+  <pre>DOCUMENT legal
+  Prints the legal details of Yorick's copyright, licensing,
+  and lack of warranty.</pre>
+  <p>SEE ALSO: <a href="std-info.html#copyright">copyright</a>, <a href="std-info.html#copyright">warranty</a></p>
+</div>
+<div class="docblock"><a name="library"></a><h3>library</h3>
+  <pre>DOCUMENT library
+  print the Y_SITE/i/README file at the terminal.</pre>
+  
+</div>
+<div class="docblock"><a name="split_path"></a><h3>split_path</h3>
+  <pre>DOCUMENT split_path(path)
+  splits PATH, a colon or semi-colon delimited list of directories
+  as returned by get_path, into a string array with one directory
+  per element.</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_path">set_path</a>, <a href="std-info.html#get_pkgnames">get_pkgnames</a></p>
+</div>
+<div class="docblock"><a name="symbol_def"></a><h3>symbol_def</h3>
+  <pre>DOCUMENT symbol_def(func_name)(arglist)
+      or symbol_def(var_name)
+  invokes the function FUNC_NAME with the specified ARGLIST,
+  returning the return value.  ARGLIST may be zero or more arguments.
+  In fact, symbol_def("fname")(arg1, arg2, arg3) is equivalent to
+  fname(arg1, arg2, arg3), so that "fname" can be the name of any
+  variable for which the latter syntax is meaningful -- interpreted
+  function, built-in function, or array.
+
+  Without an argument list, symbol_def("varname") is equivalent to
+  varname, which allows you to get the value of a variable whose name
+  you must compute.
+
+  DO NOT OVERUSE THIS FUNCTION.  It works around a specific deficiency
+  of the Yorick language -- the lack of pointers to functions -- and
+  should be used for such purposes as hook lists (see openb).
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#symbol_set">symbol_set</a>, <a href="std-info.html#symbol_exists">symbol_exists</a></p>
+</div>
+<div class="docblock"><a name="symbol_exists"></a><h3>symbol_exists</h3>
+  <pre>DOCUMENT symbol_exists(name)
+  Check whether variable/function named NAME exists.  This routine can be
+  used prior to symbol_def to check existence of a symbol since symbol_def
+  raise an error for non-existing symbol.
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#symbol_def">symbol_def</a>, <a href="std-info.html#symbol_names">symbol_names</a>, <a href="std-info.html#symbol_set">symbol_set</a>.</p>
+</div>
+<div class="docblock"><a name="symbol_names"></a><h3>symbol_names</h3>
+  <pre>DOCUMENT symbol_names()
+      or symbol_names(flags)
+  Return an  array of  strings with  the names of  all symbols  of given
+  type(s) found in  global symbol table.  To select  the type of symbol,
+  FLAGS is be the bitwise-or of one or more of the following bits:
+      1 - basic array symbols
+      2 - structure instance symbols
+      4 - range symbols
+      8 - nil symbols (i.e. symbols undefined at current scope level)
+     16 - interpreted function symbols
+     32 - builtin function symbols
+     64 - structure definition symbols
+    128 - file stream symbols
+    256 - opaque symbols (other than the ones below)
+    512 - list objects
+   1024 - auto-loaded functions
+
+  The special value FLAGS = -1 can be used to get all names found in
+  global symbol table.  The default (if FLAGS is nil or omitted) is to
+  return the names of all symbols but the nil ones.  Beware that lists,
+  hash tables and auto-loaded functions are also opaque symbols (use
+  0xffffff7f to get *all* opaque symbols).
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#symbol_def">symbol_def</a>, <a href="std-info.html#symbol_exists">symbol_exists</a>, <a href="std-info.html#symbol_set">symbol_set</a>.</p>
+</div>
+<div class="docblock"><a name="symbol_set"></a><h3>symbol_set</h3>
+  <pre>DOCUMENT symbol_set, var_name, value
+  is equivalent to the redefinition
+       varname= value
+  except that var_name="varname" is a string which must be computed.
+
+  DO NOT OVERUSE THIS FUNCTION.  It works around a specific deficiency
+  of the Yorick language -- the lack of pointers to functions, streams,
+  bookmarks, and other special non-array data types.
+</pre>
+  <p>SEE ALSO: <a href="std-info.html#symbol_def">symbol_def</a>, <a href="std-info.html#symbol_exists">symbol_exists</a></p>
+</div>
+<div class="docsee">
+  <h3>warranty</h3><p>SEE: <a href="#copyright">copyright</a></p>
+</div>

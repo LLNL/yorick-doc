@@ -1,0 +1,53 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package gamma (in gamma.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="gamma.html#beta">beta</a></p>
+    <p><a href="gamma.html#bico">bico</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>E</h3>
+    <p><a href="gamma.html#erfc_nr">erfc_nr</a></p>
+    <h3>L</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="gamma.html#lngamma">lngamma</a></p>
+    <p><a href="gamma.html#ln_gamma">ln_gamma</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="beta"></a><h3>beta</h3>
+  <pre>DOCUMENT beta(z,w)
+  returns the beta function gamma(z)gamma(w)/gamma(z+w)</pre>
+  <p>SEE ALSO: <a href="gamma.html#ln_gamma">ln_gamma</a>, <a href="gamma.html#bico">bico</a></p>
+</div>
+<div class="docblock"><a name="bico"></a><h3>bico</h3>
+  <pre>DOCUMENT bico(n,k)
+  returns the binomial coefficient n!/(k!(n-k)!) as a double.</pre>
+  <p>SEE ALSO: <a href="gamma.html#ln_gamma">ln_gamma</a>, <a href="gamma.html#beta">beta</a></p>
+</div>
+<div class="docblock"><a name="erfc_nr"></a><h3>erfc_nr</h3>
+  <pre>DOCUMENT erfc_nr(x)
+  returns the complementary error function 1-erf with fractional
+  error less than 1.2e-7 everywhere.</pre>
+  
+</div>
+<div class="docblock"><a name="lngamma"></a><h3>lngamma</h3>
+  <pre>DOCUMENT lngamma(x)
+  returns natural log of the gamma function.
+  Error is less than 1e-13 for real part of x>=1.
+  Use ln_gamma if some x<1.</pre>
+  <p>SEE ALSO: <a href="gamma.html#ln_gamma">ln_gamma</a>, <a href="gamma.html#bico">bico</a>, <a href="gamma.html#beta">beta</a></p>
+</div>
+<div class="docblock"><a name="ln_gamma"></a><h3>ln_gamma</h3>
+  <pre>DOCUMENT ln_gamma(z)
+  returns natural log of the gamma function.
+  Error is less than 1e-13 for real part of z>=1.
+  Use lngamma if you know that all z>=1, or if you don't care much about
+  accuracy for z<1.</pre>
+  <p>SEE ALSO: <a href="gamma.html#lngamma">lngamma</a>, <a href="gamma.html#bico">bico</a>, <a href="gamma.html#beta">beta</a></p>
+</div>

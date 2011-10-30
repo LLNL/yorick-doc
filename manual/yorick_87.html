@@ -1,0 +1,80 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="pldefault"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_86.html#plq-and-pledit" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.6.2 plq and pledit" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_88.html#Custom-plot-functions" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.8 Writing new plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Defaults-for-keywords"></a>
+<h2 class="section">3.7 Defaults for keywords</h2>
+
+<p>With the pldefault command, you can set default values for many of the
+keywords in the window command and the primitive plotting commands.
+These keywords control the line type, width, and color for the plg,
+plc, plm, and pldj commands, the style and dpi of newly created
+windows, and other properties of graphics windows and objects.
+</p>
+<p>You can use pldefault interactively to set new, but temporary, default
+values before embarking on a series of plots.  Or place a pldefault
+command in your &lsquo;<tt>~/yorick/custom.i</tt>&rsquo; file if your personal
+preferences differ from Yorick&rsquo;s defaults.
+</p>
+<p>You must use the hcp_file command to set values for the <kbd>dump=</kbd> or
+<kbd>ps=</kbd> keywords (which determine whether to dump the palette to
+hardcopy files and whether automatically created hardcopy files are
+PostScript or binary CGM), and these settings remain in effect until you
+explicitly change them.
+</p>
+<p>For example, if you want to use the &lsquo;<tt>vg.gs</tt>&rsquo; style, with unmarked
+wide lines, and you want PostScript hardcopy files (by default)
+including the palette for each frame, you can put the following two
+lines in your &lsquo;<tt>custom.i</tt>&rsquo; file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">pldefault, style=&quot;vg.gs&quot;, marks=0, width=4;
+hcp_file, dump=1, ps=1;
+</pre></td></tr></table>
+
+<p>The values you set using pldefault are true default values &ndash; you can
+override them on each separate call to window or a plotting primitive,
+but the default value remains in effect unless you reset it with a
+second call to pldefault.  Conversely, you can&rsquo;t temporarily override a
+<kbd>dump=</kbd> or <kbd>ps=</kbd> value you set with hcp_file &ndash; you just have to
+set them to a new value.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_86.html#plq-and-pledit" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.6.2 plq and pledit" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_88.html#Custom-plot-functions" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.8 Writing new plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

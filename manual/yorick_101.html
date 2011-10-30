@@ -1,0 +1,171 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Using-yapi_002eh"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_100.html#Using-PROTOTYPE" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4.3.1 Using PROTOTYPE" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-next.png" border="0" alt="Forward: 4.3.2 Using yapi.h" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_99.html#Embedding-example" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4.3 Embedding example" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Using-yapi_002eh-1"></a>
+<h3 class="subsection">4.3.2 Using &lsquo;<tt>yapi.h</tt>&rsquo;</h3>
+
+<p>When you use the <kbd>PROTOTYPE</kbd> comment to generate C code wrappers,
+you cannot take advantage of many of the features of the yorick
+language.  In this example, there is no easy way to pass an
+indeterminate number of arguments to your function.  When you write
+your own C code wrapper, all such limitations disappear.  The price is
+that you need to use the yorick-specific C functions declared in
+&lsquo;<tt>yapi.h</tt>&rsquo; to interact with the intepreter.
+</p>
+<p>Since you no longer need an interpreted wrapper (although you might
+still choose to have one &ndash; some tasks are easier, occasionally
+dramatically easier, in interpreted code than in compiled code), your
+inteface definition file &lsquo;<tt>rtleg.i</tt>&rsquo; becomes trivial:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plug_in, &quot;rtleg&quot;;
+extern rtleg;
+</pre></td></tr></table>
+
+<p>But your C source becomes much more complicated:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &quot;yapi.h&quot;
+#include &lt;math.h&gt;
+extern void Y_rtleg(int argc);
+void
+Y_rtleg(int argc)
+{
+  int iarg;
+  long i, n, dimsr[Y_DIMSIZE], dims[Y_DIMSIZE];
+  double *r, *rr, **px, *x, *a, xval;
+  int *flag, flagr;
+  if (argc &lt; 2) y_error(&quot;rtleg needs at least two arguments&quot;);
+
+  /* get some scratch space to deal with the indeterminate
+   * argument count, this increases iarg for arguments by 1
+   */
+  px = ypush_scratch((argc-1)*(sizeof(double)+sizeof(int)), 0);
+  flag = (int *)&amp;px[argc];
+
+  /* get r argument as double */
+  r = ygeta_d(argc, 0, dimsr);
+
+  /* first pass through remaining arguments checks they are
+   * conformable, and builds the result dimension list
+   */
+  for (flagr=0, iarg=argc-1 ; iarg&gt;0 ; iarg--) {
+    flagr |= flag[iarg-1] = yarg_dims(iarg, dims, dimsr);
+    if (flag[iarg-1] &lt; 0)
+      y_errorn(&quot;rtleg argument %ld not conformable&quot;, argc-iarg);
+  }
+
+  /* broadcast r argument to result shape if necessary */
+  if (flagr &amp; 1) yarg_bcast(argc, dimsr);
+
+  /* second pass broadcasts all arguments to result shape
+   * and converts to type double
+   */
+  for (iarg=argc-1 ; iarg&gt;0 ; iarg--) {
+    if (flag[iarg-1] &amp; 2) yarg_bcast(iarg, dimsr);
+    px[iarg-1] = ygeta_d(iarg, &amp;n, 0);
+    flag[iarg-1] = yarg_scratch(iarg);
+    if (flag[iarg-1]) flagr = iarg;
+  }
+
+  /* push new array and fill with reciprocal of r */
+  rr = ypush_d(dimsr);
+  for (i=0 ; i&lt;n ; i++)
+    if (r[i] &gt; 0.) rr[i] = 1./r[i];
+    else if (r[i] &lt; 0.) rr[i] = -1./r[i];
+    else rr[i] = -1.;
+
+  if (flagr) {  /* use scratch x as accumulator */
+    a = px[flagr-1];
+    for (i=0 ; i&lt;n ; i++) {
+      xval = a[i]*rr[i];
+      a[i] = -xval*xval;
+    }
+  } else {      /* need to create accumulator on stack */
+    a = ypush_d(dimsr);
+  }
+
+  /* compute 1 - sum((x/r)^2) */
+  for (i=0 ; i&lt;n ; i++) a[i] += (rr[i]&lt;0.)? 0. : 1.;
+  for (iarg=0 ; iarg&lt;argc-1 ; iarg++) {
+    x = px[iarg];
+    if (x == a) continue;
+    for (i=0 ; i&lt;n ; i++) {
+      xval = x[i]*rr[i];
+      a[i] -= xval*xval;
+    }
+  }
+
+  /* compute final result */
+  for (i=0 ; i&lt;n ; i++) a[i] = r[i]*sqrt(a[i]);
+
+  /* discard overlying stack elements to leave result on top */
+  if (flagr) yarg_drop(flagr+1);
+}
+</pre></td></tr></table>
+
+<p>The <kbd>ypush_scratch</kbd> function enables you to create scratch space
+that is safe against asynchronous interrupt.  You have to write every
+compiled function assuming that the user will type Control-C and
+interrupt your function.  If you used <kbd>malloc</kbd> to obtain scratch
+space, and your function were asynchronously interrupted before the
+matching <kbd>free</kbd>, your routine would leak memory.  In this case,
+the scratch space is only required to cope with the fact that the
+function accepts an indeterminate number of arguments.
+</p>
+<p>The implementation unavoidably requires a temporary array to hold the
+reciprocal of the first argument, which is used to normalize the
+remaining arguments to prevent overflows or erronious underflows when
+the other arguments are squared.  However, there is an opportunity to
+reuse an argument array which happens to be a temporary (either
+because it is the result of an expression, or because it had to be
+type converted or broadcast) as the result.  Taking advantage of that
+optimization also costs a few additional lines of source code towards
+the end of the function.
+</p>
+<p>What you get for this modest complexity is an <kbd>rtleg</kbd> function
+that is equal in performance and features to the built in <kbd>abs</kbd>
+function.
+</p>
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_100.html#Using-PROTOTYPE" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 4.3.1 Using PROTOTYPE" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-next.png" border="0" alt="Forward: 4.3.2 Using yapi.h" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_99.html#Embedding-example" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 4.3 Embedding example" align="middle"/></a></td>
+<td valign="middle" align="left"><img src="../images/dmg-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

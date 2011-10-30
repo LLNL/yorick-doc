@@ -1,0 +1,61 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package dawson (in dawson.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="dawson.html#any_in">any_in</a></p>
+    <h3>D</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="dawson.html#dawson">dawson</a></p>
+    <h3>E</h3>
+    <p><a href="dawson.html#erf">erf</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="dawson.html#erfc">erfc</a></p>
+    <h3>M</h3>
+    <p><a href="dawson.html#merge_n">merge_n</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="any_in"></a><h3>any_in</h3>
+  <pre>DOCUMENT any_in(left,x,right, mask, xx, a,aa, b,bb, c,cc
+  return the number of elements of the array X which are in the
+  interval LEFT < X <= RIGHT.  Also return MASK, which has the
+  shape of X and is 1 where X is in the interval and 0 otherwise,
+  and XX = X(where(MASK)).  Up to three optional arrays A, B, and C
+  of the same shape as X may be supplied; the arrays AA, BB, and CC
+  analogous to XX are returned.  LEFT or RIGHT may be [] for the
+  interval to extend to infinity on the corresponding side.
+  LEFT and/or RIGHT may be arrays as long as they are conformable
+  with X.</pre>
+  <p>SEE ALSO: <a href="dawson.html#merge_n">merge_n</a>, <a href="std-array.html#merge">merge</a></p>
+</div>
+<div class="docblock"><a name="dawson"></a><h3>dawson</h3>
+  <pre>DOCUMENT dawson(x)
+  return Dawson's integral, exp(-x^2)*integral[0 to x](exp(t^2)*dt)
+  maximum is dawson(0.9241388730) = 0.5410442246
+  inflection point is dawson(1.5019752682) = 0.4276866160</pre>
+  <p>SEE ALSO: <a href="dawson.html#erf">erf</a>, <a href="dawson.html#erfc">erfc</a></p>
+</div>
+<div class="docblock"><a name="erf"></a><h3>erf</h3>
+  <pre>DOCUMENT erf(x)
+  return erf(x), 2./sqrt(pi) * integral[0 to x](exp(-t^2)*dt)</pre>
+  <p>SEE ALSO: <a href="dawson.html#erfc">erfc</a>, <a href="dawson.html#dawson">dawson</a></p>
+</div>
+<div class="docblock"><a name="erfc"></a><h3>erfc</h3>
+  <pre>DOCUMENT erfc(x)
+  return erfc(x), 2./sqrt(pi) * integral[x to infinity](exp(-t^2)*dt)</pre>
+  <p>SEE ALSO: <a href="dawson.html#erf">erf</a>, <a href="dawson.html#dawson">dawson</a></p>
+</div>
+<div class="docblock"><a name="merge_n"></a><h3>merge_n</h3>
+  <pre>DOCUMENT merge_n(val1,mask1, val2,mask2, ...)
+  return array with shape of MASKi (which must all have same shape)
+  and values VALi where MASKi is true.  Unspecified values will be
+  zero; the data type of the result is the data type of the first
+  non-nil VALi.  Each VALi must be a 1D array of length sum(MASKi!=0).</pre>
+  <p>SEE ALSO: <a href="dawson.html#any_in">any_in</a>, <a href="std-array.html#merge">merge</a></p>
+</div>

@@ -1,0 +1,106 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Define-function"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_8.html#Define-procedure" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.2 Defining Procedures" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Defining-a-function"></a>
+<h3 class="subsection">1.2.1 Defining a function</h3>
+
+<p>Consider a damped sine wave.  It describes the time evolution of an
+oscillator, such as a weight on a spring, which bobs up and down for a
+while after you whack it.  The basic shape of the wave is determined
+by the Q of the oscillator; a high Q means there is little friction,
+and the weight will continue bobbing for many cycles, while a low Q
+means a lot of friction and few cycles.  The amplitude of the
+oscillation is therefore a function of two parameters &ndash; the phase
+(time in units of the natural period of the oscillator), and the Q:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func damped_wave(phase, Q)
+{
+  nu = 0.5/Q;
+  omega = sqrt(1.-nu*nu);
+  return sin(omega*phase)*exp(-nu*phase);
+}
+</pre></td></tr></table>
+
+<p>Within a function body, I terminate every Yorick statement with a
+semicolon (see <a href="yorick_3.html#Define-variable">Define variable</a>).
+</p>
+<p>The variables <kbd>phase</kbd> and <kbd>Q</kbd> are called the parameters of the
+function.  They and the variables <kbd>nu</kbd> and <kbd>omega</kbd> defined in
+the first two lines of the function body are <em>local</em> to the
+function.  That is, calling <kbd>damped_wave</kbd> will not change the
+values of any variables named <kbd>phase</kbd>, <kbd>Q</kbd>, <kbd>nu</kbd>, or
+<kbd>omega</kbd> in the calling environment.
+</p>
+<p>In fact, the only effect of calling <kbd>damped_wave</kbd> is to return its
+result, which is accomplished by the <kbd>return</kbd> statement in the
+third line of the body.  That is, calling <kbd>damped_wave</kbd> has no side
+effects.  You can use <kbd>damped_wave</kbd> in expressions like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt; damped_wave(1.5, 3)
+0.775523
+&gt; damped_wave([.5,1,1.5,2,2.5], 3)
+[0.435436,0.705823,0.775523,0.659625,0.41276]
+&gt; q5 = damped_wave(theta,5)
+&gt; fma; plg, damped_wave(theta,3), theta
+&gt; plg, damped_wave(theta,1), theta
+</pre></td></tr></table>
+
+<p>The last two lines graphically compare Q=3 oscillations to Q=1
+oscillations.
+</p>
+<p>Notice that the arguments to <kbd>damped_wave</kbd> may be arrays.  In this
+case the result will be the array of results for each element of
+input; hence <kbd>q5</kbd> will be an array of 200 numbers.  Nor is Yorick
+confused by the fact that the <kbd>phase</kbd> argument (<kbd>theta</kbd>) is an
+array, while the <kbd>Q</kbd> argument (<kbd>5</kbd>) is a scalar.  The precise
+rules for &ldquo;conformability&rdquo; between two arrays will be described
+later (see <a href="yorick_50.html#Broadcasting">Broadcasting</a>); usually you get what you expected.
+</p>
+<p>In this case, as Yorick evaluates <kbd>damped_wave</kbd>, <kbd>nu</kbd> and
+<kbd>omega</kbd> will both be scalars, since <kbd>Q</kbd> is a scalar.  On the
+other hand, <kbd>omega*phase</kbd> and <kbd>nu*phase</kbd> become arrays, since
+<kbd>phase</kbd> is an array.  Whenever an operand is an array, an
+arithmetic operation produces an array as its result.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_8.html#Define-procedure" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.2 Defining Procedures" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

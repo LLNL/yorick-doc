@@ -1,0 +1,31 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Saving and Restoring Variables</h2>
+<table><tbody>
+<tr><td><tt>save, <i>f, var1, var2, ..., varN</i></tt></td>
+<td>saves the <i>varI</i> in binary file <i>f</i></td></tr>
+<tr><td><tt>restore, <i>f, var1, var2, ..., varN</i></tt></td>
+<td>restores the <i>varI</i>from <i>f</i></td></tr>
+<tr><td><tt>save, <i>f</i></tt></td>
+<td>saves all array variables in binary file <i>f</i></td></tr>
+<tr><td><tt>restore, <i>f</i></tt></td>
+<td>restores all variables from binary file <i>f</i></td></tr>
+</tbody></table>
+<p>Unlike <i>f.varI</i> <tt>=</tt> <i>expr</i>, the <tt>save</tt> function
+will create the variable <i>varI</i> in the file <i>f</i> if it does not
+already exist.
+</p>
+<p>The <tt>restore</tt> function redefines the in-memory <i>varI</i> .
+If several binary files are open simultaneously, the <i>f.varI</i> syntax
+will be more useful for reading variables than the <tt>restore</tt> function.
+</p>
+<p>Note that a single command can be used to create a binary file, save
+variables <i>varI</i> in it, and close the file:
+<br><tt>&nbsp;save, createb(<i>filename</i>), <i>var1, var2, ..., varN</i></tt>
+<br>A similar construction using <tt>restore</tt> and <tt>openb</tt> is also
+useful.
+</p>
+
+

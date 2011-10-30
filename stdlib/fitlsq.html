@@ -1,0 +1,37 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package fitlsq (in fitlsq.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="fitlsq.html#fitlsq">fitlsq</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="fitlsq"></a><h3>fitlsq</h3>
+  <pre>DOCUMENT yp= fitlsq(y, x, xp)
+         ...
+         yfit= interp(yp, xp, xfit)
+  performs a least squares fit to the data points (X, Y).  The input
+  XP are the abcissas of the piecewise linear function passing through
+  (XP, YP) which is the best fit to the data (X,Y) in a least squares
+  sense.  The XP must be strictly monotone, either increasing or
+  decreasing.  As for interp, the piecewise linear fit is taken to be
+  constant outside the limits of the XP.
+
+  The result YP is linearly interpolated through any consecutive
+  intervals of XP which contain no data points X, and linearly
+  extrapolated beyond the extreme values of X (if any of the intervals
+  of XP lie outside these extremes).
+
+  A WEIGHT keyword of the same length as X and Y may be supplied in
+  order to weight the various data points differently; a typical
+  WEIGHT function is 1/sigma^2 where sigma are the standard deviations
+  associated with the Y values.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#interp">interp</a></p>
+</div>

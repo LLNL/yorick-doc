@@ -1,0 +1,58 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package button (in button.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="button.html#button_build">button_build</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="button.html#button_plot">button_plot</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="button.html#button_test">button_test</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="button_build"></a><h3>button_build</h3>
+  <pre>DOCUMENT button_build(button)
+      or button_build(button, which)
+  Returns a Button structure instance, modified interactively to be at
+  the correct position and to have the correct box half widths, e.g.:
+
+     button= button_build(Button(text="label",y=initial_y))
+
+  You can either drag the center of the button to a new location
+  (press down near the center of the button, move the pointer to
+  where you want the center, and release at the new center point),
+  or press the "Set Box" or "Done" button.  In the "Set Box" mode,
+  you can either drag a new box over the button, or press "Set Center"
+  (to return to the original mode) or "Done" button.
+
+  Yorick has no way to determine the size of a text string produced
+  by the plt command, which is why you need to be able to adjust
+  the size of the box draawn around the text.  The idea is to use
+  button_build to get the buttons where you like, then put those
+  coordinates into the include file for the mouse-driven function
+  you are writing.
+
+  Also, the input BUTTON may be an array of buttons, and BUTTON(WHICH)
+  will be the one that is modified.  WHICH defaults to 1.  By using an
+  array of buttons, you can see all the other buttons in a group while
+  you adjust one.
+</pre>
+  <p>SEE ALSO: Button, <a href="button.html#button_test">button_test</a>, <a href="button.html#button_plot">button_plot</a></p>
+</div>
+<div class="docblock"><a name="button_plot"></a><h3>button_plot</h3>
+  <pre>DOCUMENT button_plot, button1, button2, ...
+  plot the specified BUTTONs.  Each button in the list may be an array
+  of Button structs.  Void arguments are no-ops.</pre>
+  <p>SEE ALSO: Button, <a href="button.html#button_build">button_build</a>, <a href="button.html#button_test">button_test</a></p>
+</div>
+<div class="docblock"><a name="button_test"></a><h3>button_test</h3>
+  <pre>DOCUMENT button_test(button, x, y)
+  true if the BUTTON contains NDC coordinates (X,Y).</pre>
+  <p>SEE ALSO: Button, <a href="button.html#button_build">button_build</a>, <a href="button.html#button_plot">button_plot</a></p>
+</div>

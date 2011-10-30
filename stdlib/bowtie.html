@@ -1,0 +1,70 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package bowtie (in bowtie.i) - detect quad mesh bowties </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="bowtie.html#bowtie">bowtie</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>N</h3>
+    <p><a href="bowtie.html#nbow">nbow</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="bowtie.html#nbow_negative">nbow_negative</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="bowtie"></a><h3>bowtie</h3>
+  <pre>DOCUMENT map= bowtie(rt, zt)
+      or map= bowtie(rt, zt, ireg)
+  returns a "bowtie map" for the quadrilateral mesh defined by
+  RT, ZT, and (optionally) IREG.  If IREG is present, it should be
+  an integer array of the same dimensions as RT and ZT; its first
+  row and column are ignored, otherwise each non-zero element of
+  IREG marks an existing zone in the mesh.  (An IREG with one fewer
+  row and column than RT and ZT will also be accepted.)  If IREG
+  is omitted, every zone is presumed to exist.
+
+  The returned MAP is a 2-D integer array with one fewer row and
+  column than RT and ZT.  It's values have the following meanings:
+
+       2   marks a convex zone with positive area
+       1   marks a concave (boomerang) zone with positive area
+       0   marks a bowtied zone
+      -1   marks a concave (boomerang) zone with negative area
+      -2   marks a convex zone with negative area
+      -9   marks a non-existent zone
+
+  Use the nbow function to print the results.
+</pre>
+  <p>SEE ALSO: <a href="bowtie.html#nbow">nbow</a></p>
+</div>
+<div class="docblock"><a name="nbow"></a><h3>nbow</h3>
+  <pre>DOCUMENT nbow, map
+      or nbow, file
+      or nbow, rt, zt
+      or nbow, rt, zt, ireg
+  prints information about topological oddities in a mesh.
+  MAP is a bowtie map as returned by the bowtie function.
+  FILE is a binary file containing rt, zt, and ireg arrays.
+  RT, ZT and IREG are 2-D arrays defining a quadrilateral mesh.
+
+  The information printed includes the zone index (corner with
+  the largest indices) of zones which are concave (boomerangs)
+  or bowtied, and of zones with negative area.  You can set
+  the global variable nbow_negative to 1 to reverse the default
+  sense of positive area.  By default, only the first 10 zones
+  in each category are printed; use the all=1 keyword argument
+  to print a complete (and maybe very long) list.
+</pre>
+  <p>SEE ALSO: <a href="bowtie.html#bowtie">bowtie</a></p>
+</div>
+<div class="docblock"><a name="nbow_negative"></a><h3>nbow_negative</h3>
+  <pre>DOCUMENT nbow_negative
+  default value is 0
+  set to 1 to reverse the sense of positive area for the nbow function</pre>
+  
+</div>

@@ -1,0 +1,80 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Index-List"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_40.html#Nil-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.3 Nil index refers to an entire dimension" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_42.html#Pseudo_002dIndex" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.5 Creating a pseudo-index" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Selecting-an-arbitrary-list-of-indices"></a>
+<h3 class="subsection">2.3.4 Selecting an arbitrary list of indices</h3>
+
+<p>An index list is an array of index values.  Use an index list to specify
+an arbitrary subset of an array: <kbd>x([5,1,2,1])</kbd> means the four
+element array <kbd>[x(5), x(1), x(2), x(1)]</kbd>.  The <kbd>where</kbd> function
+returns an index list:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">list= where(x &gt; 3.5)
+y= x(list)
+</pre></td></tr></table>
+
+<p>These lines define the array <kbd>y</kbd> to be the subset of the <kbd>x</kbd>
+array, consisting of the elements greater than 3.5.
+</p>
+<p>Like the result of an index range, the result of an index list is itself
+an array.  However, the index list follows a more general rule: The
+dimensionality of the result is the same as the dimensionality of the
+index list.  Hence, <kbd>x([[5, 1], [2, 1]])</kbd> refers to the two
+dimensional array <kbd>[[x(5), x(1)], [x(2), x(1)]]</kbd>.  The general rule
+for index lists is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display">Dimensions from the dimensions of the index list; values from the array
+being indexed.
+</pre></td></tr></table>
+
+<p>Note that the scalar index value is a special case of an index list
+according to this rule.
+</p>
+<p>The rule applies to multi-dimensional arrays as well: If <kbd>x</kbd> is a
+five-by-nine array, then <kbd>x(, [[5, 1], [2, 1]])</kbd> is a
+five-by-two-by-two array.  And <kbd>x([[5, 1], [2, 1]], 3:6)</kbd> is a
+two-by-two-by-four array.
+</p>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_40.html#Nil-Index" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.3.3 Nil index refers to an entire dimension" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_42.html#Pseudo_002dIndex" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.3.5 Creating a pseudo-index" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_37.html#Indexing" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2.3 Indexing" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

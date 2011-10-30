@@ -1,0 +1,98 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Simple-debugging"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_32.html#Runtime-errors" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7.1 Runtime errors" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="How-to-respond-to-a-runtime-error"></a>
+<h4 class="subsubsection">1.3.7.2 How to respond to a runtime error</h4>
+
+<p>When Yorick stops with a runtime error, you have a choice: You can
+either type the next statment you want to execute, or you can type a
+carriage return (that is, a blank line) to enter debug mode.  The two
+possibilities would look like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">ERROR (damped_wave) math library exception handler called
+  LINE: 19  FILE: /home/icf/munro/damped.i
+ To enter debug mode, type &lt;RETURN&gt; now (then dbexit to get out)
+&gt; amplitude = damped_wave(theta, 2.5)
+&gt;
+</pre></td></tr></table>
+
+<table><tr><td>&nbsp;</td><td><pre class="example">ERROR (damped_wave) math library exception handler called
+  LINE: 19  FILE: /home/icf/munro/damped.i
+ To enter debug mode, type &lt;RETURN&gt; now (then dbexit to get out)
+&gt;
+dbug&gt;
+</pre></td></tr></table>
+
+<p>In the second case, you have entered debug mode, and the <kbd>dbug&gt;</kbd>
+prompt appears.  In debug mode, Yorick leaves the function which was
+executing and its entire calling chain intact.  You can type any Yorick
+statement; usually you will print some values or plot some arrays to
+try to determine what went wrong.  When you reference or modify a
+variable which is local to the function, you will &ldquo;see&rdquo; its local
+value:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">dbug&gt; nu; 1-nu*nu
+2
+-3
+dbug&gt;
+</pre></td></tr></table>
+
+<p>As soon as possible, you should escape from debug mode using the
+<kbd>dbexit</kbd> function:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">dbug&gt; dbexit
+&gt;
+</pre></td></tr></table>
+
+<p>You may also be able to repair the function&rsquo;s local variables and
+resume execution.  To modify the value of a variable, simply redefine
+it with an ordinary Yorick statement.  The <kbd>dbcont</kbd> function
+continues execution, beginning by re-executing the statement which
+failed to complete.  Use the <kbd>help</kbd> function (see <a href="yorick_27.html#Help">Help</a>) to learn
+about the other debugging functions; the help for the <kbd>dbexit</kbd>
+function describes them all.
+</p>
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_32.html#Runtime-errors" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7.1 Runtime errors" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_31.html#Errors" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.7 Error Messages" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

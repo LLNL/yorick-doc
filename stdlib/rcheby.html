@@ -1,0 +1,102 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package rcheby (in rcheby.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>R</h3>
+    <p><a href="rcheby.html#rcheby_build">rcheby_build</a></p>
+    <p><a href="rcheby.html#rcheby_den">rcheby_den</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="rcheby.html#rcheby_eval">rcheby_eval</a></p>
+    <p><a href="rcheby.html#rcheby_fit">rcheby_fit</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="rcheby.html#rcheby_num">rcheby_num</a></p>
+    <p><a href="rcheby.html#rcheby_trunc">rcheby_trunc</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="rcheby_build"></a><h3>rcheby_build</h3>
+  <pre>DOCUMENT rfit = rcheby_build(nfit, dfit)
+      or rfit = rcheby_build(nfit)
+      or rfit = rcheby_build(,dfit)
+  build fit suitable for input to rcheby_fit from separate numerator
+  and denominator fits in the format returned by cheby_fit.
+  You can use rcheby_build in conjunction with cheby_conv to build
+  an rfit given the polynomial coefficients for the numerator and
+  denominator: rcheby_build(cheby_conv(n), cheby_conv(d)).</pre>
+  <p>SEE ALSO: <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="rcheby.html#rcheby_eval">rcheby_eval</a>, <a href="rcheby.html#rcheby_num">rcheby_num</a>, <a href="rcheby.html#rcheby_den">rcheby_den</a>, <a href="cheby.html#cheby_conv">cheby_conv</a></p>
+</div>
+<div class="docblock"><a name="rcheby_den"></a><h3>rcheby_den</h3>
+  <pre>DOCUMENT fit = rcheby_den(rfit)
+  extract denominator from rcheby_fit RFIT to a Chebyshev fit suitable
+  for input to cheby_eval (not rcheby_eval).</pre>
+  <p>SEE ALSO: <a href="cheby.html#cheby_fit">cheby_fit</a>, <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="rcheby.html#rcheby_num">rcheby_num</a>, <a href="rcheby.html#rcheby_build">rcheby_build</a></p>
+</div>
+<div class="docblock"><a name="rcheby_eval"></a><h3>rcheby_eval</h3>
+  <pre>DOCUMENT y = cheby_eval(fit, x)
+  evaluates a rational Chebyshev FIT at points X.  The FIT is a 1D
+  array of Chebyshev coefficients, as returned by rcheby_fit, namely:
+    [m,k, a,b, 2*n0,n1,...nM,d1,...,dK]
+  where ni are the coefficients of the Chebyshev polynomials in the
+  numerator and di are the coefficients for the denominator (d0=1.0
+  is implicit).
+</pre>
+  <p>SEE ALSO: <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="cheby.html#cheby_fit">cheby_fit</a>, <a href="rcheby.html#rcheby_build">rcheby_build</a>, rcheby_conv</p>
+</div>
+<div class="docblock"><a name="rcheby_fit"></a><h3>rcheby_fit</h3>
+  <pre>DOCUMENT fit = rcheby_fit(f, interval, m, k)
+      or fit = rcheby_fit(f, x, m, k)
+  returns a rational Chebyshev fit (for use in rcheby_eval) of
+  numerator degree M and denominator degree K, to the function
+  F on the INTERVAL (a 2 element array [a,b]). In the second form,
+  F and X are arrays; the function to be fit is the piecewise cubic
+  function of xp spline(f,x,xp), and the interval of the fit is
+  [min(x),max(x)].  You can pass an alternate interpolator using
+  the nterp= keyword; it must have the same calling sequence as
+  spline or interp.
+
+  The return value is the array [m,k, a,b, 2*n0,n1,...nM,d1,...,dK]
+  where [a,b] is the interval over which the fit applies, the ni are
+  the coefficients of the Chebyshev polynomials for the numerator
+  (note that double the zeroth coefficient is stored), while the di
+  are the denominator coefficients, with a zeroth coefficient of
+  1.0 assumed.
+
+  The fitting algorithm returns very nearly the minimax error
+  rational fit to F, that is, the rational function which minimizes
+  the maximum absolute deviation from F for the given degrees.  This
+  function (very nearly) has M+K+1 points of maximum deviation from
+  F on the interval, which alternate in sign and have equal absolute
+  value.  The algorithm is inspired by the discussion in section 5.13
+  of Numerical Recipes, which itself is inspired by the well-known
+  Remez (or Remes) algorithms.  Note that it may be used with K=0
+  to obtain minimax polynomial fits.  (Compare with cheby_fit, the
+  standard Chebyshev polynomial fitting algorithm.)
+
+Problem with this algorithm:
+Nothing prevents numerator and denominator from having a factor
+in common.  This will always happen if the function being fit really
+IS a rational function of lower degree in both numerator and
+denominator than (m,k); hopefully it is rare in other cases.  But
+if you really care about a fit, you would be wise to check.
+</pre>
+  <p>SEE ALSO: <a href="rcheby.html#rcheby_eval">rcheby_eval</a>, <a href="cheby.html#cheby_fit">cheby_fit</a>, <a href="rcheby.html#rcheby_build">rcheby_build</a>, rcheby_conv, <a href="rcheby.html#rcheby_trunc">rcheby_trunc</a></p>
+</div>
+<div class="docblock"><a name="rcheby_num"></a><h3>rcheby_num</h3>
+  <pre>DOCUMENT fit = rcheby_num(rfit)
+  extract numerator from rcheby_fit RFIT to a Chebyshev fit suitable
+  for input to cheby_eval (not rcheby_eval).</pre>
+  <p>SEE ALSO: <a href="cheby.html#cheby_fit">cheby_fit</a>, <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="rcheby.html#rcheby_den">rcheby_den</a>, <a href="rcheby.html#rcheby_build">rcheby_build</a></p>
+</div>
+<div class="docblock"><a name="rcheby_trunc"></a><h3>rcheby_trunc</h3>
+  <pre>DOCUMENT tfit = rcheby_trunc(fit, err)
+  truncate rcheby_fit FIT to relative error ERR by dropping
+  trailing Chebyshev coefficients smaller than ERR.  (Note that
+  this destroys the minimax property of rcheby_fit -- use with
+  caution.)  If ERR is omitted, it defaults to 1.e-9.</pre>
+  <p>SEE ALSO: <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="cheby.html#cheby_trunc">cheby_trunc</a></p>
+</div>

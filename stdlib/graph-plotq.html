@@ -1,0 +1,155 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotq (in graph.i) - plot query and edit functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+    <p><a href="graph-plotq.html#pldefault">pldefault</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plotq.html#pledit">pledit</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotq.html#plq">plq</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="pldefault"></a><h3>pldefault</h3>
+  <pre>DOCUMENT pldefault, key1=value1, key2=value2, ...
+  sets default values for the various properties of graphical elements.
+
+  The keywords can be most of the keywords that can be passed to the
+  plotting commands:
+    plg:  color, type, width,
+          marks, mcolor, msize, mspace, mphase,
+          rays, rspace, rphase, arrowl, arroww
+    pldj: color, type, width
+    plt:  color, font, height, orient, justify, opaque
+    plm:  color, type, width
+    plv:  color, hollow, width, aspect
+    plc:  color, type, width,
+          marks, mcolor, marker, msize, mspace, mphase
+    plf:  edges, ecolor, ewidth
+
+  The initial default values are:
+    color="fg", type="solid", width=1.0 (1/2 point),
+    marks=1, mcolor="fg", msize=1.0 (10 points),
+       mspace=0.16, mphase=0.14,
+    rays=0, arrowl=1.0 (10 points), arroww=1.0 (4 points),
+       rspace=0.13, rphase=0.11375,
+    font="helvetica", height=12.0, justify="NN", opaque=0,
+    hollow= 0, aspect=0.125,
+    edges=0, ecolor="fg", ewidth=1.0 (1/2 point)
+
+  Additional default keywords are:
+    dpi, style, legends  (see window command)
+    palette              (to set default filename as in palette command)
+    maxcolors            (default 200)
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotq.html#plq">plq</a>, <a href="graph-plotq.html#pledit">pledit</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="pledit"></a><h3>pledit</h3>
+  <pre>DOCUMENT pledit, key1=value1, key2=value2, ...
+      or pledit, n_element, key1=value1, key2=value2, ...
+      or pledit, n_element, n_contour, key1=value1, key2=value2, ...
+  changes some property of element number N_ELEMENT (and contour
+  number N_CONTOUR of that element).  If N_ELEMENT and N_CONTOUR are
+  omitted, the default is the most recently added element, or the
+  element specified in the most recent plq query command.
+
+  The keywords can be any of the keywords that apply to the current
+  element.  These are:
+    plg:  color, type, width,
+          marks, mcolor, marker, msize, mspace, mphase,
+          rays, rspace, rphase, arrowl, arroww,
+          closed, smooth
+    pldj: color, type, width
+    plt:  color, font, height, orient, justify, opaque
+    plm:  region, boundary, inhibit, color, type, width
+    plf:  region
+    plv:  region, color, hollow, width, aspect, scale
+    plc:  region, color, type, width,
+          marks, mcolor, marker, msize, mspace, mphase
+          smooth, levs
+  (For contours, if you aren't talking about a particular N_CONTOUR,
+   any changes will affect ALL the contours.)
+
+  A plv (vector field) element can also take the scalem
+  keyword to multiply all vector lengths by a specified factor.
+
+  A plt (text) element can also take the dx and/or dy
+  keywords to adjust the text position by (dx,dy).
+</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotq.html#plq">plq</a>, <a href="graph-plotq.html#pldefault">pldefault</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>
+<div class="docblock"><a name="plq"></a><h3>plq</h3>
+  <pre>DOCUMENT plq
+      or plq, n_element
+      or plq, n_element, n_contour
+      or legend_list= plq()
+      or properties= plq(n_element, n_contour)
+  Called as a subroutine, prints the list of legends for the current
+  coordinate system (with an "(H)" to mark hidden elements), or prints
+  a list of current properties of element N_ELEMENT (such as line type,
+  width, font, etc.), or of contour number N_CONTOUR of element number
+  N_ELEMENT (which must be contours generated using the plc command).
+  Called as a function, returns either the list of legend strings, or a
+  list of pointers to the values of the various element properties.
+  Elements and contours are both numbered starting with one; hidden
+  elements or contours are included in this numbering.
+
+  The PROPERTIES list returned by plq is a list of pointers to the
+  relevent properties for the specified graphical element.  Each
+  possible property has a particular index in the returned PROPERTIES
+  list as follows:
+  *PROPERTIES(1)   int([element type (0 for none, 1 for plg, 2 for pldj,
+                                      3 for plt, 4 for plm, 5 for plf,
+                                      6 for plv, 7 for plc, 8 for pli,
+                                      9 for plfp),
+                        hide flag])
+  *PROPERTIES(2)   string(legend)
+  *PROPERTIES(3)   int array, depends on type (names match keywords):
+    1 plg:  [color, type, marks, mcolor, marker, rays, closed, smooth]
+    2 pldj: [color, type]
+    3 plt:  [color, font, orient, justify, opaque]
+    4 plm:  [color, type, region, boundary, inhibit]
+    5 plf:  [region, edges, ecolor, rgb_flag]
+    6 plv:  [region, color, hollow]
+    7 plc:  [region, color, type, marks, mcolor, marker, smooth]
+    8 pli:  [rgb_flag]
+    9 plfp: [edges, ecolor, rgb_flag]
+  *PROPERTIES(4)   double array, depends on type (names match keywords):
+    1 plg:  [width, msize, mspace, mphase, rspace, rphase, arrowl, arroww]
+    2 pldj: [width]
+    3 plt:  [height, x, y]
+    4 plm:  [width]
+    5 plf:  [ewidth]
+    6 plv:  [width, aspect, scale]
+    7 plc:  [width, msize, mspace, mphase]
+    8 pli:  [x0, y0, x1, y1]
+    9 plfp: [ewidth]
+  *PROPERTIES(5)   long array, depends on type (names match arguments):
+    1 plg:  [npoints, &x, &y]
+    2 pldj: [npoints, &x0, &y0, &x1, &y1]
+    3 plt:  [nchars, &text]
+    4 plm:  [imax, jmax, &x, &y, &ireg]
+    5 plf:  [imax, jmax, &x, &y, &ireg, &colors]
+    6 plv:  [imax, jmax, &x, &y, &ireg, &vx, &vy]
+    7 plc:  [imax, jmax, &x, &y, &ireg, &z, &triangle, nlevs, &levs]
+    8 pli:  [imax, jmax, &colors]
+    9 plfp: [n, &x, &y, &colors, &pn]
+  You can use the reshape function to peek at the data at the addresses
+  returned in PROPERTIES(5) as longs.  The appropriate data types are:
+  char for text, int for ireg, short for triangle, char for colors, and
+  double for everything else.  In a plf, colors is (imax-1)-by-(jmax-1).
+  Although PROPERTIES(5) returns pointers to the data plotted, attempting
+  to poke new values into this data will not produce immediate changes
+  to your plot, since the graphics package does not realize that anything
+  has changed.  Use pledit to make changes to plotted elements.
+
+  The plq function always operates on the current coordinate system
+  in the current graphics window; use window and plsys to change these.</pre>
+  <p>SEE ALSO: <a href="graph-plotout.html#window">window</a>, <a href="graph-plotout.html#plsys">plsys</a>, <a href="graph-plotq.html#pledit">pledit</a>, <a href="graph-plotq.html#pldefault">pldefault</a>, <a href="graph-plotter.html#plg">plg</a></p>
+</div>

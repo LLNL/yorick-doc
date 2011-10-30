@@ -1,0 +1,439 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-system (in std.i) - interacting with system </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-system.html#after">after</a></p>
+    <p><a href="std-system.html#after_error">after_error</a></p>
+    <h3>B</h3>
+    <p><a href="std-system.html#batch">batch</a></p>
+    <h3>C</h3>
+    <p><a href="std-system.html#cd">cd</a></p>
+    <h3>G</h3>
+    <p><a href="std-system.html#get_argv">get_argv</a></p>
+    <p><a href="std-system.html#get_cwd">get_cwd</a></p>
+    <p><a href="std-system.html#get_env">get_env</a></p>
+    <p><a href="std-system.html#get_cwd">get_home</a></p>
+    <p><a href="std-system.html#get_path">get_path</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>L</h3>
+    <p><a href="std-system.html#lsdir">lsdir</a></p>
+    <h3>M</h3>
+    <p><a href="std-system.html#maybe_prompt">maybe_prompt</a></p>
+    <p><a href="std-system.html#mkdir">mkdir</a></p>
+    <p><a href="std-system.html#mkdirp">mkdirp</a></p>
+    <h3>P</h3>
+    <p><a href="std-system.html#process_argv">process_argv</a></p>
+    <h3>Q</h3>
+    <p><a href="std-system.html#quit">quit</a></p>
+    <h3>R</h3>
+    <p><a href="std-system.html#suspend">resume</a></p>
+    <p><a href="std-system.html#mkdir">rmdir</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>S</h3>
+    <p><a href="std-system.html#set_idler">set_idler</a></p>
+    <p><a href="std-system.html#set_path">set_path</a></p>
+    <p><a href="std-system.html#spawn">spawn</a></p>
+    <p><a href="std-system.html#spawn_callback">spawn_callback</a></p>
+    <p><a href="std-system.html#suspend">suspend</a></p>
+    <p><a href="std-system.html#system">system</a></p>
+    <h3>T</h3>
+    <p><a href="std-system.html#timer">timer</a></p>
+    <p><a href="std-system.html#timer_print">timer_print</a></p>
+    <p><a href="std-system.html#timestamp">timestamp</a></p>
+    <h3>Y</h3>
+    <p><a href="std-system.html#yorick_stats">yorick_stats</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="after"></a><h3>after</h3>
+  <pre>DOCUMENT after, secs, f
+      or after, secs, f, arg
+      of after, -, f, arg
+      of after, -
+  Execute yorick statement
+    F;
+  or
+    F, ARG;
+  when yorick becomes idle, but at least SECS seconds from now.
+  SECS may be type double to specify fractions of a second.
+  With SECS = 0.0, this is the same as set_idler, except that
+  while you may have only a single idler function, you may have
+  many after functions.  F may be either a function (is_func(f)
+  non-zero), or an oxy object (is_obj(f) non-zero).  For example,
+    after, 0.1, include, ["fma; plg, y, x;"];
+  can obviously be modified to do anything you want, although you
+  are probably better off writing a function containing the
+  executable line, rather than putting it into a string.
+  As another example,
+    after, 0.1, object, method;
+  invokes the object method after a delay of a tenth of a second.
+  (See help,oxy for more on objects.)  If F is an object, and method
+  is a simple variable reference, the special semantics of object
+  arguments apply; that is, only the name "method" is significant,
+  not its value.
+  In the third form, with the pseudo-index - as the first argument,
+  cancels the specified after call(s).  The ARG, if specified, must
+  be the same variable, not just the same value.  If no ARG is specified,
+  all pending after callbacks with the given F are cancelled.  If
+  neither ARG nor F is specified, all after callbacks are cancelled.</pre>
+  <p>SEE ALSO: <a href="std-system.html#spawn">spawn</a>, <a href="std-system.html#set_idler">set_idler</a>, <a href="std-system.html#after_error">after_error</a></p>
+</div>
+<div class="docblock"><a name="after_error"></a><h3>after_error</h3>
+  <pre>DOCUMENT after_error = error_handler_func
+  If the variable AFTER_ERROR is set to an interpreted function
+  with no parameters, that function will be invoked after an error,
+  before the next prompt, instead of entering or offering to enter
+  debug mode.  The error message will be printed, and also will be
+  stored in the catch_message variable.  A fault during the execution
+  of the after_error function will not invoke after_error, but
+  otherwise after_error is persistent (unlike set_idler).  An error
+  resets any functions scheduled using after or set_idler, so the
+  after_error function must reschedule these if necessary.
+  The catch function is a more appropriate way to recover from
+  some errors.</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_idler">set_idler</a>, <a href="std-debug.html#catch">catch</a>, <a href="std-system.html#after">after</a></p>
+</div>
+<div class="docblock"><a name="batch"></a><h3>batch</h3>
+  <pre>DOCUMENT batch, 1
+         batch, 0
+         batch()
+  turns on, turns off, or tests for batch mode, respectively.
+  If yorick is started with the command line:
+     yorick -batch batch_include.i ...
+  then batch mode is turned on, the usual custom.i startup file is
+  skipped, and the file batch_include.i is parsed and executed.  The
+  -batch and batch_include.i command line arguments are removed from
+  the list returned by get_argv().  These must be the first two
+  arguments on the command line.
+
+  In batch mode, any error will terminate Yorick (as by the quit
+  function) rather than entering debug mode.  Also, any attempt to
+  read from the keyboard is an error.
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#process_argv">process_argv</a>, <a href="std-system.html#get_argv">get_argv</a>, <a href="std-system.html#set_idler">set_idler</a>, <a href="std-system.html#after_error">after_error</a></p>
+</div>
+<div class="docblock"><a name="cd"></a><h3>cd</h3>
+  <pre>DOCUMENT cd, directory_name
+      or cd(directory_name)
+  change current working directory to DIRECTORY_NAME, returning
+  the expanded path name (i.e.- with leading environment variables,
+  ., .., or ~ replaced by the actual pathname).  If called as a
+  function, returns nil to indicate failure, otherwise failure
+  causes a Yorick error.</pre>
+  <p>SEE ALSO: <a href="std-system.html#lsdir">lsdir</a>, <a href="std-system.html#mkdir">mkdir</a>, <a href="std-system.html#mkdir">rmdir</a>, <a href="std-system.html#get_cwd">get_cwd</a>, <a href="std-system.html#get_cwd">get_home</a>, <a href="std-system.html#get_env">get_env</a>, <a href="std-system.html#get_argv">get_argv</a></p>
+</div>
+<div class="docblock"><a name="get_argv"></a><h3>get_argv</h3>
+  <pre>DOCUMENT get_argv()
+  returns string array containing the argv from the command line.
+  The -batch and batch_include.i arguments are removed (not returned).</pre>
+  <p>SEE ALSO: <a href="std-system.html#process_argv">process_argv</a>, <a href="std-system.html#cd">cd</a>, <a href="std-system.html#get_cwd">get_cwd</a>, <a href="std-system.html#get_cwd">get_home</a>, <a href="std-system.html#get_env">get_env</a>, <a href="std-system.html#batch">batch</a></p>
+</div>
+<div class="docblock"><a name="get_cwd"></a><h3>get_cwd</h3>
+  <pre>DOCUMENT get_cwd()
+      or get_home()
+  returns the pathname of the current working directory or of your
+  home directory.</pre>
+  <p>SEE ALSO: <a href="std-system.html#cd">cd</a>, <a href="std-system.html#lsdir">lsdir</a>, <a href="std-system.html#get_env">get_env</a>, <a href="std-system.html#get_argv">get_argv</a></p>
+</div>
+<div class="docblock"><a name="get_env"></a><h3>get_env</h3>
+  <pre>DOCUMENT get_env(environment_variable_name)
+  returns the environment variable (a string) associated with
+  ENVIRONMENT_VARIABLE_NAME (calls ANSI getenv routine).</pre>
+  <p>SEE ALSO: <a href="std-system.html#cd">cd</a>, <a href="std-system.html#get_cwd">get_cwd</a>, <a href="std-system.html#get_cwd">get_home</a>, <a href="std-system.html#get_env">get_env</a>, <a href="std-system.html#get_argv">get_argv</a></p>
+</div>
+<div class="docsee">
+  <h3>get_home</h3><p>SEE: <a href="#get_cwd">get_cwd</a></p>
+</div>
+<div class="docblock"><a name="get_path"></a><h3>get_path</h3>
+  <pre>DOCUMENT get_path()
+  returns the current include file search path.</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_path">set_path</a>, <a href="std-info.html#get_pkgnames">get_pkgnames</a>, <a href="std-info.html#split_path">split_path</a></p>
+</div>
+<div class="docblock"><a name="lsdir"></a><h3>lsdir</h3>
+  <pre>DOCUMENT files = lsdir(directory_name)
+      or files = lsdir(directory_name, subdirs)
+  List DIRECTORY_NAME.  The return value FILES is an array of
+  strings or nil; the order of the filenames is unspecified;
+  it does not contain "." or "..".  If present, SUBDIRS must be
+  a simple variable reference, and is set to a list of subdirectory
+  names (or nil if none).  If SUBDIRS is not present (first form),
+  the return value of lsdir includes both files and subdirectories.
+  If DIRECTORY_NAME does not exist or is not a directory, the return
+  value is the integer 0 rather than nil.  Hence:
+    files = lsdir(dirname, subdirs);
+    if (structof(files) == long) {
+      directory does not exist
+    } else {
+      for (i=1 ; i<=numberof(files) ; ++i) {...use files(i)...}
+      for (i=1 ; i<=numberof(subdirs) ; ++i) {...use subdirs(i)...}
+    }</pre>
+  <p>SEE ALSO: <a href="std-system.html#cd">cd</a>, <a href="std-system.html#mkdir">mkdir</a>, <a href="std-system.html#mkdir">rmdir</a>, <a href="std-system.html#get_cwd">get_cwd</a>, <a href="std-system.html#get_cwd">get_home</a>, <a href="std-fileio.html#filepath">filepath</a></p>
+</div>
+<div class="docblock"><a name="maybe_prompt"></a><h3>maybe_prompt</h3>
+  <pre>DOCUMENT maybe_prompt
+  Issue prompt for keyboard input if appropriate.
+  This command only makes sense (I think) as the final statement
+  of a function invoked as an idler (via set_idler), when yorick is
+  in a loop with an idler function that continuously re-installs
+  itself.  Yorick ordinarily issues a prompt only just before it
+  stops to wait for keyboard input, it will never prompt in this
+  situation, even though it would accept keyboard input if it
+  were typed.</pre>
+  <p>SEE ALSO: <a href="std-system.html#set_idler">set_idler</a></p>
+</div>
+<div class="docblock"><a name="mkdir"></a><h3>mkdir</h3>
+  <pre>DOCUMENT mkdir, directory_name
+      or rmdir, directory_name 
+  Create DIRECTORY_NAME with mkdir, or remove it with rmdir.  The rmdir
+  function only works if the directory is empty.  An error is raised if
+  DIRECTORY_NAME is not a non-nil scalar string.  If mkdir or rmdir are
+  called as subroutines and the operation fails, no error is raised
+  (so you can use this form even when the directory already exists for
+  mkdir, or already is missing for rmdir).  Otherwise, if
+  DIRECTORY_NAME is a non-nil scalar string and if mkdir and rmdir are
+  called as a function, they return an integer: 0 to indicate success and
+  -1 to indicate failure.
+  </pre>
+  <p>SEE ALSO: <a href="std-system.html#mkdirp">mkdirp</a>, <a href="std-system.html#cd">cd</a>, <a href="std-system.html#lsdir">lsdir</a>, <a href="std-system.html#get_cwd">get_cwd</a>, <a href="std-system.html#get_cwd">get_home</a>, <a href="std-fileio.html#filepath">filepath</a></p>
+</div>
+<div class="docblock"><a name="mkdirp"></a><h3>mkdirp</h3>
+  <pre>DOCUMENT mkdirp, directory_name
+  Create DIRECTORY_NAME, creating any missing parent directories
+  (like UNIX utility mkdir -p).  Unlike mkdir, signals error if
+  the creation is unsuccessful.  If DIRECTORY_NAME already exists
+  and is a directory, mkdirp is a no-op.</pre>
+  <p>SEE ALSO: <a href="std-system.html#mkdir">mkdir</a></p>
+</div>
+<div class="docblock"><a name="process_argv"></a><h3>process_argv</h3>
+  <pre>DOCUMENT remaining= process_argv()
+      or remaining= process_argv("your startup message")
+  Performs standard command line processing.  This function is
+  invoked by the default custom.i file (in $Y_SITE/i); you
+  can also invoke it from your personal ~/yorick/custom.i file.
+  The process_argv calls get_argv, removes any arguments of
+  the form "-ifilename" or "-i filename" (the latter is a pair of
+  arguments.  It returns any arguments not of this form as its
+  result, after including any filenames it found in the order
+  they appeared on the command line.
+  The optional string argument may be an array of strings to print
+  a multi-line message.
+
+  A Yorick package may define the function get_command_line in
+  order to feed process_argv something other than get_argv.
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#batch">batch</a></p>
+</div>
+<div class="docblock"><a name="quit"></a><h3>quit</h3>
+  <pre>DOCUMENT quit
+  Exit YMainLoop when current task finishes.
+  Normally this terminates the program.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>resume</h3><p>SEE: <a href="#suspend">suspend</a></p>
+</div>
+<div class="docsee">
+  <h3>rmdir</h3><p>SEE: <a href="#mkdir">mkdir</a></p>
+</div>
+<div class="docblock"><a name="set_idler"></a><h3>set_idler</h3>
+  <pre>DOCUMENT set_idler, idler_function
+      or set_idler, idler_function, errflags
+  sets the idler function to IDLER_FUNCTION.  Instead of waiting
+  for keyboard input when all its tasks are finished, the interpreter
+  will invoke IDLER_FUNCTION with no arguments.  The idler function
+  is normally invoked only once, so input from the keyboard resumes
+  after one call to the idler.  Of course, an idler is free to call
+  set_idler again before it returns, which will have the effect of
+  calling that function in a loop.
+  If present, the ERRFLAGS argument changes the way errors are processed:
+    0  - default processing, add any combination of:
+    1  - suppress printing error messages
+    2  - append [pc] relative program counter to function name in error
+         message (use disassemble to find corresponding instruction)
+    4  - call any after_error function in dbug mode (rather than clearing
+         stack), so it is responsible for calling dbexit</pre>
+  <p>SEE ALSO: <a href="std-system.html#batch">batch</a>, <a href="std-system.html#maybe_prompt">maybe_prompt</a>, <a href="std-system.html#after">after</a>, <a href="std-system.html#after_error">after_error</a></p>
+</div>
+<div class="docblock"><a name="set_path"></a><h3>set_path</h3>
+  <pre>DOCUMENT set_path, "dir1:dir2:dir3:..."
+      or set_path
+  sets the include file search path to the specified list of
+  directories.  The specified directories are searched left to
+  right for include files specified as relative file names in
+  #include directives, or to the include or require functions.
+  If the argument is omitted, restores the default search path,
+  ".:~/yorick:~/Yorick:Y_SITE/i:Y_SITE/contrib:Y_SITE/i0:Y_HOME/lib",
+  where y_site is the main Yorick directory for this site.
+  The Y_LAUNCH directory is the directory which contains the
+  executable; this directory is omitted if it is the same as
+  Y_SITE.
+
+  Only the "end user" should ever call set_path, and then only in
+  his or her custom.i file, for the purpose of placing a more
+  elaborate set of personal directories containing Yorick procedures.
+  For example, if someone else maintains Yorick code you use, you
+  might put their ~/yorick on your include path.
+</pre>
+  <p>SEE ALSO: <a href="paths.html#Y_SITE">Y_LAUNCH</a>, <a href="paths.html#Y_SITE">Y_SITE</a>, <a href="std-include.html#include">include</a>, <a href="std-include.html#include">require</a>, <a href="std-system.html#get_path">get_path</a></p>
+</div>
+<div class="docblock"><a name="spawn"></a><h3>spawn</h3>
+  <pre>DOCUMENT process = spawn(argv, on_stdout)
+      or process = spawn(argv, on_stdout, on_stderr)
+  starts the process named in ARGV(1) with additional arguments
+  in any subsequent elements of ARGV (which is a scalar or 1D
+  array of strings).  The ON_STDOUT and optional ON_STDERR
+  are interpreted functions declared like this:
+    func ON_STDOUT(msg)
+    {
+      commands to process msg on stdout from process
+    }
+
+  Yorick will invoke ON_STDOUT asynchronously if process
+  emits text to its stdout.  Yorick includes the process in
+  the list of event sources, which it polls whenever it waits
+  for input.  If the optional ON_STDERR is provided, it is
+  called asynchronously whenever process emits a line to stderr;
+  with no ON_STDERR, the process will share yorick's stderr,
+  which generally means the process stderr prints at the terminal.
+  (Note that you can make the third argument the same as the second
+  if you want to use the same function to handle stdout and stderr.)
+  When the process terminates, ON_STDOUT is invoked with
+  string(0) and the process object becomes inactive.  Note that
+  ON_STDOUT and ON_STDERR are invoked via the name they were
+  originally defined with (in the func or extern statement for
+  interpreted and compiled functions, respectively).
+
+  The object returned by spawn, process, can be used to send input
+  or signals to the process:
+    process, msg;
+  where msg is a string, sends msg to the process's stdin.
+    process, signum;
+  sends process the specified signal (e.g.- signum=2 sends SIGINT,
+  like hitting control-C, while signum=9 kills the process), if
+  signum is an integer (as opposed to a string).  (Normally you
+  should not send signals to a process.)  If you redefine the
+  final reference to process, for example by
+    process = [];
+  yorick will disconnect from the process, closing its end of
+  the stdin, stdout, and, optionally, stderr pipes.  For many
+  programs, this will stop the program, but if the program can
+  continue running without stdin and stdout, it will continue
+  running.  (If yorick were a shell, the process would be running
+  in the background; if the process would live beyond the shell
+  which created it, it will also survive its process variable
+  being freed.)
+
+  Note: funcdef may be extremely useful for writing ON_STDOUT.
+</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#popen">popen</a>, <a href="std-system.html#system">system</a>, <a href="std-system.html#suspend">suspend</a>, <a href="std-include.html#funcdef">funcdef</a>, <a href="std-system.html#after">after</a>, <a href="std-system.html#spawn_callback">spawn_callback</a></p>
+</div>
+<div class="docblock"><a name="spawn_callback"></a><h3>spawn_callback</h3>
+  <pre>DOCUMENT spawn_callback -->
+         func on_stdout(msg) {
+           extern fragment; <or otherwise manage fragment>
+           lines = spawn_callback(fragment, msg);
+           for (i=1 ; i<=numberof(lines) ; i++) {
+             line = lines(i);
+             if (!line) {
+               <handle process has died>
+             } else {
+               <handle complete line emitted by process>
+             }
+           }
+         }
+  Here is a template for a callback function to be passed to spawn.
+  The spawn_callback function buffers any fragmentary lines,
+  delivering only complete lines as output.  Note that FRAGMENT
+  must somehow be managed between calls to on_stdout; it should
+  be intialized to [] before calling spawn.
+</pre>
+  <p>SEE ALSO: <a href="std-system.html#spawn">spawn</a></p>
+</div>
+<div class="docblock"><a name="suspend"></a><h3>suspend</h3>
+  <pre>DOCUMENT suspend
+         resume
+  Stop execution of the current interpreted program with suspend.
+  It resumes at the instruction following suspend when yorick
+  becomes idle after another interpreted task has called resume.
+  Note that the task which calls resume must be triggered by an
+  input stream other than stdin, such as the on_stdout or on_stderr
+  function of a spawned process or the on_elapse of an after.
+  Use control-c to escape from a hung suspend state.</pre>
+  <p>SEE ALSO: <a href="std-system.html#spawn">spawn</a>, <a href="std-include.html#funcdef">funcdef</a>, <a href="std-system.html#after">after</a></p>
+</div>
+<div class="docblock"><a name="system"></a><h3>system</h3>
+  <pre>DOCUMENT system, "shell command line"
+  Passes the command line string to a shell for execution.
+  If the string is constant, you may use the special syntax:
+      $shell command line
+  (A long command line may be continued by ending the line with \
+  as usual.)  The system function syntax allows Yorick to compute
+  parts of the command line string, while the simple $ escape
+  syntax does not.  In either case, the only way to get output
+  back from such a command is to redirect it to a file, then
+  read the file.  Note that Yorick does not regain control
+  until the subordinate shell finishes.  (Yorick will get control
+  back if the command line backgrounds the job.)
+  WARNING: If Yorick has grown to a large size, this may crash
+  your operating system, since the underlying POSIX fork function
+  first copies all of the running Yorick process before the exec
+  function can start the shell.  See Y_SITE/sysafe.i for a fix.</pre>
+  <p>SEE ALSO: <a href="std-fileio.html#popen">popen</a></p>
+</div>
+<div class="docblock"><a name="timer"></a><h3>timer</h3>
+  <pre>DOCUMENT timer, elapsed
+      or timer, elapsed, split
+  updates the ELAPSED and optionally SPLIT timing arrays.  These
+  arrays must each be of type array(double,3); the layout is
+  [cpu, system, wall], with all three times measured in seconds.
+  ELAPSED is updated to the total times elapsed since this copy
+  of Yorick started.  SPLIT is incremented by the difference between
+  the new values of ELAPSED and the values of ELAPSED on entry.
+  This feature allows for primitive code profiling by keeping
+  separate accounting of time usage in several categories, e.g.--
+     elapsed= total= cat1= cat2= cat3= array(double, 3);
+     timer, elapsed0;
+     elasped= elapsed0;
+     ... category 1 code ...
+     timer, elapsed, cat1;
+     ... category 2 code ...
+     timer, elapsed, cat2;
+     ... category 3 code ...
+     timer, elapsed, cat3;
+     ... more category 2 code ...
+     timer, elapsed, cat2;
+     timer, elapsed0, total;
+  The wall time is not absolutely reliable, owning to possible
+  rollover at midnight.</pre>
+  <p>SEE ALSO: <a href="std-system.html#timestamp">timestamp</a>, <a href="std-system.html#timer_print">timer_print</a></p>
+</div>
+<div class="docblock"><a name="timer_print"></a><h3>timer_print</h3>
+  <pre>DOCUMENT timer_print, label1, split1, label2, split2, ...
+      or timer_print
+      or timer_print, label_total
+  prints out a timing summary for splits accumulated by timer.
+     timer_print, "category 1", cat1, "category 2", cat2,
+                  "category 3", cat3, "total", total;</pre>
+  <p>SEE ALSO: <a href="std-system.html#timer">timer</a></p>
+</div>
+<div class="docblock"><a name="timestamp"></a><h3>timestamp</h3>
+  <pre>DOCUMENT timestamp()
+      or timestamp(utime)
+      or timestamp, utime
+  returns string of the form "Sun Jan  3 15:14:13 1988" -- always
+  has 24 characters.  If a simple variable reference UTIME is supplied,
+  it will be set to the number of seconds since 1970 Jan 1 0000 UT.</pre>
+  <p>SEE ALSO: <a href="std-system.html#timer">timer</a></p>
+</div>
+<div class="docblock"><a name="yorick_stats"></a><h3>yorick_stats</h3>
+  <pre>DOCUMENT yorick_stats
+  returns an array of longs describing Yorick memory usage.
+  For debugging.  See ydata.c source code.</pre>
+  
+</div>

@@ -1,0 +1,795 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package drat (in drat.i) - 2D transport equation solver </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="drat.html#adjust_ireg">adjust_ireg</a></p>
+    <p><a href="drat.html#apply_funcs">apply_funcs</a></p>
+    <h3>B</h3>
+    <p><a href="drat.html#B_nu">B_nu</a></p>
+    <p><a href="drat.html#B_nu_bar">B_nu_bar</a></p>
+    <h3>D</h3>
+    <p><a href="drat.html#default_gate">default_gate</a></p>
+    <p><a href="drat.html#default_integrate">default_integrate</a></p>
+    <p><a href="drat.html#default_ocompute">default_ocompute</a></p>
+    <p><a href="drat.html#drat_rt">drat_akap</a></p>
+    <p><a href="drat.html#drat_amult">drat_amult</a></p>
+    <p><a href="drat.html#drat_backlight">drat_backlight</a></p>
+    <p><a href="drat.html#drat_channel">drat_channel</a></p>
+    <p><a href="drat.html#drat_compress">drat_compress</a></p>
+    <p><a href="drat.html#drat_rt">drat_ekap</a></p>
+    <p><a href="drat.html#drat_amult">drat_emult</a></p>
+    <p><a href="drat.html#drat_gate">drat_gate</a></p>
+    <p><a href="drat.html#drat_rt">drat_gav</a></p>
+    <p><a href="drat.html#drat_rt">drat_gb</a></p>
+    <p><a href="drat.html#drat_glist">drat_glist</a></p>
+    <p><a href="drat.html#drat_integrate">drat_integrate</a></p>
+    <p><a href="drat.html#drat_rt">drat_ireg</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="drat.html#drat_amult">drat_ireg_adj</a></p>
+    <p><a href="drat.html#drat_rt">drat_isymz</a></p>
+    <p><a href="drat.html#drat_rt">drat_khold</a></p>
+    <p><a href="drat.html#drat_rt">drat_lhold</a></p>
+    <p><a href="drat.html#drat_linear">drat_linear</a></p>
+    <p><a href="drat.html#drat_linear">drat_nomilne</a></p>
+    <p><a href="drat.html#drat_ocompute">drat_oadjust</a></p>
+    <p><a href="drat.html#drat_ocompute">drat_ocompute</a></p>
+    <p><a href="drat.html#drat_amult">drat_omult</a></p>
+    <p><a href="drat.html#drat_quiet">drat_quiet</a></p>
+    <p><a href="drat.html#drat_rt">drat_rt</a></p>
+    <p><a href="drat.html#drat_start">drat_start</a></p>
+    <p><a href="drat.html#drat_static">drat_static</a></p>
+    <p><a href="drat.html#drat_start">drat_stop</a></p>
+    <p><a href="drat.html#drat_symmetry">drat_symmetry</a></p>
+    <p><a href="drat.html#drat_rt">drat_zt</a></p>
+    <h3>F</h3>
+    <p><a href="drat.html#find_boundary">find_boundary</a></p>
+    <p><a href="drat.html#form_mesh">form_mesh</a></p>
+    <h3>G</h3>
+    <p><a href="drat.html#gaussian_gate">gaussian_gate</a></p>
+    <p><a href="drat.html#gauss_gate">gauss_gate</a></p>
+    <p><a href="drat.html#gauss_int">gauss_int</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="drat.html#get_ray_path">get_ray_path</a></p>
+    <p><a href="drat.html#get_std_limits">get_std_limits</a></p>
+    <p><a href="drat.html#guess_symmetry">guess_symmetry</a></p>
+    <h3>I</h3>
+    <p><a href="drat.html#integ_flat">integ_flat</a></p>
+    <p><a href="drat.html#integ_linear">integ_linear</a></p>
+    <p><a href="drat.html#is_present">is_present</a></p>
+    <h3>P</h3>
+    <p><a href="drat.html#pcen_source">pcen_source</a></p>
+    <h3>R</h3>
+    <p><a href="drat.html#reset_options">reset_options</a></p>
+    <h3>S</h3>
+    <p><a href="drat.html#set_tolerances">set_tolerances</a></p>
+    <p><a href="drat.html#snap">snap</a></p>
+    <p><a href="drat.html#snap_worker">snap_worker</a></p>
+    <p><a href="drat.html#streak">streak</a></p>
+    <p><a href="drat.html#streak_save">streak_save</a></p>
+    <p><a href="drat.html#streak_saver">streak_saver</a></p>
+    <p><a href="drat.html#streak_times">streak_times</a></p>
+    <h3>T</h3>
+    <p><a href="drat.html#track_rays">track_rays</a></p>
+    <h3>U</h3>
+    <p><a href="drat.html#update_mesh">update_mesh</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="adjust_ireg"></a><h3>adjust_ireg</h3>
+  <pre>DOCUMENT adjust_ireg(ireg)
+  returns the input IREG with the regions specified in drat_ireg_adj
+  zeroed.  Beware-- the ireg array is actually modified.</pre>
+  <p>SEE ALSO: <a href="drat.html#drat_amult">drat_ireg_adj</a></p>
+</div>
+<div class="docblock"><a name="apply_funcs"></a><h3>apply_funcs</h3>
+  <pre>DOCUMENT apply_funcs(streak_result)
+      or apply_funcs(transp, selfem)
+      or apply_funcs(transp, selfem, time)
+      or apply_funcs(transp, selfem, times)
+  applies the drat_backlight and drat_channel options (if any)
+  to the input streak_result.  This destroys the separate
+  transparency and self-emission information returned by streak.
+  transp= streak_result(,1,..) and selfem= streak_result(,2,..).
+  If time is not given, time=0.0 is passed to the functions.
+  If times is a vector, it must match the final dimension of
+  transp and selfem.</pre>
+  
+</div>
+<div class="docblock"><a name="B_nu"></a><h3>B_nu</h3>
+  <pre>DOCUMENT B_nu(hnu, kt)
+  returns the specific intensity emitted by a black surface at
+  photon energy HNU and temperature KT.  The units of HNU and KT
+  must be the same.  The units of the result are determined by
+  the variable B_nu_scale, which must be consistent with the units
+  of HNU and KT.  B_nu_scale is the Stefan-Boltzmann constant
+  (sigma in sigma*T^4) times 15/pi^5.  By default, B_nu_scale is
+  set to 0.05040366 ((jrk/sh)/(cm^2 ster))/keV^4.  (1 jrk/sh =
+  10^17 W)
+  HNU and KT may be arrays, provided they are conformable.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#B_nu_bar">B_nu_bar</a></p>
+</div>
+<div class="docblock"><a name="B_nu_bar"></a><h3>B_nu_bar</h3>
+  <pre>DOCUMENT B_nu_bar(hnub, kt)
+  returns the specific intensity emitted by a black surface at
+  temperature KT in the energy bins whose boundary energies are
+  HNUB.  HNUB must be a 1-D array of bin boundary energies; the
+  units of KT must match the units of KT.  Both are in keV, by
+  default; see B_nu for a discussion of units.
+  The result will have dimensions (numberof(HNUB)-1)-by-dimsof(KT).
+
+  The algorithm has an accuracy of 0.2 percent.  The idea is to
+  difference an analytic approximation to the integral of B_nu.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#B_nu">B_nu</a></p>
+</div>
+<div class="docblock"><a name="default_gate"></a><h3>default_gate</h3>
+  <pre>DOCUMENT default_gate(times)
+  initial value of drat_gate.  Refer to the source code
+  to learn how to write your own gate function, making proper use
+  of drat_start and drat_stop options in addition to the input times.</pre>
+  <p>SEE ALSO: <a href="drat.html#gauss_gate">gauss_gate</a>, <a href="drat.html#drat_gate">drat_gate</a></p>
+</div>
+<div class="docblock"><a name="default_integrate"></a><h3>default_integrate</h3>
+  <pre>DOCUMENT atten_emit= default_integrate(f, mesh, time, irays, slimits)
+  is the default drat_integrate routine.
+  On entry, file F is positioned at TIME, from which MESH has already
+  been read.  IRAYS and SLIMITS are the rays coordinates (in internal
+  format) and integration limits.
+  The result should be ngroup-by-2-by-raydims, where the second index
+  is 1 for the attenuation factor, 2 for the self-emission (specific
+  intensity due to emission along the ray).
+OPTIONS: drat_linear, drat_ocompute, drat_oadjust,
+         drat_emult, drat_amult, drat_omult, drat_nomilne,
+         drat_ekap, drat_akap, drat_glist</pre>
+  <p>SEE ALSO: <a href="drat.html#streak">streak</a></p>
+</div>
+<div class="docblock"><a name="default_ocompute"></a><h3>default_ocompute</h3>
+  <pre>DOCUMENT default_ocompute(f, time)
+  initial value of drat_ocompute.  Extracts drat_akap and drat_ekap
+  from file F, possibly using the subset drat_glist.  TIME is unused.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>drat_akap</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docblock"><a name="drat_amult"></a><h3>drat_amult</h3>
+  <pre>DOCUMENT drat_amult, drat_emult, drat_omult
+  are optional opacity multipliers used by the streak, snap, and
+  streak_save functions.  The multipliers are applied to the
+  opacity and source functions before the transport equation is
+  integrated.  Setting them to [] is the same as setting them
+  to 1.0.
+
+  DRAT_EMULT     - multiply the emissivity by this factor,
+                      without affecting the absorption
+         opac   <- opac
+         source <- source*DRAT_EMULT
+  DRAT_AMULT   - multiply the absorption opacity by this
+                      factor, without affecting the emissivity
+         opac   <- opac*(DRAT_AMULT+1.e-20)
+         source <- source/(DRAT_AMULT+1.e-20)
+  DRAT_OMULT      - multiply BOTH the absorption opacity and the
+                      emissivity by this factor
+         opac   <- opac*DRAT_OMULT
+         source <- source
+
+  DRAT_IREG_ADJ   - list of region numbers to be zeroed.  This
+                    has the same effect as a zero DRAT_OMULT in
+                    the corresponding zones, but is more efficient.
+
+  Since opac and source are mesh-by-ngroup (where mesh is usually
+  kmax-by-lmax), DRAT_EMULT, DRAT_AMULT, DRAT_OMULT can
+  be scalars, mesh arrays, 1-by-1-by-ngroup arrays, or
+  kmax-by-lmax-by-ngroup arrays.  If DRAT_GLIST is non-nil, ngroup
+  should be numberof(DRAT_GLIST), not the total number of groups.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#drat_glist">drat_glist</a>, <a href="drat.html#adjust_ireg">adjust_ireg</a></p>
+</div>
+<div class="docblock"><a name="drat_backlight"></a><h3>drat_backlight</h3>
+  <pre>DOCUMENT func drat_backlight(time) { extern gb, gav;  ... }
+      or drat_backlight= <such a function>
+      or drat_backlight= <array (time-independent backlighter)>
+  supplies a backlighter for the snap function.
+
+  Given ngroup-by-nrays transparency fraction transp and self-emission
+  selfem (in specific intensity units), snap applies the backlighter
+  using:
+     result= backlighter*transp + selfem;
+  where backlighter is drat_backlight(time), if drat_backlight is
+  a function, or drat_backlight itself, if drat_backlight is an
+  array.
+
+  Note that the result (or value) of backlighter_func must be
+  conformable with transp and selfem.  Most commonly, drat_backlight
+  will be a vector of length ngroup -- a Planckian backlighter at
+  temperature Tr would be
+     drat_backlight= B_nu(gav, Tr);
+  -- but that a scalar, 1-by-nrays, or ngroup-by-nrays are all
+  possible.
+
+  Note also that if drat_backlight is a function, the gb and gav
+  arrays read from the history file are available as external
+  variables.</pre>
+  <p>SEE ALSO: <a href="drat.html#snap">snap</a>, <a href="drat.html#drat_channel">drat_channel</a>, <a href="drat.html#drat_gate">drat_gate</a>, <a href="drat.html#apply_funcs">apply_funcs</a></p>
+</div>
+<div class="docblock"><a name="drat_channel"></a><h3>drat_channel</h3>
+  <pre>DOCUMENT func drat_channel(time) { extern gb, gav;  ... }
+      or drat_channel= <such a function>
+      or drat_channel= <array (time-independent channel response)>
+  supplies a channel response for the snap function.
+
+  Use the drat_glist option to select a subset of the groups;
+  drat_channel can be used in addition to drat_glist.
+
+  Given ngroup-by-nrays specific intensity, snap applies the
+  channel response using:
+     result= drat_channel(..,+)*specific_intensity(+,..);
+  if drat_channel is an array, or
+     result= drat_channel(specific_intensity, time);
+  if drat_channel is a function.
+
+  Note that if drat_channel is an array, its final dimension must
+  be of length ngroup.  A multidimensional drat_channel represents
+  more than one channel response function.  Most drat_channel
+  arrays will be proportional to the bin widths gb(dif).  The
+  correct way to interpolate a filter function transmission
+  fraction known at photon enrgies efa is:
+     drat_channel= integ(ffa, efa, f.gb)(dif)
+
+  If you have more than one channel, the first dimension of
+  drat_channel should be the channel number.
+
+  The best way to generate a filter response function is to
+  use Yorick's cold opacity library.  To do this:
+     #include "coldopac/xray.i"
+  This will define the functions cold_opacity and cold_reflect,
+  which you can use to build up channel response functions from
+  filter materials and thicknesses and mirror compositions.
+
+  Note also that if drat_channel is a function, the gb and gav
+  arrays read from the history file are available as external
+  variables.</pre>
+  <p>SEE ALSO: <a href="drat.html#drat_glist">drat_glist</a>, <a href="drat.html#snap">snap</a>, <a href="drat.html#drat_backlight">drat_backlight</a>, <a href="drat.html#drat_gate">drat_gate</a>, <a href="drat.html#apply_funcs">apply_funcs</a></p>
+</div>
+<div class="docblock"><a name="drat_compress"></a><h3>drat_compress</h3>
+  <pre>DOCUMENT func drat_compress(transp, selfem, time)
+      or drat_compress= <such a function>
+  supplies a compression algorithm to the streak function.
+  The drat_compress can return anything, as long as it returns the
+  same shape array (or nil) at each time.  The snap_worker and
+  streak_saver routines are examples of compression algorithms.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>drat_ekap</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_emult</h3><p>SEE: <a href="#drat_amult">drat_amult</a></p>
+</div>
+<div class="docblock"><a name="drat_gate"></a><h3>drat_gate</h3>
+  <pre>DOCUMENT func drat_gate(times) { extern gb, gav;  ... }
+      or drat_gate= <such a function>
+  supplies a gate (to make gated images) for the snap function.
+
+  For a simple gate, the drat_start and drat_stop options will
+  be more efficient than drat_gate.
+
+  The input to drat_gate is the list of dump times; the output
+  should be the "effective dt" for each of these dumps.  This is
+  the product of the actual time interval and the gate transparency;
+  the sum of the return vector is the gate time.  See the default_gate
+  and gaussian_gate functions for examples.
+
+  Note that the gb and gav arrays read from the history file are
+  available as external variables, in case the gate transparency is
+  frequency dependent.</pre>
+  <p>SEE ALSO: <a href="drat.html#snap">snap</a>, <a href="drat.html#drat_backlight">drat_backlight</a>, <a href="drat.html#drat_channel">drat_channel</a>, <a href="drat.html#apply_funcs">apply_funcs</a>, <a href="drat.html#drat_start">drat_start</a>, <a href="drat.html#drat_start">drat_stop</a>, <a href="drat.html#gaussian_gate">gaussian_gate</a>, <a href="drat.html#default_gate">default_gate</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_gav</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_gb</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docblock"><a name="drat_glist"></a><h3>drat_glist</h3>
+  <pre>DOCUMENT drat_glist
+  if non-nil, an index list into the final dimension of akap and ekap.
+  Only these groups will be read from disk and used in the transport
+  calculation.  All other options which depend on "ngroup" or "gav"
+  should use numberof(DRAT_GLIST) or gav(DRAT_GLIST) instead.  The
+  "gb" group boundary array is not well-defined in this case, since
+  the group boundaries need not be contiguous.  The best strategy is
+  to save drat_glist and the original gb array.
+
+  DRAT_GLIST must be a 1-D, 1-origin index list.  (1-origin even if
+  gav and gb are not 1-origin, since use_origins(0) will be in effect
+  when DRAT_GLIST is used.)  The streak function will be most efficient
+  if DRAT_GLIST is strictly increasing.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#drat_channel">drat_channel</a></p>
+</div>
+<div class="docblock"><a name="drat_integrate"></a><h3>drat_integrate</h3>
+  <pre>DOCUMENT func drat_integrate(file, mesh, time, irays, slimits) { ... }
+      or drat_integrate= <such a function>
+  integrate the transport equation.  FILE is positioned to TIME, and
+  MESH has already been read.  IRAYS are the rays in internal format
+  and SLIMITS is the integration limits.  The return value should be
+  ngroup-by-2-by-raydims (where irays is 6-by-raydims).  The default
+  integrator is default_integrate, which handles the drat_ocompute,
+  drat_oadjust, drat_amult, drat_emult, drat_omult, drat_akap,
+  drat_ekap, drat_glist, drat_linear, and drat_nomilne options.
+  Reasons to replace the default routine include: (1) Some or all of
+  the opacities come from a source other than the FILE, e.g.- a second
+  post processing file.  (2) The total number of zones times number of
+  groups is debilitatingly large, even though the number of rays times
+  the number of groups is not.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>drat_ireg</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_ireg_adj</h3><p>SEE: <a href="#drat_amult">drat_amult</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_isymz</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_khold</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_lhold</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docblock"><a name="drat_linear"></a><h3>drat_linear</h3>
+  <pre>DOCUMENT drat_linear, drat_nomilne
+  Set DRAT_LINEAR to 1 in order to use integ_linear to perform the
+  transport integration instead of the default integ_flat.
+  The DRAT_NOMILNE option, if non-nil, is a list of "norad"
+  edges in the (rt,zt) mesh (other than the khold and lhold lines),
+  which is required for the source function point centering operation.
+  DRAT_NOMILNE is a 2 or 3-D array with the format:
+     [[k1,l1], [k2,l2]]
+  or an array of elements of that form, where either k1==k2 or
+  l1==l2.  (Where k is the first index of rt or zt and l is the second.)
+
+  DRAT_NOMILNE must always be a 1-origin index list into the (rt,zt)
+  mesh, independent of the index origins of rt and/or zt.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#integ_linear">integ_linear</a>, <a href="drat.html#integ_flat">integ_flat</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_nomilne</h3><p>SEE: <a href="#drat_linear">drat_linear</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_oadjust</h3><p>SEE: <a href="#drat_ocompute">drat_ocompute</a></p>
+</div>
+<div class="docblock"><a name="drat_ocompute"></a><h3>drat_ocompute</h3>
+  <pre>DOCUMENT func drat_ocompute(file, time) { extern opac, source; ...}
+      or drat_ocompute= <such a function>
+     and func drat_oadjust(file, time) { extern opac, source; ...}
+      or drat_oadjust= <such a function>
+  supply opacities from a source other than the file.drat_akap and
+  file.drat_ekap, or adjust these values.  You need to be cognizant of
+  the drat_glist option (see get_kaps source code).
+  DRAT_OCOMPUTE must set opac and source entirely on its own;
+  DRAT_OADJUST will be called afterwards.
+  The default DRAT_OCOMPUTE (default_ocompute) reads drat_akap and
+  drat_ekap from FILE, optionally extracting drat_glist, and places
+  them in opac and source.
+  DRAT_OADJUST is free to modify opac and source them at will; the
+  default DRAT_OADJUST is nil, which means no adjustment.
+  Any opacity or emissivity multipliers will be applied after
+  DRAT_OADJUST, as will the point centering operation if necessary
+  (DRAT_OADJUST should return zone centered opacities).</pre>
+  
+</div>
+<div class="docsee">
+  <h3>drat_omult</h3><p>SEE: <a href="#drat_amult">drat_amult</a></p>
+</div>
+<div class="docblock"><a name="drat_quiet"></a><h3>drat_quiet</h3>
+  <pre>DOCUMENT drat_quiet
+  By default, Drat prints the total number of records it will process,
+  and the number of the record it is currently processing.  If drat_quiet
+  is non-nil and non-zero, the printout is supressed.</pre>
+  
+</div>
+<div class="docblock"><a name="drat_rt"></a><h3>drat_rt</h3>
+  <pre>DOCUMENT drat_rt, drat_zt, drat_ireg,
+         drat_akap, drat_ekap,
+         drat_isymz,
+         drat_khold, drat_lhold,
+         drat_gb, drat_gav
+  can be set to strings other than "rt", "zt", etc. (their default
+  values) to force the streak, snap, and streak_save routines to use
+  alternative names to look up these quantites in the history file.
+
+  The following 4 variables are NOT optional:
+  (rt, zt) must be a 2-D mesh in cylindrical coordinates
+  akap is a mesh-by-ngroup array of absorption opacities, in units
+       of reciprocal length (1/rt or 1/zt)
+  ekap is a mesh-by-ngroup array of source functions, in (arbitrary)
+       specific intensity units
+  The akap and ekap arrays must be zone centered; the first row and
+  column of akap and ekap will be ignored.
+
+  The remaining variables are all optional -- set the drat_.. variable
+  to [] to ignore them completely.  Otherwise, they will be ignored if
+  they are not present in the history file, and used as follows
+  otherwise:
+  ireg is a mesh-size region number array (zone centered as akap and
+       ekap).  Zones where ireg==0 do not exist.
+  isymz is non-zero if the problem has reflection symmetry about z=0,
+       zero otherwise.  The drat_symmetry option overrides this value.
+  khold and lhold are mesh indices specifying "hold lines" --
+       khold is an index into the first dimension of (rt,zt), and
+       lhold is an index into the second dimension of (rt,zt).
+       These are used only if the drat_linear option is specified.
+  gb and gav are, respectively, the group boundary energies and group
+       center energies.  These are used by the snap and streak_save
+       functions.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#streak">streak</a>, <a href="drat.html#snap">snap</a>, <a href="drat.html#streak_save">streak_save</a>, <a href="drat.html#drat_symmetry">drat_symmetry</a>, <a href="drat.html#drat_linear">drat_linear</a></p>
+</div>
+<div class="docblock"><a name="drat_start"></a><h3>drat_start</h3>
+  <pre>DOCUMENT drat_start, drat_stop
+  if non-nil, specify the minimum and maximum dump times which will
+  be considered by the streak, snap, or streak_save functions.</pre>
+  
+</div>
+<div class="docblock"><a name="drat_static"></a><h3>drat_static</h3>
+  <pre>DOCUMENT drat_static
+  if non-nil, a list of strings representing variable names in the
+  input file which the streak_save function should copy to the
+  output file.</pre>
+  <p>SEE ALSO: <a href="drat.html#streak_save">streak_save</a></p>
+</div>
+<div class="docsee">
+  <h3>drat_stop</h3><p>SEE: <a href="#drat_start">drat_start</a></p>
+</div>
+<div class="docblock"><a name="drat_symmetry"></a><h3>drat_symmetry</h3>
+  <pre>DOCUMENT drat_symmetry
+  set to 2 to force spherical symmetry, 1 to force reflection symmetry
+  about the z=0 plane, 0 to force no symmetry, [] (the default) to
+  use the guess_symmetry function to compute problem symmetry.
+  Special value drat_symmetry=2+khold where k=khold is a hold-line
+  causes ray to reflect at the hold line.  This doesn't mean anything
+  physically (in fact, it is wrong), but may give qualitatively useful
+  pictures in problems that are polar wedges.</pre>
+  
+</div>
+<div class="docsee">
+  <h3>drat_zt</h3><p>SEE: <a href="#drat_rt">drat_rt</a></p>
+</div>
+<div class="docblock"><a name="find_boundary"></a><h3>find_boundary</h3>
+  <pre>DOCUMENT boundary= find_boundary(mesh)
+      or boundary= find_boundary(mesh, region, sense)
+  returns an array of 4 pointers representing the boundary of the
+  MESH, or of a particular REGION of the MESH, with a particular
+  SENSE -- 0 for counterclockwise in the (r,z)-plane, 1 for
+  clockwise.  The returned arrays are:
+     *boundary(1)   zone index list -- always 1-origin values
+     *boundary(2)   side list 0, 1, 2, or 3
+                    side 0 is from point zone to zone-1, side 1 is
+                    from zone-1 to zone-imax-1
+     *boundary(3)   z values of boundary points
+     *boundary(4)   r values of boundary points</pre>
+  <p>SEE ALSO: <a href="drat.html#form_mesh">form_mesh</a>, <a href="drat.html#update_mesh">update_mesh</a></p>
+</div>
+<div class="docblock"><a name="form_mesh"></a><h3>form_mesh</h3>
+  <pre>DOCUMENT form_mesh(zsym, khold, lhold)
+  returns an opaque "mesh" object, which will hold rt, zt, ireg,
+  and a boundary edge list.  This opaque mesh object is required
+  as an input to the integ_flat and integ_linear routines.
+
+  ZSYM is 2 for spherical symmetry, 1 for z=0 reflection symmetry,
+       or 0 for no symmetry
+
+  KHOLD and LHOLD are the 1-origin indices of "hold" lines in the
+       mesh, or 0 if none.  This information is used only during the
+       pcen_source operation before integ_linear is called.</pre>
+  <p>SEE ALSO: <a href="drat.html#update_mesh">update_mesh</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#integ_linear">integ_linear</a></p>
+</div>
+<div class="docblock"><a name="gaussian_gate"></a><h3>gaussian_gate</h3>
+  <pre>DOCUMENT gaussian_gate(t0, tsigma, max_trans)
+  sets the drat_gate for the snap function to be a Gaussian
+  centered at time T0, with sigma TSIGMA, and maximum transmission
+  fraction MAX_TRANS.</pre>
+  <p>SEE ALSO: <a href="drat.html#snap">snap</a>, <a href="drat.html#drat_gate">drat_gate</a></p>
+</div>
+<div class="docblock"><a name="gauss_gate"></a><h3>gauss_gate</h3>
+  <pre>DOCUMENT gauss_gate(times)
+  gate function used by gaussian_gate.  Refer to the source code
+  to learn how to write your own gate function, making proper use
+  of drat_start and drat_stop options in addition to the input times.</pre>
+  <p>SEE ALSO: <a href="drat.html#gaussian_gate">gaussian_gate</a>, <a href="drat.html#drat_gate">drat_gate</a></p>
+</div>
+<div class="docblock"><a name="gauss_int"></a><h3>gauss_int</h3>
+  <pre>DOCUMENT gauss_int(t)
+  returns time integral of Gaussian specified in call to gaussian_gate.</pre>
+  
+</div>
+<div class="docblock"><a name="get_ray_path"></a><h3>get_ray_path</h3>
+  <pre>DOCUMENT ray_info= get_ray_path(path, rt, zt)
+  where PATH is one element of an array returned by track_rays,
+  returns the points where the ray cut the edges of the mesh (ZT, RT).
+  The returned RAY_INFO has two components: RAY_INFO(,1) is the z
+  coordinates and RAY_INFO(,2) is the r coordinates.</pre>
+  <p>SEE ALSO: <a href="drat.html#track_rays">track_rays</a></p>
+</div>
+<div class="docblock"><a name="get_std_limits"></a><h3>get_std_limits</h3>
+  <pre>DOCUMENT get_std_limits(rays, slimits)
+  returns slimits suitable for internal routines: 2-by-nrays,
+  with s=0 at point of closest approach to origin</pre>
+  
+</div>
+<div class="docblock"><a name="guess_symmetry"></a><h3>guess_symmetry</h3>
+  <pre>DOCUMENT guess_symmetry, f
+      or guess_symmetry(f)
+  guesses the symmetry of the problem in the dump file F based on
+  the variables f.isymz, f.rt, and f.zt.
+  If called as a subroutine, prints one of:
+  "no symmetry", "z=0 reflection symmetry", or "spherical symmetry"
+  If called as a function, returns 0, 1, or 2, respectively.</pre>
+  
+</div>
+<div class="docblock"><a name="integ_flat"></a><h3>integ_flat</h3>
+  <pre>DOCUMENT integ_flat(opac, source, rays, mesh, slimits)
+      or integ_flat(opac, source, ray_paths)
+  returns ngroup-by-2-by-nrays result, where result(,1,..) is
+  the transparency factors, and result(,2,..) is the self-emission
+  for each group on each ray.  The input OPAC and SOURCE are the
+  opacity (an inverse length) and the source function (a specific
+  intensity).  They are mesh-by-ngroups zone centered arrays.  The
+  result has the same units as SOURCE.
+  In the second form, RAY_PATHS was returned by the track_rays
+  function.</pre>
+  <p>SEE ALSO: <a href="drat.html#integ_linear">integ_linear</a>, <a href="drat.html#track_rays">track_rays</a>, <a href="drat.html#form_mesh">form_mesh</a>, <a href="drat.html#streak">streak</a>, <a href="drat.html#snap">snap</a></p>
+</div>
+<div class="docblock"><a name="integ_linear"></a><h3>integ_linear</h3>
+  <pre>DOCUMENT integ_linear(opac, source, rays, mesh, slimits)
+      or integ_linear(opac, source, ray_paths)
+  returns ngroup-by-2-by-nrays result, where result(,1,..) is
+  the transparency factors, and result(,2,..) is the self-emission
+  for each group on each ray.  The input OPAC and SOURCE are the
+  opacity (an inverse length) and the source function (a specific
+  intensity).  They are mesh-by-ngroups arrays; OPAC is zone centered,
+  while SOURCE is point centered (using pcen_source).  The result
+  has the same units as SOURCE.
+  In the second form, RAY_PATHS was returned by the track_rays
+  function.
+  The integ_linear routine assumes that the SOURCE function varies
+  linearly between the entry and exit points from each zone.  This
+  assumption is poor near the turning point, and causes the result
+  to be a discontinuous function of the ray coordinates, unlike the
+  integ_flat result.</pre>
+  <p>SEE ALSO: <a href="drat.html#pcen_source">pcen_source</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#track_rays">track_rays</a>, <a href="drat.html#form_mesh">form_mesh</a>, <a href="drat.html#streak">streak</a>, <a href="drat.html#snap">snap</a></p>
+</div>
+<div class="docblock"><a name="is_present"></a><h3>is_present</h3>
+  <pre>DOCUMENT is_present(get_vars(f), name)
+  returns 1 if variable NAME is present in file F, 0 if not.</pre>
+  
+</div>
+<div class="docblock"><a name="pcen_source"></a><h3>pcen_source</h3>
+  <pre>DOCUMENT pcen_source, opac, source, mesh, drat_nomilne
+  point centers the SOURCE array (in place) using a complicated
+  algorithm involving the OPAC and MESH (from form_mesh and update_mesh).
+  If non-nil, DRAT_NOMILNE must have the same format as the
+  drat_nomilne option.</pre>
+  
+</div>
+<div class="docblock"><a name="reset_options"></a><h3>reset_options</h3>
+  <pre>DOCUMENT reset_options
+      or reset_options, 1
+  resets all options for the streak, snap, and streak_save functions
+  to their default values.  With a non-zero, non-nil argument, only
+  resets options which are currently nil, but have non-nil defaults.</pre>
+  
+</div>
+<div class="docblock"><a name="set_tolerances"></a><h3>set_tolerances</h3>
+  <pre>DOCUMENT set_tolerances()
+      or old_tols= set_tolerances([tol1, tol2, lost_tol])
+  returns the current tolerances for the ray tracking.  Initially,
+  these are [1.e-3, 1.e-6, 0.0].  In the second form, sets new
+  tolerances.  If any of TOL1, TOL2, or LOST_TOL is zero, that
+  tolerance is restored to its default value.  If TOL1 is less
+  than zero, the root polishing operation which requires TOL1
+  and TOL2 is not done at all.</pre>
+  <p>SEE ALSO: <a href="drat.html#track_rays">track_rays</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#integ_linear">integ_linear</a>, <a href="drat.html#streak">streak</a>, <a href="drat.html#snap">snap</a></p>
+</div>
+<div class="docblock"><a name="snap"></a><h3>snap</h3>
+  <pre>DOCUMENT snap(f, rays)
+      or snap(f, rays, slimits)
+  returns the time-integrated specific intensity for the rad-hydro
+  problem dumped in file F, on the specified RAYS, with the
+  specified limits SLIMITS on the transport integrals.
+
+  The first dimension of RAYS may be length 3, 5, or 6 to represent
+  the ray(s) in TDG/DIRT coordinates (x,y,theta), "best" coordinates
+  (x,y,z,theta,phi), or internal coordinates (cos,sin,y,z,x,r),
+  respectively.  The remaining dimensions of RAYS, if any, will be
+  called "nrays" below.
+
+  The SLIMITS parameter, if present, is the value of the s-coordinate
+  -- position along the ray -- at which to start and stop the
+  integration of the transport equation.  SLIMITS may be nil, a 1-D
+  array of length 2, or a 2-by-nrays array.  Each component of SLIMITS
+  is [s_start, s_stop]; if s_stop<s_start, the integration will run
+  from minus infinity to plus infinity, which is the default.  The
+  s-coordinate is measured from the reference point if RAYS is given
+  in "best" or internal format, or from the point of closest approach
+  to the origin r=z=0 if RAYS is given in TDG/DIRT format.
+
+  The variables rt, zt, akap, and ekap must be present in the
+  history file F, and represent, respectively, cylindrical coordinate,
+  axial coordinate, absorption opacity, and source function.  The mesh
+  (rt,zt) is a kmax-by-lmax array.  The opacity akap must be in units
+  of inverse length (e.g.- 1/rt or 1/zt); its dimensions should be
+  kmax-by-lmax-by-ngroup.  The source function ekap must be in units
+  of specific intensity -- power per unit area per unit solid angle
+  per unit spectrum, or "B nu units"; ekap must have the same dimensions
+  as akap.  (The akap and ekap arrays may be padded so that they are
+  actually (longer than kmax*lmax)-by-ngroup to handle outdated storage
+  formats.)  The names "rt", "zt", "akap", and "ekap" may be changed
+  by setting the drat_rt, drat_zt, drat_akap, and drat_ekap options.
+
+  The result has dimension ngroup-by-nrays, where nrays is
+  related to the dimensions of RAYS as above, and NGROUP is
+  the number of groups in akap and ekap.
+
+  Many external variables modify the behavior of streak.  Each of
+  these options is separately documented.  The drat_glist option
+  can be used to select a subset of ngroup, which can obviously
+  reduce the processing time.  The drat_backlight and drat_gate
+  options allow you to specify backlighter and gating functions,
+  respectively.
+
+  If you set any options, be careful.  The reset_options functions
+  clears all options back to their default values;
+OPTIONS: drat_rt, drat_zt, drat_akap, drat_ekap,
+         drat_ireg, drat_isymz, drat_khold, drat_lhold,
+         drat_gb, drat_gav,
+         drat_amult, drat_emult, drat_omult, drat_ireg_adj,
+         drat_start, drat_stop, drat_symmetry, drat_glist,
+         drat_linear, drat_nomilne,
+         drat_backlight, drat_gate, drat_channel</pre>
+  <p>SEE ALSO: <a href="drat.html#reset_options">reset_options</a>, <a href="drat.html#streak">streak</a>, <a href="drat.html#streak_save">streak_save</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#integ_linear">integ_linear</a>, <a href="drat.html#streak_times">streak_times</a>, <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a></p>
+</div>
+<div class="docblock"><a name="snap_worker"></a><h3>snap_worker</h3>
+  <pre>DOCUMENT snap_worker(transp, selfem, time)
+  The snap function actually works by replacing the drat_compress
+  with snap_worker.  See the source for snap in drat.i for details.</pre>
+  
+</div>
+<div class="docblock"><a name="streak"></a><h3>streak</h3>
+  <pre>DOCUMENT streak(f, rays)
+      or streak(f, rays, slimits)
+  returns the transparency and self-emission as functions of time for
+  the rad-hydro problem dumped in file F, on the specified RAYS, with
+  the specified limits SLIMITS on the transport integrals.
+
+  The first dimension of RAYS may be length 3, 5, or 6 to represent
+  the ray(s) in TDG/DIRT coordinates (x,y,theta), "best" coordinates
+  (x,y,z,theta,phi), or internal coordinates (cos,sin,y,z,x,r),
+  respectively.  The remaining dimensions of RAYS, if any, will be
+  called "nrays" below.
+
+  The SLIMITS parameter, if present, is the value of the s-coordinate
+  -- position along the ray -- at which to start and stop the
+  integration of the transport equation.  SLIMITS may be nil, a 1-D
+  array of length 2, or a 2-by-nrays array.  Each component of SLIMITS
+  is [s_start, s_stop]; if s_stop<s_start, the integration will run
+  from minus infinity to plus infinity, which is the default.  The
+  s-coordinate is measured from the reference point if RAYS is given
+  in "best" or internal format, or from the point of closest approach
+  to the origin r=z=0 if RAYS is given in TDG/DIRT format.
+
+  The variables rt, zt, akap, and ekap must be present in the
+  history file F, and represent, respectively, cylindrical coordinate,
+  axial coordinate, absorption opacity, and source function.  The mesh
+  (rt,zt) is a kmax-by-lmax array.  The opacity akap must be in units
+  of inverse length (e.g.- 1/rt or 1/zt); its dimensions should be
+  kmax-by-lmax-by-ngroup.  The source function ekap must be in units
+  of specific intensity -- power per unit area per unit solid angle
+  per unit spectrum, or "B nu units"; ekap must have the same dimensions
+  as akap.  (The akap and ekap arrays may be padded so that they are
+  actually (longer than kmax*lmax)-by-ngroup to handle outdated storage
+  formats.)  The names "rt", "zt", "akap", and "ekap" may be changed
+  by setting the drat_rt, drat_zt, drat_akap, and drat_ekap options.
+  The ireg array, if present in F, is also used.
+
+  The result has dimension ngroup-by-2-by-nrays-by-ntimes, where
+  ntimes is the number of history records in the file F, nrays is
+  related to the dimensions of RAYS as above, and NGROUP is
+  the number of groups in akap and ekap.  The first component of
+  the length-2 second dimension is the transparency (between 0 and 1),
+  and the second component is the self-emission (which has the same
+  units as ekap, specific intensity).
+
+  Many external variables modify the behavior of streak.  Each of
+  these options is separately documented.  The drat_glist option
+  can be used to select a subset of ngroup, which can obviously
+  reduce the processing time.  The drat_compress option can be used
+  to reduce the size of the result, so that the amount of data
+  saved at each time is less than ngroup-by-2-by-nrays.
+
+  If you set any options, be careful.  The reset_options functions
+  clears all options back to their default values;
+OPTIONS: drat_rt, drat_zt, drat_ireg, drat_akap, drat_ekap,
+         drat_ireg, drat_isymz, drat_khold, drat_lhold,
+         drat_amult, drat_emult, drat_omult, drat_ireg_adj,
+         drat_start, drat_stop, drat_symmetry, drat_glist,
+         drat_linear, drat_nomilne,
+         drat_integrate, drat_compress, drat_quiet
+
+  The include file multi.i defines an extension to the streak function
+  for allowing the opacities and emissivities to be read from several
+  history files.  Include multi.i, then get help on multi_streak.
+</pre>
+  <p>SEE ALSO: <a href="drat.html#reset_options">reset_options</a>, <a href="drat.html#snap">snap</a>, <a href="drat.html#streak_save">streak_save</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#integ_linear">integ_linear</a>, <a href="drat.html#streak_times">streak_times</a>, <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a>, <a href="drat.html#apply_funcs">apply_funcs</a></p>
+</div>
+<div class="docblock"><a name="streak_save"></a><h3>streak_save</h3>
+  <pre>DOCUMENT streak_save, outname, f, rays
+      or streak_save, outname, f, rays, slimits
+      or streak_save, outfile, f, rays, slimits
+  is the same as the streak function, except that the results of
+  the transport calculation are placed into a PDB file called
+  OUTNAME, instead of being accumulated in memory.  All of the
+  options for the streak function are available, except for
+  drat_compress (which is set to streak_saver).
+
+  If the first argument is OUTFILE, a file variable instead of a
+  file name, then that file is used for output.  You can create
+  OUTFILE and add static variables to it with save (but do NOT call
+  add_record) which streak_save otherwise wouldn't know about.
+
+  The output file has history records at the same times as the
+  input file.  Each record contains "time" (a double scalar),
+  and the two arrays "transp", the transparency (between 0 and 1),
+  and "selfem", the self emission (which has the same units as
+  ekap in the file F).  The dimensions of transp and selfem
+  are ngroup-by-2-by-nrays (where nrays represents zero or more
+  dimensions, copied from the RAYS input array).  The RAYS and
+  SLIMITS inputs are placed into the output file as non-record
+  variables, and any variables in the drat_static option are
+  copied form F to the output file.  The gb and gav variables
+  are copied from F into the output file as well.  If the drat_glist
+  option is present, that is stored in the output file also.
+
+OPTIONS: all options available for streak except drat_compress,
+         drat_gb, drat_gav, drat_static</pre>
+  <p>SEE ALSO: <a href="drat.html#streak">streak</a>, <a href="drat.html#snap">snap</a></p>
+</div>
+<div class="docblock"><a name="streak_saver"></a><h3>streak_saver</h3>
+  <pre>DOCUMENT streak_saver(transp, selfem, time)
+  The streak_save function actually works by replacing the drat_compress
+  with streak_saver.  See the source for streak_saver in drat.i for
+  details.</pre>
+  
+</div>
+<div class="docblock"><a name="streak_times"></a><h3>streak_times</h3>
+  <pre>DOCUMENT streak_times(f)
+  returns the times from file F whic lie between the optional
+  drat_start and drat_stop.</pre>
+  <p>SEE ALSO: <a href="drat.html#drat_start">drat_start</a>, <a href="drat.html#drat_start">drat_stop</a></p>
+</div>
+<div class="docblock"><a name="track_rays"></a><h3>track_rays</h3>
+  <pre>DOCUMENT ray_paths= track_rays(rays, mesh, slimits)
+  returns array of Ray_Path structs representing the progress of
+  RAYS through the MESH between the given SLIMITS.</pre>
+  <p>SEE ALSO: Ray_Path, <a href="drat.html#integ_flat">integ_flat</a>, get_ray-path</p>
+</div>
+<div class="docblock"><a name="update_mesh"></a><h3>update_mesh</h3>
+  <pre>DOCUMENT update_mesh, mesh, rt, zt
+      or update_mesh, mesh, rt, zt, ireg
+  updates the opaque MESH object to reflect a new RT, ZT, and
+  (optionally) IREG.  The boundary edges are recomputed and stored
+  in MESH, as well.</pre>
+  <p>SEE ALSO: <a href="drat.html#form_mesh">form_mesh</a>, <a href="drat.html#integ_flat">integ_flat</a>, <a href="drat.html#integ_linear">integ_linear</a></p>
+</div>

@@ -1,0 +1,123 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="plsys"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_81.html#style_002ei" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5.2 style.i functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_83.html#ticks-and-labels" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.4 Ticks and labels" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Coordinate-systems"></a>
+<h3 class="subsection">3.5.3 Coordinate systems</h3>
+
+<p>Most Yorick graphics styles define only a single coordinate system.
+In other words, there is a single transformation between the world
+coordinates of your data, and the normalized device coordinates (NDC)
+on the sheet of paper or the screen.
+</p>
+<p>The world-to-NDC transformation maps the x-y limits of your data to a
+rectangle in NDC space, called the viewport.  Normally, Yorick will
+not draw any part of your data lying outside the viewport.  However,
+you can tell Yorick to use raw NDC coordinates without any
+transformation by means of the plsys command:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plsys, 0
+</pre></td></tr></table>
+
+<p>tells Yorick not to transform data from subsequent plotting
+primitives.  When you are plotting to &ldquo;system 0&rdquo;, your data will not
+be clipped to the viewport.  In NDC coordinates, the bottom left
+corner of the 8.5 by 11 sheet of paper is always (0,0), and 0.0013 NDC
+unit is exactly one printer&rsquo;s point, or 1/72.27 inch.
+</p>
+<p>You can switch back to the default &ldquo;system 1&rdquo; plotting with:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plsys, 1
+</pre></td></tr></table>
+
+<p>The fma command also switches you back to &ldquo;system 1&rdquo; as a side effect.
+Switching windows with the window command puts you in the coordinate
+system where you most recently plotted.  Note that plsys returns the old
+system number if you call it as a function; together with the
+current_window function you can write new functions which do something
+elsewhere, then return to wherever you were before.
+</p>
+<p>Remember that there is a special relation between the window on your
+screen and an 8.5 by 11 inch sheet of paper; the bottom left corner of
+the visible screen window is not usually at (0,0) in NDC.  Instead,
+the NDC point (0.3993,0.6342) in portrait mode &ndash; or (0.5167,0.3993)
+in landscape mode &ndash; remains at the center of your screen window no
+matter how you resize it.  (The points make more sense in inches:
+(4.25,6.75) &ndash; centered horizontally and an equal distance down from
+the top of the page for portrait orientation, and (5.50,4.25) &ndash;
+centered on the page for landscape orientation.)  Furthermore, the
+screen scale is always 75 dpi or 100 dpi, that is, either 798.29
+pixels per NDC unit or 1064.38 pixels per NDC unit.
+</p>
+<p>(I apologize to European users for not making explicit provision for
+A4 paper.  If you use Yorick&rsquo;s eps command for serious, high quality
+output, the page positioning is not an issue.  For rough draft or
+working plots, I hope the fact that Yorick produces off-center
+pictures on A4 paper will not hurt you too much.  An inch,
+incidentally, is 2.54 cm.)
+</p>
+<p>You can also create a graphics style with multiple world coordinate
+systems.  For example, you could define a style with four viewports
+in a single window, in a two by two array.  If your style has more
+than one coordinate system, you use
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">plsys, i
+</pre></td></tr></table>
+
+<p>to switch among them, where i can be 0, 1, 2, up to the number of
+coordinate systems in your style.  Each coordinate system has its own
+limits, logxy, and gridxy parameters.  However, all systems in a
+window must share a single palette (many screens don&rsquo;t have more
+colors than what you need for one picture anyway).  The limits, logxy,
+and gridxy commands are meaningless in &ldquo;system 0&rdquo;, since there is no
+coordinate transformation there.  If invoked as a function, plsys will
+return the current coordinate system, which allows you to do something
+in another system, then reset to the original system.
+</p>
+<p>For interactive use, I find multiple coordinate systems too confusing.
+Instead, I pop up multiple windows when I need to see several pictures
+simultaneously.  For non-interactive use, you should consider making
+separate Yorick pictures, saving them with the eps command, then
+importing the separate pieces into a page layout program to combine
+them.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_81.html#style_002ei" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5.2 style.i functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_83.html#ticks-and-labels" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.5.4 Ticks and labels" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

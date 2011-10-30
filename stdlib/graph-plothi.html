@@ -1,0 +1,133 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plothi (in graph.i) - higher level plotting functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>C</h3>
+    <p><a href="graph-plothi.html#color_bar">color_bar</a></p>
+    <h3>P</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plothi.html#pleb">pleb</a></p>
+    <p><a href="graph-plothi.html#plfc">plfc</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plothi.html#plmk">plmk</a></p>
+    <p><a href="graph-plothi.html#plmk_default">plmk_default</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="color_bar"></a><h3>color_bar</h3>
+  <pre>DOCUMENT color_bar
+      or color_bar, levs, colors
+  Draw a color bar below the current coordinate system.  If LEVS is
+  not specified uses plfc_levs (set by previous call to plfc).  If
+  COLORS is specified, it should have one more value than LEVS,
+  otherwise equally spaced colors are chosen, or plfc_colors if
+  plfc_levs was used.  With the vert=1 keyword the color bar appears
+  to the left of the current coordinate system (vert=0 is default).
+  By default, color_bar will attempt to label some of the color
+  interfaces.  With the labs= keyword, you can force the labelling
+  algorithm as follows: labs=0 supresses all labels, labs=n forces
+  a label at every nth interface, labs=[i,n] forces a label at every
+  nth interface starting from interface i (0<=i<=numberof(LEVS)).
+  You can use the adjust= keyword to move the bar closer to (adjust<0)
+  or further from (adjust>0) the viewport, and the height= keyword to
+  set the height of any labels (default 14 points).</pre>
+  <p>SEE ALSO: <a href="graph-plothi.html#plfc">plfc</a></p>
+</div>
+<div class="docblock"><a name="pleb"></a><h3>pleb</h3>
+  <pre>DOCUMENT pleb, y, x, dx=dx, dy=dy
+  plots Y vs. X with error bars.
+
+  Uncertainty on X and/or Y are specified with the dx= and dy= keywords.
+  X and Y must have same dimensions, dx= and dy= must be conformable
+  with X (or Y).  Either dx or dy may be nil for no error bar in that
+  direction.  Scalar dx or dy gives equal error bars at all points,
+  dimsof(dx)==dimsof(X), etc., gives different error bar at each point.
+  dx= and dy= may also have a trailing dimension of length 2 in order
+  to get asymmetric error bars; dx(..,1) is the lower error bar length,
+  and dx(..,2) is the upper error bar length in that case, etc.
+
+  If marker=, msize=, or width= is specified, markers are positioned
+  at X, Y using plmk.  Use the mfill=1 keyword to get filled markers
+  (width>=10. in plmk; width= refers to error bar width in pleb).
+
+EXAMPLE:
+   x = [0, 1, 2, 3];
+   y = [0, 2, 4, 7];
+   pleb, y, x, dx=0.2, dy=[0.3, 0.4, 0.5, 0.3], mfill=1;
+      Uncertainties on dx are the same for all X, and those
+      on Y are different for each value of Y.  Filled markers
+      will be displayed at (X, Y).
+
+KEYWORDS: color, width, marker, msize
+   dx     uncertainty on X
+   dy     uncertainty on Y
+</pre>
+  <p>SEE ALSO: <a href="graph-plothi.html#plmk">plmk</a>, <a href="graph-plotter.html#pldj">pldj</a></p>
+</div>
+<div class="docblock"><a name="plfc"></a><h3>plfc</h3>
+  <pre>DOCUMENT plfc, z, y, x, levs=z_values
+      or plfc, z, y, x, ireg, levs=z_values
+
+  fills contours of Z on the mesh Y versus X.  Y, X, and IREG are
+  as for plm.  The Z array must have the same shape as Y and X.
+  The function being contoured takes the value Z at each point
+  (X,Y) -- that is, the Z array is presumed to be point-centered.
+
+  The LEVS keyword is a list of the values of Z at which you want
+  contour curves.  These curves divide the mesh into numberof(LEVS)+1
+  regions, each of which is filled with a solid color.  If LEVS is
+  nil, up to 19 "nice" equally spaced level values spanning the
+  range of Z are selected.  The level values actually used are
+  always output to the external variable plfc_levs.
+
+  If you specify levs=, you may also specify colors= a list of
+  colors of length numberof(LEVS)+1.  The colors should be indices
+  into the current palette.  If you do not specify them, equally
+  spaced colors are chosen.
+
+  The following keywords are legal (each has a separate help entry):
+KEYWORDS: triangle, region</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plv">plv</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotter.html#plt">plt</a>, <a href="graph-plotter.html#pldj">pldj</a>, <a href="graph-plotter.html#plfp">plfp</a>, <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plothi.html#color_bar">color_bar</a>, <a href="graph-plotmisc.html#spann">spann</a>, <a href="graph-plotmisc.html#contour">contour</a>, <a href="graph-plotlim.html#limits">limits</a>, <a href="graph-plotlim.html#logxy">logxy</a>, <a href="graph-plotlim.html#range">range</a>, <a href="graph-plotout.html#fma">fma</a>, <a href="graph-plotout.html#hcp">hcp</a></p>
+</div>
+<div class="docblock"><a name="plmk"></a><h3>plmk</h3>
+  <pre>DOCUMENT plmk, y,x
+
+  Make a scatter plot of the points Y versus X.  If X is nil,
+  it defaults to indgen(numberof(Y)).  By default, the marker
+  cycles through 7 predefined marker shapes.  You may specify a shape
+  using the marker= keyword, line width using the width= keyword (you
+  get solid fills for width>=10), color using the color= keyword.
+  You can also use the msize= keyword to scale the marker (default
+  msize=1.0).  You can change the default width, color, or msize
+  using the plmk_default function.
+
+  The predefined marker= values are:
+
+  marker=
+    1        square
+    2        cross
+    3        triangle
+    4        circle
+    5        diamond
+    6        cross (rotated 45 degrees)
+    7        triangle (upside down)
+
+  You may also put marker=[xm,ym] where xm and ym are vectors
+  of NDC coordinates to design your own custom marker shapes.
+</pre>
+  <p>SEE ALSO: <a href="graph-plothi.html#plmk_default">plmk_default</a>, <a href="graph-plotter.html#plg">plg</a>, <a href="graph-plothi.html#pleb">pleb</a></p>
+</div>
+<div class="docblock"><a name="plmk_default"></a><h3>plmk_default</h3>
+  <pre>DOCUMENT plmk_default, color=color, msize=msize, width=width
+
+  sets default color, msize, and width values for plmk.  Use
+  width=10 to get solid fills.  With no parameters, plmk_default
+  restores the initial default values.
+</pre>
+  <p>SEE ALSO: <a href="graph-plothi.html#plmk">plmk</a></p>
+</div>

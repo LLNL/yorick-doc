@@ -1,0 +1,64 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package plwf (in plwf.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>L</h3>
+    <p><a href="plwf.html#lightwf">lightwf</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>P</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="plwf.html#plwf">plwf</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="lightwf"></a><h3>lightwf</h3>
+  <pre>DOCUMENT lightwf, cmax
+  Sets the cmax= parameter interactively, assuming the current
+  3D display list contains the result of a previous plwf call.
+  This changes the color of the brightest surface in the picture.
+  The darkest surface color can be controlled using the ambient=
+  keyword to light3.</pre>
+  <p>SEE ALSO: <a href="plwf.html#plwf">plwf</a>, <a href="pl3d.html#light3">light3</a></p>
+</div>
+<div class="docblock"><a name="plwf"></a><h3>plwf</h3>
+  <pre>DOCUMENT plwf, z
+      or plwf, z, y,x
+
+  plots a 3-D wire frame of the given Z array, which must have the
+  same dimensions as the mesh (X, Y).  If X and Y are not given, they
+  default to the first and second indices of Z, respectively.
+  The drawing order of the zones is determined by a simple "painter's
+  algorithm", which works fairly well if the mesh is reasonably near
+  rectilinear, but can fail even then if the viewpoint is chosen to
+  produce extreme fisheye perspective effects.  Look at the resulting
+  plot carefully to be sure the algorithm has correctly rendered the
+  model in each case.
+
+KEYWORDS: fill   -- optional colors to use (default is to make zones
+                    have background color), same dimension options as
+                    for z argument to plf function
+          shade  -- set non-zero to compute shading from current
+                    3D lighting sources
+          edges  -- default is 1 (draw edges), but if you provide fill
+                    colors, you may set to 0 to supress the edges
+          ecolor, ewidth  -- color and width of edges
+          cull   -- default is 1 (cull back surfaces), but if you want
+                    to see the "underside" of the model, set to 0
+          scale  -- by default, Z is scaled to "reasonable" maximum
+                    and minimum values related to the scale of (X,Y).
+                    This keyword alters the default scaling factor, in
+                    the sense that scale=2.0 will produce twice the
+                    Z-relief of the default scale=1.0.
+          cmax   -- the ambient= keyword in light3 can be used to
+                    control how dark the darkest surface is; use this
+                    to control how light the lightest surface is
+                    the lightwf routine can change this parameter
+                    interactively
+</pre>
+  <p>SEE ALSO: <a href="plwf.html#lightwf">lightwf</a>, <a href="graph-plotter.html#plm">plm</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="pl3d.html#orient3">orient3</a>, <a href="pl3d.html#light3">light3</a>, <a href="pl3d.html#window3">window3</a>, <a href="pl3d.html#limit3">limit3</a></p>
+</div>

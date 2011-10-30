@@ -1,0 +1,394 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package hex (in hex.i) - 3D transport equation solver </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="hex.html#bi_dir">bi_dir</a></p>
+    <h3>C</h3>
+    <p><a href="hex.html#conv3_rays">conv3_rays</a></p>
+    <p><a href="hex.html#cs_adjust">cs_adjust</a></p>
+    <p><a href="hex.html#c_adjust">c_adjust</a></p>
+    <h3>H</h3>
+    <p><a href="hex.html#hex5_track">hex24b_track</a></p>
+    <p><a href="hex.html#hex5_track">hex24f_track</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="hex.html#hex5_track">hex5_track</a></p>
+    <p><a href="hex.html#hex_mesh">hex_mesh</a></p>
+    <p><a href="hex.html#hex_mesh2">hex_mesh2</a></p>
+    <p><a href="hex.html#hex_query">hex_query</a></p>
+    <p><a href="hex.html#hydra_mesh">hydra_mesh</a></p>
+    <p><a href="hex.html#hydra_start">hydra_start</a></p>
+    <h3>M</h3>
+    <p><a href="hex.html#make_sphere">make_sphere</a></p>
+    <h3>P</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="hex.html#pic3_rays">pic3_rays</a></p>
+    <h3>R</h3>
+    <p><a href="hex.html#reg_track">reg_track</a></p>
+    <h3>T</h3>
+    <p><a href="hex.html#track_combine">track_combine</a></p>
+    <p><a href="hex.html#track_integ">track_integ</a></p>
+    <p><a href="hex.html#track_reduce">track_reduce</a></p>
+    <p><a href="hex.html#track_solve">track_solve</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="bi_dir"></a><h3>bi_dir</h3>
+  <pre>DOCUMENT nlist = bi_dir(tracker, mesh, rays, slimits, c, s)
+
+  Perform hexX_track and track_reduce on a ray that enters
+  the problem at the given point on the ray.  This requires
+  tracking the ray in both directions from the given point,
+  hence this function name indicating bi-directional tracking.
+  This is unnecessary when the entry point search was over
+  the problem boundary, or when the SLIMITS for the rays
+  always lie in one direction relative to the starting point.
+
+  TRACKER is the function used to track the rays, normally
+    one of hex5_track, hex_24f_track, or hex24b_track.
+  MESH is the problem mesh returned by hex_mesh or hydra_mesh;
+    it should be generated using the entry option that finds
+    the cell containing the given point on the ray.
+  RAYS is the 3-by-nrays-by-2 array of rays, as for hex5_track
+  SLIMITS is nil or the ray tracking limits as for track_reduce
+  C, S, together with NLIST are the output arrays, as for
+    track_reduce
+</pre>
+  <p>SEE ALSO: <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#hex5_track">hex24f_track</a>, <a href="hex.html#hex5_track">hex24b_track</a>, <a href="hex.html#track_combine">track_combine</a></p>
+</div>
+<div class="docblock"><a name="conv3_rays"></a><h3>conv3_rays</h3>
+  <pre>DOCUMENT conv3_rays(rays)
+
+  convert [p,q] representation to or from best_rays representation.
+  If the first dimension of RAYS is 3, returns 5-by-raydims array
+  of best_rays; if first dimension of RAYS is 5, returns 3-by-raydims-
+  by-2 [p,q] for use with hex5_track.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#pic3_rays">pic3_rays</a>, <a href="rays.html#best_rays">best_rays</a></p>
+</div>
+<div class="docblock"><a name="cs_adjust"></a><h3>cs_adjust</h3>
+  <pre>DOCUMENT nlist= cs_adjust(nlist, c, s, ireg)
+
+  adjust NLIST, C, S returned from track_reduce to remove transits
+  of cells for which IREG == 0.  Can be called before or after
+  c_adjust, depending on layout of IREG.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#c_adjust">c_adjust</a></p>
+</div>
+<div class="docblock"><a name="c_adjust"></a><h3>c_adjust</h3>
+  <pre>DOCUMENT c_adjust, c, mesh
+      or c_adjust, c, mesh, 1
+      or c= c_adjust(c, mesh, how)
+
+  adjust the cell number array C returned by track_reduce to
+  allow for a different layout of cell arrays than the one assumed
+  by the tracking routines.  Two HOW values are currently
+  supported: 0 (or nil) if the cell arrays are the same shape as
+  the nodal arrays, but the non-existent cell is at the end of
+  each row rather than at the beginning.  And 1 if the cell arrays
+  are smaller by one along each dimension than the nodal arrays.
+
+  If you call c_adjust as a subroutine, the input C array
+  is modified; if you call it as a function, the input C is
+  unchanged and the new values returned.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#cs_adjust">cs_adjust</a></p>
+</div>
+<div class="docsee">
+  <h3>hex24b_track</h3><p>SEE: <a href="#hex5_track">hex5_track</a></p>
+</div>
+<div class="docsee">
+  <h3>hex24f_track</h3><p>SEE: <a href="#hex5_track">hex5_track</a></p>
+</div>
+<div class="docblock"><a name="hex5_track"></a><h3>hex5_track</h3>
+  <pre>DOCUMENT c= hex5_track(mesh, rays, s)
+         c= hex24f_track(mesh, rays, s)
+         c= hex24b_track(mesh, rays, s)
+
+  track 3 x Nrays x 2 RAYS through the 3D MESH.  RAYS(,,1) are
+  points on the rays, while RAYS(,,2) are normalized ray directions.
+
+  The c return value and the S parameter are a long and double
+  array respectively, with number of elements equal to the total
+  number of intersections of all the RAYS with faces of the MESH,
+  plus one for any RAY which misses MESH entirely.  The values of
+  c are:
+    [#hits,cell1,cell2,cell3,..., #hits,cell1,cell2,cell3,..., ...]
+  where each #hits is followed by the list of cell indices (assuming
+  i=1, j=1, and k=1 are present but meaningless in cell arrays --
+  that is, assuming zone centered arrays have the same dimensions
+  as XYZ rather than one less in each direction).  Rays which miss
+  the mesh entirely have #hits=1, all others have #hits>=2 since they
+  must exit.  #hits<0 means a ray reentered the mesh for abs(#hits)
+  more face crossings, but this currently cannot happen.  The values
+  of S correspond to c:
+    [s0,s1,s2,s3,..., s0,s1,s2,s3,..., ...]
+  which are the distances along the ray measured from RAYS(,,1) in
+  the direction of RAYS(,,2) where the ray pierces a cell face.  For
+  rays which miss the mesh, the value of s0 is a diagnostic telling
+  why they missed (see compiled code).
+
+  Function hex5_track uses the 5-tet decomposition for hexes,
+  which is not unique when the quad faces are non-planar.  You may
+  be able to get an idea of this effect by setting hex_triang the
+  opposite way and redoing the trace.
+
+  Functions hex24f_track and hex24b_track use the face and body
+  centered 24-tet decompositions for hexes.  These are unique;
+  however, hex_triang may in rare cases change the trace slightly,
+  since the entry search algorithm still involves triangulating
+  the surface quads.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hydra_mesh">hydra_mesh</a>, hex_triang, <a href="hex.html#reg_track">reg_track</a>, <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#c_adjust">c_adjust</a>, <a href="hex.html#pic3_rays">pic3_rays</a>, <a href="hex.html#conv3_rays">conv3_rays</a></p>
+</div>
+<div class="docblock"><a name="hex_mesh"></a><h3>hex_mesh</h3>
+  <pre>DOCUMENT mesh= hex_mesh(xyz, bound, nbnds, &mbnds, nblk, &blks, start)
+
+  create a 3D mesh object from the multiblock mesh parameters
+  XYZ   is NBLK 3 x Ni x Nj x Nk coordinate arrays packed together
+  BOUND is NBLK 3 x Ni x Nj x Nk face boundary markers packed
+  NBNDS is length of MBNDS
+  MBNDS is HX_blkbnd describing each internal block boundary face
+  NBLK  is number of blocks
+  BLKS  is NBLK HX_block objects describing the block structure
+  START is 0-origin 6*cell+face index of first boundary face/cell
+         or -1-cell to trace from centroid of that cell to point
+         p on ray to begin tracking
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#hydra_mesh">hydra_mesh</a>, hex_startflag</p>
+</div>
+<div class="docblock"><a name="hex_mesh2"></a><h3>hex_mesh2</h3>
+  <pre>DOCUMENT mesh= hex_mesh2(xyz, bounds)
+  old interface for hex_mesh
+
+  create a 3D mesh object from the 3 x Ni x Nj x Nk coordinate
+  array XYZ and the list of 6 BOUNDS:
+    BOUNDS(1), BOUNDS(2)  for the i=1,Ni boundaries
+    BOUNDS(3), BOUNDS(4)  for the j=1,Nj boundaries
+    BOUNDS(5), BOUNDS(6)  for the k=1,Nk boundaries
+  The BOUNDS values are:
+    1   if this is a problem boundary
+    2   if this is a reflecting boundary
+    3   if this is a periodic boundary
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hydra_mesh">hydra_mesh</a></p>
+</div>
+<div class="docblock"><a name="hex_query"></a><h3>hex_query</h3>
+  <pre>DOCUMENT start= hex_query(mesh, xyz, bound, mbnds, blks)
+
+  query a mesh created by hex_mesh, returning the arrays
+  passed to that function (these are not copies -- be careful
+  not to clobber them)
+  function return value is the start index
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#hydra_mesh">hydra_mesh</a></p>
+</div>
+<div class="docblock"><a name="hydra_mesh"></a><h3>hydra_mesh</h3>
+  <pre>DOCUMENT mesh= hydra_mesh(f)
+      or mesh= hydra_mesh(f, ublk, i0, j0, k0, face)
+      or mesh= hydra_mesh(f, ublk, i0, j0, k0)
+
+  read a 3D mesh object from the hydra PDB/Silo file F.
+
+  Note that the boundary arrays are adjusted to the hex convention
+  that cells with i=1, j=1, k=1 are missing, rather than the hydra
+  convention that i=imax, j=jmax, k=kmax are missing.
+
+  In the first form, the ray entry search will start on the
+  first open boundary face in the mesh.  If the actual problem
+  boundary is not convex, you need to identify a surface of
+  constant i, j, or k in the problem which is convex, and which
+  all the rays you intend to trace intersect.
+  UBLK is the user block number (starting from 0),
+  I0, J0, K0 are the (1-origin) logical coordinates of a
+    hydra *cell*.  Note that unlike hex cells, the hydra
+    cell bounded by nodes (1,1,1) and (2,2,2) is numbered (1,1,1).
+    (Hex numbers it (2,2,2).)
+  FACE is the face number on cell (I0,J0,K0) which you want a
+    ray to enter.  0 means the -I face, 1 the +I face, 2 the -J
+    face, 3 the +J face, 4 the -K face, and 5 the +K face.
+    As you step from this cell to its neighbors, then to their
+    neighbors, and so on, this face must trace out a convex
+    surface for the ray entry search.  Rays not intersecting
+    this surface will not enter the problem; the ray trace
+    will begin at this surface, not at -infinity.
+
+  If FACE==-1 or is omitted (as in the third form), then the
+  given points on the rays are assumed to lie inside the mesh,
+  and a pseudo ray from the centroid of cell (I0, J0, K0) will be
+  tracked to the given point on each ray; the ray will be launched
+  into the cell containing that point.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex_query">hex_query</a>, <a href="hex.html#hex5_track">hex5_track</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a></p>
+</div>
+<div class="docblock"><a name="hydra_start"></a><h3>hydra_start</h3>
+  <pre>DOCUMENT hydra_start, mesh, start
+
+  change the starting cell of the hydra MESH (returned by hydra_mesh)
+  to START.  If called as a function, returns old start value.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hydra_mesh">hydra_mesh</a>, <a href="hydra.html#h_data">h_data</a></p>
+</div>
+<div class="docblock"><a name="make_sphere"></a><h3>make_sphere</h3>
+  <pre>DOCUMENT make_sphere(radius, [imax,jmax,kmax],
+                     [phi1, phi2], [theta1, theta2])
+
+  return a mesh (see hex_mesh) representing the given section
+  of the sphere of given RADIUS.  IMAX, JMAX, and KMAX are the
+  number of nodes (cells+1) in the radial, longitude (phi), and
+  colatitude (theta) directions, respectively.  Note that for
+  a right handed coordinate system, phi1<phi2 but theta1>theta2.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex_mesh">hex_mesh</a></p>
+</div>
+<div class="docblock"><a name="pic3_rays"></a><h3>pic3_rays</h3>
+  <pre>DOCUMENT rays= pic3_rays(xpict, ypict, ray)
+      or rays= pic3_rays(xpict, ypict, ray, q_up)
+
+  Like picture_rays, but returns rays in the [p,q] representation
+  appropriate for hex5_track.
+
+  (XPICT,YPICT) are 2D arrays of pixel corners in the image plane;
+  RAY is the central ray (0,0) in (XPICT,YPICT) coordinates, given
+  in [p,q] representation (i.e. RAY is a 3-by-2 array).  The
+  optional Q_UP is a 3-vector specifying the orientation of the
+  y-axis in the picture plane (see theta_up, phi_up in picture_rays
+  for a description of default orientation).  Q_UP must not be
+  parallel to RAY(,2).
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#conv3_rays">conv3_rays</a>, <a href="rays.html#picture_rays">picture_rays</a></p>
+</div>
+<div class="docblock"><a name="reg_track"></a><h3>reg_track</h3>
+  <pre>DOCUMENT c= reg_track(x, y, z, rays, s)
+
+  track RAYS through regular mesh defined by the 1D coordinate
+  arrays X, Y, and Z.  Return values S and C are as for
+  hex5_track, where the mesh is numberof(X) by numberof(Y) by
+  numberof(Z).
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#track_reduce">track_reduce</a></p>
+</div>
+<div class="docblock"><a name="track_combine"></a><h3>track_combine</h3>
+  <pre>DOCUMENT nlist = track_combine(nm,cm,sm, np,cp,sp, c, s)
+
+  combine two track_reduce results NM,CM,SM, and NP,CP,SP,
+  which represent the first and second halves of a set of
+  rays.  See bi_dir for a typical application.  The returned
+  NLIST is NM+NP, or NM+NP-1 for those rays where the
+  final CM is identical to the initial CP.
+
+  C, S, together with NLIST are the output arrays, as for
+  track_reduce.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#bi_dir">bi_dir</a></p>
+</div>
+<div class="docblock"><a name="track_integ"></a><h3>track_integ</h3>
+  <pre>DOCUMENT result= track_integ(nlist, transp, selfem, last)
+
+  integrates a transport equation by doing the sums:
+
+     transparency(i) = transparency(i-1) * TRANSP(i)
+     emissivity(i) = emissivity(i-1) * TRANSP(i) + SELFEM(i)
+
+  returning only the final values transparency(n) and emissivity(n).
+  The NLIST is a list of n values, so that many transport integrals
+  can be performed simultaneously; sum(NLIST) = numberof(TRANSP) =
+  numberof(SELFEM).  The result is 2-by-dimsof(NLIST).
+
+  If TRANSP is nil, result is dimsof(NLIST) sums of SELFEM.
+  If SELFEM is nil, result is dimsof(NLIST) products of TRANSP.
+
+  TRANSP and SELFEM may by 2D to do multigroup integrations
+  simultaneously.  By default, the group dimension is first, but
+  if LAST is non-nil and non-zero, the group dimension is second.
+  In either case, the result will be ngroup-by-2-by-dimsof(NLIST).
+
+  track_solve is the higher-level interface.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#track_solve">track_solve</a>, <a href="hex.html#track_solve">track_solve</a></p>
+</div>
+<div class="docblock"><a name="track_reduce"></a><h3>track_reduce</h3>
+  <pre>DOCUMENT nlist= track_reduce(c, s)
+      or nlist= track_reduce(c, s, rays, slimits)
+
+  compresses the C and S returns from the tracking routines (see
+  hex5_track) to the following form:
+    [cell1,cell2,cell3,..., cell1,cell2,cell3,..., ...]
+    [s1-s0,s2-s1,s3-s2,..., s1-s0,s2-s1,s3-s2,..., ...]
+  returning nlist as
+    [#hits, #hits, ...]
+
+  In this form, any negative #hits are combined with the preceding
+  positive values, and #hits=1 (indicating a miss) appear as #hits=0
+  in nlist.  Hence, nlist always has exactly Nrays elements.
+
+  If RAYS is supplied, it is used to force the dimensions of the
+  returned nlist to match the dimensions of RAYS (the value of RAYS
+  is never used).  The RAYS argument need not have the trailing 2
+  dimension, so if you specified RAYS as [P,Q] if the call to
+  hex5_track, you can use just P or Q as the RAYS argument to
+  track_reduce.
+
+  If SLIMITS is supplied, it should be [smin,smax] or [smin,smax]-
+  by-dimsof(nlist) in order to reject input S values outside the
+  specified limits.  The C list will be culled appropriately, and
+  the first and last returned ds values adjusted.
+
+  With a non-zero flip= keyword, the order of the elements of
+  C and S within each group of #hits is reversed, so that a
+  subsequent track_solve will track the ray backwards.  If you
+  use this, both the ray direction input to the tracking routine
+  and any SLIMITS argument here should refer to the reverse of
+  the ray you intend to track.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hex5_track">hex5_track</a>, <a href="hex.html#c_adjust">c_adjust</a>, <a href="hex.html#track_solve">track_solve</a>, <a href="hex.html#track_integ">track_integ</a>, <a href="hex.html#bi_dir">bi_dir</a>, <a href="hex.html#track_combine">track_combine</a></p>
+</div>
+<div class="docblock"><a name="track_solve"></a><h3>track_solve</h3>
+  <pre>DOCUMENT result= track_solve(nlist, c, s, akap, ekap, last)
+
+  integrates a transport equation for NLIST, C, and S returned
+  by track_reduce (and optionally c_adjust).  The RAYS argument
+  is used only to set the dimensions of the result.  AKAP and
+  EKAP are mesh-sized arrays of opacity and emissivity, respectively.
+  They may have an additional group dimension, as well.  The
+  units of AKAP are 1/length (where length is the unit of S),
+  while EKAP is (spectral) power per unit area (length^2), where
+  the power is what ever units you want the result in.  The
+  emission per unit volume of material is EKAP*AKAP; an optically
+  thick block of material emits EKAP per unit surface.
+
+  The NLIST is a list of n values, so that many transport integrals
+  can be performed simultaneously; sum(NLIST) = numberof(AKAP) =
+  numberof(EKAP).  The result is 2-by-dimsof(NLIST), where the
+  first element of the first index is the transmission fraction
+  through the entire ray path, and the second element of the
+  result is the self-emission along the ray, which has the same
+  units as EKAP.
+
+  If EKAP is nil, result is dimsof(NLIST) -- exactly the same as
+  the transparency (1st element of result) when both EKAP and AKAP
+  are specified.
+
+  If AKAP is nil, result is dimsof(NLIST).  In this case, EKAP
+  must have units of emission per unit volume instead of per unit
+  area; the result will be the sum of EKAP*S along each ray.
+
+  AKAP and EKAP may by 2D to do multigroup integrations
+  simultaneously.  By default, the group dimension is first, but
+  if LAST is non-nil and non-zero, the group dimension is last.
+  In either case, the result will be ngroup-by-2-by-dimsof(NLIST).
+
+  To use in conjuction with hex5_track, one might do this:
+
+     c= hex5_track(mesh, rays, s);
+     nlist= track_reduce(c, s, rays);
+     c_adjust, c, mesh;  // if necessary
+     result= track_solve(nlist, c, s, akap, ekap);
+</pre>
+  <p>SEE ALSO: <a href="hex.html#track_reduce">track_reduce</a>, <a href="hex.html#hex5_track">hex5_track</a></p>
+</div>

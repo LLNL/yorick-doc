@@ -1,0 +1,43 @@
+---
+layout: qrio
+headline: Quick Reference
+---
+<h2>Opening and Closing Binary Files</h2>
+
+<table><tbody>
+<tr><td><tt><i>f</i> = openb(<i>filename</i>)</tt></td>
+<td>open <i>filename</i> read-only</td></tr>
+<tr><td><tt><i>f</i> = updateb(<i>filename</i>)</tt></td>
+<td>open <i>filename</i> read-write</td></tr>
+<tr><td><tt><i>f</i> = createb(<i>filename</i>)</tt></td>
+<td>create the binary file <i>filename</i></td></tr>
+<tr><td><tt>close, <i>f</i></tt></td>
+<td>close file <i>f</i></td></tr>
+</tbody></table>
+<p>A binary file <i>f</i> has a Yorick data type which is distinct from
+a text file. The <tt>info</tt> and <tt>print</tt> functions describe <i>f</i>.
+The <tt>close</tt> function will be called implicitly when the last reference
+to a file disappears, e.g.- if <i>f</i> is redefined.
+</p>
+<p>The data in a binary file is organized into named variables, each of
+which has a data type and dimensions. The <tt>.</tt> operator, which extracts
+members from a structure instance, accepts binary files for its left operand.
+Thus:
+<br><tt>&nbsp;f = updateb("foo.bar");
+<br>&nbsp;print, f.var1, f.var2(2:8,::4);
+<br>&nbsp;f.var3(2,5) = 3.14;
+<br>&nbsp;close, f;</tt>
+<br>Opens a file, prints <tt>var1</tt> and a subarray of <tt>var2</tt>, sets
+one element of <tt>var3</tt>, then closes the file.
+</p>
+<p>The <tt>show</tt> command prints an alphabetical list of the variables
+contained in a file:
+</p>
+<p><tt>show, <i>f</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt> shows the variables in file <i>f</i>
+<br><tt>show,
+<i>f, pat</i>&nbsp;</tt> show only names starting with <i>pat</i>
+<br><tt>get_vars(<i>f</i>)&nbsp;&nbsp;</tt>
+returns pointers to complete name lists for <i>f</i>
+</p>
+
+

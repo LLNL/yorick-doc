@@ -1,0 +1,351 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotkey (in graph.i) - keywords for plotting functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="graph-plotkey.html#rspace">arrowl</a></p>
+    <p><a href="graph-plotkey.html#rspace">arroww</a></p>
+    <p><a href="graph-plotkey.html#hollow">aspect</a></p>
+    <h3>C</h3>
+    <p><a href="graph-plotkey.html#closed">closed</a></p>
+    <p><a href="graph-plotkey.html#color">color</a></p>
+    <h3>E</h3>
+    <p><a href="graph-plotkey.html#edges">ecolor</a></p>
+    <p><a href="graph-plotkey.html#edges">edges</a></p>
+    <p><a href="graph-plotkey.html#edges">ewidth</a></p>
+    <h3>F</h3>
+    <p><a href="graph-plotkey.html#font">font</a></p>
+    <h3>H</h3>
+    <p><a href="graph-plotkey.html#font">height</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="graph-plotkey.html#hide">hide</a></p>
+    <p><a href="graph-plotkey.html#hollow">hollow</a></p>
+    <h3>J</h3>
+    <p><a href="graph-plotkey.html#font">justify</a></p>
+    <h3>L</h3>
+    <p><a href="graph-plotkey.html#legend">legend</a></p>
+    <h3>M</h3>
+    <p><a href="graph-plotkey.html#marker">marker</a></p>
+    <p><a href="graph-plotkey.html#marks">marks</a></p>
+    <p><a href="graph-plotkey.html#mspace">mcolor</a></p>
+    <p><a href="graph-plotkey.html#mspace">mphase</a></p>
+    <p><a href="graph-plotkey.html#mspace">msize</a></p>
+    <p><a href="graph-plotkey.html#mspace">mspace</a></p>
+    <h3>O</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotkey.html#font">opaque</a></p>
+    <p><a href="graph-plotkey.html#font">orient</a></p>
+    <h3>R</h3>
+    <p><a href="graph-plotkey.html#rays">rays</a></p>
+    <p><a href="graph-plotkey.html#region">region</a></p>
+    <p><a href="graph-plotkey.html#rspace">rphase</a></p>
+    <p><a href="graph-plotkey.html#rspace">rspace</a></p>
+    <h3>S</h3>
+    <p><a href="graph-plotkey.html#closed">smooth</a></p>
+    <h3>T</h3>
+    <p><a href="graph-plotkey.html#triangle">triangle</a></p>
+    <p><a href="graph-plotkey.html#type">type</a></p>
+    <h3>W</h3>
+    <p><a href="graph-plotkey.html#width">width</a></p>
+  </div>
+</div>
+<div class="docsee">
+  <h3>arrowl</h3><p>SEE: <a href="#rspace">rspace</a></p>
+</div>
+<div class="docsee">
+  <h3>arroww</h3><p>SEE: <a href="#rspace">rspace</a></p>
+</div>
+<div class="docsee">
+  <h3>aspect</h3><p>SEE: <a href="#hollow">hollow</a></p>
+</div>
+<div class="docblock"><a name="closed"></a><h3>closed</h3>
+  <pre>DOCUMENT closed=   plotting keyword
+      or smooth=   plotting keyword
+  selects closed curves (closed=1) or default open curves (closed=0),
+  or Bezier smoothing (smooth>0) or default piecewise linear curves
+  (smooth=0).  The value of smooth can be 1, 2, 3, or 4 to get
+  successively more smoothing.  Only the Bezier control points are
+  plotted to an X window; the actual Bezier curves will show up in
+  PostScript hardcopy files.  Closed curves join correctly, which
+  becomes more noticeable for wide lines; non-solid closed curves
+  may look bad because the dashing pattern may be incommensurate
+  with the length of the curve.
+PLOTTING COMMANDS: plg, plc (smooth only)</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a></p>
+</div>
+<div class="docblock"><a name="color"></a><h3>color</h3>
+  <pre>DOCUMENT color=   plotting keyword
+  selects line or text color.  Valid values are the strings "bg", "fg",
+  "black", "white", "red", "green", "blue", "cyan", "magenta", "yellow",
+  or a 0-origin index into the current palette.  The default is "fg".
+  Negative numbers may be used instead of the strings: -1 is bg
+  (background), -2 is fg (foreground), -3 is black, -4 is white,
+  -5 is red, -6 is green, -7 is blue, -8 is cyan, -9 is magenta, and
+  -10 is yellow.  (The negative numbers are actually taken modulo
+  256, so -1 is also 255, -2 is 254, and so on.)
+
+  A color can also be a triple [r, g, b], with values running from
+  0 for dark to 255 for full intensity.  Beware, however, of
+  specifying an rgb color (either as a color keyword or to the
+  plf, pli, or plfp commands) if your display is not a true color
+  display (for example, if it is 8 bits deep or less).  In that
+  case, it may switch to a 5x9x5 color cube, which causes a
+  significant degradation in quality of rendering with smooth
+  color palettes.  Furthermore, the hcp command will not work
+  properly for rgb colors if the file is a CGM.  Use the rgb=1
+  keyword in the window command to avoid having to re-issue a
+  palette command after the first rgb object is drawn (this is
+  unnecessary on true color screens).
+
+PLOTTING COMMANDS: plg, plm, plc, pldj, plt</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#mspace">mcolor</a>, <a href="graph-plotkey.html#rays">rays</a>, <a href="graph-plotkey.html#closed">closed</a>, <a href="graph-plotkey.html#closed">smooth</a></p>
+</div>
+<div class="docsee">
+  <h3>ecolor</h3><p>SEE: <a href="#edges">edges</a></p>
+</div>
+<div class="docblock"><a name="edges"></a><h3>edges</h3>
+  <pre>DOCUMENT edges=   plotting keyword
+      or ecolor=   plotting keyword
+      or ewidth=   plotting keyword
+  set the appearance of zone edges in a filled mesh plot (plf or plfp).
+  By default, edges=0, and the zone edges are not plotted.  If
+  edges=1, a solid line is drawn around each zone after it is
+  filled; the edge color and width are given by ecolor and ewidth,
+  which are "fg" and 1.0 by default.
+PLOTTING COMMANDS: plf</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#width">width</a></p>
+</div>
+<div class="docsee">
+  <h3>ewidth</h3><p>SEE: <a href="#edges">edges</a></p>
+</div>
+<div class="docblock"><a name="font"></a><h3>font</h3>
+  <pre>DOCUMENT font=     plotting keyword
+      or height=   plotting keyword
+      or opaque=   plotting keyword
+      or orient=   plotting keyword
+      or justify=  plotting keyword
+  selects text properties.  The font can be any of the strings
+  "courier", "times", "helvetica" (the default), "symbol", or
+  "schoolbook".  Append "B" for boldface and "I" for italic, so
+  "courierB" is boldface Courier, "timesI" is Times italic, and
+  "helveticaBI" is bold italic (oblique) Helvetica.  Your X server
+  should have the Adobe fonts (available free from the MIT X
+  distribution tapes) for all these fonts, preferably at both 75
+  and 100 dpi.  Occasionally, a PostScript printer will not be
+  equipped for some fonts; often New Century Schoolbook is missing.
+  The font keyword may also be an integer: 0 is Courier, 4 is Times,
+  8 is Helvetica, 12 is Symbol, 16 is New Century Schoolbook, and
+  you add 1 to get boldface and/or 2 to get italic (or oblique).
+
+  The height is the font size in points; 14.0 is the default.
+  X windows only has 8, 10, 12, 14, 18, and 24 point fonts, so
+  don't stray from these sizes if you want what you see on the
+  screen to be a reasonably close match to what will be printed.
+
+  By default, opaque=0 and text is transparent.  Set opaque=1 to
+  white-out a box before drawing the text.  The default orient
+  (orient=0) is left-to-right text; set orient=1 for text rotated 90
+  degrees so it reads upward, orient=2 for 180 degree rotation so
+  it is upside down, and orient=3 for 270 degree rotation so it
+  reads downward.
+
+  The default text justification, justify="NN" is normal is both
+  the horizontal and vertical directions.  Other possibilities
+  are "L", "C", or "R" for the first character, meaning left,
+  center, and right horizontal justification, and "T", "C", "H",
+  "A", or "B", meaning top, capline, half, baseline, and bottom
+  vertical justification.  The normal justification "NN" is equivalent
+  to "LA".  Common values are "LA", "CA", and "RA" for garden variety
+  left, center, and right justified text, with the y coordinate at the
+  baseline of the last line in the string presented to plt.  The
+  characters labeling the right axis of a plot are "RH", so that the
+  y value of the text will match the y value of the corresponding
+  tick.  Similarly, the characters labeling the bottom axis of a plot
+  are "CT".  The justify= may also be a number, horizontal+vertical,
+  where horizontal is 0 for "N", 1 for "L", 2 for "C", or 3 for "R",
+  and vertical is 0 for "N", 4 for "T", 8 for "C", 12 for "H",
+  16 for "A", or 20 for "B".
+
+PLOTTING COMMANDS: plt</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#color">color</a></p>
+</div>
+<div class="docsee">
+  <h3>height</h3><p>SEE: <a href="#font">font</a></p>
+</div>
+<div class="docblock"><a name="hide"></a><h3>hide</h3>
+  <pre>DOCUMENT hide=   plotting keyword
+  sets the visibility of a plotted element.  The default is hide=0,
+  which means that the element will be visible.  Use hide=1 to remove
+  the element from the plot (but not from the display list).
+PLOTTING COMMANDS: plg, plm, plc, plv, plf, pli, plt, pldj</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#legend">legend</a></p>
+</div>
+<div class="docblock"><a name="hollow"></a><h3>hollow</h3>
+  <pre>DOCUMENT hollow=   plotting keyword
+      or aspect=   plotting keyword
+  set the appearance of the "darts" of a vector field plot.  The
+  default darts, hollow=0, are filled; use hollow=1 to get just the
+  dart outlines.  The default is aspect=0.125; aspect is the ratio
+  of the half-width to the length of the darts.  Use the color
+  keyword to control the color of the darts.
+PLOTTING COMMANDS: plv</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#color">color</a></p>
+</div>
+<div class="docsee">
+  <h3>justify</h3><p>SEE: <a href="#font">font</a></p>
+</div>
+<div class="docblock"><a name="legend"></a><h3>legend</h3>
+  <pre>DOCUMENT legend=   plotting keyword
+  sets the legend for a plot.  The default legend is a concatentation
+  of the strings used in the original plotting command (plg, plm, etc.),
+  except for the plt command, which has no default legend.
+  Legends are never plotted to the X window; use the plq command to
+  see them interactively.  Legends will appear in hardcopy output
+  unless they have been explicitly turned off.
+PLOTTING COMMANDS: plg, plm, plc, plv, plf, pli, plt, pldj</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#hide">hide</a></p>
+</div>
+<div class="docblock"><a name="marker"></a><h3>marker</h3>
+  <pre>DOCUMENT marker=   plotting keyword
+  selects the character used for occasional markers along a polyline,
+  or for the polymarker if type is "none".  The special values
+  '\1', '\2', '\3', '\4', and '\5' stand for point, plus, asterisk,
+  circle, and cross, which are prettier than text characters on output
+  to some devices.  The default marker is the next available capital
+  letter, 'A', 'B', ..., 'Z'.
+PLOTTING COMMANDS: plg, plc</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#rays">rays</a>, <a href="graph-plotkey.html#mspace">mspace</a>, <a href="graph-plotkey.html#mspace">mphase</a>, <a href="graph-plotkey.html#mspace">msize</a>, <a href="graph-plotkey.html#mspace">mcolor</a></p>
+</div>
+<div class="docblock"><a name="marks"></a><h3>marks</h3>
+  <pre>DOCUMENT marks=   plotting keyword
+  selects unadorned lines (marks=0), or lines with occasional markers
+  (marks=1).  Ignored if type is "none" (indicating polymarkers instead
+  of occasional markers).  The spacing and phase of the occasional
+  markers can be altered using the mspace and mphase keywords; the
+  character used to make the mark can be altered using the marker
+  keyword.
+PLOTTING COMMANDS: plg, plc</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a>, <a href="graph-plotkey.html#mspace">mspace</a>, <a href="graph-plotkey.html#mspace">mphase</a>, <a href="graph-plotkey.html#mspace">msize</a>, <a href="graph-plotkey.html#mspace">mcolor</a></p>
+</div>
+<div class="docsee">
+  <h3>mcolor</h3><p>SEE: <a href="#mspace">mspace</a></p>
+</div>
+<div class="docsee">
+  <h3>mphase</h3><p>SEE: <a href="#mspace">mspace</a></p>
+</div>
+<div class="docsee">
+  <h3>msize</h3><p>SEE: <a href="#mspace">mspace</a></p>
+</div>
+<div class="docblock"><a name="mspace"></a><h3>mspace</h3>
+  <pre>DOCUMENT mspace=   plotting keyword
+      or mphase=   plotting keyword
+      or msize=    plotting keyword
+      or mcolor=   plotting keyword
+  selects the spacing, phase, and size of occasional markers placed
+  along polylines.  The msize also selects polymarker size if type
+  is "none".  The spacing and phase are in NDC units (0.0013 NDC
+  equals 1.0 point); the default mspace is 0.16, and the default
+  mphase is 0.14, but mphase is automatically incremented for
+  successive curves on a single plot.  The msize is in relative
+  units, with the default msize of 1.0 representing 10 points.
+  The mcolor keyword is the same as the color keyword, but controls
+  the marker color instead of the line color.  Setting the color
+  automatically sets the mcolor to the same value, so you only
+  need to use mcolor if you want the markers for a curve to be a
+  different color than the curve itself.
+PLOTTING COMMANDS: plg, plc</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a></p>
+</div>
+<div class="docsee">
+  <h3>opaque</h3><p>SEE: <a href="#font">font</a></p>
+</div>
+<div class="docsee">
+  <h3>orient</h3><p>SEE: <a href="#font">font</a></p>
+</div>
+<div class="docblock"><a name="rays"></a><h3>rays</h3>
+  <pre>DOCUMENT rays=   plotting keyword
+  selects unadorned lines (rays=0), or lines with occasional ray
+  arrows (rays=1).  Ignored if type is "none".  The spacing and phase
+  of the occasional arrows can be altered using the rspace and rphase
+  keywords; the shape of the arrowhead can be modified using the
+  arroww and arrowl keywords.
+PLOTTING COMMANDS: plg, plc</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#rspace">rspace</a>, <a href="graph-plotkey.html#rspace">rphase</a>, <a href="graph-plotkey.html#rspace">arroww</a>, <a href="graph-plotkey.html#rspace">arrowl</a></p>
+</div>
+<div class="docblock"><a name="region"></a><h3>region</h3>
+  <pre>DOCUMENT region=   plotting keyword
+  selects the part of mesh to consider.  The region should match one
+  of the numbers in the IREG array.  Putting region=0 (the default)
+  means to plot the entire mesh, that is, everything EXCEPT region
+  zero (non-existent zones).  Any other number means to plot only
+  the specified region number; region=3 would plot region 3 only.
+PLOTTING COMMANDS: plm, plc, plv, plf</pre>
+  
+</div>
+<div class="docsee">
+  <h3>rphase</h3><p>SEE: <a href="#rspace">rspace</a></p>
+</div>
+<div class="docblock"><a name="rspace"></a><h3>rspace</h3>
+  <pre>DOCUMENT rspace=   plotting keyword
+      or rphase=   plotting keyword
+      or arroww=   plotting keyword
+      or arrowl=   plotting keyword
+  selects the spacing, phase, and size of occasional ray arrows
+  placed along polylines.  The spacing and phase are in NDC units
+  (0.0013 NDC equals 1.0 point); the default rspace is 0.13, and
+  the default rphase is 0.11375, but rphase is automatically
+  incremented for successive curves on a single plot.
+  The arrowhead width, arroww, and arrowhead length, arrowl are
+  in relative units, defaulting to 1.0, which translates to an
+  arrowhead 10 points long and 4 points in half-width.
+PLOTTING COMMANDS: plg</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a></p>
+</div>
+<div class="docsee">
+  <h3>smooth</h3><p>SEE: <a href="#closed">closed</a></p>
+</div>
+<div class="docblock"><a name="triangle"></a><h3>triangle</h3>
+  <pre>DOCUMENT triangle=   plotting keyword
+  sets the triangulation array for a contour plot.  The triangulation
+  array must be the same shape as the IREG (region number) array, and
+  the correspondence between mesh zones and indices is the same as
+  for IREG.  The triangulation array is used to resolve the ambiguity
+  in saddle zones, in which the function Z being contoured has two
+  diagonally opposite corners high, and the other two corners low.
+  The triangulation array element for a zone is 0 if the algorithm is
+  to choose a triangulation, based on the curvature of the first
+  contour to enter the zone.  If zone (i,j) is to be triangulated
+  from point (i-1,j-1) to point (i,j), then TRIANGLE(i,j)=1,
+  while if it is to be triangulated from (i-1,j) to (i,j-1), then
+  TRIANGLE(i,j)=-1.  Contours will never cross this "triangulation
+  line".
+  You should rarely need to fiddle with the traingulation array;
+  it is a hedge for dealing with pathological cases.
+PLOTTING COMMANDS: plc</pre>
+  
+</div>
+<div class="docblock"><a name="type"></a><h3>type</h3>
+  <pre>DOCUMENT type=   plotting keyword
+  selects line type.  Valid values are the strings "solid", "dash",
+  "dot", "dashdot", "dashdotdot", and "none".  The "none" value
+  causes the line to be plotted as a polymarker.  You should also
+  check the plmk function if you need polymarkers.
+  The type value may also be a number; 0 is "none", 1 is "solid",
+  2 is "dash", 3 is "dot", 4 is "dashdot", and 5 is "dashdotdot".
+PLOTTING COMMANDS: plg, plm, plc, pldj</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#width">width</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a>, <a href="graph-plotkey.html#closed">closed</a>, <a href="graph-plotkey.html#closed">smooth</a>, <a href="graph-plothi.html#plmk">plmk</a></p>
+</div>
+<div class="docblock"><a name="width"></a><h3>width</h3>
+  <pre>DOCUMENT width=   plotting keyword
+  selects line width.  Valid values are positive floating point numbers
+  giving the line thickness relative to the default line width of one
+  half point, width= 1.0.
+PLOTTING COMMANDS: plg, plm, plc, pldj, plv (only if hollow=1)</pre>
+  <p>SEE ALSO: <a href="graph-plotkey.html#type">type</a>, <a href="graph-plotkey.html#color">color</a>, <a href="graph-plotkey.html#marks">marks</a>, <a href="graph-plotkey.html#marker">marker</a>, <a href="graph-plotkey.html#rays">rays</a>, <a href="graph-plotkey.html#closed">closed</a>, <a href="graph-plotkey.html#closed">smooth</a></p>
+</div>

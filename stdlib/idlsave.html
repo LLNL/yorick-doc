@@ -1,0 +1,50 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package idlsave (in idlsave.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="idlsave.html#f2z">f2z</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>I</h3>
+    <p><a href="idlsave.html#idl_open">idl_open</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>L</h3>
+    <p><a href="idlsave.html#l2ll">l2ll</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="f2z"></a><h3>f2z</h3>
+  <pre>DOCUMENT z = f2z(x)
+  convert 2-by-dims float or double X to complex.</pre>
+  
+</div>
+<div class="docblock"><a name="idl_open"></a><h3>idl_open</h3>
+  <pre>DOCUMENT f = idl_open(filename)
+      or f = idl_open(filename, commons)
+  openb for an IDL save file
+  optional COMMONS is returned as an array of pointers to
+    arrays of strings; the first string in each array is the name
+    of an IDL common block; the others are the names of the
+    variables in that common block
+  all variable names have been converted to lower case
+  loud=1 keyword reports on timestamp and other information
+    about the user, host, etc., stored in the save file
+
+  floating complex data becomes an array of float with leading
+    dimension of 2, use f2z to recover complex
+  64 bit integers become an array of long with leading dimension
+    of 2, use l2ll to recover single long (if sizeof(long)=8)
+</pre>
+  <p>SEE ALSO: <a href="std-filebin.html#openb">openb</a>, <a href="idlsave.html#f2z">f2z</a>, <a href="idlsave.html#l2ll">l2ll</a></p>
+</div>
+<div class="docblock"><a name="l2ll"></a><h3>l2ll</h3>
+  <pre>DOCUMENT z = l2ll(x)
+  convert 2-by-dims 32 bit integer X to 64 bit integer
+  (only works if sizeof(long)=8)</pre>
+  
+</div>

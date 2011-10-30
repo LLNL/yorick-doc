@@ -1,0 +1,240 @@
+#-*-perl-*-
+
+# texi2html --init-file=manual.init source.texi
+# manual.init: texi2html init file for yorick manual
+#   this produces stripped body-only html, modified to be xhtml conforming
+#   - a second script is necessary to insert into a page template
+#   - the first line of every file is the page anchor
+
+# Parts of this perl code are derived from texi2html.init, some of which
+# may be distributed under GPL.  Note that texi2html.init may be embedded
+# in texi2html itself.  The modifications here are in the public domain.
+#   David H. Munro  2011
+
+#$TOP_FILE = 'index.html';
+$USE_ISO = 1;   # strict xhtml compliance, utf-8 encoding issues
+
+$FRAMES = 0;
+$SHOW_MENU = 1;
+$NUMBER_SECTIONS = 1;
+$USE_NODES = 1;
+$NODE_FILES = 0;  # if set, filenames are node names
+$SPLIT = 'node';
+$USE_SETFILENAME = 1;
+$IGNORE_BEFORE_SETFILENAME = 1;
+
+$SECTION_NAVIGATION = 1;
+$SEPARATED_FOOTNOTES = 0;
+$SUBDIR = 'manual';
+
+$SHORT_REF = 1;
+$DEF_TABLE = 0;
+
+$INLINE_CONTENTS = 0;
+$NODE_NAME_IN_MENU = 1;
+$AVOID_MENU_REDUNDANCY = 1;
+$UNNUMBERED_SYMBOL_IN_MENU = 1;
+
+# $WORDS_IN_PAGE = 200;
+$USE_ACCESSKEY = 0;
+
+# use rel= and rev= in hrefs. Currently only rel is used
+$USE_REL_REV = 0;
+
+# if this is set a vertical navigation panel is used.
+$VERTICAL_HEAD_NAVIGATION = 0;
+
+# override non-xhtml compliant <hr> tags
+$SMALL_RULE = '<hr size="1"/>';
+$DEFAULT_RULE = '<hr/>';
+$MIDDLE_RULE = '<hr size="2"/>';
+$BIG_RULE = '<hr size="6"/>';
+# override non-xhtml compliant <br> tag
+$simple_map{'*'} = '<br/>';
+
+$ICONS = 1;
+
+# insert here name of icon images for buttons
+# Icons are used, if $ICONS and resp. value are set
+%ACTIVE_ICONS =
+    (
+     'Top',         '../images/dm-top.png',
+     'Contents',    '../images/dm-toc.png',
+     'Overview',    '',
+     'Index',       '../images/dm-index.png',
+     'This',        '',
+     'Back',        '../images/dm-prev.png',
+     'FastBack',    '../images/dm-2prev.png',
+     'Prev',        '../images/dm-prev.png',
+     'Up',          '../images/dm-up.png',
+     'Next',        '../images/dm-next.png',
+     'NodeUp',      '',
+     'NodeNext',    '',
+     'NodePrev',    '',
+     'Following',   '',
+     'Forward',     '../images/dm-next.png',
+     'FastForward', '../images/dm-2next.png',
+     'About' ,      '../images/dm-help.png',
+     'First',       '../images/dm-first.png',
+     'Last',        '../images/dm-last.png',
+     'NextFile',    '',
+     'PrevFile',    '',
+     ' ',           '',
+    );
+
+# insert here name of icon images for these, if button is inactive
+%PASSIVE_ICONS =
+    (
+     'Top',         '../images/dmg-top.png',
+     'Contents',    '../images/dmg-toc.png',
+     'Overview',    '',
+     'Index',       '../images/dmg-index.png',
+     'This',        '',
+     'Back',        '../images/dmg-prev.png',
+     'FastBack',    '../images/dmg-2prev.png',
+     'Prev',        '../images/dmg-prev.png',
+     'Up',          '../images/dmg-up.png',
+     'Next',        '../images/dmg-next.png',
+     'NodeUp',      '',
+     'NodeNext',    '',
+     'NodePrev',    '',
+     'Following',   '',
+     'Forward',     '../images/dmg-next.png',
+     'FastForward', '../images/dmg-2next.png',
+     'About' ,      '../images/dmg-help.png',
+     'First',       '../images/dmg-first.png',
+     'Last',        '../images/dmg-last.png',
+     'NextFile',    '',
+     'PrevFile',    '',
+     ' ',           '',
+    );
+
+@SECTION_BUTTONS =
+    (
+     'Back', 'Forward', ' ', ' ', 'FastBack', 'Up', 'FastForward',
+     ' ', ' ', ' ', ' ',
+     'Top', 'Contents', ' ', ' ', 'About',
+    );
+
+@NODE_FOOTER_BUTTONS =
+    (
+     'Back', 'Forward', ' ', ' ', 'FastBack', 'Up', 'FastForward',
+     ' ', ' ', ' ', ' ',
+     'Top', 'Contents', ' ', ' ', 'About',
+    );
+
+@MISC_BUTTONS = ('Forward', 'Top', 'Contents', ' ', ' ', 'About');
+
+################################## replace default functions
+
+#  layout functions default prefixed by T2H_DEFAULT_
+# print_page_head  - support jekyll templating
+# print_page_foot  - support jekyll templating, also <br> xhtml compliance
+# print_navigation - remove anchor#name in href
+# titlepage        - make <br> xhtml compliant
+# button_icon_img  - make <img> tag xhtml compliant
+
+#  formatting functions default prefixed by t2h_default_
+# image            - make <img> tag xhtml compliant
+# def_line         - replace <u> by <span> for xhtml compliance
+# sp               - make <br> tag xhtml compliant
+# index_summary    - make <br> tag xhtml compliant
+
+# remove header and footer entirely
+$print_page_head   = \&manual_print_page_head;
+$print_page_foot   = \&manual_print_page_foot;
+#$print_navigation  = \&manual_print_navigation;
+
+# modifications for xhtml conformance
+$titlepage         = \&T2XHTML_titlepage;
+$button_icon_img   = \&T2XHTML_button_icon_img;
+$def_line          = \&t2xhtml_def_line;
+$image             = \&t2xhtml_image;
+$sp                = \&t2xhtml_sp;
+$index_summary     = \&t2xhtml_index_summary;
+
+#$element_label     = \&manual_element_label;
+#$misc_element_label = \&manual_misc_element_label;
+
+sub manual_print_page_head($)
+{
+    my $fh = shift;
+    my $longtitle = "$Texi2HTML::THISDOC{'fulltitle_simple_format'}";
+    $longtitle .= ": $Texi2HTML::SIMPLE_TEXT{'This'}" if (defined ($Texi2HTML::SIMPLE_TEXT{'This'}) and ($Texi2HTML::SIMPLE_TEXT{'This'} !~ /^\s*$/) and $SPLIT);
+    my $description = $Texi2HTML::THISDOC{'DOCUMENT_DESCRIPTION'};
+    $description = $longtitle if (!defined($description));
+    $description = "<meta name=\"description\" content=\"$description\">" if
+         ($description ne '');
+    my $encoding = '';
+    $encoding = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=$Texi2HTML::THISDOC{'ENCODING_NAME'}\">" if (defined($Texi2HTML::THISDOC{'ENCODING_NAME'}) and ($Texi2HTML::THISDOC{'ENCODING_NAME'} ne ''));
+
+    # do not print anything for header, must be filled in later
+}
+
+sub manual_print_page_foot($)
+{
+    my $fh = shift;
+    my $program_string = &$program_string();
+
+    # do not print anything for footer, must be filled in later
+}
+
+sub T2XHTML_titlepage($$$$)
+{
+    &T2H_DEFAULT_titlepage;
+    $Texi2HTML::TITLEPAGE =~ s'<br>'<br/>'g;  #' # help emacs font-lock
+    return $Texi2HTML::TITLEPAGE;
+}
+
+sub T2XHTML_button_icon_img
+{
+    my $img = &T2H_DEFAULT_button_icon_img;
+    if (substr($img, -1) eq '>') { $img = substr($img, 0, -1) . '/>'; }
+    return $img;
+}
+
+sub t2xhtml_def_line($$$$$$$$$$$$$$$$)
+{
+    my $line = &t2h_default_def_line;
+    if ($line =~ '<u>') {
+        $line =~ s'<u>'<span style="text-decoration: underline">';  #'
+        $line =~ s'</u>'</span>';  #' # help emacs font-lock
+    }
+    return $line;
+}
+
+sub t2xhtml_image($$$$$$$$$$$$$$$$)
+{
+    my $img = &t2h_default_image;
+    if (substr($img, -1) eq '>') { $img = substr($img, 0, -1) . '/>'; }
+    return $img;
+}
+
+sub t2xhtml_sp($$)
+{
+   my $number = shift;
+   my $preformatted = shift;
+   return "<br/>\n" x $number if (!$preformatted);
+   return "\n" x $number;
+}
+
+sub t2xhtml_index_summary($$)
+{
+    my $alpha = shift;
+    my $nonalpha = shift;
+
+    my $join = '';
+    my $nonalpha_text = '';
+    my $alpha_text = '';
+    $join = " &nbsp; \n<br/>\n" if (@$nonalpha and @$alpha);
+    if (@$nonalpha)
+    {
+       $nonalpha_text = join("\n &nbsp; \n", @$nonalpha) . "\n";
+    }
+    if (@$alpha)
+    {
+       $alpha_text = join("\n &nbsp; \n", @$alpha) . "\n &nbsp; \n";
+    }
+    return "<table><tr><th valign=\"top\">" . &$I('Jump to') .": &nbsp; </th><td>" .
+    $nonalpha_text . $join . $alpha_text . "</td></tr></table>\n";
+}

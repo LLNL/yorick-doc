@@ -1,0 +1,75 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Animation"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_88.html#Custom-plot-functions" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.8 Writing new plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Animation-1"></a>
+<h2 class="section">3.9 Animation</h2>
+
+<p>Yorick&rsquo;s ordinary drawing commands make poor movies.  In order to make
+a good movie on your screen, you need to use more resources &ndash; the
+idea is to draw the picture into offscreen memory first, then use a
+fast copy operation to make the entire frame appear instantly.
+</p>
+<p>The animate command creates an offscreen pixmap, and redirects the
+rendering routines there, and modifies the fma command to perform the
+copy from offscreen to onscreen.  A second animate command returns to
+the ordinary mode of operation.
+</p>
+<p>You can&rsquo;t use animate mode for ordinary interactive work, because you
+don&rsquo;t get to see your picture until the fma.  Typically, you need to
+write a Yorick function which enters animate mode, loops producing
+frames of the movie, then exits animate mode.  Use the high level
+movie interface by including
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &quot;movie.i&quot;
+</pre></td></tr></table>
+
+<p>After this include, you can use the movie function, and let it manage
+the low level animate function for you.  You only need to write a
+function (passed as an argument to movie) that draws the n-th frame of
+your movie and returns a flag saying whether there are any more frames.
+You can easily build and test this function a frame at a time in
+ordinary non-animation mode.  Study the &lsquo;<tt>demo2.i</tt>&rsquo;, &lsquo;<tt>demo3.i</tt>&rsquo;,
+and &lsquo;<tt>demo5.i</tt>&rsquo; demonstration programs that come with the Yorick
+distribution to learn more about making movies.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_88.html#Custom-plot-functions" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.8 Writing new plotting functions" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

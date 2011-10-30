@@ -1,0 +1,117 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Arrays"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_33.html#Simple-debugging" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7.2 How to respond to a runtime error" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_35.html#Creating-Arrays" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.1 Creating Arrays" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Using-Array-Syntax"></a>
+<h1 class="chapter">2. Using Array Syntax</h1>
+
+<p>Most Yorick statements look like algebraic formulas.  A variable name is
+a string like <kbd>Var_1</kbd> &mdash; upper or lower case characters (case
+matters), digits, or underscores in any combination except that the
+first character may not be a digit.  Expressions consist of the usual
+arithmetic operations <kbd>+ - * /</kbd>, with parentheses to indicate the
+order of operations (when that order is different than or unclear from
+the ordinary rules of precedence in algebra).  Elementary mathematical
+functions such as <kbd>exp(x)</kbd>, <kbd>cos(x)</kbd>, or <kbd>atan(x)</kbd> look just
+like that.
+</p>
+<p>Usually, a Yorick variable is a parametric representation of a
+mathematical function.  The variable is an array of numbers which are
+values of the function at a number of points; few points to represent
+the function coarsely, more for an accurate rendition.  The parameters
+of the function are the indices into the array, which rarely make an
+explicit appearance in Yorick programs.  Thus,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">theta = span(0.0, 2*pi, 100)
+</pre></td></tr></table>
+
+<p>defines a variable <kbd>theta</kbd> consisting of 100 evenly spaced values
+starting with <kbd>0.0</kbd> and ending with <kbd>2*pi</kbd>.
+</p>
+<p>Now that <kbd>theta</kbd> has been defined as a list of 100 numbers, any
+function of <kbd>theta</kbd> has a concrete representation as a list of 100
+numbers &mdash; namely the values of the function at the 100 particular
+values of <kbd>theta</kbd>.  Hence, variables <kbd>x</kbd> and <kbd>y</kbd>
+representing coordinates of the unit circle are defined with:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x = cos(theta);   y = sin(theta)
+</pre></td></tr></table>
+
+<p>Here, <kbd>cos</kbd> and <kbd>sin</kbd> are built-in Yorick functions.  Like most
+Yorick functions, they operate on an entire array of numbers, returning
+an array of like shape.  Hence both <kbd>x</kbd> and <kbd>y</kbd> are now lists of
+100 numbers &ndash; the cosines and sines of the 100 numbers
+<kbd>theta</kbd>.
+</p>
+<p>The semicolon marks the end of a Yorick statement, allowing several
+statements to share a single line.  The end of a line (i.e.- a newline)
+can also mark the end of a Yorick statement.  However, if any
+parentheses are open, or if a binary operator or a comma is the last
+token on the line, then the newline is treated like a space or a tab
+character and does not terminate the Yorick statement.
+</p>
+<p>If a line ends with backslash, the following newline will never
+terminate the Yorick statement.  (That is, backslash is the continuation
+character in Yorick.)  I recommend that you never use a backslash &ndash; end
+the line to be continued with a binary operator, or leave the comma
+separating subroutine arguments at the end of the line, or split a
+parenthetic expression across the line, and it will be continued
+automatically.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_35.html#Creating-Arrays">&bull; Creating Arrays</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             How to originate arrays.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_36.html#Interpolating">&bull; Interpolating</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Interpolation functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_37.html#Indexing">&bull; Indexing</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    How to reference array elements.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_48.html#Sorting">&bull; Sorting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     How to sort an array.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_49.html#Transposing">&bull; Transposing</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 How to change the order of array dimensions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_50.html#Broadcasting">&bull; Broadcasting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Making arrays conformable.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_51.html#Dimension-Lists">&bull; Dimension Lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_33.html#Simple-debugging" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.7.2 How to respond to a runtime error" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_35.html#Creating-Arrays" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.1 Creating Arrays" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

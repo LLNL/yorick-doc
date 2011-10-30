@@ -1,0 +1,113 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package pnm (in pnm.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+    <p><a href="pnm.html#pnm">pnm</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="pnm.html#pnm_colorize">pnm_colorize</a></p>
+    <p><a href="pnm.html#pnm_display">pnm_display</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="pnm.html#pnm_read">pnm_read</a></p>
+    <p><a href="pnm.html#pnm_write">pnm_write</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="pnm"></a><h3>pnm</h3>
+  <pre>DOCUMENT #include "pnm.i"
+  makes pnm_read and pnm_write functions available, which see.</pre>
+  
+</div>
+<div class="docblock"><a name="pnm_colorize"></a><h3>pnm_colorize</h3>
+  <pre>DOCUMENT color_image= pnm_colorize(image)
+
+  colorize the width-by-height array IMAGE, returning a 3-by-
+  width-by-height array, suitable for use with pnm_write.
+  The current graphics palette is used to perform the colorization.
+  The keywords cmin=, cmax=, and top= are recognized and have the
+  same meaning as for the plf, pli, and bytscl functions.
+</pre>
+  <p>SEE ALSO: <a href="pnm.html#pnm_write">pnm_write</a>, <a href="graph-plotmisc.html#bytscl">bytscl</a></p>
+</div>
+<div class="docblock"><a name="pnm_display"></a><h3>pnm_display</h3>
+  <pre>DOCUMENT pnm_display, image
+
+  Attempt to display the IMAGE with the pli command and a pseudo-color
+  palette.  The IMAGE must be a 3-by-width-by-height array of RGB
+  pixel values.  If called as a function, the return value is the
+  width-by-height array of pixels which index into the new palette.
+  The palette is returned as the external variables red, green, and
+  blue.  The new palette is both coarse and slow to compute.
+
+  The size= keyword can be used to set the palette size.  The default
+  is 200 colors, the size of all the distribution palettes.
+
+  The flip=1 keyword can be used to flip the image bottom for top.
+
+  The square=1 limits flag is set; use
+     limits,square=0
+  to return to the default non-square plot limits.
+</pre>
+  <p>SEE ALSO: <a href="pnm.html#pnm_read">pnm_read</a></p>
+</div>
+<div class="docblock"><a name="pnm_read"></a><h3>pnm_read</h3>
+  <pre>DOCUMENT image= pnm_read(filename)
+      or image= pnm_read(filename, noflip)
+
+  read a PBM, PGM, or PPM image from FILENAME.  PBM and PGM files
+  result in width-by-height arrays; PPM files result in 3-by-width-
+  by-height arrays.  If NOFLIP is present and non-zero, the returned
+  image is in exactly the order stored in FILENAME.  Otherwise, the
+  height dimension is reversed, since images in the files read top
+  to bottom, while the Yorick image plotting commands go bottom to
+  top.
+</pre>
+  <p>SEE ALSO: <a href="pnm.html#pnm_display">pnm_display</a>, <a href="pnm.html#pnm_write">pnm_write</a></p>
+</div>
+<div class="docblock"><a name="pnm_write"></a><h3>pnm_write</h3>
+  <pre>DOCUMENT pnm_write, image, filename)
+      or pnm_write, image, filename, noflip)
+
+  write IMAGE to a PBM, PGM, or PPM file called FILENAME.  If
+  NOFLIP is present and non-zero, the image in FILENAME is stored
+  in exactly the order of IMAGE in memory.  Otherwise, the height
+  dimension is reversed, since images in the files read top to
+  bottom, while the Yorick image plotting commands go bottom to
+  top.
+
+  If IMAGE is a 3-by-width-by-height array, a PPM will be written.
+  Otherwise, IMAGE must be a width-by-height array.  If IMAGE
+  contains at most two distinct values, a PBM will be written,
+  otherwise a PGM.  You can force a PGM using the bits=8 keyword.
+
+  If IMAGE is of type char, it will be used as is, otherwise it
+  will be scaled to the range 0 to 255.  (Note that for a PPM, this
+  means the largest single rgb component value sets the scale.)
+
+  If the text= keyword is present and non-zero, a text PNM file
+  will be written; the default is to write a binary or raw PNM.
+
+  If the noscale=1 keyword is supplied, the IMAGE will not be
+  scaled to the range 0 to 255.  In this case, the IMAGE must
+  have an integer data type with minimum value >=0.  Note that
+  if max(image)>255, a text PGM or PPM file will be written
+  (overriding the text= keyword).  Raw PNM is char-only.
+  If bits= is not specified, then noscale=1 forces pnm_write to
+  guess the value you intended the brightest component value.
+  If IMAGE is not color, the guess is bits=1 if there are only
+  1 or 2 values, bits=8 if max(IMAGE)<256, and bits=16 otherwise.
+  For color IMAGE, the guess is either bits=8 or bits=16.
+
+  Normally, PGM and PPM files have a pixel or color component
+  size of 8 bits, so they run from 0 (darkest) to 255 (brightest).
+  With bits= you can force a different maximum value.  Use bits=8
+  to force a binary IMAGE to be written as a PGM.  The largest
+  legal value of bits is 16, the smallest is 1.
+</pre>
+  <p>SEE ALSO: <a href="pnm.html#pnm_colorize">pnm_colorize</a>, <a href="pnm.html#pnm_read">pnm_read</a></p>
+</div>

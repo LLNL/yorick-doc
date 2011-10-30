@@ -1,0 +1,8 @@
+prefix: ..
+pkgname: yorick
+pkgtitle: interpreted language
+
+keywords: yorick, documentation, manual
+description: Yorick Documentation
+
+exclude: gh-pages, gh-pages.src, ydoc.pl, README.md

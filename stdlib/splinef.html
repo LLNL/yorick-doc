@@ -1,0 +1,101 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package splinef (in splinef.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>S</h3>
+    <p><a href="splinef.html#splined">splined</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="splinef.html#splinef">splinef</a></p>
+    <p><a href="splinef.html#splinei">splinei</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="splinef.html#splinelsq">splinelsq</a></p>
+    <p><a href="splinef.html#spline_coef">spline_coef</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="splined"></a><h3>splined</h3>
+  <pre>DOCUMENT yp = splined(dydx, y, x, xp)
+      or yp = splined(x_y_dydx, xp)
+  returns the derivative of the piecewise cubic function specified
+  by DYDX, Y, X at the points XP.  Extrapolation beyond the extreme
+  endpoints of X is linear, so splined gives the final value of DYDX.
+  The return value dimensions are the same as the dimensions of XP.
+
+  In the second form, X_Y_DYDX is a 3-by-nknots array of [x,y,dydx]
+  values.  The values of X in either case must either increase or
+  decrease monotonically.
+</pre>
+  <p>SEE ALSO: <a href="splinef.html#splined">splined</a>, <a href="splinef.html#splinei">splinei</a></p>
+</div>
+<div class="docblock"><a name="splinef"></a><h3>splinef</h3>
+  <pre>DOCUMENT yp = splinef(dydx, y, x, xp)
+      or yp = splinef(x_y_dydx, xp)
+  returns piecewise cubic function specified by DYDX, Y, X at
+  the points XP.  Extrapolation beyond the extreme endpoints of X
+  is linear, with slope equal to the final value of DYDX.  The
+  return value dimensions are the same as the dimensions of XP.
+
+  In the second form, X_Y_DYDX is a 3-by-nknots array of [x,y,dydx]
+  values.  The values of X in either case must either increase or
+  decrease monotonically.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#interp">interp</a>, <a href="splinef.html#splined">splined</a>, <a href="splinef.html#splinei">splinei</a>, <a href="splinef.html#splinelsq">splinelsq</a></p>
+</div>
+<div class="docblock"><a name="splinei"></a><h3>splinei</h3>
+  <pre>DOCUMENT yp = splinei(dydx, y, x, xp)
+      or yp = splinei(x_y_dydx, xp)
+  returns the integral of the piecewise cubic function specified
+  by DYDX, Y, X at the points XP.  The integral is quadratic beyond
+  the extreme endpoints of X, and zero at X(1).  The dimensions of
+  the return value are the same as the dimensions of XP.
+  This is the cubic analog of the integ function.
+
+  In the second form, X_Y_DYDX is a 3-by-nknots array of [x,y,dydx]
+  values.  The values of X in either case must either increase or
+  decrease monotonically.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#integ">integ</a>, <a href="splinef.html#splinef">splinef</a>, <a href="splinef.html#splined">splined</a></p>
+</div>
+<div class="docblock"><a name="splinelsq"></a><h3>splinelsq</h3>
+  <pre>DOCUMENT x_y_dydx = splinelsq(y, x, xfit)
+         ...
+         yp = splinef(x_y_dydx, xp)
+  performs a least squares fit to the data points (X, Y).  The input
+  XFIT are the abcissas of the piecewise cubic function with knot
+  points XFIT which is the least squares best fit to the data (X,Y).
+  The XFIT must be strictly increase or decrease.
+
+  Any points in XFIT with no data points in the intervals on
+  either side will be removed.
+
+  A weight= keyword of the same length as X and Y may be supplied in
+  order to weight the various data points differently; a typical
+  WEIGHT function is 1/sigma^2 where sigma are the standard deviations
+  associated with the Y values.
+
+  You can specify y0=, dydx0=, y1=, and dydx1= keywords to fix the
+  value of the function or its derivative at the first (0) or last (1)
+  endpoint.  Be sure there is at least one point in the final
+  interval so that the XFIT at the endpoint is not removed.
+
+  More generally, you can specify a constrain= keyword.  The value
+  of constrain is a hook function which will be called just before
+  the matrix solve.  Your constrain subroutine will be passed no
+  arguments, but it can access and modify the mat and rhs variables.
+</pre>
+  <p>SEE ALSO: <a href="splinef.html#splinef">splinef</a></p>
+</div>
+<div class="docblock"><a name="spline_coef"></a><h3>spline_coef</h3>
+  <pre>DOCUMENT spline_coef
+  is the worker for the splinef, splined, and splinei functions.
+  If you need to compute both function and derivative or integral,
+  you will improve performance using spline_coef.  See the source
+  code for those functions for usage.
+</pre>
+  <p>SEE ALSO: <a href="splinef.html#splinef">splinef</a>, <a href="splinef.html#splined">splined</a>, <a href="splinef.html#splinei">splinei</a></p>
+</div>

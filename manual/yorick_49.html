@@ -1,0 +1,101 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Transposing"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_48.html#Sorting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.4 Sorting" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_50.html#Broadcasting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.6 Broadcasting and conformability" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Transposing-1"></a>
+<h2 class="section">2.5 Transposing</h2>
+
+<p>In a carefully designed Yorick program, array dimensions usually wind up
+where you need them.  However, you may occasionally wind up with a
+five-by-seven array, instead of the seven-by-five array you wanted.
+Yorick has a very general <kbd>transpose</kbd> function:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x623451 = transpose(x123456);
+x561234 = transpose(x123456, 3);
+x345612 = transpose(x123456, 5);
+x153426 = transpose(x123456, [2,5]);
+x145326 = transpose(x123456, [2,5,3,4]);
+x653124 = transpose(x123456, [2,5], [1,4,6]);
+</pre></td></tr></table>
+
+<p>Here, <kbd>x123456</kbd> represents a six-dimensional array (hopefully these
+will be rare).  The same array with its first and last dimensions
+transposed is called <kbd>x623451</kbd>; this is the default result of
+<kbd>transpose</kbd>.  The <kbd>transpose</kbd> function can take any number of
+additional arguments to describe an arbitrary permutation of the indices
+of its first argument &ndash; the array to be transposed.
+</p>
+<p>A scalar integer value, as in the second and third lines, represents a
+cyclic permutaion of all the dimensions; the first dimension of the
+input becomes the Nth dimension of the result, for an argument value of
+N.
+</p>
+<p>An array of integer values represents a cyclic permutation of the
+specified dimensions.  Hence, in the fifth example, <kbd>[2,5,3,4]</kbd>
+means that the second dimension becomes the fifth, the fifth becomes the
+third, the third becomes the fourth, and the fourth becomes the second.
+An arbitrary permutation may be built up of a number of cyclic
+permutations, as shown in the sixth example.
+</p>
+<p>One additional problem can arise in Yorick &ndash; you may not know how many
+dimensions the array to be transposed has.  In order to deal with this
+possibility, either a scalar argument or any of the numbers in a cyclic
+permutation list may be zero or negative to count from the last
+dimension.  That is, 0 represents the last dimension, -1 the next to
+last, -2 the one before that, and so on.
+</p>
+<p>Typical transposing tasks are: (1) Move the first dimension to be last,
+and all the others back one cyclically.  (2) Move the last dimension
+first, and all the others forward one cyclically.  (3) Transpose the
+first two dimensions, leaving all others fixed.  (4) Transpose the final
+two dimensions, leaving all others fixed.  These would be accomplished,
+in order, by the following four lines:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">x234561 = transpose(x123456, 0);
+x612345 = transpose(x123456, 2);
+x213456 = transpose(x123456, [1,2]);
+x123465 = transpose(x123456, [0,-1]);
+</pre></td></tr></table>
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_48.html#Sorting" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 2.4 Sorting" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_50.html#Broadcasting" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 2.6 Broadcasting and conformability" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

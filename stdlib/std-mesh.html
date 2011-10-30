@@ -1,0 +1,109 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-mesh (in std.i) - functions on mesh arrays </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-mesh.html#area">area</a></p>
+    <h3>C</h3>
+    <p><a href="std-mesh.html#call">call</a></p>
+    <h3>N</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-mesh.html#noop">noop</a></p>
+    <h3>P</h3>
+    <p><a href="std-mesh.html#ptcen">ptcen</a></p>
+    <h3>U</h3>
+    <p><a href="std-mesh.html#uncen">uncen</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>V</h3>
+    <p><a href="std-mesh.html#volume">volume</a></p>
+    <h3>Z</h3>
+    <p><a href="std-mesh.html#zncen">zncen</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="area"></a><h3>area</h3>
+  <pre>DOCUMENT area(y, x)
+  returns the zonal areas of the 2-D mesh (X, Y).  If Y and X are
+  imax-by-jmax, the result is (imax-1)-by-(jmax-1).  The area is
+  positive when, say, X increases with i and Y increases with j.
+  For example, area([[0,0],[1,1]],[[0,1],[0,1]]) is +1.</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#volume">volume</a></p>
+</div>
+<div class="docblock"><a name="call"></a><h3>call</h3>
+  <pre>DOCUMENT call, subroutine(arg1, arg2, arg3, arg4, arg5
+                          arg6, arg7, arg8);
+  allows a SUBROUTINE to be called with a very long argument list
+  as an alternative to:
+       subroutine, arg1, arg2, arg3, arg4, arg5,
+         arg6, arg7, arg8;
+  Note that the statement
+       subroutine(arg1, arg2, arg3, arg4, arg5,
+                  arg6, arg7, arg8);
+  will print the return value of subroutine, even if it is nil.
+  If invoked as a function, call simply returns its argument.</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#noop">noop</a></p>
+</div>
+<div class="docblock"><a name="noop"></a><h3>noop</h3>
+  <pre>DOCUMENT noop(x)
+  returns X.  Use to make simple variable references into expressions.
+  The noop function is a builtin, which runs much faster than the
+  interpreted "call" function.  Also, if X is an array reference for
+  a file handle, "call" performs the read, while "noop" does not.</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#call">call</a></p>
+</div>
+<div class="docblock"><a name="ptcen"></a><h3>ptcen</h3>
+  <pre>DOCUMENT ptcen(zncen)
+      or ptcen(zncen, ireg)
+  returns point centered version of the 2-D zone centered array ZNCEN.
+  The result is imax-by-jmax if ZNCEN is (imax-1)-by-(jmax-1).
+  If the region number array IREG is specified, zones with region
+  number 0 are not included in the point centering operation.
+  Note that IREG should have dimensions imax-by-jmax; the first
+  row and column of IREG are ignored.
+  Without IREG, ptcen(zncen) is equivalent to zncen(pcen,pcen).</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#zncen">zncen</a>, <a href="std-mesh.html#uncen">uncen</a></p>
+</div>
+<div class="docblock"><a name="uncen"></a><h3>uncen</h3>
+  <pre>DOCUMENT uncen(ptcen)
+      or uncen(ptcen, ireg)
+  returns zone centered version of the 2-D zone centered array PTCEN.
+  The result is (imax-1)-by-(jmax-1) if PTCEN is imax-by-jmax.
+  If the region number array IREG is specified, zones with region
+  number 0 are not included in the point centering operation.
+  Note that IREG should have dimensions imax-by-jmax, like
+  the input PTCEN array; the first row and column of IREG are ignored.
+  Without IREG, uncen(ptcen) is equivalent to ptcen(uncp,uncp).
+
+  Do not use uncen to zone center data which is naturally point
+  centered -- use the zncen function for that purpose.  The uncen
+  function is the (nearly) exact inverse of the ptcen function,
+  so that uncen(ptcen(zncen, ireg), ireg) will return the original
+  zncen array.  The uncen reconstruction is as exact as possible,
+  given the finite precision of floating point operations.</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#ptcen">ptcen</a>, <a href="std-mesh.html#zncen">zncen</a></p>
+</div>
+<div class="docblock"><a name="volume"></a><h3>volume</h3>
+  <pre>DOCUMENT volume(r, z)
+  returns the zonal volumes of the 2-D cylindrical mesh (R, Z).
+  If R and Z are imax-by-jmax, the result is (imax-1)-by-(jmax-1).
+  The volume is positive when, say, Z increases with i and R increases
+  with j.  For example, volume([[0,0],[1,1]],[[0,1],[0,1]]) is +pi.</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#area">area</a></p>
+</div>
+<div class="docblock"><a name="zncen"></a><h3>zncen</h3>
+  <pre>DOCUMENT zncen(ptcen)
+      or zncen(ptcen, ireg)
+  returns zone centered version of the 2-D point centered array PTCEN.
+  The result is (imax-1)-by-(jmax-1) if PTCEN is imax-by-jmax.
+  If the region number array IREG is specified, zones with region
+  number 0 are not included in the point centering operation.
+  Note that IREG should have dimensions imax-by-jmax, like
+  the input PTCEN array; the first row and column of IREG are ignored.
+  Without IREG, zncen(ptcen) is equivalent to ptcen(zcen,zcen).</pre>
+  <p>SEE ALSO: <a href="std-mesh.html#ptcen">ptcen</a>, <a href="std-mesh.html#uncen">uncen</a></p>
+</div>

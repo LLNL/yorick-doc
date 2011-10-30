@@ -1,0 +1,150 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package netcdf (in netcdf.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>N</h3>
+    <p><a href="netcdf.html#nc_addrec">nc_addrec</a></p>
+    <p><a href="netcdf.html#nc_attrdef">nc_attrdef</a></p>
+    <p><a href="netcdf.html#nc_attribute">nc_attribute</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="netcdf.html#nc_create">nc_create</a></p>
+    <p><a href="netcdf.html#nc_dimdef">nc_dimdef</a></p>
+    <p><a href="netcdf.html#nc_dimsof">nc_dimsof</a></p>
+    <p><a href="netcdf.html#nc_enddef">nc_enddef</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="netcdf.html#nc_open">nc_open</a></p>
+    <p><a href="netcdf.html#nc_vardef">nc_vardef</a></p>
+    <p><a href="netcdf.html#netcdf">netcdf</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="nc_addrec"></a><h3>nc_addrec</h3>
+  <pre>DOCUMENT nc_addrec, f, time
+      or nc_addrec, f
+  adds a new record to the netCDF file F at time TIME.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_vardef">nc_vardef</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a></p>
+</div>
+<div class="docblock"><a name="nc_attrdef"></a><h3>nc_attrdef</h3>
+  <pre>DOCUMENT nc_attrdef, ncf, attr_name, var_name, value
+  sets the value of the netCDF attribute ATTR_NAME associated
+  with variable VAR_NAME to VALUE (note that the data type of VALUE
+  becomes the data type of the attribute).
+  The NCF is the structure returned by nc_create; nc_attrdef
+  must be called prior to nc_enddef, which actually writes the
+  attribute data to the file.
+  If VAR_NAME is omitted, ATTR_NAME refers to the whole file.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a>, <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a>, <a href="netcdf.html#nc_attribute">nc_attribute</a></p>
+</div>
+<div class="docblock"><a name="nc_attribute"></a><h3>nc_attribute</h3>
+  <pre>DOCUMENT value= nc_attribute(attr_name, var_name)
+  gets the value of the netCDF attribute ATTR_NAME associated
+  with variable VAR_NAME, or nil if none.  Uses the external
+  variable nc_file set by nc_open.
+  If VAR_NAME is omitted, ATTR_NAME refers to the whole file,
+  and is retrieved (if present) from the nc_file.attrs variable.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_attrdef">nc_attrdef</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a>, <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a></p>
+</div>
+<div class="docblock"><a name="nc_create"></a><h3>nc_create</h3>
+  <pre>DOCUMENT ncf= nc_create(filename)
+  creates a netCDF file FILENAME.
+  After this call, use nc_vardef to declare the netCDF variables.
+  Then use nc_enddef to write the netCDF self-descriptive
+  information.  Only after this are you free to actually write data.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_vardef">nc_vardef</a>, <a href="netcdf.html#nc_attrdef">nc_attrdef</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a>, <a href="netcdf.html#nc_addrec">nc_addrec</a>, <a href="netcdf.html#nc_attribute">nc_attribute</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a></p>
+</div>
+<div class="docblock"><a name="nc_dimdef"></a><h3>nc_dimdef</h3>
+  <pre>DOCUMENT nc_dimdef, ncf, dim_name, size
+      or nc_dimdef, ncf, dim_name, "unlimited"
+  define a named dimension.  The SIZE parameter is the length of
+  the dimension, or the string "unlimited" for the unlimited
+  dimension.  (The numerical value 0 is the same as "unlimited".)
+  You can also define named dimensions implicitly using nc_vardef.</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_vardef">nc_vardef</a></p>
+</div>
+<div class="docblock"><a name="nc_dimsof"></a><h3>nc_dimsof</h3>
+  <pre>DOCUMENT def_string= nc_dimsof(var_name)
+  returns the dimension list of a netCDF variable VAR_NAME in symbolic
+  form, i.e.- using the netCDF dimension names.  This requires the
+  nc_file external variable set by nc_open.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a>, <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a></p>
+</div>
+<div class="docblock"><a name="nc_enddef"></a><h3>nc_enddef</h3>
+  <pre>DOCUMENT f= nc_enddef(ncf)
+  creates netCDF file NCF (returned by nc_create), and writes the self-
+  descriptive information.  Returns the ordinary Yorick file object
+  corresponding to the new file.  You are then free to write variables,
+  or use the save or nc_addrec functions.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_addrec">nc_addrec</a>, <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_attrdef">nc_attrdef</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a></p>
+</div>
+<div class="docblock"><a name="nc_open"></a><h3>nc_open</h3>
+  <pre>DOCUMENT f= nc_open(filename, mode)
+  opens a netCDF file FILENAME for reading or update as specified
+  by MODE, which defaults to "rb".  Attributes and dimension names
+  can be found in the three external variables nc_dims (an array of
+  type NC_dim), nc_attrs (an array of type NC_attr), and nc_vars
+  (an array of type NC_var) after this call.
+  MODE should be either "rb" or "r+b"; nothing else makes sense.
+  If FILENAME is an array of strings, exactly those files will be
+  opened as a family (if possible).  Note that nc_open("myfile00")
+  potentially opens myfile01, myfile02, and so on, as for openb,
+  but that nc_open(["myfile00"]) opens myfile00 only.</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a>, <a href="netcdf.html#nc_attribute">nc_attribute</a>, <a href="netcdf.html#nc_dimsof">nc_dimsof</a></p>
+</div>
+<div class="docblock"><a name="nc_vardef"></a><h3>nc_vardef</h3>
+  <pre>DOCUMENT nc_vardef, ncf, name, type, dims, record=0/1
+      or nc_vardef, ncf, name, type, record=0/1
+      or nc_vardef, ncf, name, template=template, record=0/1
+  define a variable in the NCF (returned by nc_create) with name
+  NAME, type TYPE (as returned by typeof or structof), and dimensions
+  DIMS (as returned by dimsof).  The template= keyword may be used
+  instead of type and dims; the type and dims will be those of the
+  TEMPLATE.  If dims is not specified, a scalar is assumed.  If the
+  record= keyword is present and non-zero, the variable is a record
+  variable; otherwise it is a non-record variable.
+
+  You can use the dimnames= keyword to write specific dimension
+  names into the netCDF file.  These are not useful to Yorick, but
+  other codes may require them.  If two variables share a dimension
+  name, the corresponding dimension must have the same length.  For
+  example:
+    nc_vardef, ncf, "theta", double, [1,nlat], dimnames=["latitude"]
+    nc_vardef, ncf, "phi", double, [1,nlong], dimnames=["longitude"]
+    nc_vardef, ncf, "elevation", double,
+               dimnames=["latitude","longitude"]
+  A dimension name of "" lets Yorick invent a fake dimension name,
+  as it does by default.  If dimnames= is present and the lengths
+  of the dimensions have previously been defined, then the DIMS
+  parameter is unnecessary, as in the "elevation" array in the example.
+  You can use the nc_dimdef function to define a named dimension size
+  before you define any variables with that dimension.
+</pre>
+  <p>SEE ALSO: <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_attrdef">nc_attrdef</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a>, <a href="netcdf.html#nc_addrec">nc_addrec</a>, <a href="netcdf.html#nc_dimdef">nc_dimdef</a></p>
+</div>
+<div class="docblock"><a name="netcdf"></a><h3>netcdf</h3>
+  <pre>DOCUMENT nc_open, nc_create, nc_vardef, nc_enddef, nc_addrec
+  are the main routines to read and write netCDF files.
+
+  The ordinary openb function will also open netCDF files.
+
+  Writing a netCDF file is more problematic in Yorick, since
+  you must define the entire file structure before you write
+  any data.  Therefore, the nc_create call returns only a
+  "token" for nc_vardef, which you use to declare variables
+  in the file.  When you are done declaring variables, you
+  call nc_enddef, which returns an ordinary Yorick file object.
+  You can then write data to the file (with f.var=value or
+  save,f,var).  To add a record, you must use nc_addrec instead
+  of add_record (nc_addrec updates the record count in the file).</pre>
+  
+</div>

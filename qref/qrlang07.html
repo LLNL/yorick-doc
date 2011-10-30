@@ -1,0 +1,35 @@
+---
+layout: qrlang
+headline: Quick Reference
+---
+<h2>Logical Operators</h2>
+<p>Yorick supports C-style logical AND and OR operators. Unlike the arithmetic
+and comparison operators, these take only scalar operands and return a
+scalar <tt>int</tt> result. Their precedence is between <tt>|</tt> and
+<tt>=</tt>.
+</p>
+<p>The right operand is not evaluated at all if the value of the left operand
+decides the result value; hence the left operand may be used to determine
+whether the evaluation of the right operand would lead to an error.
+</p>
+<p><tt>&amp;&amp;&nbsp;&nbsp;</tt> logical and (scalar <tt>int</tt> result)&nbsp;
+<br><tt>||&nbsp;&nbsp;</tt> logical or (scalar <tt>int</tt> result)
+</p>
+<p>The logical NOT operator takes an array or a scalar operand, returning
+<tt>int</tt>
+1 if the operand was zero, 0 otherwise. Its precedence is above <tt>^</tt>.
+</p>
+<p><tt>!&nbsp;&nbsp;&nbsp;</tt> logical not (<tt>int</tt> result)
+</p>
+<p>The ternary operator selects one of two values based on the value of
+a scalar <i>condition</i>:
+</p>
+<p><i>condition</i> <tt>?</tt> <i>true_expr</i> <tt>:</tt> <i>false_expr</i>
+</p>
+<p>Its precedence is low, and it must be parenthesized in a function argument
+list or an array index list to prevent confusion with the <tt>:</tt> in
+the index range syntax. Like <tt>&amp;&amp;</tt> and <tt>||</tt>, the expression
+which is rejected is not evaluated at all.
+</p>
+
+

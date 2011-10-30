@@ -1,0 +1,39 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package plclab (in plclab.i) - put numeric labels on contours </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>P</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="plclab.html#plc_label">plc_label</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="plc_label"></a><h3>plc_label</h3>
+  <pre>DOCUMENT plc_label, z,y,x, levs, ndivs=ndivs, opaque=opaque, lmgrid=lmgrid
+
+  call after plc,z,y,x in order to put labels on an existing contour
+  plot.  If you are going to set the limits (by means of the limits
+  or range functions, or zooming or panning with the mouse), do so
+  before calling plc_label, since it reads the current plot limits.
+
+  finds points where numeric contours labels can be drawn 
+  input
+   z  : array to be contoured
+   y: y coords of array to be contoured
+   x: x coords of array to be contoured
+   levs: contour levels to be labelled
+   ndivs: divide domain into ndvis x ndivs subregions with label in each
+   opaque: if defined, white out below label
+   lmgrid: if defined, draw the subregion perimeters
+
+   output --- none now
+
+   authors: Phil Rasch and David Munro
+   last revised: 20 July, 1996 (for 1.3 distribution)
+</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plc">plc</a></p>
+</div>

@@ -1,0 +1,409 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package hydra (in hydra.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>H</h3>
+    <p><a href="hydra.html#hydra">hydra</a></p>
+    <p><a href="hydra.html#hydra_aux_data">hydra_aux_data</a></p>
+    <p><a href="hydra.html#hydra_aux_data">hydra_aux_names</a></p>
+    <p><a href="hydra.html#hydra_mix_data">hydra_mix_data</a></p>
+    <p><a href="hydra.html#hydra_mix_data">hydra_mix_names</a></p>
+    <p><a href="hydra.html#hydra_xyz">hydra_xyz</a></p>
+    <p><a href="hydra.html#h_array">h_array</a></p>
+    <p><a href="hydra.html#h_blocks">h_blocks</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="hydra.html#h_close">h_close</a></p>
+    <p><a href="hydra.html#h_collect">h_collect</a></p>
+    <p><a href="hydra.html#h_data">h_data</a></p>
+    <p><a href="hydra.html#h_fparm">h_fparm</a></p>
+    <p><a href="hydra.html#h_gblk">h_gblk</a></p>
+    <p><a href="hydra.html#h_get_times">h_get_times</a></p>
+    <p><a href="hydra.html#h_global">h_global</a></p>
+    <p><a href="hydra.html#h_iparm">h_iparm</a></p>
+    <p><a href="hydra.html#h_jr">h_jr</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="hydra.html#h_jt">h_jt</a></p>
+    <p><a href="hydra.html#h_mix">h_mix</a></p>
+    <p><a href="hydra.html#h_openb">h_openb</a></p>
+    <p><a href="hydra.html#h_parm">h_parm</a></p>
+    <p><a href="hydra.html#h_show">h_show</a></p>
+    <p><a href="hydra.html#h_ublk">h_ublk</a></p>
+    <p><a href="hydra.html#h_uparm">h_uparm</a></p>
+    <p><a href="hydra.html#h_ushow">h_ushow</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="hydra"></a><h3>hydra</h3>
+  <pre>DOCUMENT hydra.i
+defines several functions useful for examining and extracting
+data from hydra-generated Silo/PDB dump files:
+
+h_openb     -- use instead of openb for hydra files
+hydra_xyz   -- extracts xyz and boundary arrays
+h_data      -- extracts data nodal or zonal arrays
+h_array     -- extracts data nodal or zonal arrays for one ublk
+h_mix       -- extracts zonal data for mixed zones
+h_iparm     -- extracts integer parameter values
+h_gblk      -- extracts information relating hblks to
+               user blocks
+h_collect   -- loops on h_array over all times
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_array">h_array</a>, <a href="hydra.html#h_mix">h_mix</a>, <a href="hydra.html#h_iparm">h_iparm</a>, <a href="hydra.html#h_fparm">h_fparm</a>, <a href="hydra.html#h_gblk">h_gblk</a></p>
+</div>
+<div class="docblock"><a name="hydra_aux_data"></a><h3>hydra_aux_data</h3>
+  <pre>DOCUMENT hydra_aux_names = [name1, name2, ...];
+         mesh = hydra_mesh(f, ...);
+         eq_nocopy, var1, *hydra_aux_data(1);
+         eq_nocopy, var2, *hydra_aux_data(2);
+         ...
+  Set hydra_aux_names to a list of names (see h_data) in order to
+  have hydra_mesh retrieve those variables concurrently as it reads
+  the mesh.  When the mesh is spread over many files, this avoids
+  reopening and reclosing all the files, as happens if you call
+  hydra_mesh and h_data separately.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hydra_mesh">hydra_mesh</a>, <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#hydra_mix_data">hydra_mix_data</a></p>
+</div>
+<div class="docsee">
+  <h3>hydra_aux_names</h3><p>SEE: <a href="#hydra_aux_data">hydra_aux_data</a></p>
+</div>
+<div class="docblock"><a name="hydra_mix_data"></a><h3>hydra_mix_data</h3>
+  <pre>DOCUMENT hydra_mix_names = [name1, name2, ...];
+         mesh = hydra_mesh(f, ...);
+         eq_nocopy, var1, *hydra_mix_data(1);
+         eq_nocopy, var2, *hydra_mix_data(2);
+         ...
+         eq_nocopy, mixn, *hydra_mix_data(nn+1);
+         eq_nocopy, mixcell, *hydra_mix_data(nn+2);
+         eq_nocopy, mixnmat, *hydra_mix_data(nn+3);
+         eq_nocopy, mixhist, *hydra_mix_data(nn+4);
+         eq_nocopy, matlist, *hydra_mix_data(nn+5);
+  Set hydra_mix_names to a list of names (see h_mix) in order to
+  have hydra_mesh retrieve those variables concurrently as it reads
+  the mesh.  When the mesh is spread over many files, this avoids
+  reopening and reclosing all the files, as happens if you call
+  hydra_mesh and h_mix separately.
+  In the example, nn=numberof(hydra_mix_names).  See h_mix for a
+  description of mixn, mixcell, mixnmat, mixhist, and matlist.
+</pre>
+  <p>SEE ALSO: <a href="hex.html#hydra_mesh">hydra_mesh</a>, <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#hydra_aux_data">hydra_aux_data</a></p>
+</div>
+<div class="docsee">
+  <h3>hydra_mix_names</h3><p>SEE: <a href="#hydra_mix_data">hydra_mix_data</a></p>
+</div>
+<div class="docblock"><a name="hydra_xyz"></a><h3>hydra_xyz</h3>
+  <pre>DOCUMENT mesh = hydra_xyz(f)
+      or mesh = hydra_xyz(f, ublk, i0, j0, k0, face)
+      or mesh = hydra_xyz(f, ublk, i0, j0, k0)
+
+  read a 3D mesh object from the hydra PDB/Silo file F.
+  The returned mesh is _lst(xyz, bound, mbnds, blks, start).
+
+  Note that the boundary arrays are adjusted to the hex convention
+  that cells with i=1, j=1, k=1 are missing, rather than the hydra
+  convention that i=imax, j=jmax, k=kmax are missing.
+
+  In the first form, the ray entry search will start on the
+  first open boundary face in the mesh.  If the actual problem
+  boundary is not convex, you need to identify a surface of
+  constant i, j, or k in the problem which is convex, and which
+  all the rays you intend to trace intersect.
+  UBLK is the user block number (starting from 0),
+  I0, J0, K0 are the (1-origin) logical coordinates of a
+    hydra *cell*.  Note that unlike hex cells, the hydra
+    cell bounded by nodes (1,1,1) and (2,2,2) is numbered (1,1,1).
+    (Hex numbers it (2,2,2).)
+  FACE is the face number on cell (I0,J0,K0) which you want a
+    ray to enter.  0 means the -I face, 1 the +I face, 2 the -J
+    face, 3 the +J face, 4 the -K face, and 5 the +K face.
+    As you step from this cell to its neighbors, then to their
+    neighbors, and so on, this face must trace out a convex
+    surface for the ray entry search.  Rays not intersecting
+    this surface will not enter the problem; the ray trace
+    will begin at this surface, not at -infinity.
+
+  If FACE==-1 or is omitted (as in the third form), then the
+  given points on the rays are assumed to lie inside the mesh,
+  and a pseudo ray from the centroid of cell (I0, J0, K0) will be
+  tracked to the given point on each ray; the ray will be launched
+  into the cell containing that point.
+
+  You can set a hydra_bnd_hook function before calling hydra_xyz
+  if the boundary conditions for hex need to be different than
+  for hydra.
+</pre>
+  <p>SEE ALSO: hydra_bnd_hook, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#hydra_aux_data">hydra_aux_data</a>, <a href="hydra.html#hydra_mix_data">hydra_mix_data</a></p>
+</div>
+<div class="docblock"><a name="h_array"></a><h3>h_array</h3>
+  <pre>DOCUMENT name_array = h_array(f, ublk, name)
+      or pname_arrays = h_array(f, ublk, [name1,name2,...,nameN])
+           eq_nocopy, name_array1, *pname_arrays(1)
+           ...
+           eq_nocopy, name_arrayN, *pname_arrays(N)
+
+  reads variable array NAME for user block UBLK from the hydra file F.  
+  If NAME=="matlist", you get the "Materials_matlist" array.
+  Coordinates can be obtained using the names x, y or z.
+
+  Ublk numbering starts at 0.  You can omit the UBLK argument and it
+  will default to zero, which is useful for problems with only a single
+  user block.
+
+  Note that here zone centered arrays are given using the hydra convention
+  so that i=imax, j=jmax, k=kmax are missing.  Thus in order to use the 
+  Yorick plc and plf functions correctly you should index the plotted
+  variable i.e. for a 2D array.
+  plf, den(1:-1,1:-1), y, x
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_mix">h_mix</a>, <a href="hydra.html#h_show">h_show</a>, <a href="hydra.html#h_collect">h_collect</a></p>
+</div>
+<div class="docblock"><a name="h_blocks"></a><h3>h_blocks</h3>
+  <pre>DOCUMENT gnblk = h_blocks(f, mdims, mlens)
+
+  returns number of blocks GNBLK, block dimensions MDIMS, and
+  block lengths MLENS for the hydra mesh in file F.
+  MDIMS is 3-by-NBLK, MLENS is GNBLK elements.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_iparm">h_iparm</a></p>
+</div>
+<div class="docblock"><a name="h_close"></a><h3>h_close</h3>
+  <pre>DOCUMENT h_close, f
+
+  close a file F opened with h_openb.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_openb">h_openb</a></p>
+</div>
+<div class="docblock"><a name="h_collect"></a><h3>h_collect</h3>
+  <pre>DOCUMENT vart = h_collect(f, ublk, name)
+
+  returns an array of the variable NAME (a string) from user block
+  UBLK of hydra file family F.  The return value has the leading
+  dimensions of h_array(f,ublk,name), with a trailing dimension
+  representing all the times in the family.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_array">h_array</a>, <a href="hydra.html#h_show">h_show</a></p>
+</div>
+<div class="docblock"><a name="h_data"></a><h3>h_data</h3>
+  <pre>DOCUMENT name_array = h_data(f, name)
+      or pname_arrays = h_data(f, [name1,name2,...,nameN])
+           eq_nocopy, name_array1, *pname_arrays(1)
+           ...
+           eq_nocopy, name_arrayN, *pname_arrays(N)
+
+  reads variable NAME from the hydra file F.  If F is a multiblock
+  file, NAME_ARRAY will be 1-D; for single block problems it will
+  be 3-D.  If NAME=="matlist", you get the "Materials_matlist"
+  array.  Coordinates can be obtained using the names x, y or z.
+
+  In the second form, NAME1, ..., NAMEN are retrieved simultaneously,
+  which is useful when F is a large family of files.
+
+  Note that zone centered arrays are adjusted to the hex convention
+  that cells with i=1, j=1, k=1 are missing, rather than the hydra
+  convention that i=imax, j=jmax, k=kmax are missing.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_mix">h_mix</a>, <a href="hydra.html#h_array">h_array</a>, <a href="hydra.html#h_show">h_show</a>, <a href="hydra.html#hydra_aux_data">hydra_aux_data</a></p>
+</div>
+<div class="docblock"><a name="h_fparm"></a><h3>h_fparm</h3>
+  <pre>DOCUMENT value = h_fparm(f, name)
+      or names = h_fparm(f)
+
+  returns value of hydra parameter NAME from file F,
+  or a list of all names in F if NAME is not supplied.
+
+  If NAME is not a string, returns that parameter
+  or parameters (NAME is index in the returned list of names),
+  for example h_fparm(f,1:0) returns all parameters.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_iparm">h_iparm</a>, <a href="hydra.html#h_parm">h_parm</a>, <a href="hydra.html#h_uparm">h_uparm</a></p>
+</div>
+<div class="docblock"><a name="h_gblk"></a><h3>h_gblk</h3>
+  <pre>DOCUMENT gblk = h_gblk(f)
+
+  return global block information from the hydra file F (see h_openb).
+
+  Each hblk in the mesh corresponds to a particular imin:imax,
+  jmin:jmax, kmin:kmax in a particular gblk.  The return value is
+  a 2D long array 7-by-numberof(h blocks):
+
+  gblk(1,) =   user block number for this hblk
+  gblk(2:3,) = gblk [imin,imax] of this hblk
+  gblk(4:5,) = gblk [jmin,jmax] of this hblk
+  gblk(6:7,) = gblk [kmin,kmax] of this hblk
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a></p>
+</div>
+<div class="docblock"><a name="h_get_times"></a><h3>h_get_times</h3>
+  <pre>DOCUMENT times = h_get_times(f)
+
+  return array of times in hydra history file family F.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#h_jt">h_jt</a>, <a href="hydra.html#h_jr">h_jr</a></p>
+</div>
+<div class="docblock"><a name="h_global"></a><h3>h_global</h3>
+  <pre>DOCUMENT value = h_global(f, name)
+  returns value of hydra Global variable NAME from file F.</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_iparm">h_iparm</a></p>
+</div>
+<div class="docblock"><a name="h_iparm"></a><h3>h_iparm</h3>
+  <pre>DOCUMENT value = h_iparm(f, name)
+      or names = h_iparm(f)
+
+  returns value of hydra parameter NAME from file F,
+  or a list of all names in F if NAME is not supplied.
+
+  If NAME is not a string, returns that parameter
+  or parameters (NAME is index in the returned list of names),
+  for example h_iparm(f,1:0) returns all parameters.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_fparm">h_fparm</a>, <a href="hydra.html#h_parm">h_parm</a>, <a href="hydra.html#h_uparm">h_uparm</a></p>
+</div>
+<div class="docblock"><a name="h_jr"></a><h3>h_jr</h3>
+  <pre>DOCUMENT h_jr, f, irec
+      or nrecs = h_jr(f)
+
+  jump to record IREC in hydra history file family F.
+  In second form, return total number of records in family.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#h_get_times">h_get_times</a>, <a href="hydra.html#h_jt">h_jt</a>, <a href="hydra.html#h_collect">h_collect</a></p>
+</div>
+<div class="docblock"><a name="h_jt"></a><h3>h_jt</h3>
+  <pre>DOCUMENT h_jt, f, time
+
+  jump to time TIME in hydra history file family F.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#h_get_times">h_get_times</a>, <a href="hydra.html#h_jr">h_jr</a>, <a href="hydra.html#h_collect">h_collect</a></p>
+</div>
+<div class="docblock"><a name="h_mix"></a><h3>h_mix</h3>
+  <pre>DOCUMENT mixdat = h_mix(f, matlist)
+           eq_nocopy, mixn, *mixdat(1)
+           eq_nocopy, mixcell, *mixdat(2)
+           eq_nocopy, mixnmat, *mixdat(3)
+           eq_nocopy, mixhist, *mixdat(4)
+      or mix_array = h_mix(f, mixdat, name)
+      or pmix_array = h_mix(f, matlist, [name1,...,nameN], mixdat)
+           eq_nocopy, mix_array1, *pmix_array(1)
+           ...
+           eq_nocopy, mix_arrayN, *pmix_array(N)
+
+  In first form, returns MIXDAT and MATLIST for the hydra file F.
+  MIXDAT consists of two arrays: MIXN is a list of the number of
+  mixed cells for each block, and MIXCELL is an index array
+  into any hex global cell array (as returned by h_data),
+  MIXNMAT is the number of mix "zones" within each cell,
+  and MIXHIST is the list required in order to use the
+  histogram function on a mix array.
+
+  In the second form, reads the mix data for the variable NAME
+  in the hydra file F; the MIXDAT argument must have been returned
+  by a previous call to h_mix using the first form.
+
+  In the third form, MATLIST and MIXDAT are both returned along
+  with the set of variables NAME1, ..., NAMEN, so that a number of
+  variables can be retrieved in one call (useful when F is a large
+  family of files).
+
+  For example, to compute the temperature in each cell, using
+  a mass weighted average in mixed zones, you would do this:
+    den = h_data(f,"den");
+    tmat = h_data(f,"tmat");
+    mixdat = h_mix(f, matlist);
+    local mixcell, mixhist;
+    eq_nocopy, mixcell, *mixdat(2);
+    eq_nocopy, mixhist, *mixdat(4);
+    denx = h_mix(f, mixdat, "den");
+    tmatx = h_mix(f, mixdat, "tmat");
+    vf = h_mix(f, mixdat, "vf");
+    tavg = tmat;
+    tavg(mixcell) = histogram(mixhist, tmatx*denx*vf)/den(mixcell);
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_array">h_array</a>, <a href="hydra.html#h_show">h_show</a></p>
+</div>
+<div class="docblock"><a name="h_openb"></a><h3>h_openb</h3>
+  <pre>DOCUMENT f = h_openb(filename)
+
+  open a hydra dump file, including 2D families of distributed
+  history files.
+
+  The return value is a list (see _lst function) containing the
+  currently opened file and the non-PDB data required to navigate
+  through each file and the entire family.
+
+  With one=1 keyword, only one file of a history family is opened.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_close">h_close</a>, <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_jt">h_jt</a>, <a href="hydra.html#h_jr">h_jr</a>, <a href="hydra.html#h_get_times">h_get_times</a></p>
+</div>
+<div class="docblock"><a name="h_parm"></a><h3>h_parm</h3>
+  <pre>DOCUMENT value = h_parm(f, name)
+      or names = h_parm(f)
+
+  returns value of hydra parameter NAME from file F,
+  or a list of all names in NAME is not supplied.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_fparm">h_fparm</a>, <a href="hydra.html#h_iparm">h_iparm</a>, <a href="hydra.html#h_uparm">h_uparm</a></p>
+</div>
+<div class="docblock"><a name="h_show"></a><h3>h_show</h3>
+  <pre>DOCUMENT h_show, f
+      or varnames = h_show(f)
+
+  prints names of variables available for h_data, h_mix, h_array.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#h_ushow">h_ushow</a></p>
+</div>
+<div class="docblock"><a name="h_ublk"></a><h3>h_ublk</h3>
+  <pre>DOCUMENT ublk = h_ublk(f)
+      or ublk = h_ublk(f, unew)
+
+  return user block information from the hydra file F (see h_openb).
+
+  Each ublk in the mesh has a particular size.  The return value is
+  a 2D long array 7-by-numberof(u blocks):
+
+  ublk(1,) =   user block number for this ublk
+  ublk(2:3,) = ublk [imin,imax] of this ublk
+  ublk(4:5,) = ublk [jmin,jmax] of this ublk
+  ublk(6:7,) = ublk [kmin,kmax] of this ublk
+
+  Normally, imin=jmin=kmin=1, and the only information in the return
+  value is imax, jmax, kmax.
+
+  In the second form, sets the ublk to UNEW, which is useful for
+  resetting imin, jmin, and kmin for each block so that it describes
+  a packing of the user blocks into an overall global block
+  structure.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#hydra_xyz">hydra_xyz</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_openb">h_openb</a></p>
+</div>
+<div class="docblock"><a name="h_uparm"></a><h3>h_uparm</h3>
+  <pre>DOCUMENT values = h_uparm(f, names)
+
+  returns values of user defined variables (def cards) in hydra file F.
+  NAMES is a name or array of names; the returned values have the
+  same dimensions as NAMES.  All values are type double.
+
+  Note that integer valued variables can be returned as integers
+  with long(h_uparm(f, names)).
+
+  User defined variables are stored as strings.  You can retrieve
+  the strings instead of the numeric values with the isstr=1
+  keyword.  Without isstr=1, any string which cannot be converted
+  to a number will appear as -1.e99.
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_ushow">h_ushow</a>, <a href="hydra.html#h_uparm">h_uparm</a>, <a href="hydra.html#h_fparm">h_fparm</a>, <a href="hydra.html#h_parm">h_parm</a></p>
+</div>
+<div class="docblock"><a name="h_ushow"></a><h3>h_ushow</h3>
+  <pre>DOCUMENT h_ushow, f
+      or varnames = h_ushow(f)
+
+  prints names of user defined variables (def cards) in hydra file F.
+  As a function, returns array of def names.  The index of each name
+  in the returned list is 1 plus its index in the file F.  (Missing
+  indices in F will have string(0) in varnames -- shouldn't happen.)
+</pre>
+  <p>SEE ALSO: <a href="hydra.html#h_uparm">h_uparm</a>, <a href="hydra.html#h_show">h_show</a>, <a href="hydra.html#h_openb">h_openb</a></p>
+</div>

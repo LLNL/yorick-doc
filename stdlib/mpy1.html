@@ -1,0 +1,98 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package mpy1 (in mpy1.i) - mpy version 1 support for backward compatibility </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+    <p><a href="mpy1.html#mp_bcast">mp_bcast</a></p>
+    <p><a href="mpy1.html#mp_from">mp_from</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="mpy1.html#mp_partition">mp_partition</a></p>
+    <p><a href="mpy1.html#mp_pool">mp_pool</a></p>
+    <p><a href="mpy1.html#mp_prange">mp_prange</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="mpy1.html#mp_recv1">mp_recv1</a></p>
+    <p><a href="mpy1.html#mp_start">mp_start</a></p>
+    <p><a href="mpy1.html#mp_task">mp_task</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="mp_bcast"></a><h3>mp_bcast</h3>
+  <pre>DOCUMENT mp_bcast
+***obsolete mpy1 function*** (see mp_handout)</pre>
+  
+</div>
+<div class="docblock"><a name="mp_from"></a><h3>mp_from</h3>
+  <pre>DOCUMENT mp_from
+***obsolete mpy1 function*** (see mp_probe)</pre>
+  
+</div>
+<div class="docblock"><a name="mp_partition"></a><h3>mp_partition</h3>
+  <pre>DOCUMENT ntasks= mp_partition(njobs, ntrips)
+      or ntasks= mp_partition(njobs, ntrips, master_works)
+      ***obsolete mpy1 function***</pre>
+  <p>SEE ALSO: <a href="mpy1.html#mp_pool">mp_pool</a>, <a href="mpy1.html#mp_prange">mp_prange</a></p>
+</div>
+<div class="docblock"><a name="mp_pool"></a><h3>mp_pool</h3>
+  <pre>DOCUMENT mp_pool, n_tasks, sow, work, reap, work0
+      or mp_pool, n_tasks, sow, work, reap
+
+***obsolete mpy1 pool of tasks***
+
+func SOW(to, i)
+  mp_send, to, <input1>, <input2>, ..., <inputQ>
+  <no return value>
+
+func WORK
+  input1= mp_recv(dimsi1)
+  input2= mp_recv(dimsi2)
+  ...
+  inputQ= mp_recv(dimsiQ)
+  <do the task specified by the messages>
+  mp_send, 0, <result1>, <result2>, ..., <resultR>
+  <no return value>
+
+func REAP(i, m)
+  if (m==1) {
+    result1= mp_recv(dimsr1)
+    <save or accumulate 1st result of i-th task>
+  } else if (m==2) {
+    result2= mp_recv(dimsr2)
+    <save or accumulate 2nd result of i-th task>
+  } else ...
+  } else if (m==R) {
+    resultR= mp_recv(dimsrR)
+    <save or accumulate Rth result of i-th task>
+  }
+  return (m==R)
+
+func WORK0(i)
+  <do the i-th task>
+  <no return value>
+</pre>
+  <p>SEE ALSO: <a href="mpy1.html#mp_task">mp_task</a>, <a href="mpy1.html#mp_partition">mp_partition</a>, <a href="mpy1.html#mp_prange">mp_prange</a></p>
+</div>
+<div class="docblock"><a name="mp_prange"></a><h3>mp_prange</h3>
+  <pre>DOCUMENT range= mp_prange(i, ntasks, njobs)
+  ***obsolete mpy1 function***</pre>
+  <p>SEE ALSO: <a href="mpy1.html#mp_pool">mp_pool</a>, <a href="mpy1.html#mp_partition">mp_partition</a></p>
+</div>
+<div class="docblock"><a name="mp_recv1"></a><h3>mp_recv1</h3>
+  <pre>DOCUMENT mp_recv1
+***implements obsolete mpy1 mp_recv API***</pre>
+  
+</div>
+<div class="docblock"><a name="mp_start"></a><h3>mp_start</h3>
+  <pre>DOCUMENT mp_start
+***obsolete mpy1 function***</pre>
+  
+</div>
+<div class="docblock"><a name="mp_task"></a><h3>mp_task</h3>
+  <pre>DOCUMENT mp_task
+***obsolete mpy1 function***</pre>
+  
+</div>

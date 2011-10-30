@@ -1,0 +1,295 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-oxy (in std.i) - object oriented extensions to yorick </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>C</h3>
+    <p><a href="std-oxy.html#closure">closure</a></p>
+    <h3>G</h3>
+    <p><a href="std-oxy.html#gaccess">gaccess</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>I</h3>
+    <p><a href="std-oxy.html#is_obj">is_obj</a></p>
+    <h3>O</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-oxy.html#oxy">oxy</a></p>
+    <h3>U</h3>
+    <p><a href="std-oxy.html#use">use</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="closure"></a><h3>closure</h3>
+  <pre>DOCUMENT f = closure(function, data)
+      or f = closure(object, member)
+  creates a closure function from FUNCTION and DATA.  Invoking the
+  closure function invokes FUNCTION with argument DATA prepended
+  to the argument list passed to the closure function.  For example,
+     f;        is equivalent to    FUNCTION, DATA;
+     f(a1,a2)  is equivalent to    FUNCTION(DATA, a1, a2)
+  and so on.  When the first argument is an OBJECT, and the second
+  argument a MEMBER, the object is invoked with the member as its
+  first parameter.  (Typically the member would be a function.)
+  If the first argument is an object, then the second argument
+  (MEMBER) has the same semantics as object(member, ...): namely,
+  if MEMBER is a simple variable reference, its value is ignored,
+  and only its name is used to specify which member of the object.
+  Hence, if you want the value of MEMBER to be used, you need to
+  be sure the second argument to closure is an expression, such
+  as noop(member).  If the first argument is a function, then
+  the second argument is always a value.
+
+  Finally, the first argument can be a string in order to specify
+  that the returned closure object use the value of the named
+  variable at runtime for the function (or object).  If you expect
+  the value to be an object, prefix the variable name by "o:" in
+  order to prevent the closure object from keeping a use of the
+  value of the second argument, if MEMBER is a simple variable
+  reference.  For example,
+    f = closure("myfunc", data);     // keeps use of data value
+    g = closure("o:myobj", member);  // ignores value of member
+    h = closure("myobj", noop(member));  // o: unnecessary
+  This feature is primarily an aid during debugging; typically
+  you would remove the quotes (and o:) once the code was working.
+
+  You can query a closure object using the member extraction
+  operator:
+    f.function  returns function or object
+    f.data      returns data or member
+    f.function_name  returns name of function or object
+    f.data_name      returns name of data
+  The names are string(0) if unknown; function_name is known
+  if and only if the first argument to closure was a string;
+  data_name is known only if the first argument was a string or
+  an object and the second argument a simple variable reference.
+</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#oxy">oxy</a>, <a href="std-query.html#is_func">is_func</a>, <a href="std-oxy.html#use">use</a></p>
+</div>
+<div class="docblock"><a name="gaccess"></a><h3>gaccess</h3>
+  <pre>DOCUMENT flags = gaccess(grp)
+      or grp = gaccess(grp, flags)
+  With single GRP argument, return current group object access flags.
+  With second FLAGS argument, set group object access flags, returning
+  the input GRP to allow constructs like g=gaccess(save(var1,var2), 3);
+  The access flags bits are:
+    1  set if no new members may be created
+    2  set if existing members cannot change data type or dimensions
+         (that is, they behave as x(..)=expr, rather than as x=expr)</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#oxy">oxy</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a></p>
+</div>
+<div class="docblock"><a name="is_obj"></a><h3>is_obj</h3>
+  <pre>DOCUMENT is_obj(x)
+      or is_obj(x,m)
+      or is_obj(x,m,errflag)
+  returns 1 if X is an object, else 0.  If X is an object which permits
+  numerical indexing of its members, returns 3.  With second parameter M,
+  query is for member M of object X.  If M specifies multiple members
+  (an index range, index list, or list of member names), then returns
+  an array of results.  Note that is_obj(x,) may return [] if the
+  object X is empty.  With third parameter ERRFLAG non-nil and non-zero,
+  is_obj will return -2 if X is not an object, and -1 wherever M
+  specifies a non-member (either a name not present or an index out
+  of range).  Without ERRFLAG, is_obj raises an error when M is not
+  a member.</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#oxy">oxy</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a></p>
+</div>
+<div class="docblock"><a name="oxy"></a><h3>oxy</h3>
+  <pre>DOCUMENT oxy
+  Object extension to yorick.  Various yorick packages may create
+  "objects", which are collections of data and methods (functions)
+  for operating on that data.  Yorick objects are much more free-form
+  than other object-oriented languages, in keeping with the fact that
+  yorick has no declarative statements.
+
+  Yorick objects have zero or more members; members may be anonymous
+  or named.  For objects supporting anonymous members (an optional
+  feature), all members whether anonymous or named can be accessed
+  by a 1-origin index, as if the members were a 1D array.  Object
+  indexing has unusual semantics, similar to the semantics of the
+  arguments to the save and restore commands, in which it is the
+  name of the variable passed as an argument to the object, rather
+  than the value of the variable, which determines which member is
+  to be extracted.  For example,
+    obj(i)
+  refers to the member of obj named "i", whether the value of i is
+  1 or 100 or "j" or sqrt(3)+2i or span(0,1,200).  However, by passing
+  an expression, rather than a simple variable reference, you can
+  make the value of the argument (now that it has no name) be significant.
+  Hence, obj("i") is also member "i", while obj(7) is the 7th member,
+  obj(3*n+2) is the 3*n+2nd member, and so on.  You can use the noop()
+  function to make a variable into an expression, if the member specifier
+  happens to be stored in a variable:
+    obj(noop(membspec))
+
+  Objects also accept some special arguments:
+    obj()   returns the whole object (same as without the parens)
+    obj(*)  returns the number of members
+    obj(*,) returns an array of member names (string(0) for anonymous)
+              in the index order (if the object supports indexing)
+    obj(*,m)  returns an array of the specified member names, or the
+              specified member indices if M is a string array
+              (if the object supports indexing)
+    obj(..) returns the attribute object associated with obj, which
+              may be an empty object, or nil [] if obj does not support
+              attributes
+
+  When called as a subroutine, objects accept keyword arguments as a
+  shorthand for the save command:
+    obj, m1=val1, m2=val2, ...;
+  is the same as:
+    save, obj, m1=val1, m2=val2, ...;
+
+  Yorick has a generic object, called a "group", which holds an arbitrary
+  collection of yorick variables.  You make group objects with the save
+  function (see help,save), and you can also use save to add members to
+  an existing group object.  Another way to create a group object is by
+  passing a membspec argument to any group which specifies multiple
+  members -- the result will be a group containing all the specified
+  members.  Hence, membspec may be an array of strings, an array of
+  indices, or an index range min:max:step, in order to produce a group
+  object holding all the specified members.  (Note that dimensionality
+  of membspec arrays is lost, and potentially not even number is
+  preserved if a single named member is specified multiple times.)
+
+  When you pass more than one argument to an object, the first one
+  specifies a single member, and subsequent arguments apply to that
+  member.  Thus,
+    obj(m, i, j, k)    is similar to     obj(m)(i, j, k)
+  In fact, these are exactly the same as long as M does not specify
+  a function.  When M is a function, there is a slight difference,
+  which is that the function (whether built-in or interpreted) is
+  executed in the context of the object obj.  Unlike classic object
+  oriented languages, in yorick the use of the context object is not
+  automatic -- the function M must specify which object members it
+  wishes to access.  You do that with the use function:
+    func method(x, y, z) {
+      extern var1, var2, var3;
+      use, var1, var2, var3;   // initializes vari from context object
+      // compute using var1, var2, var3, possibly redefining them
+      return result;
+      // just before return, any
+      // changes to var1, var2, var3 stored back to context object
+    }
+  In this form, the arguments to the use call must be external variables
+  to the function (method).  If you put the use call(s) at the top of the
+  function, you can dispense with the explicit extern statement, provided
+  you are careful to check that none of the names matches any of the
+  dummy parameter names (x, y, or z here).  [Eventually, the yorick
+  parser may treat use specially and enforce this restriction.  For now,
+  you need to be sure that any arguments are external to avoid incorrect
+  behavior.  Specifically, if any of the vari is local, the external
+  variable of that name will be set to nil (or the actual argument value
+  if vari is a dummy parameter) when the method returns.  Ouch.]
+  Although the vari look like they are extern to the method function,
+  use saves their external values and arranges to replace them when the
+  function returns, so they behave as if they were local to method.
+
+  You want to restrict the "use" subroutine/declarative to only those
+  object members which the method function changes.  If you merely wish
+  read access, you have two options, either call a special form of
+  restore, or call use() as a function in expressions.  For example,
+  suppose you are going to modify var1 and var3, but merely read var2
+  and var4 in the method context:
+    func method(x, y, z) {
+      use, var1, var3;   // initializes vari from context object
+      local var2, var4;  // otherwise, restore arguments would be extern
+      restore, use, var2, var4;
+      // compute using vari
+      var1 = something(var2);   var3 = something(var4);
+      return result;
+    }
+  Or equivalently,
+    func method(x, y, z) {
+      use, var1, var3;   // initializes vari from context object
+      // compute using vari
+      var1 = something(use(var2));   var3 = something(use(var4));
+      return result;
+    }
+  As a function, use(arg1, arg2, ...) is exactly the same as
+  obj(arg1, arg2, ...), where obj is the context object for the function.
+
+  You can a invoke method function M as a subroutine as well:
+    obj, m, i, j, k;
+
+  This stripped down facility lets you do most of the things (except
+  arguably type checking) other object oriented languages feature,
+  although it is a little difficult to see how to do this at first.
+  For example, you can think of a "class" as the constructor function
+  which makes instances:
+    func myclass(data1, data2, ...) {
+      // build and return the class, for example:
+      return save(method1, method2, ..., data1, data2, ...);
+    }
+    func method1(x) { return something; }
+    func method2(x,y) { return something; }
+  You make an instance with:
+    mything = myclass(d1, d2);
+  Then you can use your object: mything(method2,x,y) and so on.
+
+  This is slightly untidy, because you have to worry about never
+  colliding with the method names.  So you could bundle it up neatly
+  by making myclass itself an object containing all its methods and
+  constructor(s):
+    myclass = save(new, method1, method2, ...);  // save old values
+    func new(data1, data2, ...) {
+      // build and return the class, for example:
+      return save(method1, method2, ..., data1, data2, ...);
+    }
+    func method1(x) { return something; }
+    func method2(x,y) { return something; }
+    myclass = restore(myclass);   // swap new values into myclass
+  (See help,save for examples of this trick.)  Now the only variable
+  you have to worry about not clobbering is myclass, and you create
+  your object with:
+    mything = myclass(new, d1, d2);
+  and use it as before.
+
+  There are many ways to handle inheritance (multiple inheritance
+  is no harder); the simplest is just to use the save function to
+  concatentate new members onto the base class.  [Probably should
+  illustrate a good style here...]  The complete absence of type
+  checking is actually an advantage here: If an object has a method
+  with the required arguments and semantics, it will be usable no
+  matter what other members it has.
+
+  You can also extract object members using the dot operator:
+    obj.member    is a synonym for    obj("member")
+  but note that obj.member(args) may be very different from
+  obj(member,args); in general you are better off not using the
+  dot operator with objects.  In particular, note that
+    obj.member = value;   // ERROR!
+  does NOT set the member to value.  (Use obj,member=value;)
+</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#use">use</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-oxy.html#is_obj">is_obj</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-mesh.html#noop">noop</a>, <a href="std-oxy.html#closure">closure</a>, <a href="std-oxy.html#gaccess">gaccess</a></p>
+</div>
+<div class="docblock"><a name="use"></a><h3>use</h3>
+  <pre>DOCUMENT use, var1, var2, ...
+      or use(membspec, arg1, arg2, ...)
+  Access the context object in an object method function (see help,oxy).
+
+  In the first form, the VARi must be extern to the calling function,
+  and you get read-write access to the VARi.  That is, if you redefine
+  any of the VARi, your changes will be saved back to the context object
+  when the calling function returns.  Even though the VARi are external
+  to the method function, use arranges for their external values to be
+  replaced when the calling function returns, just as if they had been
+  local variables.
+
+  The second form is equivalent to obj(membspec, arg1, arg2, ...),
+  where obj is the context object.  You can use this whenever you need
+  only read access to membspec.
+
+  Alternatively, you can use the special forms of the save and
+  restore function to explicitly save and restore variables from the
+  context object:
+    restore, use, var1, var2, ...;
+    save, use, var1, var2, ...;
+  The use function is merely a shorthand for these explicit operations,
+  so you do not need to worry about multiple return points in the
+  method function or other details.
+</pre>
+  <p>SEE ALSO: <a href="std-oxy.html#oxy">oxy</a>, <a href="std-filebin.html#save">save</a>, <a href="std-filebin.html#save">restore</a>, <a href="std-filebin.html#openb">openb</a>, <a href="std-filebin.html#createb">createb</a>, <a href="std-mesh.html#noop">noop</a>, <a href="std-oxy.html#closure">closure</a></p>
+</div>

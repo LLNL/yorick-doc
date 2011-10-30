@@ -1,0 +1,183 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package rays (in rays.i) - create and plot ray sets for drat package </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="rays.html#best_rays">best_rays</a></p>
+    <h3>D</h3>
+    <p><a href="rays.html#dirt_rays">dirt_rays</a></p>
+    <h3>F</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="rays.html#form_rays">form_rays</a></p>
+    <h3>G</h3>
+    <p><a href="rays.html#get_s0">get_s0</a></p>
+    <h3>I</h3>
+    <p><a href="rays.html#internal_rays">internal_rays</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>P</h3>
+    <p><a href="rays.html#picture_rays">picture_rays</a></p>
+    <p><a href="rays.html#plray">plray</a></p>
+    <p><a href="rays.html#plray_lims">plray_lims</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="best_rays"></a><h3>best_rays</h3>
+  <pre>DOCUMENT best_rays(rays)
+  returns 5-element (x,y,z,theta,phi) representation of RAYS.
+  The first dimension of RAYS may be length 3, 5, or 6 to represent
+  the ray(s) in TDG/DIRT coordinates (x,y,theta), "best" coordinates
+  (x,y,z,theta,phi), or internal coordinates (cos,sin,y,z,x,r),
+  respectively.  The first dimension of the result always has length 5.
+
+  The "best" coordinate system is the easiest to visualize:
+  (x,y,z) represents any point on the ray, while (theta,phi)
+  represents the ray direction in standard spherical coordinates
+  relative to the +z-axis.  Namely, theta is the angle from the
+  +z-direction to the ray direction (between 0 and pi), and phi is
+  the counterclockwise angle from the +x-axis to the projection of
+  the ray direction into the xy-plane, assuming xyz is a right-handed
+  coordinate system.
+
+  As a specification of a ray, this system is doubly redundant because
+  the point (x,y,z) could be any point on the ray, and the underlying
+  mesh through which the ray propagates is cylindrically symmetric about
+  the z-axis.
+
+  However, the slimits parameter -- used to specify the points along
+  a ray where the transport integration starts and stops -- is
+  measured from the point (x,y,z) specified as a part of the
+  (x,y,z,theta,phi) ray coordinate.  Thus, any change in the point
+  (x,y,z) on a ray must be accompanied by a corresponding change in
+  the slimits for that ray.
+</pre>
+  <p>SEE ALSO: <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a>, <a href="rays.html#get_s0">get_s0</a>, <a href="rays.html#picture_rays">picture_rays</a></p>
+</div>
+<div class="docblock"><a name="dirt_rays"></a><h3>dirt_rays</h3>
+  <pre>DOCUMENT dirt_rays(rays)
+  returns 3-element (x,y,theta) representation of RAYS.
+  The first dimension of RAYS may be length 3, 5, or 6 to represent
+  the ray(s) in TDG/DIRT coordinates (x,y,theta), "best" coordinates
+  (x,y,z,theta,phi), or internal coordinates (cos,sin,y,z,x,r),
+  respectively.  The first dimension of the result always has length 3.
+
+  The TDG/DIRT coordinate system is based on the coordinates (x,y)
+  in a plane normal to the ray.  Unfortunately, the old TDG and DIRT
+  codes used an angle theta which has the opposite sense from the
+  "best" and internal coordinates.  Therefore, conversion from
+  TDG/DIRT coordinates to internal coordinates will reverse the
+  sign of theta.  Conversion from TDG/DIRT coordinates to "best"
+  coordinates always results in positive theta, but the angle phi
+  will be pi for positive input theta.
+
+  The slimits parameter -- used to specify the points along
+  a ray where the transport integration starts and stops -- is
+  measured from the point of closest approach of the ray described
+  by (x,y,theta) to the origin x=y=z=0.  Therefore, slimits is
+  independent of the TDG/DIRT ray coordinate representation.
+</pre>
+  <p>SEE ALSO: <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#internal_rays">internal_rays</a>, <a href="rays.html#get_s0">get_s0</a>, <a href="rays.html#picture_rays">picture_rays</a></p>
+</div>
+<div class="docblock"><a name="form_rays"></a><h3>form_rays</h3>
+  <pre>DOCUMENT best= form_rays( [x, y, z, theta, phi] )
+      or dirt= form_rays( [x, y, theta] )
+      or internal= form_rays( [cos, sin, y, z, x, r] )
+  forms 5-by-nrays, 3-by-nrays, or 6-by-nrays ray representation
+  given individual lists of array coordinates.  The [...]
+  operator builds an nrays-by-5, nrays-by-3, or nrays-by-6
+  array, which form_rays transposes.  The "nrays" may represent
+  zero or more actual dimensions.</pre>
+  <p>SEE ALSO: <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a>, <a href="rays.html#picture_rays">picture_rays</a></p>
+</div>
+<div class="docblock"><a name="get_s0"></a><h3>get_s0</h3>
+  <pre>DOCUMENT get_s0(rays)
+  returns the s-coordinate of the point of closest approach of
+  the RAYS to the origin x=y=z=0.  The length of the first dimension
+  of RAYS may be either 3, 5, or 6; this first dimension will not
+  be present in the result.
+
+  The s-coordinate represents distance along the ray, increasing in
+  the direction the ray moves.  The 5 and 6 component ray coordinates
+  include a reference point (x,y,z) on the ray; s=0 at that point.
+  For the 3 component ray coordinate, get_s0 always returns 0.
+</pre>
+  <p>SEE ALSO: <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a></p>
+</div>
+<div class="docblock"><a name="internal_rays"></a><h3>internal_rays</h3>
+  <pre>DOCUMENT internal_rays(rays)
+  returns 6-element (cos,sin,y,z,x,r) representation of RAYS.
+  The first dimension of RAYS may be length 3, 5, or 6 to represent
+  the ray(s) in TDG/DIRT coordinates (x,y,theta), "best" coordinates
+  (x,y,z,theta,phi), or internal coordinates (cos,sin,y,z,x,r),
+  respectively.  The first dimension of the result always has length 6.
+
+  The internal coordinates are what Drat uses internally to
+  describe the ray.  The coordinate system is rotated about the
+  z-axis until the ray lies in a plane of constant y (there are at
+  least two ways to do this).  The point (x,y,z) can be any point on
+  the ray, and r=sqrt(x^2+y^2) is the corresponding cylindrical radius.
+  The clockwise angle theta from the +z-axis to the ray direction
+  (which always lies in the zx-plane) determines cos=cos(theta) and
+  sin=sin(theta).
+
+  As a specification of a ray, this system is triply redundant because
+  the point (x,y,z) could be any point on the ray, both the sine and
+  cosine of theta appear, and r=sqrt(x^2+y^2).
+
+  However, the slimits parameter -- used to specify the points along
+  a ray where the transport integration starts and stops -- is
+  measured from the point (x,y,z) specified as a part of the
+  (cos,sin,y,z,x,r) ray coordinate.  Thus, any change in the point
+  (x,y,z) on a ray must be accompanied by a corresponding change in
+  the slimits for that ray.
+</pre>
+  <p>SEE ALSO: <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#get_s0">get_s0</a>, <a href="rays.html#picture_rays">picture_rays</a></p>
+</div>
+<div class="docblock"><a name="picture_rays"></a><h3>picture_rays</h3>
+  <pre>DOCUMENT picture_rays(xpict, ypict, ray)
+      or picture_rays(xpict, ypict, ray, theta_up, phi_up)
+  returns 2-D array of rays, one at the center of each zone (which
+  represents a pixel here) of the mesh (XPICT, YPICT).  The rays are
+  all parallel to the given RAY (a 3, 5, or 6 element vector).  The
+  (XPICT, YPICT) coordinates are in the plane perpendicular to the rays,
+  with the origin XPICT=YPICT=0 at the given RAY.
+
+  If (THETA_UP, PHI_UP) are given, the +YPICT-axis will lie along the
+  projection of the (THETA_UP, PHI_UP) direction into the (XPICT, YPICT)
+  plane.  The default (THETA_UP, PHI_UP) is (pi/2, pi/2) -- the +y-axis
+  -- unless (THETA, PHI) is the y-axis, in which case it is (pi/2, 0)
+  -- the +x-axis.  This matches the DIRT/TDG ray coordinate convention
+  in the sense that if RAY is [0,0,theta], then
+  (zncen(XPICT),zncen(YPICT)) are the DIRT/TDG (x,y) coordinates for
+  the rays.
+
+  If XPICT and YPICT are imax-by-jmax, the returned array will have
+  dimensions 5-by-(imax-1)-by-(jmax-1).  That is, "best" coordinates
+  are returned.  The (x,y,z) of all of the returned rays will lie in
+  the plane perpendicular to the ray passing through the given central
+  RAY.
+</pre>
+  <p>SEE ALSO: <a href="rays.html#form_rays">form_rays</a>, <a href="rays.html#best_rays">best_rays</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a>, <a href="std-mesh.html#area">area</a></p>
+</div>
+<div class="docblock"><a name="plray"></a><h3>plray</h3>
+  <pre>DOCUMENT plray, ray
+  where RAY is a vector of length 5 representing [x, y, z, theta, phi]
+  -- a point (x,y,z) on the ray, and the ray direction (theta,phi)
+  relative to the z-axis.  The ray hyperbola is plotted with the
+  z-axis horizontal.  The portion of the ray plotted is determined
+  by the plray_lims command, which must be issued prior to the first
+  plray.
+  The 3 and 6 component ray formats are also accepted.</pre>
+  <p>SEE ALSO: <a href="rays.html#plray_lims">plray_lims</a>, <a href="rays.html#dirt_rays">dirt_rays</a>, <a href="rays.html#internal_rays">internal_rays</a></p>
+</div>
+<div class="docblock"><a name="plray_lims"></a><h3>plray_lims</h3>
+  <pre>DOCUMENT plray_lims, zmin, zmax, rmax
+  sets the (z,r) coordinate limits for the plray command.  Subsequent
+  rays will be clipped to the region from z=ZMIN to z=ZMAX, and from
+  r=0 to r=RMAX.</pre>
+  <p>SEE ALSO: <a href="rays.html#plray">plray</a></p>
+</div>

@@ -1,0 +1,113 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Loops"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_11.html#logical-operators" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3.2 Combining conditions with &amp;&amp; and ||" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_13.html#while-and-do" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4.1 The while and do while statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Loops-1"></a>
+<h3 class="subsection">1.2.4 Loops</h3>
+
+<p>Most loops in Yorick programs are implicit; remember that operations
+between array arguments produce array results.  Whenever you write a
+Yorick program, you should be suspicious of <em>all</em> explicit loops.
+Always ask yourself whether a clever use of array syntax could have
+avoided the loop.
+</p>
+<p>To illustrate an appropriate Yorick loop, let&rsquo;s revise <kbd>q_out</kbd> to
+write several values of Q in a single call.  Incidentally, this sort
+of incremental revision of a function is very common in Yorick program
+development.  As you use a function, you notice that the surrounding
+code is often the same, suggesting a savings if it were incorporated
+into the function.  Again, a careful job leaves all of the previous
+behavior of <kbd>q_out</kbd> intact:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func q_out(Q, file)
+{
+  if (structof(file)==string) file = create(file);
+  n = numberof(Q);
+  for (i=1 ; i&lt;=n ; ++i) {
+    write, file, &quot;Q = &quot;+pr1(Q(i));
+    write, file, &quot;   theta       amplitude&quot;;
+    write, file, theta, damped_wave(theta,Q(i));
+  }
+  return file;
+}
+</pre></td></tr></table>
+
+<p>Two new features here are the <kbd>numberof</kbd> function, which returns
+the length of the array <kbd>Q</kbd>, and the array indexing syntax
+<kbd>Q(i)</kbd>, which extracts the <kbd>i</kbd>-th element of the array
+<kbd>Q</kbd>.  If <kbd>Q</kbd> is scalar (as it had to be before this latest
+revision), <kbd>numberof</kbd> returns 1, and <kbd>Q(1)</kbd> is the same as
+<kbd>Q</kbd>, so scalar <kbd>Q</kbd> works as before.
+</p>
+<p>But the most important new feature is the <kbd>for</kbd> loop.  It says to
+initialize <kbd>i</kbd> to 1, then, as long as <kbd>i</kbd> remains less than or
+equal to <kbd>n</kbd>, to execute the loop body, which is a compound of
+three write statements.  Finally, after each pass, the increment
+expression <kbd>++i</kbd> is executed before the <kbd>i&lt;=n</kbd> condition is
+evaluated.  <kbd>++i</kbd> is equivalent to <kbd>i=i+1</kbd>; <kbd>--i</kbd> means
+<kbd>i=i-1</kbd>.
+</p>
+<p>A loop body may also be a single statement, in which case the curly
+braces are unecessary.  For example, the following lines will write
+the Q=3, Q=2, and Q=1 curves to the file &lsquo;<tt>q.out</tt>&rsquo;, then plot
+them:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">q_list = [3,2,1]
+q_out, q_list, &quot;q.out&quot;
+fma; for(i=1;i&lt;=3;++i) plg, damped_wave(theta,q_list(i)), theta
+</pre></td></tr></table>
+
+<p>A <kbd>for</kbd> loop with a <kbd>plg</kbd> body is the easiest way to overlay a
+series of curves.  After the three simple statement types, <kbd>for</kbd>
+statements see the most frequent direct use from the keyboard.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_13.html#while-and-do">&bull; while and do</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_14.html#for">&bull; for</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_15.html#goto">&bull; goto</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        How to break, continue, and goto from a loop body.
+</td></tr>
+</table>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_11.html#logical-operators" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.2.3.2 Combining conditions with &amp;&amp; and ||" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_13.html#while-and-do" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.2.4.1 The while and do while statements" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_6.html#Flow-control" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.2 Flow Control Statements" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

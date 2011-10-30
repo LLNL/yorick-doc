@@ -1,0 +1,109 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package levmar (in levmar.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>L</h3>
+  </div>
+  <div class="ndex2">
+    <p><a href="levmar.html#levmar">levmar</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="levmar.html#levmar_partial">levmar_partial</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="levmar"></a><h3>levmar</h3>
+  <pre>DOCUMENT a = levmar(y, x, f, a0, avar, acovar)
+  perform a Levenberg-Marquardt non-linear least squares fit
+  to data values Y, which are functions of X.  The dimensions
+  of X need bear no particular relationship to the dimensions
+  of Y, but Y must be a 1D array.  The function F maps X into Y,
+  as a function of some additional parameters A, according to
+    Y = F(X, A)
+  Again, the dimensions of A bear no particular relation to
+  the dimensions of either X or Y.  The input A0 is the initial
+  estimate of the parameter values, which must be made with some
+  care for the algorithm to converge.  Note that it may not converge
+  to the expected relative minimum in many situations.
+
+  The parameters Y and A must be 1D arrays, X can be anything.
+
+  AVAR and ACOVAR are return arguments; ACOVAR is the covariance
+  matrix of the fit parameters A, and AVAR is its diagonal.  Hence
+  AVAR has the same dimensions as A0, while ACOVAR is a 2D symmetric
+  matrix, whose diagonal is AVAR.  Multiply AVAR or ACOVAR by
+  levmar_chi2 if you did not use wgt= and want to use the quality
+  of the fit to estimate the variances of the parameters.
+  ACOVAR is what is returned by regress_cov, see help,regress_cov.
+
+  You may be able to improve the performance of levmar by supplying
+  analytic derivatives.  To support this improvement, levmar permits
+  three different "prototypes" for the function F:
+    func F(x, a)
+      if you cannot compute analytic dfda
+      approximate dfda will be computed by levmar_partial (see help)
+    func F(x, a, &dfda)
+      if you can return analytic dfda
+      if levmar will use dfda, dfda=1 on input
+      if levmar will not use dfda, dfda=[] on input
+    func F(x, a, &dfda, deriv=)
+      if levmar will use dfda, it sets deriv=1, else deriv=0
+      (this form is for backward compatibility with original lmfit)
+  The levmar function automatically detects the prototype of F. (!!)
+  In all cases, dfda is defined as:
+    dfda(i,j) = partial[Y(i)] / partial[A(j)]
+  Note that the external variable fit (the fit= keyword to levmar)
+  is available to F, indicating that only a subset of the partial
+  derivatives must be computed.  Set unused j indices to zero.
+
+ EXTERNAL VARIABLES:
+     outputs:
+   levmar_chi2             final value of chi2
+   levmar_chi20            initial value of chi2 (for a0)
+   levmar_lambda           final value of lambda
+   levmar_neval            number of calls to F
+     inputs:
+   levmar_itmax = 100      maximum number of gradient recalculations
+   levmar_tol = 1.e-7      stop when chi2 changes by less than this
+   levmar_lambda0 = 0.001  initial value of lambda
+   levmar_lambda1 = 1.e12  maximum permitted value of lambda
+   levmar_gain = 10.       factor by which to change lambda
+   levmar_aabs, levmar_arel, levmar_ada -- see levmar_partial
+
+ KEYWORDS:
+   fit=   index list into a0 of parameters to be varied
+     the returned model will equal a0 for parameters not varied,
+     avar and acovar will be 0.0 for parameters not varied
+   amin=  minimum values for parameters, same size as a0
+   amax=  maximum parameter values, same size as a0
+     the function F will not be called with parameters outside
+     these specified ranges
+   wgt=   same size as Y, weightings for each point
+     if sigma_y(i) is standard deviation of i-th point, then
+     wgt=1./sigma_y^2 is the appropriate weight.
+   lu=    set non-zero to use LUsolve instead of SVsolve
+     LUsolve will be faster, which will only be an issue if the
+     number of parameters is large
+</pre>
+  <p>SEE ALSO: <a href="regress.html#regress">regress</a>, <a href="levmar.html#levmar_partial">levmar_partial</a></p>
+</div>
+<div class="docblock"><a name="levmar_partial"></a><h3>levmar_partial</h3>
+  <pre>DOCUMENT y = levmar_partial(f, x, a, dfda)
+  return y=F(X,A) and DFDA(i,j) = partial[F(X,A)(i)] / partial[A(j)]
+  by finite differences.  Accepts fit=, amin=, amax= keywords with
+  same meaning as levmar.  DFDA is only computed if DFDA=1 on input;
+  if DFDA=[] or 0, the (expensive) DFDA calculation is skipped.
+
+  Uses levmar_arel and levmar_aabs to compute the step sizes
+  use to compute the patial derivatives as follows:
+    da = levmar_aabs + levmar_arel*abs(A)
+  (Hence levmar_aabs, levmar_arel can be arrays with the same length
+  as the parameter array A.)  By default, levmar_arel = 1.e-6, and
+  levmar_aabs = 0.  If levmar_aabs = 0 and A(i)=0, then da(i)=1.e-9.
+  You can also supply a function, levmar_ada(A) returning da>0 by
+  whatever formula you wish.</pre>
+  <p>SEE ALSO: <a href="levmar.html#levmar">levmar</a></p>
+</div>

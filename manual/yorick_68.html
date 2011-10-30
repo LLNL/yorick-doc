@@ -1,0 +1,101 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="logxy"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_67.html#square-limits" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.1.3 Forcing square limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_69.html#gridxy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.3 gridxy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="logxy-1"></a>
+<h3 class="subsection">3.2.2 logxy</h3>
+
+<p>You may want to choose among log, semi-log, or ordinary linear scale
+axes.  Use the logxy command:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">logxy, 1, 1       // log-log plot
+logxy, 1, 0       // semi-log plot, x logarithmic
+logxy, 0, 1       // semi-log plot, y logarithmic
+logxy, 0, 0       // linear axis scales
+</pre></td></tr></table>
+
+<p>You can also omit the x or y flag to leave the scaling of that axis
+unchanged:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">logxy, , 1
+</pre></td></tr></table>
+
+<p>changes the y axis to a log scale, leaving the x axis scaling
+unchanged.
+</p>
+<p>The flags returned by the limits function include the current logxy
+settings, if you need them in a program.
+</p>
+<p>Zero or negative values in your data have no catastrophic effects with
+log axis scaling; Yorick takes the absolute value of your data and
+adds a very small offset before applying the logarithm function.  As a
+side effect, you lose any indication of the sign of your data in a log
+plot.  If you insist you need a way to get log axis scaling for
+oscillating data, write a function to treat negative points specially.
+For example, to draw positive-y portions solid and negative-y portions
+dashed, you might use a function like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">func logplg(y, x)
+{
+  s = sum(y&gt;=0.);  /* number of positive-y points */
+  n = numberof(y);
+  if (s) plg, max(y,0.), x, type=&quot;solid&quot;;
+  if (s&lt;n) plg, min(y,0.), x, type=&quot;dash&quot;;
+}
+</pre></td></tr></table>
+
+<p>You always have the option of plotting the logarithm of a function,
+instead of using log axes:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">logxy,0,1; plg,y,x
+</pre></td></tr></table>
+
+<p>plots the same curve as
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">logxy,0,0; plg,log(y),x
+</pre></td></tr></table>
+
+<p>The log axis scaling merely changes the position of the ticks and
+their labels; the y axis ticks will look like a slide rule scale in
+the first case, but like an ordinary ruler in the second.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_67.html#square-limits" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.2.1.3 Forcing square limits" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_69.html#gridxy" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.2.3 gridxy" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_63.html#Plot-limits" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.2 Plot limits and relatives" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

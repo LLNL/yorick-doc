@@ -1,0 +1,201 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package graph-plotmisc (in graph.i) - miscellaneous plotting-related functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="graph-plotmisc.html#bytscl">bytscl</a></p>
+    <h3>C</h3>
+    <p><a href="graph-plotmisc.html#contour">contour</a></p>
+    <h3>H</h3>
+    <p><a href="graph-plotmisc.html#histeq_scale">histeq_scale</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>M</h3>
+    <p><a href="graph-plotmisc.html#mesh_loc">mesh_loc</a></p>
+    <p><a href="graph-plotmisc.html#mouse">mouse</a></p>
+    <p><a href="graph-plotmisc.html#moush">moush</a></p>
+    <h3>P</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="graph-plotmisc.html#pause">pause</a></p>
+    <h3>R</h3>
+    <p><a href="graph-plotmisc.html#rgb_read">rgb_read</a></p>
+    <h3>S</h3>
+    <p><a href="graph-plotmisc.html#spann">spann</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="bytscl"></a><h3>bytscl</h3>
+  <pre>DOCUMENT bytscl(z)
+      or bytscl(z, top=max_byte, cmin=lower_cutoff, cmax=upper_cutoff)
+  returns a char array of the same shape as Z, with values linearly
+  scaled to the range 0 to one less than the current palette size.
+  If MAX_BYTE is specified, the scaled values will run from 0 to
+  MAX_BYTE instead.
+  If LOWER_CUTOFF and/or UPPER_CUTOFF are specified, Z values outside
+  this range are mapped to the cutoff value; otherwise the linear
+  scaling maps the extreme values of Z to 0 and MAX_BYTE.</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a>, <a href="graph-plotmisc.html#histeq_scale">histeq_scale</a></p>
+</div>
+<div class="docblock"><a name="contour"></a><h3>contour</h3>
+  <pre>DOCUMENT nc= contour(yc,xc, level, z, y,x)
+      or nc= contour(yc,xc, level, z, y,x,ireg)
+
+  returns the points on the contour curve that would have been
+  plotted by plc.  Z, Y, X, and IREG are as for plc, and the
+  triangle= and region= keywords are accepted and have the same
+  meaning as for plc.  Unlike plc, the triangle array is an output
+  as well as an input to contour; if supplied it may be modified
+  to reflect any triangulations which were performed by contour.
+
+  LEVEL is a scalar z value to return the points at that contour
+  level.  All such points lie on edges of the mesh.  If a contour
+  curve closes, the final point is the same as the initial point
+  (i.e.- that point is included twice in the returned list).
+
+  LEVEL is a pair of z values [z0,z1] to return the points of
+  a set of polygons which outline the regions between the two
+  contour levels.  These will include points on the mesh boundary
+  which lie between the levels, in addition to the edge points
+  for both levels.  The polygons are closed, simply connected,
+  and will not contain more than about 4000 points (larger polygons
+  are split into pieces with a few points repeated where the pieces
+  join).
+
+  YC and XC are the output points on the curve(s), or nil if there
+  are no points.  On input, they must be simple variable references,
+  not expressions.  The return value NC is a list of the lengths of
+  the polygons/polylines returned in (XC,YC), or nil if there are
+  none.  numberof(XC)==numberof(YC)==sum(NC).  For the level pair
+  case, YC, XC, and NC are ready to be used as inputs to plfp.
+
+KEYWORDS: triangle, region</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plotter.html#plfp">plfp</a></p>
+</div>
+<div class="docblock"><a name="histeq_scale"></a><h3>histeq_scale</h3>
+  <pre>DOCUMENT histeq_scale(z, top=top_value, cmin=cmin, cmax=cmax)
+  returns a byte-scaled version of the array Z having the property
+  that each byte occurs with equal frequency (Z is histogram
+  equalized).  The result bytes range from 0 to TOP_VALUE, which
+  defaults to one less than the size of the current palette (or
+  255 if no pli, plf, or palette command has yet been issued).
+
+  If non-nil CMIN and/or CMAX is supplied, values of Z beyond these
+  cutoffs are not included in the frequency counts.
+</pre>
+  <p>SEE ALSO: <a href="graph-plotmisc.html#bytscl">bytscl</a>, <a href="graph-plotter.html#plf">plf</a>, <a href="graph-plotter.html#pli">pli</a></p>
+</div>
+<div class="docblock"><a name="mesh_loc"></a><h3>mesh_loc</h3>
+  <pre>DOCUMENT mesh_loc(y0, x0)
+      or mesh_loc(y0, x0, y, x)
+      or mesh_loc(y0, x0, y, x, ireg)
+  returns the zone index (=i+imax*(j-1)) of the zone of the mesh
+  (X,Y) (with optional region number array IREG) containing the
+  point (X0,Y0).  If (X0,Y0) lies outside the mesh, returns 0.
+  Thus, eg- ireg(mesh_loc(x0, y0, y, x, ireg)) is the region number of
+  the region containing (x0,y0).  If no mesh specified, uses default.
+  X0 and Y0 may be arrays as long as they are conformable.
+
+  For mesh_loc wrappers to duplicate the functionality of the
+  digitize and interp functions in 2D, see the library file digit2.i.
+  After #include "digit2.i", type:  help,digit2
+</pre>
+  <p>SEE ALSO: <a href="graph-plotter.html#plmesh">plmesh</a>, <a href="graph-plotmisc.html#moush">moush</a>, <a href="graph-plotmisc.html#mouse">mouse</a></p>
+</div>
+<div class="docblock"><a name="mouse"></a><h3>mouse</h3>
+  <pre>DOCUMENT result= mouse(system, style, prompt)
+  displays a PROMPT, then waits for a mouse button to be pressed,
+  then released.  Returns array of eleven doubles:
+    result= [x_pressed, y_pressed, x_released, y_released,
+             xndc_pressed, yndc_pressed, xndc_released, yndc_released,
+             system, button, modifiers]
+
+  If SYSTEM>=0, the first four coordinate values will be relative to
+  that coordinate system.
+  For SYSTEM<0, the first four coordinate values will be relative to
+  the coordinate system under the mouse when the button was pressed.
+  The second four coordinates are always normalized device coordinates,
+  which start at (0,0) in the lower left corner of the 8.5x11 sheet of
+  paper the picture will be printed on, with 0.0013 NDC unit being
+  1/72.27 inch (1.0 point).  Look in the style sheet for the location
+  of the viewport in NDC coordinates (see the style keyword).
+
+  If STYLE is 0, there will be no visual cues that the mouse
+  command has been called; this is intended for a simple click.
+  If STYLE is 1, a rubber band box will be drawn; if STYLE is 2,
+  a rubber band line will be drawn.  These disappear when the
+  button is released.
+
+  Clicking a second button before releasing the first cancels the
+  mouse function, which will then return nil.
+  Ordinary text input also cancels the mouse function, which again
+  returns nil.
+
+  The left button reverses forground for background (by XOR) in
+  order to draw the rubber band (if any).  The middle and right
+  buttons use other masks, in case the rubber band is not visible
+  with the left button.
+
+  long(result(9)) is the coordinate system in which the first four
+  coordinates are to be interpreted.
+  long(result(10)) is the button which was pressed, 1 for left, 2
+  for middle, and 3 for right (4 and 5 are also possible).
+  long(result(11)) is a mask representing the modifier keys which
+  were pressed during the operation: 1 for shift, 2 for shift lock,
+  4 for control, 8 for mod1 (alt or meta), 16 for mod2, 32 for mod3,
+  64 for mod4, and 128 for mod5.
+
+  Holding the shift key and pressing the left mouse button is
+  equivalent to pressing the middle mouse button.  Similarly,
+  pressing meta-left is equivalent to the right button.  This
+  permits access to the middle and right button functions on
+  machines (e.g.- most laptops) with two button or one button
+  mice.  The long(result(10)) value returned by mouse() reflects
+  this convention, returning 2 or 3 for those cases, even though
+  it is button 1 that is actually being pressed.  Therefore, there
+  is no way to distinguish shift-left from shift-middle, because the
+  long(result(11)) mask indicates tht the shift button is pressed
+  in either case.  (And on a machine without a middle button,
+  there would be no way to emulate shift-middle anyway.)
+</pre>
+  <p>SEE ALSO: <a href="graph-plotmisc.html#moush">moush</a></p>
+</div>
+<div class="docblock"><a name="moush"></a><h3>moush</h3>
+  <pre>DOCUMENT moush()
+      or moush(y, x, ireg)
+  returns the 1-origin zone index for the point clicked in
+  for the default mesh, or for the mesh (X,Y) (region array IREG).</pre>
+  
+</div>
+<div class="docblock"><a name="pause"></a><h3>pause</h3>
+  <pre>DOCUMENT pause, milliseconds
+      or pause(milliseconds)
+  pause for the specified number of milliseconds of wall clock
+  time, or until input arrives from the keyboard.
+  If you call pause as a function, the return value is 1
+  if the specified number of milliseconds elapsed, or 0 if
+  keyboard input caused the pause to abort.
+  This is intended for use in creating animated sequences.</pre>
+  
+</div>
+<div class="docblock"><a name="rgb_read"></a><h3>rgb_read</h3>
+  <pre>DOCUMENT rgb = rgb_read()
+      or rgb = rgb_read(n)
+  Read contents of current graphics window, or of graphics window N.
+  RGB is a 3xNXxNY array of char where NXxNY is the current shape of
+  the window in pixels.  RGB(1,,) is the red component, RGB(2,,) is
+  the green component, and RGB(3,,) is the blue component, with 0
+  black and 255 full intensity.  RGB(,,1) is the top row of the
+  window, RGB(,,2) the second row, and so on to RGB(,,0), which is
+  the bottom row.  (So RGB(,,::-1) to pli redraws a copy.)</pre>
+  
+</div>
+<div class="docblock"><a name="spann"></a><h3>spann</h3>
+  <pre>DOCUMENT spann(zmin, zmax, n)
+  return no more than N equally spaced "nice" numbers between
+  ZMIN and ZMAX.</pre>
+  <p>SEE ALSO: <a href="std-array.html#span">span</a>, <a href="std-array.html#spanl">spanl</a>, <a href="graph-plotter.html#plc">plc</a>, <a href="graph-plothi.html#plfc">plfc</a></p>
+</div>

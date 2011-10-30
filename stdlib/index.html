@@ -1,0 +1,368 @@
+---
+layout: default
+headline: Standard Library
+---
+<p>Go to <a href="index-f.html">index of all functions or symbols</a>.</p>
+<p>The main yorick distribution includes many functions and packages
+of functions, which are present in every yorick build.  (The exception
+is the mpy package for parallel processing, which may not be
+universally present.)  The documentation for these functions is available
+via the interactive help command:<pre>
+   help, symbol
+</pre>
+where symbol is any yorick variable or function.  Help prints the text
+in a special document comment in the source code where the symbol was
+defined.  Here is an automatically generated compendium of all such
+document comments in the main yorick distribution.  The Plugins link
+in the sidebar will take you to similar collections of document
+comments for add-on yorick packages which are not part of the main
+distribution.</p>
+
+<h2>Built-in functions</h2>
+<p class="seclist"><a href="std-advanced.html">std-advanced</a> (in std.i) - performance and interface optimizations </p>
+<p class="seclist"><a href="std-array.html">std-array</a> (in std.i) - building and manipulating arrays </p>
+<p class="seclist"><a href="std-checksum.html">std-checksum</a> (in std.i) - crc, md5, sha1 checksums </p>
+<p class="seclist"><a href="std-debug.html">std-debug</a> (in std.i) - debug commands </p>
+<p class="seclist"><a href="std-filebin.html">std-filebin</a> (in std.i) - save and restore binary data </p>
+<p class="seclist"><a href="std-fileio.html">std-fileio</a> (in std.i) - generic file i/o </p>
+<p class="seclist"><a href="std-filetxt.html">std-filetxt</a> (in std.i) - text i/o to terminal, file, or string </p>
+<p class="seclist"><a href="std-include.html">std-include</a> (in std.i) - including files and parsing strings </p>
+<p class="seclist"><a href="std-info.html">std-info</a> (in std.i) - help and information </p>
+<p class="seclist"><a href="std-list.html">std-list</a> (in std.i) - list objects (deprecated, use oxy) </p>
+<p class="seclist"><a href="std-math.html">std-math</a> (in std.i) - simple mathematical functions </p>
+<p class="seclist"><a href="std-mesh.html">std-mesh</a> (in std.i) - functions on mesh arrays </p>
+<p class="seclist"><a href="std-oxy.html">std-oxy</a> (in std.i) - object oriented extensions to yorick </p>
+<p class="seclist"><a href="std-plugin.html">std-plugin</a> (in std.i) - loading plugins </p>
+<p class="seclist"><a href="std-query.html">std-query</a> (in std.i) - finding out variable type and properties </p>
+<p class="seclist"><a href="std-string.html">std-string</a> (in std.i) - string manipulation </p>
+<p class="seclist"><a href="std-system.html">std-system</a> (in std.i) - interacting with system </p>
+
+<p class="seclist"><a href="paths.html">paths</a> (in paths.i) - file system paths </p>
+
+<p class="seclist"><a href="fft.html">fft</a> (in fft.i) - Fast Fourier Transform functions </p>
+
+<p class="seclist"><a href="matrix.html">matrix</a> (in matrix.i) - LAPACK linear algebra functions </p>
+
+<h2>Basic graphic functions</h2>
+<p class="seclist"><a href="graph-plothi.html">graph-plothi</a> (in graph.i) - higher level plotting functions </p>
+<p class="seclist"><a href="graph-plotkey.html">graph-plotkey</a> (in graph.i) - keywords for plotting functions </p>
+<p class="seclist"><a href="graph-plotlim.html">graph-plotlim</a> (in graph.i) - plot limits and axis scaling </p>
+<p class="seclist"><a href="graph-plotmisc.html">graph-plotmisc</a> (in graph.i) - miscellaneous plotting-related functions </p>
+<p class="seclist"><a href="graph-plotout.html">graph-plotout</a> (in graph.i) - controlling plot windows and files </p>
+<p class="seclist"><a href="graph-plotq.html">graph-plotq</a> (in graph.i) - plot query and edit functions </p>
+<p class="seclist"><a href="graph-plotter.html">graph-plotter</a> (in graph.i) - plotting functions </p>
+
+<h2>Interpreted library packages</h2>
+<p>
+The following include files contain Yorick code built from the
+basic Yorick functions.  These are part of the Yorick distribution,
+and are located in the directory <a href="paths.html#Y_SITE">Y_SITE</a>/i.
+</p>
+<h3>Special functions:</h3>
+<dl class="docdef">
+
+<dt><a href="bessel.html">bessel.i</a></dt><dd>- integer order Bessel functions
+<br />Functions: <a href="bessel.html#bessj">bessj</a>, <a href="bessel.html#bessy">bessy</a>, <a href="bessel.html#bessi">bessi</a>, <a href="bessel.html#bessk">bessk</a></dd>
+<dt><a href="gamma.html">gamma.i</a></dt><dd>- gamma and beta functions (erfc in dawson.i better)
+<br />Functions: <a href="gamma.html#ln_gamma">ln_gamma</a>, <a href="gamma.html#beta">beta</a>, <a href="gamma.html#bico">bico</a> (binomial coefficients), <a href="dawson.html#erfc">erfc</a></dd>
+<dt><a href="gammp.html">gammp.i</a></dt><dd>- incomplete gamma and beta functions
+<br />Functions: <a href="gammp.html#gammp">gammp</a>, <a href="gammp.html#gammq">gammq</a>, <a href="gammp.html#betai">betai</a></dd>
+<dt><a href="dawson.html">dawson.i</a></dt><dd>- Dawson's integral, error functions
+<br />Functions: <a href="dawson.html#dawson">dawson</a>, <a href="dawson.html#erf">erf</a>, <a href="dawson.html#erfc">erfc</a></dd>
+<dt><a href="ellipse.html">ellipse.i</a></dt><dd>- complete elliptic integrals (deprecated, elliptic.i better)
+<br />Functions: <a href="ellipse.html#EllipticE">EllipticE</a>, <a href="ellipse.html#EllipticK">EllipticK</a></dd>
+<dt><a href="elliptic.html">elliptic.i</a></dt><dd>- elliptic functions
+<br />Functions: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ell_am">ell_am</a>, <a href="elliptic.html#ell_f">ell_f</a>, <a href="elliptic.html#ell_e">ell_e</a>, <a href="elliptic.html#dn_">dn_</a>, <a href="elliptic.html#ellip_k">ellip_k</a>, <a href="elliptic.html#ellip_e">ellip_e</a></dd>
+<dt><a href="legndr.html">legndr.i</a></dt><dd>- Legendre polynomials, associated Legendre functions
+<br />Function:  <a href="legndr.html#legndr">legndr</a></dd>
+<dt><a href="fermi.html">fermi.i</a></dt><dd>- Fermi-Dirac integrals and their inverses
+<br />Functions: <a href="fermi.html#fdm12">fdm12</a>, <a href="fermi.html#fd12">fd12</a>, <a href="fermi.html#fd32">fd32</a>, <a href="fermi.html#fd52">fd52</a>, <a href="fermi.html#ifdm12">ifdm12</a>, <a href="fermi.html#ifd12">ifd12</a>, <a href="fermi.html#ifd32">ifd32</a>, <a href="fermi.html#ifd52">ifd52</a></dd>
+<dt><a href="fermii.html">fermii.i</a></dt><dd>- incomplete Fermi-Dirac integrals
+<br />Functions: <a href="fermii.html#fdim12">fdim12</a>, <a href="fermii.html#fdi12">fdi12</a>, <a href="fermii.html#fdi32">fdi32</a>, <a href="fermii.html#fdi52">fdi52</a></dd>
+<dt><a href="series.html">series.i</a></dt><dd>- geometric series solvers
+<br />Functions: <a href="series.html#series_s">series_s</a> (sum a series), <a href="series.html#series_r">series_r</a> (find ratio given
+sum and number of terms), <a href="series.html#series_n">series_n</a> (find number of
+terms given sum and ratio)
+</dd>
+</dl>
+<h3>Data fitting and interpolation:</h3>
+<dl class="docdef">
+
+<dt><a href="fitlsq.html">fitlsq.i</a></dt><dd>- least squares fit a piecewise linear function to data
+<br />Function: <a href="fitlsq.html#fitlsq">fitlsq</a></dd>
+<dt><a href="fitrat.html">fitrat.i</a></dt><dd>- rational function and polynomial fits
+<br />Functions: <a href="fitrat.html#fitrat">fitrat</a>, <a href="fitrat.html#fitpol">fitpol</a></dd>
+<dt><a href="spline.html">spline.i</a></dt><dd>- cubic spline and tensioned spline interpolation
+<br />Functions: <a href="spline.html#spline">spline</a>, <a href="spline.html#tspline">tspline</a></dd>
+<dt><a href="splinef.html">splinef.i</a></dt><dd>- general piecewise cubic spline interpolation
+<br />Functions: <a href="splinef.html#splinef">splinef</a>, <a href="splinef.html#splined">splined</a>, <a href="splinef.html#splinei">splinei</a>, <a href="splinef.html#splinelsq">splinelsq</a></dd>
+<dt><a href="digit2.html">digit2.i</a></dt><dd>- 2D equivalents for digitize and interp
+<br />Functions: <a href="digit2.html#digit2">digit2</a>, <a href="digit2.html#interp2">interp2</a></dd>
+<dt><a href="cheby.html">cheby.i</a></dt><dd>- Chebyshev fitting and evaluation routines
+<br />Functions: <a href="cheby.html#cheby_fit">cheby_fit</a>, <a href="cheby.html#cheby_eval">cheby_eval</a>, <a href="cheby.html#cheby_integ">cheby_integ</a>, <a href="cheby.html#cheby_deriv">cheby_deriv</a>, <a href="cheby.html#cheby_poly">cheby_poly</a>
+<a href="cheby.html#cheby_conv">cheby_conv</a>, <a href="cheby.html#cheby_trunc">cheby_trunc</a></dd>
+<dt><a href="rcheby.html">rcheby.i</a></dt><dd>- rational and polynomial Chebyshev fitting and evaluation
+routines (these are minimax fitting, as opposed to cheby.i)
+<br />Functions: <a href="rcheby.html#rcheby_fit">rcheby_fit</a>, <a href="rcheby.html#rcheby_eval">rcheby_eval</a>, rcheby_conv, <a href="rcheby.html#rcheby_build">rcheby_build</a>, and more</dd>
+<dt><a href="regress.html">regress.i</a></dt><dd>- Linear regression (least squares fitting)
+<br />Functions: <a href="regress.html#regress">regress</a>, <a href="regress.html#regress_cov">regress_cov</a></dd>
+<dt><a href="levmar.html">levmar.i</a></dt><dd>- Non-linear least squares fitting by Levenberg-Marquardt
+<br />Functions: <a href="levmar.html#levmar">levmar</a>
+</dd>
+</dl>
+<h3>Numerical integration:</h3>
+<dl class="docdef">
+
+<dt><a href="romberg.html">romberg.i</a></dt><dd>- Romberg and Simpson adaptive integrators
+<br />Functions: <a href="romberg.html#romberg">romberg</a>, <a href="romberg.html#simpson">simpson</a></dd>
+<dt><a href="rkutta.html">rkutta.i</a></dt><dd>- Runge-Kutta and Bulirsch-Stoer ODE integrators
+<br />Functions: <a href="rkutta.html#rkutta">rkutta</a>, <a href="rkutta.html#rk_integrate">rk_integrate</a>, <a href="rkutta.html#bstoer">bstoer</a>, <a href="rkutta.html#bs_integrate">bs_integrate</a>, <a href="rkutta.html#rkdumb">rkdumb</a>
+</dd>
+</dl>
+<h3>I/O functions:</h3>
+<dl class="docdef">
+
+<dt><a href="textload.html">textload.i</a></dt><dd>- read and write Unix, DOS, or Mac text and .csv files
+<br />Functions: <a href="textload.html#text_lines">text_lines</a>, <a href="textload.html#text_cells">text_cells</a>, <a href="textload.html#text_load">text_load</a>, <a href="textload.html#text_csv">text_csv</a></dd>
+<dt><a href="netcdf.html">netcdf.i</a></dt><dd>- read and write netcdf binary files
+<br />Functions: <a href="netcdf.html#nc_open">nc_open</a>, <a href="netcdf.html#nc_create">nc_create</a>, <a href="netcdf.html#nc_vardef">nc_vardef</a>, <a href="netcdf.html#nc_enddef">nc_enddef</a>, <a href="netcdf.html#nc_addrec">nc_addrec</a>
+(if you only need to read a netcdf file, just use openb
+-- netcdf.i will be included automatically)</dd>
+<dt><a href="fits.html">fits.i</a></dt><dd>- read and write FITS files (IAU astronomical data)
+<br />Functions: <a href="fits.html#fits_open">fits_open</a>, fits_read, fits_create, fits_write, <others></dd>
+<dt><a href="pnm.html">pnm.i</a></dt><dd>- read and write PBM, PGM, and PBM files made by the
+pbmplus or netpbm packages
+<br />Functions: <a href="pnm.html#pnm_read">pnm_read</a>, <a href="pnm.html#pnm_write">pnm_write</a>, <others></dd>
+<dt><a href="idlsave.html">idlsave.i</a></dt><dd>- read IDL save files (RSI, see comment in idlsave.i)
+<br />Functions: <a href="idlsave.html#idl_open">idl_open</a>, <a href="idlsave.html#f2z">f2z</a>, <a href="idlsave.html#l2ll">l2ll</a></dd>
+<dt><a href="copyb.html">copyb.i</a></dt><dd>- copy a binary file
+<br />Function: <a href="copyb.html#copyb">copyb</a></dd>
+<dt><a href="prefix.html">prefix.i</a></dt><dd>- read lists of numbers tagged by a "prefix" at the
+beginning of each line
+<br />Functions: <a href="prefix.html#prefix_find">prefix_find</a>, <a href="prefix.html#prefix_read">prefix_read</a>, <a href="prefix.html#prefix_write">prefix_write</a></dd>
+<dt><a href="silo.html">silo.i</a></dt><dd>- read silo files
+<br />Functions: <a href="silo.html#silo_open">silo_open</a>, <a href="silo.html#silo_close">silo_close</a>, <a href="silo.html#silo_cd">silo_cd</a>, <a href="silo.html#silo_ls">silo_ls</a>, <a href="silo.html#silo_var">silo_var</a></dd>
+<dt><a href="hydra.html">hydra.i</a></dt><dd>- read hydra dump files
+<br />Functions: <a href="hydra.html#h_openb">h_openb</a>, <a href="hydra.html#h_data">h_data</a>, <a href="hydra.html#h_array">h_array</a>, <a href="hydra.html#h_jt">h_jt</a>, <others>
+</dd>
+</dl>
+<h3>Graphics:</h3>
+<dl class="docdef">
+
+<dt><a href="movie.html">movie.i</a></dt><dd>- assistance for animation (see demo2.i and demo3.i)
+<br />Functions: <a href="movie.html#movie">movie</a>, <a href="movie.html#movie_stats">movie_stats</a></dd>
+<dt><a href="button.html">button.i</a></dt><dd>- implement mouse pushbuttons in a Yorick graphics window
+(see rezone.i for usage examples)
+<br />Functions: Button, <a href="button.html#button_plot">button_plot</a>, <a href="button.html#button_test">button_test</a>, <a href="button.html#button_build">button_build</a></dd>
+<dt><a href="plwf.html">plwf.i</a></dt><dd>- 3-D wire frame plots (painter's algorithm)
+<br />Function:  <a href="plwf.html#plwf">plwf</a></dd>
+<dt><a href="slice3.html">slice3.i</a></dt><dd>- 3-D mesh slicing functions, plus plotting functions
+<br />Functions: <a href="slice3.html#mesh3">mesh3</a>, <a href="slice3.html#slice3">slice3</a>, <a href="slice3.html#slice2">slice2</a>, <a href="slice3.html#pl3tree">pl3tree</a>, <a href="slice3.html#split_palette">split_palette</a>, <more></dd>
+<dt><a href="pl3d.html">pl3d.i</a></dt><dd>- first cut at 3-D graphics command line interface,
+defines common lighting, rotation and perspective
+transforms, gnomon (axis orientation indicator)
+plwf.i, slice3.i, and demo5.i contain usage examples
+<br />Functions: <a href="pl3d.html#rot3">rot3</a>, <a href="pl3d.html#light3">light3</a>, <a href="pl3d.html#aim3">aim3</a>, <a href="pl3d.html#draw3">draw3</a>, <a href="pl3d.html#gnomon">gnomon</a>, <more></dd>
+<dt><a href="pixels.html">pixels.i</a></dt><dd>- crude attempt to force Yorick to plot cell arrays at
+one cell per X window pixel
+<br />Functions: <a href="pixels.html#pixels">pixels</a>, <a href="pixels.html#pix_window">pix_window</a></dd>
+<dt><a href="color.html">color.i</a></dt><dd>- palette adjustment, HSV<->RGB transforms
+(study split_palette, split_bytscl in slice3.i for more
+color table ideas)
+<br />Functions: <a href="color.html#brighten">brighten</a>, <a href="color.html#to_hsv">to_hsv</a>, <a href="color.html#to_rgb">to_rgb</a>, <a href="color.html#dump_palette">dump_palette</a></dd>
+<dt><a href="style.html">style.i</a></dt><dd>- low level peek and poke into graphics style sheets
+<br />Functions: <a href="style.html#get_style">get_style</a>, <a href="style.html#set_style">set_style</a>, <a href="style.html#read_style">read_style</a>, <a href="style.html#write_style">write_style</a>
+</dd>
+</dl>
+<h3>Miscellaneous:</h3>
+<dl class="docdef">
+
+<dt><a href="mkdoc.html">mkdoc.i</a></dt><dd>- extract and alphabetize DOCUMENT comments from include files
+<br />Function: <a href="mkdoc.html#mkdoc">mkdoc</a></dd>
+<dt><a href="msort.html">msort.i</a></dt><dd>- multiple key sorting functions
+<br />Functions: <a href="msort.html#msort">msort</a>, <a href="msort.html#msort_rank">msort_rank</a></dd>
+<dt><a href="roots.html">roots.i</a></dt><dd>- Newton-Raphson root and inverse, Brent maxima and minima
+<br />Functions: <a href="roots.html#nraphson">nraphson</a>, <a href="roots.html#f_inverse">f_inverse</a>, <a href="roots.html#mnbrent">mnbrent</a>, <a href="roots.html#mxbrent">mxbrent</a></dd>
+<dt><a href="zroots.html">zroots.i</a></dt><dd>- find roots of polynomial
+<br />Function: <a href="zroots.html#zroots">zroots</a></dd>
+<dt><a href="filter.html">filter.i</a></dt><dd>-- analog signal processing functions
+<br />Functions: <a href="filter.html#filter">filter</a>, <a href="filter.html#fil_response">fil_response</a>, <a href="filter.html#fil_butter">fil_butter</a>, <a href="filter.html#fil_bessel">fil_bessel</a>, <a href="filter.html#fil_cheby1">fil_cheby1</a>,
+<a href="filter.html#fil_cheby2">fil_cheby2</a>, <a href="filter.html#fil_cauer">fil_cauer</a>, <a href="filter.html#fil_make">fil_make</a>, <a href="filter.html#fil_delay">fil_delay</a>, <a href="filter.html#to_db">to_db</a>, <a href="filter.html#to_phase">to_phase</a></dd>
+<dt><a href="convol.html">convol.i</a></dt><dd>- convolution product using fft, smoothing array data
+<br />Functions: <a href="convol.html#convol">convol</a>, <a href="convol.html#fft_good">fft_good</a>, <a href="convol.html#convoln">convoln</a>, <a href="convol.html#gaussm">gaussm</a>, <a href="convol.html#boxcar">boxcar</a></dd>
+<dt><a href="random.html">random.i</a></dt><dd>- gaussian deviates, arbitrary piecewise linear deviates,
+rejection method, poisson deviates, more
+<br />Functions: <a href="random.html#random_x">random_x</a>, <a href="random.html#random_n">random_n</a>, <a href="random.html#random_ipq">random_ipq</a>, <a href="random.html#random_rej">random_rej</a>, <a href="random.html#poisson">poisson</a>, ...</dd>
+<dt><a href="gcd.html">gcd.i</a></dt><dd>- GCD, LCM, prime factorization
+<br />Functions: <a href="gcd.html#gcd">gcd</a>, <a href="gcd.html#lcm">lcm</a>, <a href="gcd.html#is_prime">is_prime</a>, <a href="gcd.html#factorize">factorize</a></dd>
+<dt><a href="ieee.html">ieee.i</a></dt><dd>- IEEE 754 floating point support (Inf, NaN, denormal)
+<br />Functions: <a href="ieee.html#ieee_test">ieee_test</a>, <a href="ieee.html#ieee_set">ieee_set</a>, <a href="ieee.html#as_chars">as_chars</a></dd>
+<dt><a href="md5.html">md5.i</a></dt><dd>- compute MD5 checksums (slowly)
+<br />Functions: <a href="md5.html#md5sum">md5sum</a>, <a href="std-checksum.html#md5">md5</a></dd>
+<dt><a href="plato.html">plato.i</a></dt><dd>- compute Platonic solids and geodesic domes
+<br />Functions: <a href="plato.html#plato">plato</a>, pt_tet, pt_cube, pt_oct, pt_dodec, pt_ico, bucky</dd>
+<dt><a href="string.html">string.i</a></dt><dd>- various utilities (its string facilities mostly superceded)
+<br />Functions: <a href="string.html#getdate">getdate</a>, <a href="std-array.html#reform">reform</a>, <a href="string.html#scalar">scalar</a>, ...</dd>
+<dt><a href="sysafe.html">sysafe.i</a></dt><dd>- Replacement for system function (but not $ syntax)
+<br />Functions: <a href="sysafe.html#sysafe">sysafe</a>, <a href="std-system.html#system">system</a></dd>
+<dt><a href="make.html">make.i</a></dt><dd>- automatic Makefile generator for custom version of Yorick
+<br />Function:  <a href="make.html#make">make</a></dd>
+<dt><a href="kepler.html">kepler.i</a></dt><dd>- simple solar system models
+<br />Functions: <a href="kepler.html#kepler">kepler</a>, <a href="kepler.html#solar_system">solar_system</a>, <a href="kepler.html#moon">moon</a></dd>
+<dt><a href="calendar.html">calendar.i</a></dt><dd>- functions for dealing with dates and times
+<br />Functions: <a href="calendar.html#calendar">calendar</a>, <a href="calendar.html#unix_time">unix_time</a>, <a href="calendar.html#julian_day">julian_day</a>, <a href="calendar.html#datestamp">datestamp</a>, <a href="calendar.html#base60">base60</a>, <a href="calendar.html#tz_set">tz_set</a></dd>
+<dt><a href="pathfun.html">pathfun.i</a></dt><dd>- functions for manipulating filenames
+<br />Functions: <a href="pathfun.html#dirname">dirname</a>, <a href="pathfun.html#basename">basename</a>, <a href="pathfun.html#pathform">pathform</a>, <a href="pathfun.html#pathsplit">pathsplit</a></dd>
+<dt><a href="unsigned.html">unsigned.i</a></dt><dd>- suport for unsigned integers
+<br />Functions: <a href="unsigned.html#u_gt">u_gt</a>, <a href="unsigned.html#u_lt">u_lt</a>, <a href="unsigned.html#u_ge">u_ge</a>, <a href="unsigned.html#u_le">u_le</a>, <a href="unsigned.html#u_eq">u_eq</a>, <a href="unsigned.html#u_ne">u_ne</a>, <a href="unsigned.html#u_shr">u_shr</a>, <a href="unsigned.html#u_div">u_div</a>, <a href="unsigned.html#u_mod">u_mod</a>,
+<a href="unsigned.html#u_cast">u_cast</a>, <a href="unsigned.html#s_char">s_char</a>
+</dd>
+</dl>
+<h3>Demonstration programs:</h3>
+<dl class="docdef">
+
+<dt><a href="demo1.html">demo1.i</a></dt><dd>- a simple 1-D hydro code
+<br />Functions: <a href="demo1.html#demo1">demo1</a>, <a href="demo1.html#evolve">evolve</a> (read the file for more)</dd>
+<dt><a href="demo2.html">demo2.i</a></dt><dd>- fancy movies of a drumhead oscillating
+(solves 2D wave equation on the fly)
+<br />Functions: <a href="demo2.html#demo2">demo2</a></dd>
+<dt><a href="demo3.html">demo3.i</a></dt><dd>- movie of a chaotic pendulum (way cool)
+(does Runge-Kutta integration of Lagrangian on the fly)
+<br />Functions: <a href="demo3.html#demo3">demo3</a></dd>
+<dt><a href="demo4.html">demo4.i</a></dt><dd>- movie of flow around an airfoil
+(solves for flow field on the fly)
+<br />Functions: <a href="demo4.html#demo4">demo4</a></dd>
+<dt><a href="demo5.html">demo5.i</a></dt><dd>- interpreted 3-D graphics, demonstrating plwf, slice3
+<br />Function:  <a href="demo5.html#demo5">demo5</a></dd>
+<dt><a href="rezone.html">rezone.i</a></dt><dd>- point-and-click rezoner for quadrilateral meshes
+<br />Function:  <a href="rezone.html#rezone">rezone</a>, <a href="rezone.html#toy_mesh">toy_mesh</a>
+</dd>
+</dl>
+<h3>Test programs:</h3>
+<dl class="docdef">
+
+<dt>testp.i</dt><dd>- reasonably complete Yorick test suite, except graphics
+Just include it and the tests run immediately, includes:</dd>
+<dt><a href="testb.html">testb.i</a></dt><dd>- binary file I/O tests</dd>
+<dt><a href="test1.html">test1.i</a></dt><dd>- shock tracker test, poorly vectorizing</dd>
+<dt><a href="test2.html">test2.i</a></dt><dd>- radiation escape factor calculation, highly vectorizing</dd>
+<dt><a href="test3.html">test3.i</a></dt><dd>- scalar arithmetic performance test</dd>
+<dt>teststr.i</dt><dd>- string manipulation function test</dd>
+<dt>testoxy.i</dt><dd>- object extensions for yorick test</dd>
+<dt><a href="testlp.html">testlp.i</a></dt><dd>- rough Yorick version of Linpack benchmark
+<br />Function:  <a href="testlp.html#testlp">testlp</a></dd>
+<dt><a href="testg.html">testg.i</a></dt><dd>- a few graphics tests (grtest is a crude tutorial)
+<br />Functions: <a href="testg.html#testg">testg</a>, <a href="testg.html#lissajous">lissajous</a>, <a href="testg.html#grtest">grtest</a>
+</dd>
+</dl>
+
+<h2>Other distribution packages</h2>
+<p class="seclist"><a href="basfix.html">basfix</a> (in basfix.i) - support for Basis-generated pdb files </p>
+
+<p class="seclist"><a href="bowtie.html">bowtie</a> (in bowtie.i) - detect quad mesh bowties </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="seclist"><a href="drat.html">drat</a> (in drat.i) - 2D transport equation solver </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="seclist"><a href="hex.html">hex</a> (in hex.i) - 3D transport equation solver </p>
+
+
+
+
+
+
+
+
+
+
+
+<p class="seclist"><a href="mpool.html">mpool</a> (in mpool.i) - mpy pool of tasks programming paradigm </p>
+<p class="seclist"><a href="mpy.html">mpy</a> (in mpy.i) - MPI parallel processing interface </p>
+<p class="seclist"><a href="mpy1.html">mpy1</a> (in mpy1.i) - mpy version 1 support for backward compatibility </p>
+
+<p class="seclist"><a href="multi.html">multi</a> (in multi.i) - multiple mesh support for drat package </p>
+
+
+
+
+<p class="seclist"><a href="pkg_mngr.html">pkg_mngr</a> (in pkg_mngr.i) - yorick package manager </p>
+
+
+<p class="seclist"><a href="plclab.html">plclab</a> (in plclab.i) - put numeric labels on contours </p>
+
+
+
+
+<p class="seclist"><a href="rays.html">rays</a> (in rays.i) - create and plot ray sets for drat package </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="seclist"><a href="testmp.html">testmp</a> (in testmp.i) - mpy simple parallel test suite </p>
+
+<p class="seclist"><a href="txpath.html">txpath</a> (in txpath.i) - funky rotated text plotter </p>
+
+<p class="seclist"><a href="ylmdec.html">ylmdec</a> (in ylmdec.i) - compute Ylm coefficients using hex ray tracer </p>
+

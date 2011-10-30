@@ -1,0 +1,161 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package rkutta (in rkutta.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="rkutta.html#bstoer">bstoer</a></p>
+    <p><a href="rkutta.html#bs_integrate">bs_integrate</a></p>
+    <h3>R</h3>
+    <p><a href="rkutta.html#rk4">rk4</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="rkutta.html#rkdumb">rkdumb</a></p>
+    <p><a href="rkutta.html#rkutta">rkutta</a></p>
+    <p><a href="rkutta.html#rk_integrate">rk_integrate</a></p>
+    <p><a href="rkutta.html#rk_nstore">rk_maxits</a></p>
+    <p><a href="rkutta.html#rk_nstore">rk_maxstep</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="rkutta.html#rk_nstore">rk_minstep</a></p>
+    <p><a href="rkutta.html#rk_nstore">rk_nbad</a></p>
+    <p><a href="rkutta.html#rk_nstore">rk_ngood</a></p>
+    <p><a href="rkutta.html#rk_nstore">rk_nstore</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="bstoer"></a><h3>bstoer</h3>
+  <pre>DOCUMENT y1= bstoer(derivative, y0,x0, x1,epsilon, dx0)
+  Bulirsch-Stoer integrator, otherwise identical to rkutta routine.
+  All of the options for rkutta (rk_nstore, etc.) work here as well.
+
+  If the function you are trying to integrate is not very
+  smooth, rkutta will probably work better than bstoer.
+</pre>
+  <p>SEE ALSO: <a href="rkutta.html#rkutta">rkutta</a>, <a href="rkutta.html#rk_nstore">rk_nstore</a>, <a href="rkutta.html#rk_nstore">rk_maxits</a>, <a href="rkutta.html#rk_nstore">rk_minstep</a>, <a href="rkutta.html#rk_nstore">rk_maxstep</a>, <a href="rkutta.html#rk_nstore">rk_ngood</a>, <a href="rkutta.html#rk_nstore">rk_nbad</a></p>
+</div>
+<div class="docblock"><a name="bs_integrate"></a><h3>bs_integrate</h3>
+  <pre>DOCUMENT y= bs_integrate(derivative, y1, x, epsilon, dx1)
+  Bulirsch-Stoer integrator, otherwise identical to rk_integrate
+  routine. All of the options for rk_integrate work here as well.
+
+  Based on odeint from Numerical Recipes (Press, et.al.).
+  If the function you are trying to integrate is not very
+  smooth, or your X values are closely spaced, rk_integrate
+  will probably work better than bs_integrate.
+</pre>
+  <p>SEE ALSO: <a href="rkutta.html#bstoer">bstoer</a>, <a href="rkutta.html#rk_integrate">rk_integrate</a>, <a href="rkutta.html#rk_nstore">rk_maxits</a>, <a href="rkutta.html#rk_nstore">rk_minstep</a>, <a href="rkutta.html#rk_nstore">rk_maxstep</a>, <a href="rkutta.html#rk_nstore">rk_ngood</a>, <a href="rkutta.html#rk_nstore">rk_nbad</a>, <a href="rkutta.html#rkdumb">rkdumb</a>, <a href="rkutta.html#rk4">rk4</a></p>
+</div>
+<div class="docblock"><a name="rk4"></a><h3>rk4</h3>
+  <pre>DOCUMENT y_at_x_plus_dx= rk4(y,dydx, x,dx, derivative)
+  takes a single 4th order Runge-Kutta step from X to X+DX.
+  DERIVATIVE(y,x) is a function returning dydx; the input DYDX
+  is DERIVATIVE(y,x) at the input (X,Y).  This fourth evaluation
+  of DERIVATIVE must be performed by the caller of rk4.</pre>
+  
+</div>
+<div class="docblock"><a name="rkdumb"></a><h3>rkdumb</h3>
+  <pre>DOCUMENT y_of_x= rkdumb(derivative, y0,x0, x1,nsteps)
+  integrates dydx= DERIVATIVE(y,x) beginning at (X0,Y0) and
+  going to X1 in NSTEPS 4th order Runge-Kutta steps.  The
+  result is dimsof(Y0)-by-(NSTEPS+1) values of y at the points
+  span(X0, X1, NSTEPS+1).
+  If the nosave= keyword is non-zero, the returned value will
+  simply be the final y value.</pre>
+  
+</div>
+<div class="docblock"><a name="rkutta"></a><h3>rkutta</h3>
+  <pre>DOCUMENT y1= rkutta(derivative, y0,x0, x1,epsilon, dx0)
+  integrates dydx= DERIVATIVE(y,x) beginning at (X0,Y0) and
+  going to X1 with fractional error EPSILON.  The result is
+  the value of y at X1.  DX0 will be used as the initial guess
+  for a step size.
+
+  If the external variable rk_nstore is >0, rk_y and rk_x
+  will contain up to rk_nstore intermediate values after the
+  call to rkutta.  Consider using rk_integrate if you need
+  this feature; using rk_nstore gives you the results at
+  intermediate values which will tend to be closer where
+  the Runge-Kutta step size was smaller, while rk_integrate
+  forces you to specify precisely which x values you want.
+
+  The external variable rk_maxits (default 10000) is the
+  maximum number of steps rkutta will take.  The variable
+  rk_minstep (default 0.0) is the minimum step size.  The
+  variable rk_maxstep (default 1.e35) is the maximum step
+  size, which you may need if you are storing intermediate
+  values (particularly with bstoer).
+
+  If a function rk_yscale(y,dydx,x,dx) exists, it is used
+  to compute an appropriate yscale to give the EPSILON error
+  criterion meaning.  Otherwise, yscale is taken to be:
+     abs(y)+abs(dydx*dx)+1.e-30
+
+  Based on odeint from Numerical Recipes (Press, et.al.).
+  If the function you are trying to integrate is very
+  smooth, bstoer will probably work better than rkutta.
+</pre>
+  <p>SEE ALSO: <a href="rkutta.html#rk_integrate">rk_integrate</a>, <a href="rkutta.html#bstoer">bstoer</a>, <a href="rkutta.html#rk_nstore">rk_nstore</a>, <a href="rkutta.html#rk_nstore">rk_maxits</a>, <a href="rkutta.html#rk_nstore">rk_minstep</a>, <a href="rkutta.html#rk_nstore">rk_maxstep</a>, <a href="rkutta.html#rk_nstore">rk_ngood</a>, <a href="rkutta.html#rk_nstore">rk_nbad</a>, <a href="rkutta.html#rkdumb">rkdumb</a>, <a href="rkutta.html#rk4">rk4</a></p>
+</div>
+<div class="docblock"><a name="rk_integrate"></a><h3>rk_integrate</h3>
+  <pre>DOCUMENT y= rk_integrate(derivative, y1, x, epsilon, dx1)
+  integrates dydx= DERIVATIVE(y,x) beginning at (X(1),Y1) and
+  going to X(0) with fractional error EPSILON.  The result is
+  the value of y at each value in the list X.  If non-nil, DX1
+  will be used as initial guess for the first step size.
+  Otherwise, X(2)-X(1) will be the first step size guess.
+
+  The list of X values must be monotone -- strictly increasing
+  or strictly decreasing; the Runge-Kutta step sizes are selected
+  adaptively until the next X value would be passed, when the
+  step size is adjusted to complete the step exactly.
+
+  The external variable rk_maxits (default 10000) is the
+  maximum number of steps rk_integrate will take.
+
+  If a function rk_yscale(y,dydx,x,dx) exists, it is used
+  to compute an appropriate yscale to give the EPSILON error
+  criterion meaning.  Otherwise, yscale is taken to be:
+     abs(y)+abs(dydx*dx)+1.e-30
+
+  Based on odeint from Numerical Recipes (Press, et.al.).
+  If the function you are trying to integrate is very
+  smooth, and your X values are fairly far apart, bs_integrate
+  may work better than rk_integrate.
+</pre>
+  <p>SEE ALSO: <a href="rkutta.html#rkutta">rkutta</a>, <a href="rkutta.html#bs_integrate">bs_integrate</a>, <a href="rkutta.html#rk_nstore">rk_maxits</a>, <a href="rkutta.html#rk_nstore">rk_minstep</a>, <a href="rkutta.html#rk_nstore">rk_maxstep</a>, <a href="rkutta.html#rk_nstore">rk_ngood</a>, <a href="rkutta.html#rk_nstore">rk_nbad</a>, <a href="rkutta.html#rkdumb">rkdumb</a>, <a href="rkutta.html#rk4">rk4</a></p>
+</div>
+<div class="docsee">
+  <h3>rk_maxits</h3><p>SEE: <a href="#rk_nstore">rk_nstore</a></p>
+</div>
+<div class="docsee">
+  <h3>rk_maxstep</h3><p>SEE: <a href="#rk_nstore">rk_nstore</a></p>
+</div>
+<div class="docsee">
+  <h3>rk_minstep</h3><p>SEE: <a href="#rk_nstore">rk_nstore</a></p>
+</div>
+<div class="docsee">
+  <h3>rk_nbad</h3><p>SEE: <a href="#rk_nstore">rk_nstore</a></p>
+</div>
+<div class="docsee">
+  <h3>rk_ngood</h3><p>SEE: <a href="#rk_nstore">rk_nstore</a></p>
+</div>
+<div class="docblock"><a name="rk_nstore"></a><h3>rk_nstore</h3>
+  <pre>DOCUMENT rk_nstore, rk_maxits, rk_minstep, rk_maxstep,
+         rk_ngood, rk_nbad
+
+  rk_nstore      maximum number of y values rkutta (bstoer) will store
+     after rkutta (bstoer) call, rk_y and rk_x contain stored values
+
+  The other variables are inputs or outputs for rkutta, bstoer,
+  rk_integrate, or bs_integrate:
+
+  rk_maxits      maximum number of steps (default 10000)
+  rk_minstep     minimum step size (default 0.0)
+  rk_maxstep     maximum step size (default 1.e35)
+  rk_ngood       number of good steps taken
+  rk_nbad        number of failed (but repaired) steps taken</pre>
+  
+</div>

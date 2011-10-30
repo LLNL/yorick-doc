@@ -1,0 +1,158 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package fft (in fft.i) - Fast Fourier Transform functions </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>F</h3>
+    <p><a href="fft.html#fft">fft</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="fft.html#fft_inplace">fft_inplace</a></p>
+    <p><a href="fft.html#fft_setup">fft_setup</a></p>
+  </div>
+  <div class="ndex3">
+    <h3>R</h3>
+    <p><a href="fft.html#roll">roll</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="fft"></a><h3>fft</h3>
+  <pre>DOCUMENT fft(x, direction)
+         fft(x, ljdir, rjdir)
+      or fft(x, ljdir, rjdir, setup=workspace)
+  returns the complex Fast Fourier Transform of array X.
+  The DIRECTION determines which direction the transform is in --
+  e.g.- from time to frequency or vice-versa -- as follows:
+
+  DIRECTION    meaning
+  ---------    -------
+      1        "forward" transform (coefficients of exp(+i * 2*pi*kl/N))
+               on every dimension of X
+     -1        "backward" transform (coefficients of exp(-i * 2*pi*kl/N))
+               on every dimension of X
+  [1,-1,1]     forward transform on first and third dimensions of X,
+               backward transform on second dimension of X (any other
+               dimensions remain untransformed)
+  [-1,0,0,1]   backward transform on first dimension of X, forward
+               transform on fourth dimension of X
+     etc.
+
+  The third positional argument, if present, allows the direction
+  of dimensions of X to be specified relative to the final dimension
+  of X, instead of relative to the first dimension of X.  In this
+  case, both LJDIR and RJDIR must be vectors of integers -- the
+  scalar form is illegal:
+
+     LJDIR    RJDIR      meaning
+     -----    -----      -------
+     []        [1]       forward transform last dimension of X
+     [1]        []       forward transform first dimension of X
+     []        [-1,-1]   backward transform last two dimensions of X,
+                         leaving any other dimensions untransformed
+  [-1,0,0,1]    []       backward transform on first dimension of X,
+                         forward transform on fourth dimension of X
+     []      [-1,0,0,1]  backward transform on 4th to last dimension of X,
+                         forward transform on last dimension of X
+     etc.
+
+  Note that the final element of RJDIR corresponds to the last dimension
+  of X, while the initial element of LJDIR corresponds to the first
+  dimension of X.
+
+  The explicit meaning of "forward" transform -- the coefficients of
+  exp(+i * 2*pi*kl/N) -- is:
+
+  result for j=1,...,n
+
+             result(j)=the sum from k=1,...,n of
+
+                   x(k)*exp(-i*(j-1)*(k-1)*2*pi/n)
+
+                         where i=sqrt(-1)
+
+  Note that the result is unnormalized.  Applying the "backward"
+  transform to the result of a "forward" transform returns N times
+  the original vector of length N.  Equivalently, applying either
+  the "forward" or "backward" transform four times in succession
+  yields N^2 times the original vector of length N.
+
+  Performing the transform requires some WORKSPACE, which can be
+  set up beforehand by calling fft_setup, if fft is to be called
+  more than once with arrays X of the same shape.  If no setup
+  keyword argument is supplied, the workspace allocation and setup
+  must be repeated for each call.
+</pre>
+  <p>SEE ALSO: <a href="fft.html#roll">roll</a>, <a href="fft.html#fft_setup">fft_setup</a>, <a href="fft.html#fft_inplace">fft_inplace</a></p>
+</div>
+<div class="docblock"><a name="fft_inplace"></a><h3>fft_inplace</h3>
+  <pre>DOCUMENT fft_inplace, x, direction
+      or fft_inplace, x, ljdir, rjdir
+      or fft_inplace, x, ljdir, rjdir, setup=workspace
+  is the same as the fft function, except that the transform is
+  performed "in_place" on the array X, which must be of type complex.</pre>
+  <p>SEE ALSO: <a href="fft.html#fft">fft</a>, <a href="fft.html#fft_setup">fft_setup</a></p>
+</div>
+<div class="docblock"><a name="fft_setup"></a><h3>fft_setup</h3>
+  <pre>DOCUMENT workspace= fft_setup(dimsof(x))
+      or workspace= fft_setup(dimsof(x), direction)
+      or workspace= fft_setup(dimsof(x), ljdir, rjdir)
+  allocates and sets up the workspace for a subsequent call to
+         fft(X, DIRECTION, setup=WORKSPACE)
+  or
+         fft(X, LJDIR, RJDIR, setup=WORKSPACE)
+  The DIRECTION or LJDIR, RJDIR arguments compute WORKSPACE only for
+  the dimensions which will actually be transformed.  If only the
+  dimsof(x) argument is supplied, then WORKSPACE will be enough to
+  transform any or all dimensions of X.  With DIRECTION or LJDIR, RJDIR
+  supplied, WORKSPACE will only be enough to compute the dimensions
+  which are actually to be transformed.  The WORKSPACE does not
+  depend on the sign of any element in the DIRECTION (or LJDIR, RJDIR),
+  so you can use the same WORKSPACE for both "forward" and "backward"
+  transforms.
+
+  Furthermore, as long as the length of any dimensions of the array
+  X to be transformed are present in WORKSPACE, it may be used in
+  a call to fft with the array.  Thus, if X were a 25-by-64 array,
+  and Y were a 64-vector, the following sequence is legal:
+       ws= fft_setup(dimsof(x));
+       xf= fft(x, 1, setup=ws);
+       yf= fft(y, -1, setup=ws);
+
+  The WORKSPACE required for a dimension of length N is 6*N+15 doubles.
+</pre>
+  <p>SEE ALSO: <a href="fft.html#fft">fft</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="fft.html#fft_inplace">fft_inplace</a></p>
+</div>
+<div class="docblock"><a name="roll"></a><h3>roll</h3>
+  <pre>DOCUMENT roll(x, ljoff, rjoff)
+      or roll, x, ljoff, rjoff
+      or roll(x)
+      or roll, x
+
+  "rolls" selected dimensions of the array X.  The roll offsets
+  LJOFF and RJOFF (both optional) work in the same fashion as the
+  LJDIR and RJDIR arguments to the fft function:
+
+     A scalar LJDIR (and nil RJDIR) rolls all dimensions of X by
+     the specified offset.
+     Otherwise, the elements of the LJDIR vector [ljoff1, ljoff2, ...]
+     are used as the roll offsets for the first, second, etc.
+     dimensions of X.
+     Similarly, the elements of the RJDIR vector [..., rjoff1, rjoff0]
+     are matched to the final dimensions of X, so the next to last
+     dimension is rolled by rjoff1 and the last dimension by rjoff0.
+
+     As a special case (mostly for use with the fft function), if
+     both LJDIR and RJDIR are nil, every dimension is rolled by
+     half of its length.  Thus,
+        roll(x)
+     it equivalent to
+        roll(x, dimsof(x)(2:0)/2)
+
+  The result of the roll function is complex if X is complex, otherwise
+  double (i.e.- any other array type is promoted to type double).  If
+  roll is invoked as a subroutine, the operation is performed in place.
+</pre>
+  <p>SEE ALSO: <a href="fft.html#fft">fft</a></p>
+</div>

@@ -1,0 +1,84 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="DOCUMENT"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_23.html#Comments" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.2 Comments" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_25.html#Include-path" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.4 Where Yorick looks for include files" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="DOCUMENT-comments"></a>
+<h4 class="subsubsection">1.3.2.3 <kbd>DOCUMENT</kbd> comments</h4>
+
+<p>Immediately after (within a few lines of) a <kbd>func</kbd>, <kbd>extern</kbd>, or
+<kbd>local</kbd> statement (see <a href="yorick_16.html#Scoping">Scoping</a>), you may put a comment which
+begins with the eleven characters <kbd>/* DOCUMENT</kbd>.  Although Yorick
+itself doesn&rsquo;t pay any more attention to a <kbd>DOCUMENT</kbd> comment than
+to any other comment, there is a function called <kbd>help</kbd> which does.
+What Yorick does do when it sees a <kbd>func</kbd>, <kbd>extern</kbd>, or
+<kbd>local</kbd> (outside of any function body), is to record the include
+file name and line number where that function or variable(s) are
+defined.
+</p>
+<p>Later, when you ask for help on some topic, the <kbd>help</kbd> function
+asks Yorick whether it knows the file and line number where that topic
+(a function or variable) was defined.  If so, it opens the file, goes
+to the line number, and scans forward a few lines looking for a
+<kbd>DOCUMENT</kbd> comment.  If it finds one, it prints the entire
+comment.
+</p>
+<p>The file <kbd>damped.i</kbd> has three <kbd>DOCUMENT</kbd> comments: one for a
+fictitious variable called <kbd>damped</kbd>, so that someone who saw the
+file but didn&rsquo;t know the names of the functions inside could find out,
+and one each for the <kbd>damped_wave</kbd> and <kbd>q_out</kbd> functions.
+</p>
+
+<p>Near the end of most <kbd>DOCUMENT</kbd> comments, you will find a
+<kbd>SEE ALSO:</kbd> field which feeds the reader the names of related
+functions or variables which also have <kbd>DOCUMENT</kbd> comments.  If
+you use these wisely, you can lead someone (often an older self) to
+all of the documentation she needs to be able to use your package.
+</p>
+<p>This low-tech form of online documentation is surprisingly effective:
+easy to create, maintain, and use.  As an automated step toward a more
+formal document, the <kbd>mkdoc</kbd> function (in the Yorick library include
+file &lsquo;<tt>mkdoc.i</tt>&rsquo;) collects all of the <kbd>DOCUMENT</kbd> comments in one
+or more include files, alphabetizes them, adds a table of contents, and
+writes them into a file suitable for printing.
+</p>
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_23.html#Comments" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 1.3.2.2 Comments" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_25.html#Include-path" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1.3.2.4 Where Yorick looks for include files" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_21.html#Include" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 1.3.2 Include files" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_34.html#Arrays" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 2. Using Array Syntax" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

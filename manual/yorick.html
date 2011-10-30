@@ -1,0 +1,302 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="Top"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Yorick_003a-An-Interpreted-Language"></a>
+<h1 class="settitle">Yorick: An Interpreted Language</h1>
+
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="yorick_1.html#Basics">&bull; Basics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      A tutorial-like introductory chapter.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_34.html#Arrays">&bull; Arrays</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Using array syntax.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_52.html#Graphics">&bull; Graphics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    How to plot things.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_96.html#Embedding">&bull; Embedding</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Embedding compiled code in a custom Yorick.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ &mdash; The Detailed Node Listing &mdash;
+
+Basic Ideas
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_2.html#Simple-Statements">&bull; Simple Statements</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_6.html#Flow-control">&bull; Flow control</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Defining functions, conditionals, and loops.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_19.html#Environment">&bull; Environment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 How to use Yorick&rsquo;s interpreted environment.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Simple Statements
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_3.html#Define-variable">&bull; Define variable</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_4.html#Call-procedure">&bull; Call procedure</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_5.html#Print-expression">&bull; Print expression</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Flow Control Statements
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_7.html#Define-function">&bull; Define function</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_8.html#Define-procedure">&bull; Define procedure</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_9.html#Conditionals">&bull; Conditionals</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Conditionally executing statements.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_12.html#Loops">&bull; Loops</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Repeatedly executing statements. 
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_16.html#Scoping">&bull; Scoping</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Local and external variables.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Conditional Execution
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_10.html#if_002delse-constructs">&bull; if-else constructs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_11.html#logical-operators">&bull; logical operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Loops
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_13.html#while-and-do">&bull; while and do</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_14.html#for">&bull; for</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_15.html#goto">&bull; goto</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        How to break, continue, and goto from a loop body.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Variable scope
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_17.html#extern">&bull; extern</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_18.html#local">&bull; local</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+The Interpreted Environment
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_20.html#Starting">&bull; Starting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Starting, stopping, and interrupting Yorick.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_21.html#Include">&bull; Include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     How to read Yorick statements from a file.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_27.html#Help">&bull; Help</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Using the help command.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_28.html#Info">&bull; Info</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Getting information about a variable.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_29.html#Prompts">&bull; Prompts</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     What Yorick prompts mean.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_30.html#Shell-commands">&bull; Shell commands</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Issuing shell commands from within Yorick.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_31.html#Errors">&bull; Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      What to do when Yorick detects an error.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Include files
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_22.html#Sample-include">&bull; Sample include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_23.html#Comments">&bull; Comments</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_24.html#DOCUMENT">&bull; DOCUMENT</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    The help command recognizes special comments.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_25.html#Include-path">&bull; Include path</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Directories Yorick searches for include files.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_26.html#Customizing">&bull; Customizing</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 How to execute Yorick statements at startup.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Error Messages
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_32.html#Runtime-errors">&bull; Runtime errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_33.html#Simple-debugging">&bull; Simple debugging</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Using Array Syntax
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_35.html#Creating-Arrays">&bull; Creating Arrays</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             How to originate arrays.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_36.html#Interpolating">&bull; Interpolating</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Interpolation functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_37.html#Indexing">&bull; Indexing</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    How to reference array elements.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_48.html#Sorting">&bull; Sorting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     How to sort an array.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_49.html#Transposing">&bull; Transposing</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 How to change the order of array dimensions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_50.html#Broadcasting">&bull; Broadcasting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Making arrays conformable.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_51.html#Dimension-Lists">&bull; Dimension Lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Indexing
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_38.html#Scalar-Index">&bull; Scalar Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Scalar indices and array order.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_39.html#Index-Range">&bull; Index Range</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Selecting a range of indices.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_40.html#Nil-Index">&bull; Nil Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Nil index refers to an entire dimension.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_41.html#Index-List">&bull; Index List</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Selecting an arbitrary list of indices.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_42.html#Pseudo_002dIndex">&bull; Pseudo-Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Creating a pseudo-index.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_43.html#Negative-Index">&bull; Negative Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Numbering a dimension from its last element.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_44.html#Rubber_002dIndex">&bull; Rubber-Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Using a rubber index.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_45.html#Matrix-Multiply">&bull; Matrix Multiply</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Marking an index for matrix multiplication.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_46.html#Statistical">&bull; Statistical</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Rank reducing (statistical) range functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_47.html#Finite-Difference">&bull; Finite Difference</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Rank preserving (finite difference) range functions.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Graphics
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_53.html#Plotting-primitives">&bull; Plotting primitives</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         The basic drawing functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_63.html#Plot-limits">&bull; Plot limits</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Setting plot limits, log scaling, etc.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_72.html#Display-list">&bull; Display list</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                The display list model.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_75.html#Hardcopy">&bull; Hardcopy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    How to get it.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_79.html#Graphics-style">&bull; Graphics style</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              How to change it.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_84.html#Query-and-edit">&bull; Query and edit</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Seeing legends and making minor changes.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_87.html#pldefault">&bull; pldefault</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Setting (non-default) defaults.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_88.html#Custom-plot-functions">&bull; Custom plot functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       Combining the plotting primitives.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_89.html#Animation">&bull; Animation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Spielberg look out.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_90.html#g_t3D-graphics">&bull; 3D graphics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 An experimental interface.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Primitive plotting functions
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_54.html#plg">&bull; plg</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot graph.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_55.html#pldj">&bull; pldj</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Plot disjoint lines.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_56.html#plm">&bull; plm</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot quadrilateral mesh.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_57.html#plc">&bull; plc</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot contours.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_58.html#plf">&bull; plf</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot filled quadrilateral mesh.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_59.html#pli">&bull; pli</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot image.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_60.html#plfp">&bull; plfp</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Plot filled polygons.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_61.html#plv">&bull; plv</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot vectors.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_62.html#plt">&bull; plt</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Plot text.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Plot limits and relatives
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_64.html#limits">&bull; limits</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Set plot limits.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_68.html#logxy">&bull; logxy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Set log axis scaling.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_69.html#gridxy">&bull; gridxy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Set grid lines.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_70.html#palette">&bull; palette</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Set color palette.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_71.html#Color-model">&bull; Color model</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 More about color.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+limits
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_65.html#mouse-zooming">&bull; mouse zooming</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               How to zoom by mouse clicks.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_66.html#saving-limits">&bull; saving limits</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Save and restore plot limits.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_67.html#square-limits">&bull; square limits</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Assure that circles are not ellipses.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Managing a display list
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_73.html#fma">&bull; fma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Frame advance (begin next picture).
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_74.html#multiple-windows">&bull; multiple windows</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            How to get them.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Getting hardcopy
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_76.html#Color-hardcopy">&bull; Color hardcopy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Dumping palettes into hardcopy files.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_77.html#CGM-hardcopy">&bull; CGM hardcopy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Caveats about binary CGM format.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_78.html#EPS-hardcopy">&bull; EPS hardcopy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Encapsulated PostScript output.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Graphics style
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_80.html#style-keyword">&bull; style keyword</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Accessing predefined graphics styles.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_81.html#style_002ei">&bull; style.i</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Bypassing predefined graphics styles.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_82.html#plsys">&bull; plsys</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Multiple coordinate systems.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_83.html#ticks-and-labels">&bull; ticks and labels</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            How to change them.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Queries, edits, and legends
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_85.html#legends">&bull; legends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Setting plot legends.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_86.html#plq-and-pledit">&bull; plq and pledit</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              The plot query and edit functions.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+3D graphics interfaces
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_91.html#g_t3D-mapping">&bull; 3D mapping</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Changing your viewpoint.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_92.html#g_t3D-lighting">&bull; 3D lighting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 The 3D lighting model.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_93.html#g_t3D-gnomon">&bull; 3D gnomon</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Gnomon indicates axis orientation.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_94.html#plwf">&bull; plwf</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        The plot wire frame interface.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_95.html#slice3">&bull; slice3</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      The slice and isosurface interface.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Embedding
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_97.html#Mechanics-of-embedding">&bull; Mechanics of embedding</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      How to use the make utility.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_98.html#API-for-embedding">&bull; API for embedding</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Using the yapi.h interface.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_99.html#Embedding-example">&bull; Embedding example</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Three ways to implement a function.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Embedding example
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="yorick_100.html#Using-PROTOTYPE">&bull; Using PROTOTYPE</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Example of PROTOTYPE comment.
+</td></tr>
+<tr><td align="left" valign="top"><a href="yorick_101.html#Using-yapi_002eh">&bull; Using yapi.h</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Example of &lsquo;<tt>yapi.h</tt>&rsquo; API.
+</td></tr>
+</table>
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_1.html#Basics" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 1. Basic Ideas" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

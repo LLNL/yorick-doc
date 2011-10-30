@@ -1,0 +1,338 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package mpy (in mpy.i) - MPI parallel processing interface </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>M</h3>
+    <p><a href="mpy.html#mpy_nfan">mpy_nfan</a></p>
+    <p><a href="mpy.html#mp_boss">mp_boss</a></p>
+    <p><a href="mpy.html#mp_cd">mp_cd</a></p>
+    <p><a href="mpy.html#mp_connect">mp_connect</a></p>
+    <p><a href="mpy.html#mp_dbg">mp_dbg</a></p>
+    <p><a href="mpy.html#mp_disconnect">mp_disconnect</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="mpy.html#mp_exec">mp_exec</a></p>
+    <p><a href="mpy.html#mp_handin">mp_handin</a></p>
+    <p><a href="mpy.html#mp_handout">mp_handout</a></p>
+    <p><a href="mpy.html#mp_include">mp_include</a></p>
+    <p><a href="mpy.html#mp_rank">mp_nfan</a></p>
+    <p><a href="mpy.html#mp_probe">mp_probe</a></p>
+    <p><a href="mpy.html#mp_rank">mp_rank</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="mpy.html#mp_recv">mp_recv</a></p>
+    <p><a href="mpy.html#mp_reform">mp_reform</a></p>
+    <p><a href="mpy.html#mp_require">mp_require</a></p>
+    <p><a href="mpy.html#mp_send">mp_send</a></p>
+    <p><a href="mpy.html#mp_set_debug">mp_set_debug</a></p>
+    <p><a href="mpy.html#mp_rank">mp_size</a></p>
+    <p><a href="mpy.html#mp_staff">mp_staff</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="mpy_nfan"></a><h3>mpy_nfan</h3>
+  <pre>DOCUMENT mp_exec, "mpy_nfan,"+print(nfan)(1);
+  Resets the mp_size, mp_rank, and mp_nfan variables.  The NFAN
+  argument can be 0 to restore the initial fanout, otherwise NFAN
+  must be between 2 and 64.
+  This is a very dangerous function, and is needed only in the
+  very rare circumstance that the default value for mp_nfan is not
+  good enough.  About the only legal way to invoke mpy_nfan is
+  directly vian mp_exec.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_boss">mp_boss</a>, <a href="mpy.html#mp_staff">mp_staff</a>, <a href="mpy.html#mp_handout">mp_handout</a></p>
+</div>
+<div class="docblock"><a name="mp_boss"></a><h3>mp_boss</h3>
+  <pre>DOCUMENT boss = mp_boss()
+  get the rank of the "boss" for this process, or nil [] if this
+  is rank 0.  The boss is the process from which fanout messages are
+  sent to this process.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_rank">mp_nfan</a>, <a href="mpy.html#mp_staff">mp_staff</a>, <a href="mpy.html#mp_handout">mp_handout</a></p>
+</div>
+<div class="docblock"><a name="mp_cd"></a><h3>mp_cd</h3>
+  <pre>DOCUMENT mp_cd, dirname
+      or mp_cd
+
+  Change all processes to directory DIRNAME, or to the current
+  working directory of the rank 0 process if DIRNAME is not
+  specified.  Note that DIRNAME must exist for all processes.
+  Note also that the processes may start in different directories.
+
+  The mp_cd function can only be called from rank 0 in serial mode.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_handout">mp_handout</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_include">mp_include</a></p>
+</div>
+<div class="docblock"><a name="mp_connect"></a><h3>mp_connect</h3>
+  <pre>DOCUMENT mp_connect, rank
+  connect to non-zero RANK.  Rank 0 enters a loop collecting command lines
+  and sending them to this rank for execution.  Exit by calling mp_disconnect.
+  Do not attempt to perform other parallel operations; you are in a parallel
+  task in which all ranks other than 0 and RANK happen to be finished.
+  You cannot send incomplete command lines.
+  The prompt (on rank 0) mp_conprompt defaults to "rank%ld> ", which you
+  can change with the prompt= keyword.  If prompt contains "%ld", the rank
+  connected will appear in the prompt.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_disconnect">mp_disconnect</a></p>
+</div>
+<div class="docblock"><a name="mp_dbg"></a><h3>mp_dbg</h3>
+  <pre>DOCUMENT mp_dbg, msg
+  print mpy debugging message MSG if and only if mp_debug is set.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_set_debug">mp_set_debug</a></p>
+</div>
+<div class="docblock"><a name="mp_disconnect"></a><h3>mp_disconnect</h3>
+  <pre>DOCUMENT mp_disconnect
+  disconnect to end an mp_connect session.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_connect">mp_connect</a></p>
+</div>
+<div class="docblock"><a name="mp_exec"></a><h3>mp_exec</h3>
+  <pre>DOCUMENT mp_exec, command_line
+      or mp_exec, [command_line1, command_line2, ...]
+      or mp_exec, char_array
+      or is_serial = mp_exec()
+
+  The mp_exec function is how you launch all parallel tasks.
+  COMMAND_LINE is a string to be parsed and executed on every
+  rank.  It can be a single string, or an array of strings,
+  or an array of char containing the text to be parsed.
+
+  Calling mp_exec on a non-0 rank process is illegal with the
+  sole exception of the call in mpy_idler.  There, the call to
+  mp_exec blocks until the matching call to mp_exec on rank 0
+  broadcasts the command(s) to all ranks.  At that point, all
+  non-zero ranks exit their idler, and execute the command;
+  returning to the idle loop to wait for the next call to mp_exec
+  on rank 0 to re-awaken them.
+
+  On rank 0, mp_exec executes the command in immediate mode,
+  as if by include,[command_line],1.  Hence, the commands are
+  parsed and executed before mp_exec returns.  Outside of the
+  mp_exec function calls (and after startup), rank 0 is always
+  in serial mode -- any activity, particularly include, require,
+  or #include, affect only rank 0.  It is only "inside" a call
+  to mp_exec that rank 0 is in parallel mode, where the include
+  functions are collective operations.  The mp_exec function
+  may only be called in serial mode (which means it cannot be
+  called recursively).
+
+  However, mp_exec() may be called as a function at any time
+  on any rank.  It returns 1 if and only if a call to mp_exec
+  as a subroutine (launching a parallel task)  would be legal,
+  that is, only if this is rank 0 in serial mode.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_include">mp_include</a>, <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_cd">mp_cd</a>, <a href="mpy.html#mp_connect">mp_connect</a></p>
+</div>
+<div class="docblock"><a name="mp_handin"></a><h3>mp_handin</h3>
+  <pre>DOCUMENT mp_handin
+      or result = mp_handin(part)
+  acknowledge completion to rank 0.  The mp_handin function must be
+  called on all ranks; it uses the same logarithmic fanout as mp_handout,
+  but in the reverse direction, with messages beginning at the leaf ranks
+  and propagating to their bosses until finally reaching rank 0.
+  In the second form, PART can be any numeric array; RESULT will be
+  the sum of PART for this rank and all its staff.  The PART array,
+  if present, must have the same dimensions on every rank.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_handout">mp_handout</a>, <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_recv">mp_recv</a></p>
+</div>
+<div class="docblock"><a name="mp_handout"></a><h3>mp_handout</h3>
+  <pre>DOCUMENT mp_handout, var1, var2, ...
+
+  distribute VAR1, VAR2, etc. to all processes.  On rank 0, the VARi
+  are inputs, on all other ranks the VARi are outputs.  The mp_handout
+  operation is collective, so it must be called on all ranks.  The
+  operation uses the same logarithmic fanout as the MPY include
+  operation.  The VARi must be arrays of numbers or strings.
+    if (!mp_rank) {
+      array1 = <something>;
+      array2 = <something else>;
+      ...
+    }
+    mp_handout, array1, array2, ...;
+
+  The VARi are combined into a single message using vpack, so the
+  string arrays are allowed, and array dimensions are preserved.
+  The VARi may not be pointers or structs.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_handin">mp_handin</a>, <a href="mpy.html#mp_rank">mp_nfan</a>, <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_recv">mp_recv</a></p>
+</div>
+<div class="docblock"><a name="mp_include"></a><h3>mp_include</h3>
+  <pre>DOCUMENT mp_include, filename
+  call mp_exec with "include,filename".
+
+  The ordinary #include directive and the include and require
+  functions, when used as part of a parallel task (and at startup,
+  which is effectively a parallel task), are collective operations
+  requiring that all ranks reach them simultaneously, and in a state
+  in which an mp_handout operation originating at rank 0 works.
+  When rank 0 is running outside a parallel task, #include, include,
+  and require happen only on rank 0.  The mp_include function always
+  forces the parallel include.
+
+  A call to mp_include is legal only on rank 0 in serial mode.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_require">mp_require</a>, <a href="std-include.html#include">include</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_cd">mp_cd</a></p>
+</div>
+<div class="docsee">
+  <h3>mp_nfan</h3><p>SEE: <a href="#mp_rank">mp_rank</a></p>
+</div>
+<div class="docblock"><a name="mp_probe"></a><h3>mp_probe</h3>
+  <pre>DOCUMENT ranks = mp_probe(block)
+
+  return list of the ranks of processes which have sent messages
+  to this process that are waiting in the mp_recv queue.  If the
+  queue is empty and BLOCK is nil or 0, mp_probe returns nil [].
+  If BLOCK == 1 then mp_probe blocks until at least one message
+  is queued, but returns immediately if the queue is not empty. If
+  BLOCK >= 2 then mp_probe always blocks until the next message
+  arrives, even if the queue was not empty.  The returned list of
+  ranks is always in the order received, so that
+    mp_recv(mp_probe(1)(1))
+  returns the next message to arrive from any rank (without leaving
+  you any way to find out what rank sent the message -- save the
+  result of mp_probe if you need to know).
+
+  The mpy program always receives all available MPI messages
+  before returning from any mp_recv, mp_send, or blocking mp_probe
+  call, so that the MPI library message buffers are emptied as
+  soon as possible.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_recv">mp_recv</a>, <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_exec">mp_exec</a></p>
+</div>
+<div class="docblock"><a name="mp_rank"></a><h3>mp_rank</h3>
+  <pre>DOCUMENT mp_rank, mp_size, mp_nfan
+  MPI rank of this process and total number of processes.
+    0 <= mp_rank <= mp_size-1
+  The variables are set at startup.  DO NOT CHANGE THESE VALUES!
+  Both mp_rank and mp_size will be nil if multiple processes are
+  not present (mp_size==1 is impossible).
+  mp_nfan is the fanout used to broadcast messages by the mp_exec,
+  mp_handout, and mp_handin functions.  See mpy_nfan.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_recv">mp_recv</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mpy_nfan">mpy_nfan</a></p>
+</div>
+<div class="docblock"><a name="mp_recv"></a><h3>mp_recv</h3>
+  <pre>DOCUMENT msg = mp_recv(from)
+      or msg = mp_recv(from, dimlist)
+      or mp_recv, from, msg1, msg2, msg3, ...;
+
+  receive the next message from the process whose rank is FROM.
+  Messages from a given rank are always received in the order
+  they are sent with mp_send.
+
+  The mp_recv function blocks until the next matching message
+  arrives.  Any messages from ranks other than FROM which arrive
+  before the message from FROM are queued internally, and will be
+  returned by subsequent calls to mp_recv order of arrival.  The
+  mp_probe function lets you query the state of this internal queue.
+
+  Array dimensions are not part of the message; if you send an array
+  x, it will be received as x(*).  There are two ways to put back
+  dimension information, depending on whether you want the sender
+  to send the information, or whether you want the receiver to apply
+  its own knowledge of what the dimensions must have been:
+
+  You can use the vpack/vunpack functions to send messages that
+  contain the dimension information of arrays:
+    mp_send, to, vpack(msg1, msg2, ...);
+  which you receive as:
+    vunpack, mp_recv(from), msg1, msg2, ...;
+
+  Or, you can pass mp_recv (on the receiving side) an explicit
+  DIMLIST in the same format as the array function.  The arriving
+  message must have the correct number of elements for the DIMLIST,
+  or a multiple of that number; the result will have either the
+  DIMLIST dimensions, or with an extra dimension tacked on the end
+  if the arriving message is a multiple. (That is, you are really
+  specifying the dimensions of the "cells" of which the message is
+  to be composed.)  By default (and as a special case), the result of
+  mp_recv will be either a scalar value, or a 1D array of the same
+  type as the matching send.
+
+  Called as a subroutine, mp_recv can return multiple messages; MSG1,
+  MSG2, MSG3, ... are simple variable references set to the result.
+  Any or all of the MSGi may be preceded by a dimlist expression
+  (not a simple variable reference) to specify a dimension list for
+  that MSGi output.
+
+  The mp_reform function can add a DIMLIST after the mp_recv call:
+  mp_reform(mp_recv(p),dimlist) is the same as mp_recv(p,dimlist).
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_probe">mp_probe</a>, <a href="mpy.html#mp_send">mp_send</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_handout">mp_handout</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_reform">mp_reform</a>, <a href="std-fileio.html#vunpack">vunpack</a></p>
+</div>
+<div class="docblock"><a name="mp_reform"></a><h3>mp_reform</h3>
+  <pre>DOCUMENT mp_reform(x, dimlist)
+  returns array X reshaped according to dimension list DIMLIST.
+  If x is longer than dimlist, uses dimlist as the leading
+  dimensions of x, adding one trailing dimension.  This is the
+  same convention as the mp_recv(dimlist) function uses:
+  mp_reform(mp_recv(),dimlist) is the same as mp_recv(dimlist).</pre>
+  <p>SEE ALSO: <a href="std-array.html#reform">reform</a>, <a href="std-array.html#array">array</a>, <a href="std-query.html#dimsof">dimsof</a></p>
+</div>
+<div class="docblock"><a name="mp_require"></a><h3>mp_require</h3>
+  <pre>DOCUMENT mp_require, filename
+  same as mp_include, but does parallel require instead of include.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_include">mp_include</a></p>
+</div>
+<div class="docblock"><a name="mp_send"></a><h3>mp_send</h3>
+  <pre>DOCUMENT mp_send, to, msg
+      or mp_send, to, msg1, msg2, ...
+      or mp_send, to_list, msg1, msg2, ...
+
+  send MSG, MSG1, MSG2, ... to process whose rank is TO.  Each
+  MSG must be an array (or scalar) of type char, short, int, long,
+  float, double, complex, or a scalar string.
+
+  If TO_LIST is an array of rank numbers, then each MSG may be an
+  equal length array of pointers to send a different message to
+  each process in the TO_LIST, or one of the basic data types to
+  send the same message to each process in TO_LIST.
+
+  The mp_send function will not return until the msg variables can
+  be discarded or reused.
+
+  Messages can be arrays, but their dimension information is not
+  included in the actual message (they look like 1D arrays upon
+  arrival).  You can use the vpack/vunpack functions to send and
+  receive messages in a way the preserves their dimension
+  information, and to pack several small messages together for
+  improved message passing performance:
+    mp_send, to, vpack(msg1, msg2, ...);
+  which you receive as:
+    vunpack, mp_recv(from), msg1, msg2, ...;
+  String arrays and nil [] messages are permitted with vpack and
+  vunpack, in addition to the array data types permitted by the
+  raw mp_send and mp_recv functions.
+
+  If you need to pass pointer or struct messages, use vsave:
+    mp_send, to, vsave(msg1, msg2, ...);
+  which you receive as:
+    restore, openb(mp_recv(from)), msg1, msg2, ...;
+
+  Use mp_handout to send messages from rank 0 to all ranks;
+  very large TO_LIST arguments (more than a few dozen recipients)
+  will be dramatically slower than mp_handout.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_recv">mp_recv</a>, <a href="mpy.html#mp_probe">mp_probe</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_handout">mp_handout</a>, <a href="std-fileio.html#vpack">vpack</a></p>
+</div>
+<div class="docblock"><a name="mp_set_debug"></a><h3>mp_set_debug</h3>
+  <pre>DOCUMENT mp_set_debug, onoff
+
+  Set mp_debug to ONOFF on all ranks.  ONOFF non-zero turns on
+  copious debugging messages, printed on stdout, with all ranks
+  jumbled together.
+
+  The mp_set_debug function is legal only from rank 0 in serial mode.
+</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_dbg">mp_dbg</a>, <a href="mpy.html#mp_handout">mp_handout</a>, <a href="mpy.html#mp_rank">mp_rank</a>, <a href="mpy.html#mp_include">mp_include</a></p>
+</div>
+<div class="docsee">
+  <h3>mp_size</h3><p>SEE: <a href="#mp_rank">mp_rank</a></p>
+</div>
+<div class="docblock"><a name="mp_staff"></a><h3>mp_staff</h3>
+  <pre>DOCUMENT staff = mp_boss()
+  get the list of ranks of the "staff" for this process, or nil [] if
+  this is a leaf process.  The staff are the processes to which fanout
+  messages are sent by this process.</pre>
+  <p>SEE ALSO: <a href="mpy.html#mp_boss">mp_boss</a>, <a href="mpy.html#mp_rank">mp_nfan</a>, <a href="mpy.html#mp_handout">mp_handout</a></p>
+</div>

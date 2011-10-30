@@ -1,0 +1,100 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="ticks-and-labels"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_82.html#plsys" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5.3 Coordinate systems" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_84.html#Query-and-edit" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.6 Queries, edits, and legends" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="Ticks-and-labels"></a>
+<h3 class="subsection">3.5.4 Ticks and labels</h3>
+
+<p>The style parameters regulating the location of the viewport,
+appearance of the tick marks, and so on are fairly straightforward:
+You can specify which of the four sides of the viewport will have
+tick marks, or you can select &ldquo;axis&rdquo; style, where coordinate axes
+and ticks run through the middle of the viewport.  Tick marks can
+extend into or out of the viewport, or both (beware that tick marks
+which project into the viewport often overlay a portion of your data,
+making it harder to interpret).  You can draw a frame line around the
+edge of the viewport, or just let the tick marks frame your picture.
+You can specify which, if any, of the four sides of the viewport will
+have numeric labels for the ticks, the distance from the ticks to the
+labels, the font and size of the labels, and so forth.
+</p>
+<p>An elaborate artificial intelligence (or stupidity) algorithm
+determines tick and label positions.  Four parameters control this
+algorithm: nMajor, nMinor, logAdjMajor, and logAdjMinor.  Tick marks
+have a hierarchy of lengths.  The longest I call major ticks; these
+are the tick marks which get a numeric label (if you turn on labels).
+Like the scale on a ruler, there is a hierarchy of progressively
+shorter ticks.  Each level in the hierarchy divides the intervals
+between the next higher level into two or five subdivisions &ndash; two if
+the interval above had a width whose least significant decimal digit
+of 1 or 2, five if that digit was 5.
+</p>
+<p>Only two questions remain: What interval should I use for the major
+ticks, and how many levels should I proceed down the hierarchy?  The
+nMajor and nMinor parameters answer these questions.  They specify the
+upper limit of the density of the largest and smallest ticks in the
+hierarchy, respectively, as follows: The tick interval is the smallest
+interval such that the ratio of the full interval plotted to that
+interval is less than nMajor (or nMinor).  Only major tick intervals
+whose widths have least significant decimal digit 1, 2, or 5 are
+considered (otherwise, the rest of the hierarchy algorithm fails).
+</p>
+<p>Log scaling adds two twists: First, if there are any decades, I make
+decade ticks longer than any others, even if the first level of
+subdecade ticks are far enough apart to get numeric labels.  If there
+will be ticks within each decade, I divide the decade into three
+subintervals &ndash; from 1 to 2, 2 to 5, and 5 to 10 &ndash; then use the
+linear scale algorithm for selecting tick intervals at the specified
+density within each of the three subintervals.  Since the tick density
+changes by at most a factor of 2.5 within each subinterval, the linear
+algorithm works pretty well.  You expect closer ticks on a log scale
+than you see on a linear scale, so I multiply the nMajor and nMinor
+densities by logAdjMajor and logAdjMinor before using them for the
+subintervals.
+</p>
+<p>A final caveat: On the horizontal axis, long numeric labels can
+overlap each other if the tick density gets too high.  This depends on
+the font size and the maximum number of digits you allow for those
+labels, both of which are style parameters.  Designing a graphics
+style which avoids this evil is not easy.
+</p>
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_82.html#plsys" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.5.3 Coordinate systems" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_84.html#Query-and-edit" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 3.6 Queries, edits, and legends" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_79.html#Graphics-style" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.5 Graphics style" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+

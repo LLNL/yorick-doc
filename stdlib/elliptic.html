@@ -1,0 +1,194 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package elliptic (in elliptic.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>D</h3>
+    <p><a href="elliptic.html#dn_">dn_</a></p>
+    <h3>E</h3>
+    <p><a href="elliptic.html#ellip2_e">ellip2_e</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="elliptic.html#ellip2_k">ellip2_k</a></p>
+    <p><a href="elliptic.html#elliptic">elliptic</a></p>
+    <p><a href="elliptic.html#ellip_e">ellip_e</a></p>
+    <p><a href="elliptic.html#ellip_k">ellip_k</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="elliptic.html#ell_am">ell_am</a></p>
+    <p><a href="elliptic.html#ell_e">ell_e</a></p>
+    <p><a href="elliptic.html#ell_f">ell_f</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="dn_"></a><h3>dn_</h3>
+  <pre>DOCUMENT dn_(ell_am(u,m))
+
+  return the Jacobian elliptic function dn(u|m).  The external
+  variable ell_m must be set properly before calling dn_.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ell_am">ell_am</a></p>
+</div>
+<div class="docblock"><a name="ellip2_e"></a><h3>ellip2_e</h3>
+  <pre>DOCUMENT ellip2_e(m)
+
+  returns the complete elliptic integral of the second kind E(M):
+     E(M) = integral[0 to pi/2]( dt * sqrt(1-M*sin(t)^2) )
+  accurate to 2e-8 for 0<=M<=1
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ellip_k">ellip_k</a>, <a href="elliptic.html#ell_e">ell_e</a></p>
+</div>
+<div class="docblock"><a name="ellip2_k"></a><h3>ellip2_k</h3>
+  <pre>DOCUMENT ellip2_k(m)
+
+  returns the complete elliptic integral of the first kind K(M):
+     K(M) = integral[0 to pi/2]( dt / sqrt(1-M*sin(t)^2) )
+  accurate to 2e-8 for 0<=M<1
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ellip_e">ellip_e</a>, <a href="elliptic.html#ell_f">ell_f</a></p>
+</div>
+<div class="docblock"><a name="elliptic"></a><h3>elliptic</h3>
+  <pre>DOCUMENT elliptic, ell_am, ell_f, ell_e, dn_, ellip_k, ellip_e
+
+  The elliptic integral of the first kind is:
+
+     u = integral[0 to phi]( dt / sqrt(1-m*sin(t)^2) )
+
+  The functions ell_f and ell_am compute this integral and its
+  inverse:
+
+     u   = ell_f(phi, m)
+     phi = ell_am(u, m)
+
+  The Jacobian elliptic functions can be computed from the
+  "amplitude" ell_am by means of:
+
+     sn(u|m) = sin(ell_am(u,m))
+     cn(u|m) = cos(ell_am(u,m))
+     dn(u|m) = dn_(ell_am(u,m)) = sqrt(1-m*sn(u|m)^2)
+
+  The other nine functions are sc=sn/cn, cs=cn/sn, nd=1/dn,
+  cd=cn/dn, dc=dn/cn, ns=1/sn, sd=sn/dn, nc=1/cn, and ds=dn/sn.
+  (The notation u|m does not means yorick's | operator; it is
+  the mathematical notation, not valid yorick code!)
+
+  The parameter M is given in three different notations:
+    as M, the "parameter",
+    as k, the "modulus", or
+    as alpha, the "modular angle",
+  which are related by: M = k^2 = sin(alpha)^2.  The yorick elliptic
+  functions in terms of M may need to be written
+    ell_am(u,k^2) or ell_am(u,sin(alpha)^2)
+  in order to agree with the definitions in other references.
+  Sections 17.2.17-19 of Abramowitz and Stegun explains these notations,
+  and chapters 16 and 17 present a compact overview of the subject of
+  elliptic functions in general.
+
+  The parameter M must be a scalar; U may be an array.  The
+  exceptions are the complete elliptic integrals ellip_k and
+  ellip_e which accept an array of M values.
+
+  The ell_am function uses the external variable ell_m if M is
+  omitted, otherwise stores M in ell_m.  Hence, you may set ell_m,
+  then simply call ell_am(u) if you have a series of calls with
+  the same value of M; this also allows the dn_ function to work
+  without a second specification of M.
+
+  The elliptic integral of the second kind is:
+
+     u = integral[0 to phi]( dt * sqrt(1-m*sin(t)^2) )
+
+  The function ell_e computes this integral:
+
+     u   = ell_e(phi, m)
+
+  The special values ell_f(pi/2,m) and ell_e(pi/2,m) are the complete
+  elliptic integrals of the first and second kinds; separate functions
+  ellip_k and ellip_e are provided to compute them.
+
+  Note that the function ellip_k is infinite for M=1 and for large
+  negative M.  The "natural" range for M is 0<=M<=1; all other real
+  values can be "reduced" to this range by various transformations;
+  the logarithmic singularity of ellip_k is actually very mild, and
+  other functions such as ell_am are perfectly well-defined there.
+
+  Here are the sum formulas for elliptic functions:
+
+    sn(u+v) = ( sn(u)*cn(v)*dn(v) + sn(v)*cn(u)*dn(u) ) /
+              ( 1 - m*sn(u)^2*sn(v)^2 )
+    cn(u+v) = ( cn(u)*cn(v) - sn(u)*dn(u)*sn(v)*dn(v) ) /
+              ( 1 - m*sn(u)^2*sn(v)^2 )
+    dn(u+v) = ( dn(u)*dn(v) - m*sn(u)*cn(u)*sn(v)*cn(v) ) /
+              ( 1 - m*sn(u)^2*sn(v)^2 )
+
+  And the formulas for pure imaginary values:
+
+    sn(1i*u,m) = 1i * sc(u,1-m)
+    cn(1i*u,m) = nc(u,1-m)
+    dn(1i*u,m) = dc(u,1-m)
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#ell_am">ell_am</a>, <a href="elliptic.html#ell_f">ell_f</a>, <a href="elliptic.html#ell_e">ell_e</a>, <a href="elliptic.html#dn_">dn_</a>, <a href="elliptic.html#ellip_k">ellip_k</a>, <a href="elliptic.html#ellip_e">ellip_e</a></p>
+</div>
+<div class="docblock"><a name="ellip_e"></a><h3>ellip_e</h3>
+  <pre>DOCUMENT ellip_e(m)
+
+  returns the complete elliptic integral of the second kind E(M):
+     E(M) = integral[0 to pi/2]( dt * sqrt(1-M*sin(t)^2) )
+
+  See help,elliptic for more.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ellip_k">ellip_k</a>, <a href="elliptic.html#ell_e">ell_e</a></p>
+</div>
+<div class="docblock"><a name="ellip_k"></a><h3>ellip_k</h3>
+  <pre>DOCUMENT ellip_k(m)
+
+  returns the complete elliptic integral of the first kind K(M):
+     K(M) = integral[0 to pi/2]( dt / sqrt(1-M*sin(t)^2) )
+
+  See help,elliptic for more.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ellip_e">ellip_e</a>, <a href="elliptic.html#ell_f">ell_f</a></p>
+</div>
+<div class="docblock"><a name="ell_am"></a><h3>ell_am</h3>
+  <pre>DOCUMENT ell_am(u)
+      or ell_am(u,m)
+
+  returns the "amplitude" (an angle in radians) for the Jacobi
+  elliptic functions at U, with parameter M.  That is,
+     phi = ell_am(u,m)
+  means that
+     u = integral[0 to phi]( dt / sqrt(1-m*sin(t)^2) )
+
+  Thus ell_am is the inverse of the incomplete elliptic function
+  of the first kind ell_f.  See help,elliptic for more.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a></p>
+</div>
+<div class="docblock"><a name="ell_e"></a><h3>ell_e</h3>
+  <pre>DOCUMENT ell_e(phi,m)
+
+  returns the incomplete elliptic integral of the second kind E(phi|M).
+  That is,
+     u = ell_e(phi,m)
+  means that
+     u = integral[0 to phi]( dt * sqrt(1-m*sin(t)^2) )
+
+  See help,elliptic for more.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ell_f">ell_f</a></p>
+</div>
+<div class="docblock"><a name="ell_f"></a><h3>ell_f</h3>
+  <pre>DOCUMENT ell_f(phi,m)
+
+  returns the incomplete elliptic integral of the first kind F(phi|M).
+  That is,
+     u = ell_f(phi,m)
+  means that
+     u = integral[0 to phi]( dt / sqrt(1-m*sin(t)^2) )
+
+  See help,elliptic for more.
+</pre>
+  <p>SEE ALSO: <a href="elliptic.html#elliptic">elliptic</a>, <a href="elliptic.html#ell_e">ell_e</a></p>
+</div>

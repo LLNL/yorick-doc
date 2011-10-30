@@ -1,0 +1,63 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package gammp (in gammp.i) - </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>B</h3>
+    <p><a href="gammp.html#betai">betai</a></p>
+  </div>
+  <div class="ndex2">
+    <h3>G</h3>
+    <p><a href="gammp.html#gammp">gammp</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="gammp.html#gammq">gammq</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="betai"></a><h3>betai</h3>
+  <pre>DOCUMENT betai(a, b, x)
+  return I_x(a,x) = int[0 to x]{ du * u^(a-1)*(1-u)^(b-1) } / beta(a,b)
+  the incomplete beta function
+
+  betai(a,b,x) = 1 - betai(b,a,1-x)
+
+  Note that Student's t-distribution is
+    A(t|nu) = 1 - betai(0.5*nu,0.5, nu/(nu+t^2))
+  The F-distribution is
+    Q(F|nu1,nu2) = betai(0.5*nu2,0.5*nu1, nu2/(nu2+F*nu1))
+</pre>
+  <p>SEE ALSO: <a href="gammp.html#gammp">gammp</a>, <a href="gammp.html#gammq">gammq</a>, <a href="gamma.html#ln_gamma">ln_gamma</a>, </p>
+</div>
+<div class="docblock"><a name="gammp"></a><h3>gammp</h3>
+  <pre>DOCUMENT gammp(a, x)
+      or gammp(a, x, q, lg)
+  return P(a,x) = int[0 to x]{ du * u^(a-1)*exp(-u) } / gamma(a)
+  optionally return Q(a,x) = 1-P(a,x) and ln(gamma(a))
+
+  Note that erf(x)=gammp(0.5,x^2) and erfc(x)=gammq(0.5,x^2)
+  Also P(chi2|nu)=gammp(0.5*nu,0.5*chi2)
+   and Q(chi2|nu)=gammq(0.5*nu,0.5*chi2)
+  are the probabilities that an observed chi-square be less than
+  or greater than (P or Q) chi2 when there are nu degrees of freedom
+  (terms in the chi-square sum).
+</pre>
+  <p>SEE ALSO: <a href="gammp.html#gammq">gammq</a>, <a href="gammp.html#betai">betai</a>, <a href="gamma.html#ln_gamma">ln_gamma</a>, </p>
+</div>
+<div class="docblock"><a name="gammq"></a><h3>gammq</h3>
+  <pre>DOCUMENT gammq(a, x)
+      or gammq(a, x, p, lg)
+  return Q(a,x) = 1 - int[0 to x]{ du * u^(a-1)*exp(-u) } / gamma(a)
+  optionally return P(a,x) = 1-Q(a,x) and ln(gamma(a))
+
+  Note that erf(x)=gammp(0.5,x^2) and erfc(x)=gammq(0.5,x^2)
+  Also P(chi2|nu)=gammp(0.5*nu,0.5*chi2)
+   and Q(chi2|nu)=gammq(0.5*nu,0.5*chi2)
+  are the probabilities that an observed chi-square be less than
+  or greater than (P or Q) chi2 when there are nu degrees of freedom
+  (terms in the chi-square sum).
+</pre>
+  <p>SEE ALSO: <a href="gammp.html#gammp">gammp</a>, <a href="gammp.html#betai">betai</a>, <a href="gamma.html#ln_gamma">ln_gamma</a>, </p>
+</div>

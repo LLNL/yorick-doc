@@ -1,0 +1,544 @@
+---
+layout: default
+headline: Standard Library
+---
+<p class="sectop">Package std-array (in std.i) - building and manipulating arrays </p>
+<p class="sectop">Index of documented functions or symbols:</p>
+<div class="ndex0s">
+  <div class="ndex1">
+    <h3>A</h3>
+    <p><a href="std-array.html#accum_dimlist">accum_dimlist</a></p>
+    <p><a href="std-array.html#allof">allof</a></p>
+    <p><a href="std-array.html#allof">anyof</a></p>
+    <p><a href="std-array.html#array">array</a></p>
+    <p><a href="std-array.html#avg">avg</a></p>
+    <h3>D</h3>
+    <p><a href="std-array.html#digitize">digitize</a></p>
+    <h3>G</h3>
+    <p><a href="std-array.html#grow">grow</a></p>
+    <h3>H</h3>
+    <p><a href="std-array.html#histinv">histinv</a></p>
+    <p><a href="std-array.html#histogram">histogram</a></p>
+    <h3>I</h3>
+    <p><a href="std-array.html#indgen">indgen</a></p>
+  </div>
+  <div class="ndex2">
+    <p><a href="std-array.html#integ">integ</a></p>
+    <p><a href="std-array.html#interp">interp</a></p>
+    <h3>M</h3>
+    <p><a href="std-array.html#max">max</a></p>
+    <p><a href="std-array.html#median">median</a></p>
+    <p><a href="std-array.html#merge">merge</a></p>
+    <p><a href="std-array.html#merge2">merge2</a></p>
+    <p><a href="std-array.html#mergef">mergef</a></p>
+    <p><a href="std-array.html#mergeg">mergeg</a></p>
+    <p><a href="std-array.html#mergei">mergei</a></p>
+    <p><a href="std-array.html#min">min</a></p>
+    <h3>N</h3>
+    <p><a href="std-array.html#allof">nallof</a></p>
+    <p><a href="std-array.html#allof">noneof</a></p>
+    <h3>R</h3>
+  </div>
+  <div class="ndex3">
+    <p><a href="std-array.html#reform">reform</a></p>
+    <p><a href="std-array.html#reshape">reshape</a></p>
+    <h3>S</h3>
+    <p><a href="std-array.html#sort">sort</a></p>
+    <p><a href="std-array.html#span">span</a></p>
+    <p><a href="std-array.html#spanl">spanl</a></p>
+    <p><a href="std-array.html#sum">sum</a></p>
+    <h3>T</h3>
+    <p><a href="std-array.html#transpose">transpose</a></p>
+    <h3>W</h3>
+    <p><a href="std-array.html#where">where</a></p>
+    <p><a href="std-array.html#where2">where2</a></p>
+    <h3>_</h3>
+    <p><a href="std-array.html#grow">_</a></p>
+  </div>
+</div>
+<div class="docblock"><a name="accum_dimlist"></a><h3>accum_dimlist</h3>
+  <pre>DOCUMENT accum_dimlist, dims, d
+  accumulate a dimension argument D onto a dimension list DIMS.
+  This can be used to emulate the dimension lists supplied to the
+  array function.  For example:
+    func myfunc(arg1, arg2, ..) {
+      local dims;
+      while (more_args()) accum_dimlist, dims, next_arg();
+      ...
+    }</pre>
+  <p>SEE ALSO: <a href="std-array.html#array">array</a>, <a href="std-array.html#reform">reform</a></p>
+</div>
+<div class="docblock"><a name="allof"></a><h3>allof</h3>
+  <pre>DOCUMENT allof(x)
+         anyof(x)
+         nallof(x)
+         noneof(x)
+  Respectively:
+   returns 1 if every element of the array x is non-zero, else 0.
+   returns 1 if at least one element of the array x is non-zero, else 0.
+   returns 1 if at least one element of the array x is zero, else 0.
+   returns 1 if every element of the array x is zero, else 0.</pre>
+  <p>SEE ALSO: <a href="std-array.html#allof">allof</a>, <a href="std-array.html#allof">anyof</a>, <a href="std-array.html#allof">noneof</a>, <a href="std-array.html#allof">nallof</a>, <a href="std-array.html#where">where</a>, <a href="std-array.html#where2">where2</a></p>
+</div>
+<div class="docsee">
+  <h3>anyof</h3><p>SEE: <a href="#allof">allof</a></p>
+</div>
+<div class="docblock"><a name="array"></a><h3>array</h3>
+  <pre>DOCUMENT array(value, dimension_list)
+      or array(type, dimension_list)
+  returns an object of the same type as VALUE, consisting of copies
+  of VALUE, with the given DIMENSION_LIST appended to the dimensions
+  of VALUE.  Hence, array(1.5, 3, 1) is the same as [[1.5, 1.5, 1.5]].
+  In the second form, the VALUE is taken as scalar zero of the TYPE.
+  Hence, array(short, 2, 3) is the same as [[0s,0s],[0s,0s],[0s,0s]].
+  A DIMENSION_LIST is a list of arguments, each of which may be
+  any of the following:
+     (1) A positive scalar integer expression,
+     (2) An index range with no step field (e.g.-  1:10), or
+     (3) A vector of integers [number of dims, length1, length2, ...]
+         (that is, the format returned by the dimsof function).</pre>
+  <p>SEE ALSO: <a href="std-array.html#reshape">reshape</a>, <a href="std-query.html#is_array">is_array</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-array.html#grow">grow</a>, <a href="std-array.html#span">span</a>, <a href="std-query.html#use_origins">use_origins</a>, <a href="std-list.html#_lst">_lst</a></p>
+</div>
+<div class="docblock"><a name="avg"></a><h3>avg</h3>
+  <pre>DOCUMENT avg(x)
+  returns the scalar average of all elements of its array argument.</pre>
+  <p>SEE ALSO: <a href="std-array.html#sum">sum</a>, <a href="std-array.html#min">min</a>, <a href="std-array.html#max">max</a></p>
+</div>
+<div class="docblock"><a name="digitize"></a><h3>digitize</h3>
+  <pre>DOCUMENT digitize(x, bins)
+  returns an array of longs with dimsof(X), and values i such that
+  BINS(i-1) <= X < BINS(i) if BINS is monotonically increasing, or
+  BINS(i-1) > X >= BINS(i) if BINS is monotonically decreasing.
+  Beyond the bounds of BINS, returns either i=1 or i=numberof(BINS)+1
+  as appropriate.</pre>
+  <p>SEE ALSO: <a href="std-array.html#histogram">histogram</a>, <a href="std-array.html#interp">interp</a>, <a href="std-array.html#integ">integ</a>, <a href="std-array.html#sort">sort</a>, <a href="std-array.html#where">where</a>, <a href="std-array.html#where2">where2</a></p>
+</div>
+<div class="docblock"><a name="grow"></a><h3>grow</h3>
+  <pre>DOCUMENT grow, x, xnext1, xnext2, ...
+      or grow(x, xnext1, xnext2, ...)
+      or    _(x, xnext1, xnext2, ...)
+  lengthens the array X by appending XNEXT1, XNEXT2, etc. to its
+  final dimension.  If X is nil, X is first redefined to the first
+  non-nil XNEXT, and the remainder of the XNEXT list is processed
+  normally.  Each XNEXT is considered to have the same number of
+  dimensions as X, by appending unit-length dimensions if necessary.
+  All but this final dimension of each XNEXT must be right-conformable
+  (that is, conformable in the sense of the right hand side of an
+  assignment statement) with all but the final dimension of X.
+  The result has a final dimension which is the sum of the final
+  dimension of X and all the final dimensions of the XNEXT.  Nil
+  XNEXT are ignored.  The value of the result is obtained by
+  concatenating all the XNEXT to X, after any required broadcasts.
+
+  If invoked as a function, grow returns the new value of X; in
+  this case, X may be an expression.  X must be a simple variable
+  reference for the subroutine form of grow; otherwise there is
+  nowhere to return the result.  The subroutine form is slightly
+  more efficient than the function form for the common usage:
+       x= grow(x, xnext1, xnext2)           is the same as
+       grow, x, xnext1, xnext2              the preferred form
+
+  The _ function is a synonym for grow, for people who want this
+  operator to look like punctuation in their source code, on analogy
+  with the array building operator [a, b, c, ...].
+
+  The _cat function is sometimes more appropriate than grow.
+
+  Usage note:
+  Never do this:
+    while (more_data) grow, result, datum;
+  The time to complete this loop scales as the SQUARE of the number
+  of passes!  Instead, do this:
+    for (i=1,result=array(things,n_init) ; more_data ; i++) {
+      if (i>numberof(result)) grow, result, result;
+      result(i) = datum;
+    }
+    result = result(1:i-1);
+  The time to complete this loop scales as n*log(n), because the
+  grow operation doubles the length of the result each time.
+</pre>
+  <p>SEE ALSO: <a href="std-list.html#_lst">_cat</a>, <a href="std-array.html#array">array</a></p>
+</div>
+<div class="docblock"><a name="histinv"></a><h3>histinv</h3>
+  <pre>DOCUMENT list = histinv(hist)
+  returns a list whose histogram is HIST, hist = histogram(list),
+  that is, hist(1) 1's followed by hist(2) 2's, followed by hist(3)
+  3's, and so on.  The total number of elements in the returned
+  list is sum(hist).  All values in HIST must be non-negative;
+  if sum(hist)==0, histinv returns [].  The input HIST array may
+  have any number of dimensions; the result will always be either
+  nil or a 1D array.
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#histogram">histogram</a></p>
+</div>
+<div class="docblock"><a name="histogram"></a><h3>histogram</h3>
+  <pre>DOCUMENT histogram(list)
+      or histogram(list, weight)
+  returns an array hist which counts the number of occurrences of each
+  element of the input index LIST, which must consist of positive
+  integers (1-origin index values into the result array):
+       histogram(list)(i) = number of occurrences of i in LIST
+
+  A second argument WEIGHT must have the same shape as LIST; the result
+  will be the sum of WEIGHT:
+       histogram(list)(i) = sum of all WEIGHT(j) where LIST(j)==i
+
+  The result of the single argument call will be of type long; the
+  result of the two argument call will be of type double (WEIGHT is
+  promoted to that type).  The input argument(s) may have any number
+  of dimensions; the result is always 1-D.
+
+KEYWORD: top=max_list_value
+  By default, the length of the result is max(LIST).  You may
+  specify that the result have a larger length by means of the TOP
+  keyword.  (Elements beyond max(LIST) will be 0, of course.)
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#digitize">digitize</a>, <a href="std-array.html#sort">sort</a>, <a href="std-array.html#histinv">histinv</a></p>
+</div>
+<div class="docblock"><a name="indgen"></a><h3>indgen</h3>
+  <pre>DOCUMENT indgen(n)
+      or indgen(start:stop)
+      or indgen(start:stop:step)
+  returns "index generator" list -- an array of longs running from
+  1 to N, inclusive.  In the second and third forms, the index
+  values specified by the index range are returned.</pre>
+  <p>SEE ALSO: <a href="std-array.html#span">span</a>, <a href="std-array.html#spanl">spanl</a>, <a href="std-array.html#array">array</a></p>
+</div>
+<div class="docblock"><a name="integ"></a><h3>integ</h3>
+  <pre>DOCUMENT integ(y, x, xp)
+      or integ(y, x, xp, which)
+  See the interp function for an explanation of the meanings of the
+  arguments.  The integ function returns ypi which is the integral
+  of the piecewise linear curve (X(i), Y(i)) (i=1, ..., numberof(X))
+  from X(1) to XP.  The curve (X, Y) is regarded as constant outside
+  the bounds of X.  Note that X must be monotonically increasing or</pre>
+  <p>SEE ALSO: <a href="std-array.html#interp">interp</a>, <a href="std-array.html#digitize">digitize</a>, <a href="std-array.html#span">span</a></p>
+</div>
+<div class="docblock"><a name="interp"></a><h3>interp</h3>
+  <pre>DOCUMENT interp(y, x, xp)
+      or interp(y, x, xp, which)
+  returns yp such that (XP, yp) lies on the piecewise linear curve
+  (X(i), Y(i)) (i=1, ..., numberof(X)).  Points beyond X(1) are set
+  to Y(1); points beyond X(0) are set to Y(0).  The array X must be
+  one dimensional, have numberof(X)>=2, and be either monotonically
+  increasing or monotonically decreasing.  The array Y may have more
+  than one dimension, but dimension WHICH must be the same length as
+  X.  WHICH defaults to 1, the first dimension of Y.  WHICH may be
+  non-positive to count dimensions from the end of Y; a WHICH of 0
+  means the final dimension of Y.  The result yp has dimsof(XP)
+  in place of the WHICH dimension of Y (if XP is scalar, the WHICH
+  dimension is not present).  (The dimensions of the result are the
+  same as if an index list with dimsof(XP) were placed in slot
+  WHICH of Y.)</pre>
+  <p>SEE ALSO: <a href="std-array.html#integ">integ</a>, <a href="std-array.html#digitize">digitize</a>, <a href="std-array.html#span">span</a></p>
+</div>
+<div class="docblock"><a name="max"></a><h3>max</h3>
+  <pre>DOCUMENT max(x)
+      or max(x, y, z, ...)
+  returns the scalar maximum value of its array argument, or, if
+  more than one argument is supplied, returns an array of the
+  maximum value for each array element among the several arguments.
+  In the multi-argument case, the arguments must be conformable.</pre>
+  <p>SEE ALSO: <a href="std-array.html#min">min</a>, <a href="std-array.html#sum">sum</a>, <a href="std-array.html#avg">avg</a></p>
+</div>
+<div class="docblock"><a name="median"></a><h3>median</h3>
+  <pre>DOCUMENT median(x)
+      or median(x, which)
+  returns the median of the array X.  The search for the median takes
+  place along the dimension of X specified by WHICH.  WHICH defaults
+  to 1, meaning the first index of X.  The median function returns an
+  array with one fewer dimension than its argument X (the WHICH
+  dimension of X is missing in the result), in exact analogy with
+  rank reducing index range functions.  If dimsof(X)(WHICH) is
+  odd, the result will have the same data type as X; if even, the
+  result will be a float or a double, since the median is defined
+  as the arithmetic mean between the two central values in that
+  case.</pre>
+  <p>SEE ALSO: <a href="std-array.html#sort">sort</a></p>
+</div>
+<div class="docblock"><a name="merge"></a><h3>merge</h3>
+  <pre>DOCUMENT merge(true_expr, false_expr, condition)
+  returns the values TRUE_EXPR or FALSE_EXPR where CONDITION is
+  non-zero or zero, respectively.  The result has the data type of
+  TRUE_EXPR or FALSE_EXPR, promoted to the higher arithmetic type
+  if necessary.  The result has the dimensions of CONDITION.
+  The number of elements in TRUE_EXPR must match the number of
+  non-zero elements of CONDITION, and the number of elements in
+  FALSE_EXPR must match the number of zero elements of CONDITION.
+  (TRUE_EXPR or FALSE_EXPR should be nil if there are no such
+  elements of CONDITION.  Normally, TRUE_EXPR and FALSE_EXPR should
+  be 1-D arrays if they are not nil.)
+  This function is intended for vectorizing a function whose
+  domain is divided into two or more parts, as in:
+     func f(x) {
+       big= (x>=threshhold);
+       wb= where(big);
+       ws= where(!big);
+       if (is_array(wb)) {
+         xx= x(wb);
+         fb= <function of xx>
+       }
+       if (is_array(ws)) {
+         xx= x(ws);
+         fs= <function of xx>
+       }
+       return merge(fb, fs, big);
+     }</pre>
+  <p>SEE ALSO: <a href="std-array.html#mergef">mergef</a>, <a href="std-array.html#merge2">merge2</a>, <a href="std-array.html#where">where</a></p>
+</div>
+<div class="docblock"><a name="merge2"></a><h3>merge2</h3>
+  <pre>DOCUMENT merge2(true_expr, false_expr, condition)
+  returns the values TRUE_EXPR or FALSE_EXPR where CONDITION is
+  non-zero or zero, respectively.  The result has the data type of
+  TRUE_EXPR or FALSE_EXPR, promoted to the higher arithmetic type
+  if necessary.  Unlike the merge function, TRUE_EXPR and FALSE_EXPR
+  must be conformable with each other, and with the CONDITION.</pre>
+  <p>SEE ALSO: <a href="std-array.html#merge">merge</a>, <a href="std-array.html#where">where</a>, <a href="std-array.html#mergef">mergef</a></p>
+</div>
+<div class="docblock"><a name="mergef"></a><h3>mergef</h3>
+  <pre>DOCUMENT y = mergef(x, f1, cond1, f2, cond2, ... felse)
+  Evaluate F1(X(where(COND1))), F2(X(where(COND2))),
+  and so on, until FELSE(X(where(!(COND1 | COND2 | ...))))
+  and merge all the results back into an array Y with the
+  same dimensions as X.  Each of the CONDi must have the
+  same dimensions as X, and they must be mutally exclusive.
+
+  During the evaluation of Fi, all of the local variables of
+  the caller of mergei are available.  The Fi are called in
+  order, skipping any for which no X is in the specified interval.
+  Each Fi must return a double value with the same dimensions as
+  its input.
+
+  Additional input and output variables can be constructed using
+  the mergel index list employed by mergei, and using the mergeg
+  function.  For example, let w be an additional input to and z be
+  an additional output from the function:
+    func myfunc(x, w, &z) {
+      z = array(0.0, dimsof(x, w));
+      x += z;
+      w += z;
+      return mergef(x, _myfunc_lo, x<1.234, _myfunc_hi);
+    }
+    func _myfunc_lo(x) {
+      wp = w(mergel);  // part of w for this function
+      z = mergeg(z, <expression using x and wp>);
+      return <expression using x and wp>;
+    }
+    func _myfunc_hi(x) {
+      wp = w(mergel);  // part of w for this function
+      z = mergeg(z, <expression using x and wp>);
+      return <expression using x and wp>;
+    }
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#mergei">mergei</a>, <a href="std-array.html#merge">merge</a></p>
+</div>
+<div class="docblock"><a name="mergeg"></a><h3>mergeg</h3>
+  <pre>DOCUMENT z = mergeg(z, value)
+      or z = mergeg(z)
+  If secondary results are to be returned from a mergef, besides
+  its return value, the Fi may construct them using mergeg.
+    z = mergeg(z, value)
+  where z is a variable in the original caller of mergef,
+  and value is its value.
+
+  z = [];    or   z = <something with shape of x>;
+  y = mergef(x, f1, cond, f2);
+  z = mergeg(z);  // this can now be omitted, but does no harm
+  ...
+  func f1(x) { <exprz(x) computes z(x), expry(x) computes y(x)>
+    z = mergeg(z, exprz(x));
+    return expry(x);
+  }
+  func f2(x) { <exprz(x) computes z(x), expry(x) computes y(x)>
+    z = mergeg(z, exprz(x));
+    return expry(x);
+  }
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#mergef">mergef</a>, <a href="std-array.html#merge">merge</a></p>
+</div>
+<div class="docblock"><a name="mergei"></a><h3>mergei</h3>
+  <pre>DOCUMENT y = mergei(x, f0, x1, f1, x2, ... xN, fN)
+  Evaluate F1 where X<X1, F2 where X1<=X<X2, ..., FN where X>=XN,
+  and merge all the results back into an array Y with the
+  same dimensions as X.
+
+  During the evaluation of Fi, all of the local variables of
+  the caller of mergei are available.  The Fi are called in
+  order, skipping any for which no X is in the specified interval.
+  Each Fi must return a value with the same dimensions as
+  its input.
+
+  Additional input and output variables can be constructed using
+  the mergel index list employed by mergei, and using the mergeg
+  function.  For example, let w be an additional input to and z be
+  an additional output from the function:
+    func myfunc(x, w, &z) {
+      z = array(0.0, dimsof(x, w));
+      x += z;
+      w += z;
+      return mergei(x, _myfunc_lo, 1.234, _myfunc_hi);
+    }
+    func _myfunc_lo(x) {
+      wp = w(mergel);  // part of w for this function
+      z = mergeg(z, <expression using x and wp>);
+      return <expression using x and wp>;
+    }
+    func _myfunc_hi(x) {
+      wp = w(mergel);  // part of w for this function
+      z = mergeg(z, <expression using x and wp>);
+      return <expression using x and wp>;
+    }
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#mergef">mergef</a>, <a href="std-array.html#merge">merge</a></p>
+</div>
+<div class="docblock"><a name="min"></a><h3>min</h3>
+  <pre>DOCUMENT min(x)
+      or min(x, y, z, ...)
+  returns the scalar minimum value of its array argument, or, if
+  more than one argument is supplied, returns an array of the
+  minimum value for each array element among the several arguments.
+  In the multi-argument case, the arguments must be conformable.</pre>
+  <p>SEE ALSO: <a href="std-array.html#max">max</a>, <a href="std-array.html#sum">sum</a>, <a href="std-array.html#avg">avg</a></p>
+</div>
+<div class="docsee">
+  <h3>nallof</h3><p>SEE: <a href="#allof">allof</a></p>
+</div>
+<div class="docsee">
+  <h3>noneof</h3><p>SEE: <a href="#allof">allof</a></p>
+</div>
+<div class="docblock"><a name="reform"></a><h3>reform</h3>
+  <pre>DOCUMENT reform(x, dimlist)
+   returns array X reshaped according to dimension list DIMLIST.</pre>
+  <p>SEE ALSO: <a href="std-array.html#array">array</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-array.html#accum_dimlist">accum_dimlist</a></p>
+</div>
+<div class="docblock"><a name="reshape"></a><h3>reshape</h3>
+  <pre>DOCUMENT reshape, reference, address, type, dimension_list
+      or reshape, reference, type, dimension_list
+      or reshape, reference
+  The REFERENCE must be an unadorned variable, not an expression;
+  reshape sets this variable to an LValue at the specified ADDRESS
+  with the specified TYPE and DIMENSION_LIST.  (See the array
+  function documentation for acceptable DIMENSION_LIST formats.)
+  If ADDRESS is an integer (e.g.- a long), the programmer is
+  responsible for assuring that the data at ADDRESS is valid.
+  If ADDRESS is a (Yorick) pointer, Yorick will assure that the
+  data pointed to will not be discarded, and the reshape will
+  fail if TYPE and DIMENSION_LIST extend beyond the pointee
+  bounds.  In the second form, ADDRESS is taken to be &REFERENCE;
+  that is, the TYPE and DIMENSION_LIST of the variable are changed
+  without doing any type conversion.  In the third form, REFERENCE
+  is set to nil ([]).  (Simple redefinition will not work on a
+  variable defined using reshape.)
+  WARNING: There are almost no situations for which reshape is
+    the correct operation.  Use reform instead.</pre>
+  <p>SEE ALSO: <a href="std-array.html#reform">reform</a>, <a href="std-array.html#array">array</a>, <a href="std-query.html#dimsof">dimsof</a>, <a href="std-query.html#numberof">numberof</a>, <a href="std-query.html#is_array">is_array</a>, <a href="std-advanced.html#eq_nocopy">eq_nocopy</a></p>
+</div>
+<div class="docblock"><a name="sort"></a><h3>sort</h3>
+  <pre>DOCUMENT sort(x)
+      or sort(x, which)
+  returns an array of longs with dimsof(X) containing index values
+  such that X(sort(X)) is a monotonically increasing array.  X can
+  contain integer, real, or string values.  If X has more than one
+  dimension, WHICH determines the dimension to be sorted.  The
+  default WHICH is 1, corresponding to the first dimension of X.
+  WHICH can be non-positive to count dimensions from the end of X;
+  in particular a WHICH of 0 will sort the final dimension of X.
+
+  WARNING: The sort function is non-deterministic if some of the
+           values of X are equal, because the Quick Sort algorithm
+           involves a random selection of a partition element.
+
+  For information on sorting with multiple keys (and on making
+  sort deterministic), type the following:
+     #include "msort.i"
+     help, msort
+</pre>
+  <p>SEE ALSO: <a href="std-array.html#median">median</a>, <a href="std-array.html#digitize">digitize</a>, <a href="std-array.html#interp">interp</a>, <a href="std-array.html#integ">integ</a>, <a href="std-array.html#histogram">histogram</a></p>
+</div>
+<div class="docblock"><a name="span"></a><h3>span</h3>
+  <pre>DOCUMENT span(start, stop, n)
+      or span(start, stop, n, which)
+  returns array of N doubles equally spaced from START to STOP.
+  The START and STOP arguments may themselves be arrays, as long as
+  they are conformable.  In this case, the result will have one
+  dimension of length N in addition to dimsof(START, STOP).
+  By default, the result will be N-by-dimsof(START, STOP), but
+  if WHICH is specified, the new one of length N will be the
+  WHICHth.  WHICH may be non-positive to position the new
+  dimension relative to the end of dimsof(START, STOP); in
+  particular WHICH of 0 produces a result with dimensions
+  dimsof(START, STOP)-by-N.</pre>
+  <p>SEE ALSO: <a href="std-array.html#spanl">spanl</a>, <a href="std-array.html#indgen">indgen</a>, <a href="std-array.html#array">array</a></p>
+</div>
+<div class="docblock"><a name="spanl"></a><h3>spanl</h3>
+  <pre>DOCUMENT spanl(start, stop, n)
+      or spanl(start, stop, n, which)
+  similar to the span function, but the result array have N points
+  spaced at equal ratios from START to STOP (that is, equally
+  spaced logarithmically).  See span for discussion of WHICH argument.
+  START and STOP must have the same algebraic sign for this to make
+  any sense.</pre>
+  <p>SEE ALSO: <a href="std-array.html#span">span</a>, <a href="std-array.html#indgen">indgen</a>, <a href="std-array.html#array">array</a></p>
+</div>
+<div class="docblock"><a name="sum"></a><h3>sum</h3>
+  <pre>DOCUMENT sum(x)
+  returns the scalar sum of all elements of its array argument.
+  If X is a string, concatenates all elements.</pre>
+  <p>SEE ALSO: <a href="std-array.html#avg">avg</a>, <a href="std-array.html#min">min</a>, <a href="std-array.html#max">max</a></p>
+</div>
+<div class="docblock"><a name="transpose"></a><h3>transpose</h3>
+  <pre>DOCUMENT transpose(x)
+      or transpose(x, permutation1, permutation2, ...)
+  transpose the first and last dimensions of array X.  In the second
+  form, each PERMUTATION specifies a simple permutation of the
+  dimensions of X.  These permutations are compounded left to right
+  to determine the final permutation to be applied to the dimensions
+  of X.  Each PERMUTATION is either an integer or a 1D array of
+  integers.  A 1D array specifies a cyclic permutation of the
+  dimensions as follows: [3, 5, 2] moves the 3rd dimension to the
+  5th dimension, the 5th dimension to the 2nd dimension, and the 2nd
+  dimension to the 3rd dimension.  Non-positive numbers count from the
+  end of the dimension list of X, so that 0 is the final dimension,
+  -1 in the next to last, etc.  A scalar PERMUTATION is a shorthand
+  for a cyclic permutation of all of the dimensions of X.  The value
+  of the scalar is the dimension to which the 1st dimension will move.
+
+  Examples:  Let x have dimsof(x) equal [6, 1,2,3,4,5,6] in order
+     to be able to easily identify a dimension by its length. Then:
+     dimsof(x)                          == [6, 1,2,3,4,5,6]
+     dimsof(transpose(x))               == [6, 6,2,3,4,5,1]
+     dimsof(transpose(x,[1,2]))         == [6, 2,1,3,4,5,6]
+     dimsof(transpose(x,[1,0]))         == [6, 6,2,3,4,5,1]
+     dimsof(transpose(x,2))             == [6, 6,1,2,3,4,5]
+     dimsof(transpose(x,0))             == [6, 2,3,4,5,6,1]
+     dimsof(transpose(x,3))             == [6, 5,6,1,2,3,4]
+     dimsof(transpose(x,[4,6,3],[2,5])) == [6, 1,5,6,3,2,4]</pre>
+  
+</div>
+<div class="docblock"><a name="where"></a><h3>where</h3>
+  <pre>DOCUMENT where(x)
+  returns the vector of longs which is the index list of non-zero
+  values in the array x.  Thus, where([[0,1,3],[2,0,4]]) would
+  return [2,3,4,6].  If noneof(x), where(x) is a special range
+  function which will return a nil value if used to index an array;
+  hence, if noneof(x), then x(where(x)) is nil.
+  If x is a non-zero scalar, then where(x) returns a scalar value.
+  The rather recondite behavior for scalars and noneof(x) provides
+  maximum performance when the merge function to be used with the
+  where function.</pre>
+  <p>SEE ALSO: <a href="std-array.html#where2">where2</a>, <a href="std-array.html#merge">merge</a>, <a href="std-array.html#merge2">merge2</a>, <a href="std-array.html#allof">allof</a>, <a href="std-array.html#allof">anyof</a>, <a href="std-array.html#allof">noneof</a>, <a href="std-array.html#allof">nallof</a>, <a href="std-array.html#sort">sort</a></p>
+</div>
+<div class="docblock"><a name="where2"></a><h3>where2</h3>
+  <pre>DOCUMENT where2(x)
+  like where(x), but the returned list is decomposed into indices
+  according to the dimensions of x.  The returned list is always
+  2 dimensional, with the second dimension the same as the dimension
+  of where(x).  The first dimension has length corresponding to the
+  number of dimensions of x.  Thus, where2([[0,1,3],[2,0,4]]) would
+  return [[2,1],[3,1],[1,2],[3,2]].
+  If noneof(x), where2 returns [] (i.e.- nil).</pre>
+  <p>SEE ALSO: <a href="std-array.html#where">where</a>, <a href="std-array.html#merge">merge</a>, <a href="std-array.html#merge2">merge2</a>, <a href="std-array.html#allof">allof</a>, <a href="std-array.html#allof">anyof</a>, <a href="std-array.html#allof">noneof</a>, <a href="std-array.html#allof">nallof</a>, <a href="std-array.html#sort">sort</a></p>
+</div>
+<div class="docsee">
+  <h3>_</h3><p>SEE: <a href="#grow">grow</a></p>
+</div>

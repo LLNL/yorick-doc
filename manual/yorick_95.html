@@ -1,0 +1,80 @@
+---
+layout: default
+headline: User Manual
+anchor: '<a name="slice3"></a>'
+---
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_94.html#plwf" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.4 plwf interface" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+<hr size="1"/>
+<a name="slice3-interface"></a>
+<h3 class="subsection">3.10.5 slice3 interface</h3>
+
+<p>The slice3 function, in contrast, makes planar slices or isosurface
+contours of functions of three variables.  You can pseudocolor the
+planar slices, or show projections of the isosurfaces, or combine
+slices with isosurfaces.  The plfp function makes the actual plots,
+but you call a higher level function, pl3tree.
+</p>
+<p>Unlike plwf, you must invoke at least two functions in order to plot
+anything.  First, you call to slice3 returns either a planar slice
+through your 3D data, or an isosurface of some scalar function on your
+3D mesh.  Next, you call pl3tree in order to add the slice or
+isosurface to your 3D display list.
+</p>
+<p>Again, Yorick&rsquo;s pseudocolor model does not permit partially transparent
+surfaces.  Often, you need to slice open closed isosurfaces like a melon
+in order to view the interior.  Use the slice2 and slice2x functions to
+make slices like this.  Unfortunately, when you remove slices to make
+interior surfaces visible, you will only be able to see through your
+slice from a restricted range of viewing directions.  That is, the best
+slicing planes will depend on your viewing direction.  Study the
+&lsquo;<tt>demo5.i</tt>&rsquo; for an example of how to make this type of picture.
+</p>
+<p>A trick allows you to both color your slices (like a 2D plf or pli), and
+shade your isosurfaces, despite the limitations of the pseudocolor
+model.  The idea is to split your palette into a gray scale you can use
+to shade isosurfaces, followed by a color palette you can use to
+pseudocolor slices.  The split_palette routine in &lsquo;<tt>slice3.i</tt>&rsquo;
+generates such a split palette.  Again, read &lsquo;<tt>demo5.i</tt>&rsquo; for
+details.
+</p>
+
+
+
+
+<hr size="1"/>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left"><a href="yorick_94.html#plwf" title="Previous section in reading order"><img src="../images/dm-prev.png" border="0" alt="Back: 3.10.4 plwf interface" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next section in reading order"><img src="../images/dm-next.png" border="0" alt="Forward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_52.html#Graphics" title="Beginning of this chapter or previous chapter"><img src="../images/dm-2prev.png" border="0" alt="FastBack: 3. Graphics" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_90.html#g_t3D-graphics" title="Up section"><img src="../images/dm-up.png" border="0" alt="Up: 3.10 3D graphics interfaces" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_96.html#Embedding" title="Next chapter"><img src="../images/dm-2next.png" border="0" alt="FastForward: 4. Embedding Compiled Routines Inside Yorick" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick.html#Top" title="Cover (top) of document"><img src="../images/dm-top.png" border="0" alt="Top: Yorick: An Interpreted Language" align="middle"/></a></td>
+<td valign="middle" align="left"><a href="yorick_toc.html#SEC_Contents" title="Table of contents"><img src="../images/dm-toc.png" border="0" alt="Contents: Table of Contents" align="middle"/></a></td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"><a href="yorick_abt.html#SEC_About" title="About (help)"><img src="../images/dm-help.png" border="0" alt="About: About This Document" align="middle"/></a></td>
+</tr></table>
+
