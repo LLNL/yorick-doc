@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package pl3d (in pl3d.i) - </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -280,8 +281,7 @@ EXAMPLES:
   When draw3 calls DRAWING_FUNCTION, the external variable _draw3
   will be non-zero, so DRAWING_FUNCTION can be written like this:
 
-  func drawing_function(arg1,arg2,...)
-  {
+func drawing_function
     require, "pl3d.i";
     if (_draw3) {
       list= arg1;

@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package std-oxy (in std.i) - object oriented extensions to yorick </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -165,7 +166,7 @@ headline: Standard Library
   oriented languages, in yorick the use of the context object is not
   automatic -- the function M must specify which object members it
   wishes to access.  You do that with the use function:
-    func method(x, y, z) {
+func method
       extern var1, var2, var3;
       use, var1, var2, var3;   // initializes vari from context object
       // compute using var1, var2, var3, possibly redefining them
@@ -193,7 +194,7 @@ headline: Standard Library
   restore, or call use() as a function in expressions.  For example,
   suppose you are going to modify var1 and var3, but merely read var2
   and var4 in the method context:
-    func method(x, y, z) {
+func method
       use, var1, var3;   // initializes vari from context object
       local var2, var4;  // otherwise, restore arguments would be extern
       restore, use, var2, var4;
@@ -202,7 +203,7 @@ headline: Standard Library
       return result;
     }
   Or equivalently,
-    func method(x, y, z) {
+func method
       use, var1, var3;   // initializes vari from context object
       // compute using vari
       var1 = something(use(var2));   var3 = something(use(var4));
@@ -219,12 +220,12 @@ headline: Standard Library
   although it is a little difficult to see how to do this at first.
   For example, you can think of a "class" as the constructor function
   which makes instances:
-    func myclass(data1, data2, ...) {
+func myclass
       // build and return the class, for example:
       return save(method1, method2, ..., data1, data2, ...);
     }
-    func method1(x) { return something; }
-    func method2(x,y) { return something; }
+func method1
+func method2
   You make an instance with:
     mything = myclass(d1, d2);
   Then you can use your object: mything(method2,x,y) and so on.
@@ -234,12 +235,12 @@ headline: Standard Library
   by making myclass itself an object containing all its methods and
   constructor(s):
     myclass = save(new, method1, method2, ...);  // save old values
-    func new(data1, data2, ...) {
+func new
       // build and return the class, for example:
       return save(method1, method2, ..., data1, data2, ...);
     }
-    func method1(x) { return something; }
-    func method2(x,y) { return something; }
+func method1
+func method2
     myclass = restore(myclass);   // swap new values into myclass
   (See help,save for examples of this trick.)  Now the only variable
   you have to worry about not clobbering is myclass, and you create

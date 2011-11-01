@@ -2,11 +2,13 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package fits (in fits.i) - </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
   <div class="ndex1">
     <h3>F</h3>
+    <p><a href="fits.html#fits">fits</a></p>
     <p><a href="fits.html#fitsHeader">fitsAddComment</a></p>
     <p><a href="fits.html#fitsHeader">fitsAddHistory</a></p>
     <p><a href="fits.html#fitsHeader">fitsFixHeader</a></p>
@@ -30,22 +32,30 @@ headline: Standard Library
     <p><a href="fits.html#fits_copy_header">fits_copy_data</a></p>
     <p><a href="fits.html#fits_copy_header">fits_copy_hdu</a></p>
     <p><a href="fits.html#fits_copy_header">fits_copy_header</a></p>
+    <p><a href="fits.html#fits_create">fits_create</a></p>
     <p><a href="fits.html#fits_current_hdu">fits_current_hdu</a></p>
-  </div>
-  <div class="ndex2">
     <p><a href="fits.html#fits_date">fits_date</a></p>
     <p><a href="fits.html#fits_delete">fits_delete</a></p>
     <p><a href="fits.html#fits_eof">fits_eof</a></p>
     <p><a href="fits.html#fits_filename">fits_filename</a></p>
+  </div>
+  <div class="ndex2">
     <p><a href="fits.html#fits_get">fits_get</a></p>
     <p><a href="fits.html#fits_get_bitpix">fits_get_bitpix</a></p>
+    <p><a href="fits.html#fits_get_bscale">fits_get_bscale</a></p>
+    <p><a href="fits.html#fits_get_bscale">fits_get_bzero</a></p>
     <p><a href="fits.html#fits_get_cards">fits_get_cards</a></p>
+    <p><a href="fits.html#fits_get_history">fits_get_comment</a></p>
     <p><a href="fits.html#fits_coordinate">fits_get_coordinate</a></p>
     <p><a href="fits.html#fits_get_data_size">fits_get_data_size</a></p>
     <p><a href="fits.html#fits_get_dims">fits_get_dims</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_gcount</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_groups</a></p>
+    <p><a href="fits.html#fits_get_history">fits_get_history</a></p>
     <p><a href="fits.html#fits_get_keywords">fits_get_keywords</a></p>
     <p><a href="fits.html#fits_get_list">fits_get_list</a></p>
     <p><a href="fits.html#fits_get_naxis">fits_get_naxis</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_pcount</a></p>
     <p><a href="fits.html#fits_get_special">fits_get_special</a></p>
     <p><a href="fits.html#fits_get_xtension">fits_get_xtension</a></p>
     <p><a href="fits.html#fits_goto_hdu">fits_goto_hdu</a></p>
@@ -55,11 +65,14 @@ headline: Standard Library
     <p><a href="fits.html#fits_index_of_table_field">fits_index_of_table_field</a></p>
     <p><a href="fits.html#fits_info">fits_info</a></p>
     <p><a href="fits.html#fits_init">fits_init</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_integer_scalar</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_real_scalar</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_string_scalar</a></p>
     <p><a href="fits.html#fits_key">fits_key</a></p>
     <p><a href="fits.html#fits_list">fits_list</a></p>
-    <p><a href="fits.html#fits_map">fits_map</a></p>
   </div>
   <div class="ndex3">
+    <p><a href="fits.html#fits_map">fits_map</a></p>
     <p><a href="fits.html#fits_match">fits_match</a></p>
     <p><a href="fits.html#fits_move">fits_move</a></p>
     <p><a href="fits.html#fits_move_card">fits_move_card</a></p>
@@ -72,7 +85,10 @@ headline: Standard Library
     <p><a href="fits.html#fits_pack_bintable">fits_pack_bintable</a></p>
     <p><a href="fits.html#fits_pad_hdu">fits_pad_hdu</a></p>
     <p><a href="fits.html#fits_parse">fits_parse</a></p>
+    <p><a href="fits.html#fits_read">fits_read</a></p>
     <p><a href="fits.html#fits_read_array">fits_read_array</a></p>
+    <p><a href="fits.html#fits_read_bintable">fits_read_bintable</a></p>
+    <p><a href="fits.html#fits_read_bintable_as_hashtable">fits_read_bintable_as_hashtable</a></p>
     <p><a href="fits.html#fits_ignore_short_file">fits_read_header</a></p>
     <p><a href="fits.html#fits_rehash">fits_rehash</a></p>
     <p><a href="fits.html#fits_rewind">fits_rewind</a></p>
@@ -82,10 +98,278 @@ headline: Standard Library
     <p><a href="fits.html#fits_toupper">fits_tolower</a></p>
     <p><a href="fits.html#fits_toupper">fits_toupper</a></p>
     <p><a href="fits.html#fits_trimright">fits_trimright</a></p>
+    <p><a href="fits.html#fits_write">fits_write</a></p>
     <p><a href="fits.html#fits_write_array">fits_write_array</a></p>
     <p><a href="fits.html#fits_write_bintable">fits_write_bintable</a></p>
     <p><a href="fits.html#fits_write_header">fits_write_header</a></p>
   </div>
+</div>
+<div class="docblock"><a name="fits"></a><h3>fits</h3>
+  <pre>DOCUMENT fits - an introduction to Yorick interface to FITS files.
+
+  The  routines  provided  by   this  (standalone)  package  are  aimed  at
+  reading/writing  FITS  (Flexible Image  Transport  System) files  from/to
+  Yorick.  These routines attempt to follow the FITS standard (version 1.1)
+  as defined  in NOST report  [1].  Nevertheless the  user may be  aware of
+  some limitations  (some of which  are unavoidable with such  a "flexible"
+  format as FITS):
+
+   - It is still possible to  produce a non-standard FITS file because (for
+     obvious  efficiency reasons)  routines  in this  package cannot  check
+     everything.   At  least,  FITS  routines  check  that  compliant  FITS
+     keywords are  used and that mandatory  cards (SIMPLE/XTENSION, BITPIX,
+     NAXIS, ...)  get  written in the correct order  and with correct value
+     types (see  fits_set).  Nevertheless, the  user has to know  only very
+     little about FITS standard to be able to produce valid FITS files.
+
+   - In this version  of the package, headers of any  FITS extension can be
+     read/produced but you can only  read/write Yorick array data or binary
+     tables,  i.e.   corresponding to  primary  data  and  FITS "IMAGE"  or
+     "BINTABLE"   extensions    (see   fits_read_array,   fits_write_array,
+     fits_read_bintable,  and fits_write_bintable).   Support  for standard
+     extensions (such as ASCII table "TABLE") is planned but not yet done.
+
+   - There is no  special handling of IEEE special  values NaN, +/-Infinity
+     (using such values  is likely to raise a  floating point error catched
+     by Yorick).
+
+   - You  cannot   read/write  compressed  FITS  files.    You'll  have  to
+     pre-decompress  or post-compress  files (you  can use  Yorick "system"
+     function to that end).
+
+   - It is  (not yet) possible to  re-open an existing FITS  file to modify
+     it.  But it would be very easy to allow for appending extensions to an
+     existing file (should be provided very soon).
+
+  Some  simple driver routines  are provided  to allow  for reading/writing
+  Yorick arrays  from/to FITS  file and may  be sufficient for  basic usage
+  (see fits_read and fits_write).
+
+
+READING AN EXISTING FITS FILE:
+
+  There is  a simplified driver  fits_read (which see)  to read data  in an
+  existing FITS  file.  The following  example demontrates how to  read the
+  contents of a FITS file with the basic routines:
+
+  fh = fits_open(name);                 // open existing file and read
+                                        // header of 1st (primary) HDU
+  data1 = fits_read_array(fh);          // read all "image" data in 1st HDU
+  slice = fits_read_array(fh, which=n); // read N-th data slice in current
+                                        // HDU
+  fits_next_hdu, fh;                    // move to next HDU and read header
+  data2 = fits_read_array(fh);          // read data of secondary HDU
+  ...;
+
+
+CREATING A NEW FITS FILE:
+
+  There is  a (very) simplified driver  fits_write (which see)  to create a
+  new  FITS  file  to  store   a  Yorick  array.   The  following  examples
+  demontrates how  to write a moderately  complex FITS file  with the basic
+  routines (assuming DATA1 is a 2-dimensional array):
+
+    fh = fits_open(name, 'w');      // create new file
+    fits_set, fh, "SIMPLE", 'T',    "true FITS file";
+    fits_set, fh, "BITPIX", bitpix, "bits per pixel";
+    fits_set, fh, "NAXIS",  naxis,  "number of dimensions";
+    fits_set, fh, "NAXIS1", dim1,   "length of 1st dimension";
+    fits_set, fh, "NAXIS2", dim2,   "length of 2nd dimension";
+    fits_set, fh, "EXTEND", 'T', "this file may contain FITS extensions";
+    fits_set, fh, ...               // set any number of other cards with
+    ...                             // several calls to fits_set
+    fits_write_header, fh;          // write header part of current HDU
+    fits_write_array, fh, data1;    // write data part of current HDU
+
+    fits_new_hdu, fh, "IMAGE";        // append new "IMAGE" extension
+    fits_set, fh, "BITPIX", bitpix, "bits per pixel";
+    fits_set_dims, fh, dimsof(data2); // set all dimensions in one call
+    fits_set, fh, ...                 // set any number of other cards with
+    ...
+    fits_write_header, fh;            // write header part of extension
+    fits_write_array, fh, data2;      // write data part of extension
+    fits_close, fh;                   // close stream of FITS handle, the
+                                      // header can still be examined
+
+  Note that the cards with the dimensions of the data array (NAXIS, NAXIS1,
+  ...)  which are  explicitly set with fits_set for  the primary header can
+  also  be  instanciated  in a  more  simple  way  thanks to  the  function
+  fits_set_dims as shown for the second HDU.
+
+  Alternatively, The  function fits_create can be  used to open  a new file
+  and setup a  basic primary header.  In this case, the  first lines of the
+  above examples become:
+
+    fh = fits_create(name, extend=1,
+                     bitpix=fits_bitpix_of(data1),
+                     dimlist=dimsof(data1));
+    fits_set, fh, ...               // set any number of other cards with
+    ...                             // several calls to fits_set
+    fits_write_header, fh;          // write header part of current HDU
+    fits_write_array, fh, data1;    // write data part of current HDU
+
+  If you  intend to  write more  than one HDU,  do not  forget to  set card
+  EXTEND to  true in the primary header  (this is done in  the two examples
+  above with fits_open and with fits_create).
+
+
+LIST OF ROUTINES:
+
+  By convention,  in this Yorick  package, all public symbols  (routines or
+  variables) are prefixed with "fits_" and all private symbols are prefixed
+  with "_fits_".  The following (public) routines are provided:
+
+  File routines:
+    fits_check_file     - check whether a file may be a FITS file
+    fits_open           - open existing FITS file or create new FITS file
+    fits_close          - close file stream in FITS handle
+    fits_create         - creates a new FITS file with minimal header
+    fits_filename       - get full path name of FITS stream
+
+  Header/HDU routines:
+    fits_current_hdu    - returns number of current HDU
+    fits_goto_hdu       - go to a given HDU number
+    fits_list           - get list of extensions in a FITS file
+    fits_next_hdu       - move to next HDU and parse the header part
+    fits_pad_hdu        - pad current HDU to a multiple of 2880 bytes
+    fits_rewind         - goto first (primary) HDU
+    fits_new_hdu        - start a new FITS extension
+    fits_read_header    - read header part of current HDU
+    fits_write_header   - write header part of current HDU
+
+  Card routines:
+    fits_delete         - delete card(s) from header of current HDU
+    fits_get            - get value of FITS card(s) in current HDU
+    fits_get_bitpix     - get BITPIX value
+    fits_get_bscale     - get BSCALE value
+    fits_get_bzero      - get BZERO value
+    fits_get_cards      - get all cards matching a pattern
+    fits_get_comment    - get value(s) of COMMENT card(s)
+    fits_get_coordinate - get coordinate information for a given axis
+    fits_get_data_size  - get size of data part in current HDU.
+    fits_get_dims       - get dimension list of array data
+    fits_get_gcount     - get GCOUNT value
+    fits_get_groups     - get GROUPS value
+    fits_get_history    - get value(s) of HISTORY card(s)
+    fits_get_keywords   - get list of defined keywords
+    fits_get_list       - get list of integer values
+    fits_get_naxis      - get NAXIS value
+    fits_get_pcount     - get PCOUNT value
+    fits_get_xtension   - get name of FITS primary/extension HDU
+    fits_move_card      - move FITS card
+    fits_parse          - parse FITS card(s)
+    fits_set            - set value of FITS card(s) in current HDU
+    fits_set_dims       - set FITS card(s) for dimension list of array
+
+  Reading/writing data (also see binary table routines):
+    fits_read           - simple driver to read "IMAGE" or "BINTABLE" data
+    fits_write          - simple driver to write "IMAGE" data
+    fits_new_image      - creates a new "IMAGE" HDU
+    fits_read_array     - read array data from current HDU
+    fits_write_array    - write array data in current HDU
+
+  Binary tables:
+    fits_new_bintable   - creates a new "BINTABLE" HDU
+    fits_read_bintable  - read binary table from current HDU
+    fits_write_bintable - write binary table in current HDU
+    fits_pack_bintable  - make table columns into a single array
+
+  Expert users routines:
+    fits_get_special    - get FITS value of mandatory FITS key
+    fits_init           - (re)initialize FITS internals
+    fits_id             - get numerical identifier of a single card
+    fits_ids            - get numerical identifier of FITS card(s)
+    fits_key            - converts numerical identifier into string
+    fits_match          - find FITS card(s) which match a pattern
+    fits_rehash         - recalculate the numerical identifiers of cards
+
+  Miscellaneous routines:
+    fits_best_scale     - compute best BSCALE and BZERO parameters
+    fits_bitpix_info    - get description of FITS bits-per-pixel value
+    fits_bitpix_of      - compute FITS bits-per-pixel value
+    fits_bitpix_type    - convert FITS bits-per-pixel value to data type
+    fits_check_bitpix   - test if FITS bits-per-pixel value is valid
+    fits_date           - get current time as standard FITS date string
+    fits_is_integer_scalar - checks whether argument is integer scalar
+    fits_is_real_scalar - checks whether argument is real scalar
+    fits_is_string_scalar - checks whether argument is scalar string or not
+    fits_map            - map scalar function onto array argument
+    fits_move           - move element of an array in-place
+    fits_nth            - format a string in the form: "1st", "2nd", ...
+    fits_tolower        - convert string(s) to lower case letters
+    fits_toupper        - convert string(s) to upper case letters
+    fits_trimright      - removes trailing spaces
+    fits_strcmp         - compare strings according to FITS conventions
+
+ Copy routines (can be used to perform editing of FITS files):
+    fits_copy_header    - copy header part of current HDU;
+    fits_copy_data      - copy header data of current HDU;, dst, src;
+    fits_copy_hdu       - copy current HDU;
+
+
+CHANGES WITH RESPECT TO "OLD" FITS PACKAGES:
+
+  This package is intended to be used in place of the old "fits.i" (written
+  by me and  distributed along with Yorick) which  had too many limitations
+  and  restrictions  to allow  for  further  extensions.   However the  API
+  provided by  this novel package is  quite different from the  old one (in
+  particular the  FITS header is no  longer stored into  a Yorick structure
+  but in some  "opaque" object: a FITS handle).   Hopefully the new package
+  provides all the routines needed to  deal with this opaque handle but the
+  name  of the  routines  (all  prefixed with  "fits_")  and their  calling
+  sequences have changed.
+
+  The new FITS interface was written with the aim of being:
+    (1) conformable with FITS standards (although try to be not too strict
+        when _reading_ files)
+    (2) flexible and extensible
+    (3) fast (e.g. fits_get takes ~ 150 microseconds for a FITS header
+        with 200 cards on an PIII @ 1GHz)
+
+
+FITS HANDLE:
+
+  In this  package, a FITS  handle (denoted FH  in the documentation)  to a
+  FITS file is  intended to be an "opaque" object.  Actually,  it is a list
+  of 4 items organized as follow:
+
+     _lst(cards, ids, descr, stream)
+     cards  = vector of strings which are the header cards of the
+              current HDU;
+     ids    = vector of card identifier values (this is for fast search
+              of cards);
+     descr  = descriptor, vector of long integers:
+                DESCR(1)= current HDU number (1 for primary HDU);
+                DESCR(2)= file address of the current HDU;
+                DESCR(3)= file address of the data part for the current HDU;
+                DESCR(4)= file address of the next HDU in read mode,
+                          total number of written bytes in write mode;
+                DESCR(5)= file mode: 'r' (read), or 'w' (write), or 'a'
+                          (append).
+     stream = void (no associated file) or stream for input or output;
+
+  Of course the end-user should never directly access the items of the FITS
+  handle but  rather use the provided  FITS routines (so that,  in order to
+  warant portability of the user level  code, it will be sufficient to only
+  modify routines in this package whenever the internals of the FITS handle
+  change).
+
+
+GLOSSARY:
+
+  HDU - Header and Data Unit
+  Indexed Keyword -
+
+
+REFERENCES:
+
+  [1] "Definition of Flexible Image Transport System (FITS)", NASA/Science
+      Office of Standards and Technology, report NOST 100-1.1, September 29,
+      1995.
+
+  [2] "A User's Guide for the Flexible Image Transport System (FITS)"
+      http://archive.stsci.edu/fits/users_guide/</pre>
+  
 </div>
 <div class="docsee">
   <h3>fitsAddComment</h3><p>SEE: <a href="#fitsHeader">fitsHeader</a></p>
@@ -128,7 +412,7 @@ headline: Standard Library
   ctype(k) - type of physical coordinate
   crota(k) - rotation angle of axis No. #
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fitsOldHeaderMembers">fitsMakeOldHeader</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fitsOldHeaderMembers">fitsMakeOldHeader</a>.</p>
 </div>
 <div class="docblock"><a name="fitsHeader"></a><h3>fitsHeader</h3>
   <pre>DOCUMENT obsolete FITS routines
@@ -150,7 +434,7 @@ headline: Standard Library
     fitsFixHeader
     fitsRescale
 </pre>
-  <p>SEE ALSO: fits.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>.</p>
 </div>
 <div class="docsee">
   <h3>fitsMakeOldHeader</h3><p>SEE: <a href="#fitsOldHeaderMembers">fitsOldHeaderMembers</a></p>
@@ -166,7 +450,7 @@ headline: Standard Library
   Convert header information in FITS handle FH into the obsolete FitsHeader
   structure.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#FitsHeader">FitsHeader</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#FitsHeader">FitsHeader</a>.</p>
 </div>
 <div class="docblock"><a name="fitsRead"></a><h3>fitsRead</h3>
   <pre>DOCUMENT a = fitsRead(filename, header)
@@ -190,7 +474,7 @@ headline: Standard Library
   should not be rescaled according  to FITS keywords BSCALE and BZERO.  The
   default is to rescale data values if BSCALE is not 1. or BZERO is not 0.
 </pre>
-  <p>SEE ALSO: fits, fits_read, <a href="fits.html#fitsHeader">fitsObsolete</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_read">fits_read</a>, <a href="fits.html#fitsHeader">fitsObsolete</a>.</p>
 </div>
 <div class="docsee">
   <h3>fitsRescale</h3><p>SEE: <a href="#fitsHeader">fitsHeader</a></p>
@@ -207,12 +491,12 @@ headline: Standard Library
   to save  to the file; alternatively,  CMIN and CMAX give  the minimal and
   maximal values in physical data.
 </pre>
-  <p>SEE ALSO: fits, fits_write.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write">fits_write</a>.</p>
 </div>
 <div class="docblock"><a name="fits_bitpix_info"></a><h3>fits_bitpix_info</h3>
   <pre>DOCUMENT fits_bitpix_info(bitpix)
   Return string information about FITS bits-per-pixel value.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
 </div>
 <div class="docblock"><a name="fits_bitpix_of"></a><h3>fits_bitpix_of</h3>
   <pre>DOCUMENT fits_bitpix_of(x)
@@ -224,19 +508,19 @@ headline: Standard Library
   FITS standard and  to assume that XDR binary format will  be used in FITS
   file.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
 </div>
 <div class="docblock"><a name="fits_bitpix_type"></a><h3>fits_bitpix_type</h3>
   <pre>DOCUMENT fits_bitpix_type(bitpix)
       or fits_bitpix_type(bitpix, native=1)
   Returns Yorick data  type given by FITS bits-per-pixel  value BITPIX.  If
   keyword NATIVE is true, return the native data type matching BITPIX.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_info">fits_bitpix_info</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_info">fits_bitpix_info</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>.</p>
 </div>
 <div class="docblock"><a name="fits_check_bitpix"></a><h3>fits_check_bitpix</h3>
   <pre>DOCUMENT fits_check_bitpix(bitpix)
   Test if FITS bits-per-pixel value BITPIX is valid.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_bitpix_info">fits_bitpix_info</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_bitpix_type">fits_bitpix_type</a>, <a href="fits.html#fits_bitpix_info">fits_bitpix_info</a>.</p>
 </div>
 <div class="docblock"><a name="fits_check_file"></a><h3>fits_check_file</h3>
   <pre>DOCUMENT fits_check_file(filename)
@@ -247,7 +531,7 @@ headline: Standard Library
   simple: it is sufficient that the first FITS card in the first 2880 bytes
   has keyword "SIMPLE" with logical value 'T' (true).
 </pre>
-  <p>SEE ALSO: fits, <a href="std-fileio.html#open">open</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-fileio.html#open">open</a>.</p>
 </div>
 <div class="docblock"><a name="fits_close"></a><h3>fits_close</h3>
   <pre>DOCUMENT fits_close(fh)
@@ -256,7 +540,7 @@ headline: Standard Library
   returned value is FH.  Note that  if you destroy all references to handle
   FH, the associated file (if any) gets automatically closed by Yorick.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_pad_hdu">fits_pad_hdu</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="std-fileio.html#close">close</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_pad_hdu">fits_pad_hdu</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="std-fileio.html#close">close</a>.</p>
 </div>
 <div class="docblock"><a name="fits_coordinate"></a><h3>fits_coordinate</h3>
   <pre>DOCUMENT fits_get_coordinate(fh, axis)
@@ -283,7 +567,7 @@ headline: Standard Library
      CDELT*(indgen(LENGTH) - CRPIX) + CRVAL
   Note that, if the axis length is zero, a nil value is returned.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
 </div>
 <div class="docsee">
   <h3>fits_copy_data</h3><p>SEE: <a href="#fits_copy_header">fits_copy_header</a></p>
@@ -354,35 +638,71 @@ EXAMPLES:
     }
     fits_close, dst;
 </pre>
-  <p>SEE ALSO: <a href="fits.html#fits_open">fits_open</a>, fits_create, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>, <a href="fits.html#fits_write_header">fits_write_header</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_create">fits_create</a>, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>, <a href="fits.html#fits_write_header">fits_write_header</a>.</p>
+</div>
+<div class="docblock"><a name="fits_create"></a><h3>fits_create</h3>
+  <pre>DOCUMENT fits_create(filename)
+  Creates a new FITS file FILENAME and returns a FITS handle with mandatory
+  cards  (i.e.  SIMPLE, BITPIX,  NAXIS,  NAXISn)  and  some optional  cards
+  (i.e. EXTEND, BSCALE and BZERO) already initialized.
+
+  Keyword  BITPIX can  be used  to  set FITS  "bits-per-pixel" (default  is
+  BITPIX=8, i.e. byte data).
+
+  Keyword DIMLIST should be used to specify the dimension list of the array
+  data that is intended to be written in primary HDU.  The value of DIMLIST
+  is similar to the result returned by dimsof.
+
+  Keyword EXTEND can be used to indicate whether the file may contains FITS
+  extensions.  It is probably a good idea to always use EXTEND=1.
+
+  Keyword TEMPLATE  can be set  with an existing  FITS handle to  copy some
+  FITS cards of  the template into the new header.  The  FITS card that are
+  _never_  copied are:  "SIMPLE", "XTENSION",  "BITPIX",  "NAXIS", "NAXIS#"
+  (with #  an integer), "BSCALE" and  "BZERO"; the other  cards get copied.
+  See  keywords BSCALE  and BZERO  if you  specifically want  to  set these
+  values.
+
+  Keywords BSCALE and BZERO can be used to specify physical value scale and
+  offset.  See  fits_write_array to figure out how  keywords BITPIX, BSCALE
+  and BZERO are used to convert data values into file values.
+
+  Keywords HISTORY and  COMMENT can be set to add some  comments in the new
+  handle.  The values of these keywords may be array of strings.
+
+  Keywords ENCODING  and OVERWRITE  have the same  meaning as  in fits_open
+  routine (to see).
+
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_set">fits_set</a>, <a href="fits.html#fits_set_dims">fits_set_dims</a>.</p>
 </div>
 <div class="docblock"><a name="fits_current_hdu"></a><h3>fits_current_hdu</h3>
   <pre>DOCUMENT fits_current_hdu(fh);
   Return number of current Header Data Unit in FITS handle FH.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_date"></a><h3>fits_date</h3>
   <pre>DOCUMENT fits_date()
   Returns current Universal Time date as a string conforming to FITS
   standard: "DD/MM/YY".</pre>
-  <p>SEE ALSO: fits, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-fileio.html#popen">popen</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-filetxt.html#rdline">rdline</a>, <a href="std-fileio.html#popen">popen</a>.</p>
 </div>
 <div class="docblock"><a name="fits_delete"></a><h3>fits_delete</h3>
   <pre>DOCUMENT fits_delete, fh, pattern;
   Delete all cards  matching PATTERN from current header  of FITS handle FH
   (see fits_match for the syntax of PATTERN).</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_match">fits_match</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_match">fits_match</a>.</p>
 </div>
 <div class="docblock"><a name="fits_eof"></a><h3>fits_eof</h3>
   <pre>DOCUMENT fits_eof(fh)
   Returns non-zero if FITS handle FH is at end of file.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_filename"></a><h3>fits_filename</h3>
   <pre>DOCUMENT fits_filename(fh)
   Return path  name of  file associated  with FITS handle  FH (in  fact the
   argument may also be any Yorick open stream).</pre>
-  <p>SEE ALSO: fits, <a href="std-fileio.html#filepath">filepath</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-fileio.html#filepath">filepath</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get"></a><h3>fits_get</h3>
   <pre>DOCUMENT fits_get(fh, pattern, comment)
@@ -416,20 +736,36 @@ EXAMPLES:
   Request fo commentary cards (i.e. PATTERN is "HISTORY", "COMMENT", or "")
   may returns several cards.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_match">fits_match</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_match">fits_match</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get_bitpix"></a><h3>fits_get_bitpix</h3>
   <pre>DOCUMENT fits_get_bitpix(fh)
       or fits_get_bitpix(fh, fix)
   Get BITPIX value from current HDU in FITS handle FH.  See
   fits_get_special for the meaning of FIX.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_check_bitpix">fits_check_bitpix</a>, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+</div>
+<div class="docblock"><a name="fits_get_bscale"></a><h3>fits_get_bscale</h3>
+  <pre>DOCUMENT fits_get_bscale(fh)
+      or fits_get_bzero(fh)
+  Get BSCALE  and BZERO  values for FITS  handle FH.  These  parameters are
+  used to convert file values into physical values according to:
+      physical_value = BZERO + BSCALE * file_value
+  if the corresponding card is missing, BSCALE and BZERO default to 1.0 and
+  0.0 respectively.</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
+</div>
+<div class="docsee">
+  <h3>fits_get_bzero</h3><p>SEE: <a href="#fits_get_bscale">fits_get_bscale</a></p>
 </div>
 <div class="docblock"><a name="fits_get_cards"></a><h3>fits_get_cards</h3>
   <pre>DOCUMENT fits_get_cards(fh, pattern);
   Return cards from FITS handle  FH which match PATTERN (see fits_match for
   the syntax of PATTERN).</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_match">fits_match</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_match">fits_match</a>.</p>
+</div>
+<div class="docsee">
+  <h3>fits_get_comment</h3><p>SEE: <a href="#fits_get_history">fits_get_history</a></p>
 </div>
 <div class="docsee">
   <h3>fits_get_coordinate</h3><p>SEE: <a href="#fits_coordinate">fits_coordinate</a></p>
@@ -441,7 +777,7 @@ EXAMPLES:
   FH.  This value is computed according to the header part of FH and may be
   different from the  number of bytes actually written in  the data part of
   the current HDU.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get_dims"></a><h3>fits_get_dims</h3>
   <pre>DOCUMENT fits_get_dims(fh)
@@ -451,7 +787,41 @@ EXAMPLES:
   card is zero, then there is no data in the current unit and fits_get_dims
   returns [] (nil)  in this case.  See fits_get_special  for the meaning of
   FIX.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>.</p>
+</div>
+<div class="docsee">
+  <h3>fits_get_gcount</h3><p>SEE: <a href="#fits_get_groups">fits_get_groups</a></p>
+</div>
+<div class="docblock"><a name="fits_get_groups"></a><h3>fits_get_groups</h3>
+  <pre>DOCUMENT fits_get_groups(fh)
+      or fits_get_gcount(fh)
+      or fits_get_pcount(fh)
+  Get GROUPS, PCOUNT or GCOUNT values  for FITS handle FH.  GROUPS shall be
+  a logical value:  'T' (true), if the current HDU  contains a random group
+  extension; 'F' (false),  otherwise.  The default value for  GROUPS is 'F'
+  (false).  PCOUNT shall  be an integer equals to  the number of parameters
+  preceding each group (default value 0).  GCOUNT shall be an integer equal
+  to the number of random groups present (default value 1).  When GROUPS is
+  false, the total number of bits in the data array (exclusive of fill that
+  is needed  after the data  to complete the  last record) is given  by the
+  following expression:
+
+      NBITS = abs(BITPIX)*GCOUNT*(PCOUNT + NAXIS1*NAXIS2*...*NAXISm)
+
+  where NAXISm  is the length  of the last  axis; for a random  group (i.e.
+  when GROUPS is true), NAXIS1=0 and the total number of bits is:
+
+      NBITS = abs(BITPIX)*GCOUNT*(PCOUNT + NAXIS2*...*NAXISm)
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
+</div>
+<div class="docblock"><a name="fits_get_history"></a><h3>fits_get_history</h3>
+  <pre>DOCUMENT fits_get_history(fh)
+      or fits_get_comment(fh)
+  Get COMMENT  and HISTORY  values for  FITS handle FH.   The result  is an
+  array of string(s)  or nil if no  such cards exists in the  header of the
+  current unit.</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get_keywords"></a><h3>fits_get_keywords</h3>
   <pre>DOCUMENT fits_get_keywords(fh)
@@ -460,7 +830,7 @@ EXAMPLES:
   returned value  is an array of  strings. If ORDERED is  true (non-nil and
   non-zero), the  keywords get sorted.   Note: the "END" keyword  is always
   missing in a (non-corrupted) FITS handle.</pre>
-  <p>SEE ALSO: fits, <a href="std-array.html#sort">sort</a>, <a href="std-string.html#strtok">strtok</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-array.html#sort">sort</a>, <a href="std-string.html#strtok">strtok</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get_list"></a><h3>fits_get_list</h3>
   <pre>DOCUMENT fits_get_list(fh, key)
@@ -476,7 +846,10 @@ EXAMPLES:
       or fits_get_naxis(fh, fix)
   Get NAXIS value from current HDU in FITS handle FH.  See fits_get_special
   for the meaning of FIX.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get_special">fits_get_special</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+</div>
+<div class="docsee">
+  <h3>fits_get_pcount</h3><p>SEE: <a href="#fits_get_groups">fits_get_groups</a></p>
 </div>
 <div class="docblock"><a name="fits_get_special"></a><h3>fits_get_special</h3>
   <pre>DOCUMENT fits_get_special(fh, key, id, location, fix)
@@ -484,7 +857,7 @@ EXAMPLES:
   identifier  and absolute LOCATION  (1 for  first FITS  card).  If  FIX is
   true, various further verifications are made and, if FITS strict checking
   mode is off, the header may be fixed in case of unambiguous error.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get_bitpix">fits_get_bitpix</a>, <a href="fits.html#fits_get_naxis">fits_get_naxis</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
 </div>
 <div class="docblock"><a name="fits_get_xtension"></a><h3>fits_get_xtension</h3>
   <pre>DOCUMENT fits_get_xtension(fh)
@@ -492,7 +865,7 @@ EXAMPLES:
   value  is a scalar  string in  upper case  letters with  the name  of the
   extension (without trailing spaces);  "IMAGE" is returned for the primary
   HDU.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_parse">fits_parse</a>.</p>
 </div>
 <div class="docblock"><a name="fits_goto_hdu"></a><h3>fits_goto_hdu</h3>
   <pre>DOCUMENT fits_goto_hdu(fh, hdu)
@@ -501,7 +874,7 @@ EXAMPLES:
   is updated with  header part of new HDU.  To allow  for linked calls, the
   returned value is FH.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>.</p>
 </div>
 <div class="docsee">
   <h3>fits_id</h3><p>SEE: <a href="#fits_ids">fits_ids</a></p>
@@ -520,7 +893,7 @@ EXAMPLES:
     fits_id("SIMPLE ");
     fits_id("SIMPLE");
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_key">fits_key</a>, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_key">fits_key</a>, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
 </div>
 <div class="docblock"><a name="fits_ignore_short_file"></a><h3>fits_ignore_short_file</h3>
   <pre>DOCUMENT fits_read_header(fh)
@@ -534,14 +907,14 @@ EXAMPLES:
   are silently ignored.  Otherwise, if fits_ignore_short_file is non-zero,
   a warning is printed.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_index_of_table_field"></a><h3>fits_index_of_table_field</h3>
   <pre>DOCUMENT fits_index_of_table_field(fh, name)
   Returns index(es) of FITS table  columns with their TTYPE# value matching
   array of  string(s) NAME.  The table  header is read from  current HDU of
   FITS handle FH.</pre>
-  <p>SEE ALSO: fits, fits_read_bintable.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_read_bintable">fits_read_bintable</a>.</p>
 </div>
 <div class="docblock"><a name="fits_info"></a><h3>fits_info</h3>
   <pre>DOCUMENT fits_info, fh;
@@ -552,7 +925,7 @@ EXAMPLES:
   FITS file FILENAME.  If argument HDU  is given, only this header unit get
   printed out (HDU may be an array).
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>.</p>
 </div>
 <div class="docblock"><a name="fits_init"></a><h3>fits_init</h3>
   <pre>DOCUMENT fits_init;
@@ -591,13 +964,27 @@ EXAMPLES:
   BLANK="\t\r\v\n".   Note  that  this  break  strict  compliance  to  FITS
   standard.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
+</div>
+<div class="docblock"><a name="fits_is_integer_scalar"></a><h3>fits_is_integer_scalar</h3>
+  <pre>DOCUMENT fits_is_integer_scalar(x);
+      or fits_is_real_scalar(x);
+      or fits_is_string_scalar(x);
+  Check whether X is a scalar of integer/real/string type.
+</pre>
+  <p>SEE ALSO: <a href="std-query.html#is_scalar">is_scalar</a>, <a href="std-query.html#is_integer">is_integer</a>, <a href="std-query.html#is_integer">is_real</a>, <a href="std-query.html#is_integer">is_string</a>.</p>
+</div>
+<div class="docsee">
+  <h3>fits_is_real_scalar</h3><p>SEE: <a href="#fits_is_integer_scalar">fits_is_integer_scalar</a></p>
+</div>
+<div class="docsee">
+  <h3>fits_is_string_scalar</h3><p>SEE: <a href="#fits_is_integer_scalar">fits_is_integer_scalar</a></p>
 </div>
 <div class="docblock"><a name="fits_key"></a><h3>fits_key</h3>
   <pre>DOCUMENT fits_key(id)
   Convert (array of) FITS numerical identifier(s) ID into the corresponding
   string FITS keyword(s) without trailing spaces.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ids">fits_id</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ids">fits_id</a>.</p>
 </div>
 <div class="docblock"><a name="fits_list"></a><h3>fits_list</h3>
   <pre>DOCUMENT fits_list, fh;
@@ -607,14 +994,14 @@ EXAMPLES:
   called as a subroutine, the list is printed to terminal; when called as a
   function, the returned value is a string array with the names of the FITS
   extensions in FH.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_map"></a><h3>fits_map</h3>
   <pre>DOCUMENT fits_map(op, src)
   Map scalar function OP onto array argument SRC to mimics element-wise
   unary operation.
 </pre>
-  <p>SEE ALSO: fits.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>.</p>
 </div>
 <div class="docblock"><a name="fits_match"></a><h3>fits_match</h3>
   <pre>DOCUMENT fits_match(fh, pattern)
@@ -632,19 +1019,19 @@ EXAMPLES:
   supported on them, though.
 
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get_cards">fits_get_cards</a>, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get_cards">fits_get_cards</a>, <a href="fits.html#fits_rehash">fits_rehash</a>.</p>
 </div>
 <div class="docblock"><a name="fits_move"></a><h3>fits_move</h3>
   <pre>DOCUMENT fits_move, a, i, j;
   Move I-th element of array A in place of J-th element.  The operation is
   done in-place.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_move_card">fits_move_card</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_move_card">fits_move_card</a>.</p>
 </div>
 <div class="docblock"><a name="fits_move_card"></a><h3>fits_move_card</h3>
   <pre>DOCUMENT fits_move_card(fh, from, to);
   Change location of FROM-th card to index TO into FITS handle FH.  The
   operation is made in place.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_move">fits_move</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_move">fits_move</a>.</p>
 </div>
 <div class="docblock"><a name="fits_new_bintable"></a><h3>fits_new_bintable</h3>
   <pre>DOCUMENT fits_new_bintable(fh)
@@ -659,7 +1046,7 @@ EXAMPLES:
 
   The returned value is FH.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_write_bintable">fits_write_bintable</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write_bintable">fits_write_bintable</a>.</p>
 </div>
 <div class="docblock"><a name="fits_new_hdu"></a><h3>fits_new_hdu</h3>
   <pre>DOCUMENT fits_new_hdu(fh, xtension)
@@ -678,7 +1065,7 @@ EXAMPLES:
   header.
 
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_pad_hdu">fits_pad_hdu</a>, <a href="fits.html#fits_set">fits_set</a>, <a href="fits.html#fits_write_header">fits_write_header</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_pad_hdu">fits_pad_hdu</a>, <a href="fits.html#fits_set">fits_set</a>, <a href="fits.html#fits_write_header">fits_write_header</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
 </div>
 <div class="docblock"><a name="fits_new_image"></a><h3>fits_new_image</h3>
   <pre>DOCUMENT fits_new_image(fh, data)
@@ -690,7 +1077,7 @@ EXAMPLES:
   used to guess the bits per  pixel and the dimension list if not specified
   by the keywords BITPIX and DIMSLIST respectively.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
 </div>
 <div class="docblock"><a name="fits_next_hdu"></a><h3>fits_next_hdu</h3>
   <pre>DOCUMENT fits_next_hdu(fh)
@@ -698,13 +1085,13 @@ EXAMPLES:
   the new unit.  Contents of FH is updated with header part of new HDU.  To
   allow for linked calls, the returned value is FH.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_goto_hdu">fits_goto_hdu</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_goto_hdu">fits_goto_hdu</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_rewind">fits_rewind</a>.</p>
 </div>
 <div class="docblock"><a name="fits_nth"></a><h3>fits_nth</h3>
   <pre>DOCUMENT fits_nth(n)
   Returns a string in the form "1st", "2nd", "3rd" or "#th" where # is the
   human readable value of integer N.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_set_dims">fits_set_dims</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_set_dims">fits_set_dims</a>.</p>
 </div>
 <div class="docblock"><a name="fits_open"></a><h3>fits_open</h3>
   <pre>DOCUMENT fits_open(filename)
@@ -735,7 +1122,7 @@ EXAMPLES:
   (otherwise it is an error to create a file that already exists).
 
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_write_header">fits_write_header</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_set">fits_set</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_write_array">fits_write_array</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>, <a href="fits.html#fits_rewind">fits_rewind</a>, <a href="std-filebin.html#__xdr">__sun</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_write_header">fits_write_header</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_set">fits_set</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_write_array">fits_write_array</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>, <a href="fits.html#fits_rewind">fits_rewind</a>, <a href="std-filebin.html#__xdr">__sun</a>.</p>
 </div>
 <div class="docblock"><a name="fits_pack_bintable"></a><h3>fits_pack_bintable</h3>
   <pre>DOCUMENT fits_pack_bintable(ptr)
@@ -749,14 +1136,14 @@ EXAMPLES:
   must be  the same) and NCOLS  is the sum  of the second dimension  of all
   fields.
 </pre>
-  <p>SEE ALSO: fits_read_bintable.</p>
+  <p>SEE ALSO: <a href="fits.html#fits_read_bintable">fits_read_bintable</a>.</p>
 </div>
 <div class="docblock"><a name="fits_pad_hdu"></a><h3>fits_pad_hdu</h3>
   <pre>DOCUMENT fits_pad_hdu(fh)
   Fix file  size in handle FH to  a multiple of FITS  blocking factor (2880
   bytes) by  writting null or space characters  at the end of  the file and
   update FH offsets accordingly.  FH must be open for writing.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_close">fits_close</a>, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_close">fits_close</a>, <a href="fits.html#fits_new_hdu">fits_new_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_parse"></a><h3>fits_parse</h3>
   <pre>DOCUMENT fits_parse(card);
@@ -783,7 +1170,35 @@ EXAMPLES:
   If the SAFE keyword is true,  the routine returns an empty result in case
   of error.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_ids">fits_id</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get">fits_get</a>, <a href="fits.html#fits_ids">fits_id</a>.</p>
+</div>
+<div class="docblock"><a name="fits_read"></a><h3>fits_read</h3>
+  <pre>DOCUMENT           a = fits_read(filename)
+      or local fh; a = fits_read(filename, fh)
+
+  Open FITS file  FILENAME and read data.  FH is  an optional output symbol
+  where the FITS handle  will be stored for future use such  as moving to a
+  FITS extension  in the same file  and reading its  header/data.  (Note: a
+  FITS handle is  a Yorick list that contains a file  handle and all header
+  information from  the current HDU.)  By  default, the data  get read from
+  the  first HDU  but this  can be  changed with  the HDU  keyword (default
+  HDU=1, i.e.,  primary HDU).  If data get  read from the primary  HDU or a
+  FITS image extension, the result  returned by the function fits_read() is
+  a  numerical array (see  fits_read_array); if  the data  get read  from a
+  binary  table  extension,  the  result  is  a  vector  of  pointers  (see
+  fits_read_bintable).
+
+  Keyword ENCODING has the same meaning as in fits_open (which see).
+
+  Keywords WHICH  and RESCALE have  the same meaning as  in fits_read_array
+  (which see).   These keywords are ignored  if HDU to read  is not primary
+  HDU nor an "image" extension.
+
+  Keywords PACK and  SELECT have the same meaning  as in fits_read_bintable
+  (which see).
+
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write">fits_write</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_read_array">fits_read_array</a>, <a href="fits.html#fits_read_bintable">fits_read_bintable</a>.</p>
 </div>
 <div class="docblock"><a name="fits_read_array"></a><h3>fits_read_array</h3>
   <pre>DOCUMENT fits_read_array(fh)
@@ -807,7 +1222,74 @@ EXAMPLES:
   0 (i.e.  the default is  RESCALE=1).  In order  to get raw data  (i.e. as
   written in the file), use RESCALE=0.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>.</p>
+</div>
+<div class="docblock"><a name="fits_read_bintable"></a><h3>fits_read_bintable</h3>
+  <pre>DOCUMENT fits_read_bintable(fh)
+
+  Reads a  binary table in  current HDU of  FITS handle FH and  returns the
+  fields  of the  table as  a pointer  array (n-th  field of  the  table is
+  pointed  by   n-th  pointer  element).   Empty  fields   and  fields  for
+  unsupported data types (bit array)  yield a null pointer value (&[]).  If
+  TDIMn  keyword  is  present,  then  the  dimensions  of  n-th  field  are
+  (NROWS,i,j,k,...)   where ROWS is  the number  of rows  in the  table and
+  '(i,j,k,...)' is  the value  of the TDIMn  keyword.  Otherwise,  the n-th
+  field is a NROWS-by-NCOLS(n) array  where NCOLS(n) is the repeat count of
+  the n-th  field in  the table (see  fits_write_bintable).  If  the repeat
+  count is 1 and  TDIMn is not set, the n-th field  is a NROWS vector; that
+  is, not a NROWS-by-1 array.
+
+  An empty table  (number of rows or number of fileds  less than one) yield
+  an empty result.
+
+  Keyword SELECT  can be used to retain  only some fields of  the table (or
+  re-order them).  For instance, use SELECT=[2,5,3] to return only 2nd, 5th
+  and 3rd  fields (in  that order) of  the table.   The fields can  also be
+  selected by  their names, for  instance: SELECT=["flux","distance"] (note
+  that trailing spaces and case is not significant for the field names).
+
+  If keyword PACK  is true, fits_pack_bintable (which see)  is used to pack
+  the  columns of  the binary  table into  a single  array  (possibly after
+  selection/re-ordering by SELECT).
+
+  If keyword  TRIM is  true, then trailing  spaces get removed  from string
+  fields (this has no effect if RAW_STRING is true).
+
+  If keyword  RAW_STRING is  true, fields made  of char's ('A'  format) are
+  returned  as arrays  of char's.   The default  is to  convert  'A' format
+  fields into NROWS vector of strings.
+
+  If keyword RAW_LOGICAL is true,  logical fields ('L' format) are returned
+  as arrays  of char's.  The default  is to convert 'L'  format fields into
+  array of  int's as follows: 'T'  -> 1 (true),  'F' -> 0 (false),  and any
+  other character  -> -1 (bad).   The bad value  can be set by  keyword BAD
+  (default is -1).
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write_bintable">fits_write_bintable</a>, <a href="fits.html#fits_pack_bintable">fits_pack_bintable</a>.</p>
+</div>
+<div class="docblock"><a name="fits_read_bintable_as_hashtable"></a><h3>fits_read_bintable_as_hashtable</h3>
+  <pre>DOCUMENT fits_read_bintable_as_hashtable(fh)
+      or fits_read_bintable_as_hashtable(fh, h)
+
+  Read binary table in current  HDU (see fits_read_bintable) of FITS handle
+  FH and make  it into a hash  table.  If optional argument H  is given, it
+  must be an  existing hash table to be augmented with  the contents of the
+  binary table.  The (augmented) hash table is returned.  This function can
+  only be used with the hash table extension.
+
+  The members of  the hash table get named after the  value of the 'TTYPEn'
+  card converted to  lowercase (where n is the  field number).  For missing
+  'TTYPEn' cards, the value of keyword  FORMAT is used to define the member
+  name as swrite(format=FORMAT,n).  The  default value for FORMAT is "_%d".
+  If FORMAT is specified, it must contain exactly one directive to write an
+  integer and no  other format directives.  If a  card 'TUNITn' exists, its
+  value is stored  into member with "_units" appended  to the corresponding
+  field name.
+
+  Keywords SELECT, RAW_STRING, RAW_LOGICAL and BAD have the same meaning as
+  in fits_read_bintable.
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits_read_bintable">fits_read_bintable</a>, <a href="std-filetxt.html#write">swrite</a>, h_new.</p>
 </div>
 <div class="docsee">
   <h3>fits_read_header</h3><p>SEE: <a href="#fits_ignore_short_file">fits_ignore_short_file</a></p>
@@ -817,14 +1299,14 @@ EXAMPLES:
   (Re)compute array of numerical identifier for FITS handle FH (operation
   is done in-place) and return FH.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ids">fits_id</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ids">fits_id</a>.</p>
 </div>
 <div class="docblock"><a name="fits_rewind"></a><h3>fits_rewind</h3>
   <pre>DOCUMENT fits_rewind(fh)
   Move FITS handle FH to primary Header Data Unit and parse the header part
   of the unit.  FH is returned when called as a function.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_ignore_short_file">fits_read_header</a>, <a href="fits.html#fits_next_hdu">fits_next_hdu</a>.</p>
 </div>
 <div class="docblock"><a name="fits_set"></a><h3>fits_set</h3>
   <pre>DOCUMENT fits_set, fh, key, value;
@@ -843,20 +1325,20 @@ EXAMPLES:
   afterward).  The "END" card is  not needed since it will be automatically
   written when required.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>.</p>
 </div>
 <div class="docblock"><a name="fits_set_dims"></a><h3>fits_set_dims</h3>
   <pre>DOCUMENT fits_set_dims(fh, dimlist)
    Set NAXIS and NAXIS1, NAXIS2, ... values into current HDU of FITS handle
    FH according to dimension list DIMLIST.  DIMLIST may be empty.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_get_dims">fits_get_dims</a>.</p>
 </div>
 <div class="docblock"><a name="fits_strcmp"></a><h3>fits_strcmp</h3>
   <pre>DOCUMENT fits_strcmp(a, b)
   Returns non-zero  where (array of) strings A  and B are the  same in FITS
   sense, i.e.,  ignore case and  trailing ordinary spaces (code  0x20). For
   instance, "Hello" and "HELLO " are the same strings.</pre>
-  <p>SEE ALSO: fits, <a href="std-string.html#strcase">strcase</a>, <a href="fits.html#fits_toupper">fits_toupper</a>, <a href="fits.html#fits_trimright">fits_trimright</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-string.html#strcase">strcase</a>, <a href="fits.html#fits_toupper">fits_toupper</a>, <a href="fits.html#fits_trimright">fits_trimright</a>.</p>
 </div>
 <div class="docsee">
   <h3>fits_tolower</h3><p>SEE: <a href="#fits_toupper">fits_toupper</a></p>
@@ -865,13 +1347,34 @@ EXAMPLES:
   <pre>DOCUMENT fits_tolower(s);
       or fits_toupper(s);
   Converts a string or an array of strings S to lower/upper case letters.</pre>
-  <p>SEE ALSO: fits, <a href="std-string.html#strcase">strcase</a>, <a href="fits.html#fits_trimright">fits_trimright</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="std-string.html#strcase">strcase</a>, <a href="fits.html#fits_trimright">fits_trimright</a>.</p>
 </div>
 <div class="docblock"><a name="fits_trimright"></a><h3>fits_trimright</h3>
   <pre>DOCUMENT fits_trimright(s)
   Removes trailing  ordinary spaces (character  0x20) from string  array S.
   Note that trailing spaces are usually not significant in FITS.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_toupper">fits_tolower</a>, <a href="fits.html#fits_toupper">fits_toupper</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strword">strword</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_toupper">fits_tolower</a>, <a href="fits.html#fits_toupper">fits_toupper</a>, <a href="std-string.html#strpart">strpart</a>, <a href="std-string.html#strword">strword</a>.</p>
+</div>
+<div class="docblock"><a name="fits_write"></a><h3>fits_write</h3>
+  <pre>DOCUMENT fits_write, filename, data;
+      or fits_write(filename, data)
+  Creates a  new FITS file  FILENAME and write  array DATA in  primary HDU.
+  When called as a  function, the result is a FITS handle  that can be used
+  to append extensions to the file.
+
+  FITS  "bits-per-pixel" can  be  specified by  keyword BITPIX;  otherwise,
+  BITPIX is automatically guessed from the data type (see fits_bitpix_of).
+
+  Keywords EXTEND,  TEMPLATE, HISTORY COMMENT, BSCALE,  BZERO, ENCODING and
+  OVERWRITE have the same meaning as in fits_create (to see).
+
+  If BITPIX  is explicitely  specified and corresponds  to an  integer file
+  type (8,  16 or 32) and  neither BSCALE nor BZERO  are specified, optimal
+  BSCALE  and  BZERO  values  will  be  automatically  computed  thanks  to
+  fits_best_scale (which see).
+
+</pre>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_best_scale">fits_best_scale</a>, <a href="fits.html#fits_bitpix_of">fits_bitpix_of</a>, <a href="fits.html#fits_create">fits_create</a>, <a href="fits.html#fits_write_header">fits_write_header</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
 </div>
 <div class="docblock"><a name="fits_write_array"></a><h3>fits_write_array</h3>
   <pre>DOCUMENT fits_write_array, fh, data;
@@ -913,7 +1416,7 @@ EXAMPLE:
     fits_close, fh;
 
 </pre>
-  <p>SEE ALSO: fits, fits_write, <a href="fits.html#fits_write_header">fits_write_header</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_write">fits_write</a>, <a href="fits.html#fits_write_header">fits_write_header</a>.</p>
 </div>
 <div class="docblock"><a name="fits_write_bintable"></a><h3>fits_write_bintable</h3>
   <pre>DOCUMENT fits_write_bintable(fh, ptr)
@@ -965,7 +1468,7 @@ EXAMPLE:
 
   The returned value is FH.
 </pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_new_bintable">fits_new_bintable</a>, fits_read_bintable.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_new_bintable">fits_new_bintable</a>, <a href="fits.html#fits_read_bintable">fits_read_bintable</a>.</p>
 </div>
 <div class="docblock"><a name="fits_write_header"></a><h3>fits_write_header</h3>
   <pre>DOCUMENT fits_write_header(fh)
@@ -974,5 +1477,5 @@ EXAMPLE:
   overwrite existing written  data if any (i.e. the  new header, rounded up
   to a multiple of 2880 bytes, must not be longer than the old one or there
   must be no data written.</pre>
-  <p>SEE ALSO: fits, <a href="fits.html#fits_open">fits_open</a>, fits_write, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
+  <p>SEE ALSO: <a href="fits.html#fits">fits</a>, <a href="fits.html#fits_open">fits_open</a>, <a href="fits.html#fits_write">fits_write</a>, <a href="fits.html#fits_write_array">fits_write_array</a>.</p>
 </div>

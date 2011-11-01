@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package mpy1 (in mpy1.i) - mpy version 1 support for backward compatibility </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -43,7 +44,7 @@ headline: Standard Library
 
 ***obsolete mpy1 pool of tasks***
 
-func SOW(to, i)
+func SOW
   mp_send, to, <input1>, <input2>, ..., <inputQ>
   <no return value>
 
@@ -56,7 +57,7 @@ func WORK
   mp_send, 0, <result1>, <result2>, ..., <resultR>
   <no return value>
 
-func REAP(i, m)
+func REAP
   if (m==1) {
     result1= mp_recv(dimsr1)
     <save or accumulate 1st result of i-th task>
@@ -70,7 +71,7 @@ func REAP(i, m)
   }
   return (m==R)
 
-func WORK0(i)
+func WORK0
   <do the i-th task>
   <no return value>
 </pre>

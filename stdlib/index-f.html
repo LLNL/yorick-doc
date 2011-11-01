@@ -250,6 +250,7 @@ Standard library functions or symbols:</p>
     <p><a href="fitlsq.html#fitlsq">fitlsq</a></p>
     <p><a href="fitrat.html#fitpol">fitpol</a></p>
     <p><a href="fitrat.html#fitrat">fitrat</a></p>
+    <p><a href="fits.html#fits">fits</a></p>
     <p><a href="fits.html#fitsHeader">fitsAddComment</a></p>
     <p><a href="fits.html#fitsHeader">fitsAddHistory</a></p>
     <p><a href="fits.html#fitsHeader">fitsFixHeader</a></p>
@@ -273,6 +274,7 @@ Standard library functions or symbols:</p>
     <p><a href="fits.html#fits_copy_header">fits_copy_data</a></p>
     <p><a href="fits.html#fits_copy_header">fits_copy_hdu</a></p>
     <p><a href="fits.html#fits_copy_header">fits_copy_header</a></p>
+    <p><a href="fits.html#fits_create">fits_create</a></p>
     <p><a href="fits.html#fits_current_hdu">fits_current_hdu</a></p>
     <p><a href="fits.html#fits_date">fits_date</a></p>
     <p><a href="fits.html#fits_delete">fits_delete</a></p>
@@ -280,13 +282,20 @@ Standard library functions or symbols:</p>
     <p><a href="fits.html#fits_filename">fits_filename</a></p>
     <p><a href="fits.html#fits_get">fits_get</a></p>
     <p><a href="fits.html#fits_get_bitpix">fits_get_bitpix</a></p>
+    <p><a href="fits.html#fits_get_bscale">fits_get_bscale</a></p>
+    <p><a href="fits.html#fits_get_bscale">fits_get_bzero</a></p>
     <p><a href="fits.html#fits_get_cards">fits_get_cards</a></p>
+    <p><a href="fits.html#fits_get_history">fits_get_comment</a></p>
     <p><a href="fits.html#fits_coordinate">fits_get_coordinate</a></p>
     <p><a href="fits.html#fits_get_data_size">fits_get_data_size</a></p>
     <p><a href="fits.html#fits_get_dims">fits_get_dims</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_gcount</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_groups</a></p>
+    <p><a href="fits.html#fits_get_history">fits_get_history</a></p>
     <p><a href="fits.html#fits_get_keywords">fits_get_keywords</a></p>
     <p><a href="fits.html#fits_get_list">fits_get_list</a></p>
     <p><a href="fits.html#fits_get_naxis">fits_get_naxis</a></p>
+    <p><a href="fits.html#fits_get_groups">fits_get_pcount</a></p>
     <p><a href="fits.html#fits_get_special">fits_get_special</a></p>
     <p><a href="fits.html#fits_get_xtension">fits_get_xtension</a></p>
     <p><a href="fits.html#fits_goto_hdu">fits_goto_hdu</a></p>
@@ -296,6 +305,9 @@ Standard library functions or symbols:</p>
     <p><a href="fits.html#fits_index_of_table_field">fits_index_of_table_field</a></p>
     <p><a href="fits.html#fits_info">fits_info</a></p>
     <p><a href="fits.html#fits_init">fits_init</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_integer_scalar</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_real_scalar</a></p>
+    <p><a href="fits.html#fits_is_integer_scalar">fits_is_string_scalar</a></p>
     <p><a href="fits.html#fits_key">fits_key</a></p>
     <p><a href="fits.html#fits_list">fits_list</a></p>
     <p><a href="fits.html#fits_map">fits_map</a></p>
@@ -311,7 +323,10 @@ Standard library functions or symbols:</p>
     <p><a href="fits.html#fits_pack_bintable">fits_pack_bintable</a></p>
     <p><a href="fits.html#fits_pad_hdu">fits_pad_hdu</a></p>
     <p><a href="fits.html#fits_parse">fits_parse</a></p>
+    <p><a href="fits.html#fits_read">fits_read</a></p>
     <p><a href="fits.html#fits_read_array">fits_read_array</a></p>
+    <p><a href="fits.html#fits_read_bintable">fits_read_bintable</a></p>
+    <p><a href="fits.html#fits_read_bintable_as_hashtable">fits_read_bintable_as_hashtable</a></p>
     <p><a href="fits.html#fits_ignore_short_file">fits_read_header</a></p>
     <p><a href="fits.html#fits_rehash">fits_rehash</a></p>
     <p><a href="fits.html#fits_rewind">fits_rewind</a></p>
@@ -321,6 +336,7 @@ Standard library functions or symbols:</p>
     <p><a href="fits.html#fits_toupper">fits_tolower</a></p>
     <p><a href="fits.html#fits_toupper">fits_toupper</a></p>
     <p><a href="fits.html#fits_trimright">fits_trimright</a></p>
+    <p><a href="fits.html#fits_write">fits_write</a></p>
     <p><a href="fits.html#fits_write_array">fits_write_array</a></p>
     <p><a href="fits.html#fits_write_bintable">fits_write_bintable</a></p>
     <p><a href="fits.html#fits_write_header">fits_write_header</a></p>
@@ -350,6 +366,8 @@ Standard library functions or symbols:</p>
     <p><a href="string.html#getdate">getdate</a></p>
     <p><a href="string.html#gettime">gettime</a></p>
     <p><a href="slice3.html#getv3">getv3</a></p>
+  </div>
+  <div class="ndex2">
     <p><a href="std-filebin.html#get_addrs">get_addrs</a></p>
     <p><a href="std-system.html#get_argv">get_argv</a></p>
     <p><a href="std-system.html#get_cwd">get_cwd</a></p>
@@ -360,8 +378,6 @@ Standard library functions or symbols:</p>
     <p><a href="std-filebin.html#get_member">get_member</a></p>
     <p><a href="std-filebin.html#get_times">get_ncycs</a></p>
     <p><a href="std-system.html#get_path">get_path</a></p>
-  </div>
-  <div class="ndex2">
     <p><a href="std-info.html#get_pkgnames">get_pkgnames</a></p>
     <p><a href="std-filebin.html#get_primitives">get_primitives</a></p>
     <p><a href="drat.html#get_ray_path">get_ray_path</a></p>
@@ -546,6 +562,7 @@ Standard library functions or symbols:</p>
     <p><a href="graph-plotkey.html#mspace">mphase</a></p>
     <p><a href="mpool.html#mpool">mpool</a></p>
     <p><a href="mpool.html#mpool_stats">mpool_stats</a></p>
+    <p><a href="mpool.html#mpool_test">mpool_test</a></p>
     <p><a href="mpy.html#mpy_nfan">mpy_nfan</a></p>
     <p><a href="mpy1.html#mp_bcast">mp_bcast</a></p>
     <p><a href="mpy.html#mp_boss">mp_boss</a></p>
@@ -580,6 +597,7 @@ Standard library functions or symbols:</p>
     <p><a href="graph-plotkey.html#mspace">mspace</a></p>
     <p><a href="multi.html#multic">multic</a></p>
     <p><a href="multi.html#multif">multif</a></p>
+    <p><a href="multi.html#multio">multio</a></p>
     <p><a href="multi.html#multi_bav">multi_bav</a></p>
     <p><a href="multi.html#multi_bins">multi_bins</a></p>
     <p><a href="multi.html#multi_opac">multi_emiss</a></p>
@@ -709,13 +727,13 @@ Standard library functions or symbols:</p>
     <p><a href="prefix.html#prefix_comment">prefix_comment</a></p>
     <p><a href="prefix.html#prefix_find">prefix_find</a></p>
     <p><a href="prefix.html#prefix_read">prefix_read</a></p>
+  </div>
+  <div class="ndex3">
     <p><a href="prefix.html#prefix_write">prefix_write</a></p>
     <p><a href="std-filetxt.html#print">print</a></p>
     <p><a href="std-filetxt.html#print_columns">print_columns</a></p>
     <p><a href="std-filetxt.html#print_format">print_format</a></p>
     <p><a href="std-system.html#process_argv">process_argv</a></p>
-  </div>
-  <div class="ndex3">
     <p><a href="std-mesh.html#ptcen">ptcen</a></p>
     <h3>Q</h3>
     <p><a href="matrix.html#QRsolve">QRsolve</a></p>
@@ -811,6 +829,7 @@ Standard library functions or symbols:</p>
     <p><a href="kepler.html#sch_planets">sch_planets</a></p>
     <p><a href="std-math.html#sech">sech</a></p>
     <p><a href="std-filetxt.html#select_file">select_file</a></p>
+    <p><a href="std-filetxt.html#select_name">select_name</a></p>
     <p><a href="series.html#series_n">series_n</a></p>
     <p><a href="series.html#series_r">series_r</a></p>
     <p><a href="series.html#series_s">series_s</a></p>

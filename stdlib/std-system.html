@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package std-system (in std.i) - interacting with system </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -289,8 +290,7 @@ headline: Standard Library
   in any subsequent elements of ARGV (which is a scalar or 1D
   array of strings).  The ON_STDOUT and optional ON_STDERR
   are interpreted functions declared like this:
-    func ON_STDOUT(msg)
-    {
+func ON_STDOUT
       commands to process msg on stdout from process
     }
 
@@ -335,7 +335,7 @@ headline: Standard Library
 </div>
 <div class="docblock"><a name="spawn_callback"></a><h3>spawn_callback</h3>
   <pre>DOCUMENT spawn_callback -->
-         func on_stdout(msg) {
+func on_stdout
            extern fragment; <or otherwise manage fragment>
            lines = spawn_callback(fragment, msg);
            for (i=1 ; i<=numberof(lines) ; i++) {

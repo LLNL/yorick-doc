@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package random (in random.i) - </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -28,8 +29,7 @@ headline: Standard Library
   <pre>DOCUMENT build_dimlist, dimlist, next_argument
   build a DIMLIST, as used in the array function.  Use like this:
 
-  func your_function(arg1, arg2, etc, dimlist, ..)
-  {
+func your_function
     while (more_args()) build_dimlist, dimlist, next_arg();
     ...
   }
@@ -122,18 +122,18 @@ headline: Standard Library
   returns an array of double values with the given DIMLIST (see array
   function, nil for a scalar result).  The numbers are distributed
   according to the TARGET_DIST function:
-     func target_dist(x)
+func target_dist
   returning u(x)>=0 of same number and dimensionality as x, normalized
   so that the integral of target_dist(x) from -infinity to +infinity
   is 1.0.  The BOUNDING_DIST function must have the same calling
   sequence as TARGET_DIST:
-     func bounding_dist(x)
+func bounding_dist
   returning b(x)>=u(x) everywhere.  Since u(x) is normalized, the
   integral of b(x) must be >=1.0.  Finally, BOUNDING_RAND is a
   function which converts an array of uniformly distributed random
   numbers on (0,1) -- as returned by random -- into an array
   distributed according to BOUNDING_DIST:
-     func bounding_rand(uniform_x_01)
+func bounding_rand
   Mathematically, BOUNDING_RAND is the inverse of the integral of
   BOUNDING_DIST from -infinity to x, with its input scaled to (0,1).
 

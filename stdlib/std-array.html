@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package std-array (in std.i) - building and manipulating arrays </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -61,7 +62,7 @@ headline: Standard Library
   accumulate a dimension argument D onto a dimension list DIMS.
   This can be used to emulate the dimension lists supplied to the
   array function.  For example:
-    func myfunc(arg1, arg2, ..) {
+func myfunc
       local dims;
       while (more_args()) accum_dimlist, dims, next_arg();
       ...
@@ -270,7 +271,7 @@ KEYWORD: top=max_list_value
   be 1-D arrays if they are not nil.)
   This function is intended for vectorizing a function whose
   domain is divided into two or more parts, as in:
-     func f(x) {
+func f
        big= (x>=threshhold);
        wb= where(big);
        ws= where(!big);

@@ -2,17 +2,19 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package mpool (in mpool.i) - mpy pool of tasks programming paradigm </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
   <div class="ndex1">
     <h3>M</h3>
-  </div>
-  <div class="ndex2">
     <p><a href="mpool.html#mpool">mpool</a></p>
   </div>
-  <div class="ndex3">
+  <div class="ndex2">
     <p><a href="mpool.html#mpool_stats">mpool_stats</a></p>
+  </div>
+  <div class="ndex3">
+    <p><a href="mpool.html#mpool_test">mpool_test</a></p>
   </div>
 </div>
 <div class="docblock"><a name="mpool"></a><h3>mpool</h3>
@@ -103,10 +105,19 @@ headline: Standard Library
     else
       block until message pending from slave
 </pre>
-  <p>SEE ALSO: mpool_test, <a href="mpool.html#mpool_stats">mpool_stats</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_recv">mp_recv</a>, <a href="std-fileio.html#vpack">vpack</a>, <a href="std-fileio.html#vsave">vsave</a>, <a href="std-system.html#timer">timer</a></p>
+  <p>SEE ALSO: <a href="mpool.html#mpool_test">mpool_test</a>, <a href="mpool.html#mpool_stats">mpool_stats</a>, <a href="mpy.html#mp_exec">mp_exec</a>, <a href="mpy.html#mp_recv">mp_recv</a>, <a href="std-fileio.html#vpack">vpack</a>, <a href="std-fileio.html#vsave">vsave</a>, <a href="std-system.html#timer">timer</a></p>
 </div>
 <div class="docblock"><a name="mpool_stats"></a><h3>mpool_stats</h3>
   <pre>DOCUMENT mpool_stats, pool_stats
   print statistics from POOL_STATS returned by mpool or mpool_test.</pre>
-  <p>SEE ALSO: <a href="mpool.html#mpool">mpool</a>, mpool_test</p>
+  <p>SEE ALSO: <a href="mpool.html#mpool">mpool</a>, <a href="mpool.html#mpool_test">mpool_test</a></p>
+</div>
+<div class="docblock"><a name="mpool_test"></a><h3>mpool_test</h3>
+  <pre>DOCUMENT pool_stats = mpool_test(fsow, fwork, freap)
+  test FSOW, FWORK, and FREAP functions by conducting an mpool
+  on a single processor in serial mode.  This can be run in ordinary
+  serial yorick; it does not require mpy.  The mpool_test function
+  accepts and uses the use_vsave= keyword.  The other mpool keywords
+  are accepted but ignored.</pre>
+  <p>SEE ALSO: <a href="mpool.html#mpool">mpool</a>, <a href="mpool.html#mpool_stats">mpool_stats</a></p>
 </div>

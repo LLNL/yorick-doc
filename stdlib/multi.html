@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package multi (in multi.i) - multiple mesh support for drat package </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -9,6 +10,7 @@ headline: Standard Library
     <h3>M</h3>
     <p><a href="multi.html#multic">multic</a></p>
     <p><a href="multi.html#multif">multif</a></p>
+    <p><a href="multi.html#multio">multio</a></p>
     <p><a href="multi.html#multi_bav">multi_bav</a></p>
     <p><a href="multi.html#multi_bins">multi_bins</a></p>
     <p><a href="multi.html#multi_opac">multi_emiss</a></p>
@@ -38,14 +40,114 @@ headline: Standard Library
       or multic, [mf1, mf2, mf3, ...]
   closes a MultiFile created with multif.
   Presented with an array of multifiles, closes them all.</pre>
-  <p>SEE ALSO: multio, <a href="multi.html#multif">multif</a></p>
+  <p>SEE ALSO: <a href="multi.html#multio">multio</a>, <a href="multi.html#multif">multif</a></p>
 </div>
 <div class="docblock"><a name="multif"></a><h3>multif</h3>
   <pre>DOCUMENT multif(mf)
   returns an ordinary file pointer for the MultiFile MF.
   Do not use close to close this pointer; just set it to [] when
   you are done.  Use multic to properly close the MF.</pre>
-  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a></p>
+  <p>SEE ALSO: <a href="multi.html#multio">multio</a>, <a href="multi.html#multic">multic</a></p>
+</div>
+<div class="docblock"><a name="multio"></a><h3>multio</h3>
+  <pre>DOCUMENT mf= multio(filename)
+      or mf= multio(file)
+  opens file FILENAME for use with the multi_streak function.
+  The file MUST be subsequently closed using multic, since
+  this function produces a hidden reference to the file.  The function
+  multif can be used to return an ordinary file pointer, given the
+  returned MF structure.  If the argument is already a stream FILE,
+  that file will be used.  The call still produces a hidden copy of
+  FILE, so you may set your copy of the FILE variable to [], but do
+  not close the file.
+
+  The following keywords can be used to allow for variations in the
+  variable names or units, and to specify the correspondence between
+  the zones in this file, and the zones in the master file:
+
+  zonelist=index_list
+  -or- zonelist=zonelist_name
+    is an index list into the (rt,zt) mesh arrays of the master file.
+    If ireg is the region number array (having the same dimensions as
+    rt or zt, and with its first row and column all 0), and if FILENAME
+    contains opacity data only for zones with region numbers 1 and 2,
+    you could open the file using:
+       mf= multio(filename, zonelist=where(ireg==1 | ireg==2))
+    The zonelist should be nil only if the spatial dimensions of the
+    opacity and emissivity in this file exactly match those of rt or
+    zt in the master file.
+    If zonelist is a string, it replaces the default name for the
+    zonelist variable stored in the file (see multi_zonelist).
+
+  zoneuse=index_list
+    The zonelist specifies how the zones in this file correspond
+    with those in the master file.  The zoneuse list allows you
+    to specify that only some of the zones actually present in the
+    opacity and emissivity arrays of this file are to contribute
+    to the total.  This might be necessary to avoid double counting
+    in a region covered by more than one file.  Hence zoneuse is
+    a list of indices into the spatial dimension(s) of the opacity
+    and emissivity arrays in this file.  If nil, all zones in this
+    file will contribute.  If present, and if zonelist is supplied
+    as an array (rather than out of the file), zonelist should
+    have the same length as zoneuse.
+    As a special case, if zoneuse is a scalar 0, no opacity or
+    emissivity will come from this file; this makes sense only if
+    this is the master file.
+
+  opac=oname, emiss=ename, srcf=sname
+    specify non-default names for the opacity, emissivity, and
+    osource function arrays.  The defaults are given by the global
+    variables mutli_opac, multi_emiss, and multi_srcf (see help).
+    If the emissivity array is present in the file, it is preferred
+    to the source function array, which will then be ignored.
+
+  oscale=opacity_unit, escale=emissivity_unit
+    are optional conversion factors to bring the units of the
+    opac and emiss (or srcf) arrays into agreement among the various
+    files which are to be used in a single run.  The default value
+    is 1.0 (i.e.- all files are expected to have the same units).
+
+  gb=gbname, gav=gavname, gexist=gexistname
+  -or- gexist=group_existence_map
+    specify non-default names for the group boundary, group energy,
+    and group existence arrays.  The defaults are given by the global
+    variables mutli_gb, multi_gav, and multi_gexist (see help).
+    If the group boundary array is present in the file, it is preferred
+    to the group energy array, which will then be ignored.  The file
+    should specify group boundaries if its opacity and emissivity are
+    averaged over finite width bins; group energies if its opacity
+    and emissivity are computed at points.  The group existence map,
+    if present, allows several disjoint spectral regions to exist in
+    a single file.  If the data type of gexist is not "string", it
+    should be an array of length one less than gb, if gb is present,
+    or gav, otherwise.  By this means you can ignore spectral regions
+    which are present in the file.
+
+  gscale=photon_energy_unit
+    is an optional conversion factor to bring the units of the
+    gb (or gav) arrays into agreement among the various files
+    which are to be used in a single run.  The default value
+    is 1.0 (i.e.- all files are expected to have the same units).
+
+  tscale=time_unit
+    is an optional conversion factor to bring the units of the
+    time into agreement among the various files which are to be used
+    in a single run.  The default value is 1.0 (i.e.- all files are
+    expected to have the same units).
+
+  noextrap=1
+    if present and non-zero prevents the opacity and emissivity
+    data from this file from being extrapolated as 1/hnu^3 in
+    master bins at energies above the highest energy bin in this
+    file.
+
+  freqfirst=0
+    if present and non-zero means the frequency index is first
+    for the opacity and emissivity arrays, instead of the
+    default of frequency index last.
+</pre>
+  <p>SEE ALSO: <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, <a href="multi.html#multi_streak">multi_streak</a>, MultiFile, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a></p>
 </div>
 <div class="docblock"><a name="multi_bav"></a><h3>multi_bav</h3>
   <pre>DOCUMENT multi_bav(gav)
@@ -163,7 +265,7 @@ headline: Standard Library
       multic, master;
       multic, slave;
 </pre>
-  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
+  <p>SEE ALSO: <a href="multi.html#multio">multio</a>, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
 </div>
 <div class="docblock"><a name="multi_streak_save"></a><h3>multi_streak_save</h3>
   <pre>DOCUMENT multi_streak_save, outname, mf, rays, slimits, gb=common_bins
@@ -227,7 +329,7 @@ headline: Standard Library
       multic, master;
       multic, slave;
 </pre>
-  <p>SEE ALSO: multio, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_streak">multi_streak</a>, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
+  <p>SEE ALSO: <a href="multi.html#multio">multio</a>, <a href="multi.html#multic">multic</a>, <a href="multi.html#multif">multif</a>, MultiFile, <a href="multi.html#multi_streak">multi_streak</a>, <a href="multi.html#multi_opac">multi_opac</a>, <a href="multi.html#multi_opac">multi_emiss</a>, <a href="multi.html#multi_opac">multi_srcf</a>, <a href="multi.html#multi_gb">multi_gb</a>, <a href="multi.html#multi_gb">multi_gav</a>, <a href="multi.html#multi_zonelist">multi_zonelist</a>, <a href="multi.html#multi_times">multi_times</a>, <a href="multi.html#multi_bins">multi_bins</a></p>
 </div>
 <div class="docblock"><a name="multi_times"></a><h3>multi_times</h3>
   <pre>DOCUMENT times= multi_times(mf)

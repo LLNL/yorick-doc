@@ -295,8 +295,10 @@ sub readme_funcs($)
 # workhorse, scans each .i file, extracting DOCUMENT comments
 sub extract_dot_i {
     my $fname = $_;
-    if (-d $fname && $fname =~ /^relocate/) {
-        $File::Find::prune = 1;
+    if (-d $fname) {
+        $File::Find::prune = 1
+            if ($fname =~ /^relocate/
+                || $fname eq "i-start");
         return;
     }
     return unless (/\.i$/ && (-f $fname));
@@ -317,7 +319,9 @@ sub extract_dot_i {
     #   does, but those are neither consistent with each other, nor
     #   semantically sensible
     $file =~ s/\a//g;  # paranoia -- make sure no preexisting markers
-    $file =~ s/(^[ \t]*(extern|local|func)\b[^\n]*(\n[ \t]*(extern|local|func)\b[^\n]*)*\n([^\n]\n)*?[ \t]*\/\* DOCUMENT\b.*?\*\/)/\a$1\a/msg;
+#    $file =~ s/^[ \t]*((extern|local|func)\b[^\n]*(\n[ \t]*(extern|local|func)\b[^\n]*)*\n([^\n]*\S[^\n]*\n)*?[ \t]*\/\* DOCUMENT\b.*?\*\/)/\a$1\a/msg;
+    $file =~ s/^[ \t]*func[ \t]+(\w+)(\s*\(.*?\))?(\s*\{([^\n]*\})?)?/func $1/msg;
+    $file =~ s/^[ \t]*((extern|local|func)\b[^\n]*(\n[ \t]*(extern|local|func)\b[^\n]*)*\n[ \t]*\/\* DOCUMENT\b.*?\*\/)/\a$1\a/msg;
     # make sections into pseudo-blocks
     $file =~ s/(\/\*= SECTION\(.*?\).*?=+\*\/)/\a$1\a/sg;
     # remove everything except \a blocks
@@ -340,8 +344,6 @@ sub extract_dot_i {
             ($sec, $desc) = $db =~ /\(\s*(.*?)\s*\)\s*(.*)\s*/s;
         } elsif (($i & 1) == 0) {
             # reduce symbol names to single space delimited string
-            $db =~ s/\(.*?\)//sg;            # remove func arg lists
-            $db =~ s/\{.*?\n/\n/sg;          # remove func body part
             $db =~ s/\/\*.*?\*\///sg;        # remove C comments
             $db =~ s/\/\/.*?\n/\n/sg;        # remove C++ comments
             $db =~ s/;.*?\n/\n/sg;           # remove semi-colon

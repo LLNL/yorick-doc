@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package slice3 (in slice3.i) - </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -237,7 +238,7 @@ headline: Standard Library
 
   If the slice function FSLICE is a function, it should be of the
   form:
-     func fslice(m3, chunk)
+func fslice
   returning a list of function values on the specified chunk of the
   mesh m3.  The format of chunk depends on the type of m3 mesh, so
   you should use only the other mesh functions xyz3 and getv3 which
@@ -259,7 +260,7 @@ headline: Standard Library
   (e.g.- by a 3D shading calculation), use this mode.
 
   If FCOLOR is a function, it should be of the form:
-     func fcolor(m3, cells, l, u, fsl, fsu, ihist)
+func fcolor
   returning a list of function values on the specified cells of the
   mesh m3.  The cells argument will be the list of cell indices in
   m3 at which values are to be returned.  l, u, fsl, fsu, and ihist
@@ -273,7 +274,7 @@ headline: Standard Library
 
   If the optional argument after FCOLOR is non-nil and non-zero,
   then the FCOLOR function is called with only two arguments:
-     func fcolor(m3, cells)
+func fcolor
 </pre>
   <p>SEE ALSO: <a href="slice3.html#mesh3">mesh3</a>, <a href="slice3.html#plane3">plane3</a>, <a href="slice3.html#xyz3">xyz3</a>, <a href="slice3.html#getv3">getv3</a>, <a href="slice3.html#getc3">getc3</a>, <a href="slice3.html#slice2">slice2</a>, <a href="graph-plotter.html#plfp">plfp</a></p>
 </div>

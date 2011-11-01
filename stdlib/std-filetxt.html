@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package std-filetxt (in std.i) - text i/o to terminal, file, or string </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -23,6 +24,7 @@ headline: Standard Library
     <p><a href="std-filetxt.html#read_n">read_n</a></p>
     <h3>S</h3>
     <p><a href="std-filetxt.html#select_file">select_file</a></p>
+    <p><a href="std-filetxt.html#select_name">select_name</a></p>
   </div>
   <div class="ndex3">
     <p><a href="std-filetxt.html#read">sread</a></p>
@@ -101,7 +103,7 @@ headline: Standard Library
   items (default START=1).
 
 </pre>
-  <p>SEE ALSO: <a href="std-filetxt.html#write">swrite</a>, select_name, <a href="std-filetxt.html#select_file">select_file</a>.</p>
+  <p>SEE ALSO: <a href="std-filetxt.html#write">swrite</a>, <a href="std-filetxt.html#select_name">select_name</a>, <a href="std-filetxt.html#select_file">select_file</a>.</p>
 </div>
 <div class="docblock"><a name="print_format"></a><h3>print_format</h3>
   <pre>DOCUMENT print_format, line_length, max_lines, char=, short=, int=,
@@ -279,6 +281,20 @@ headline: Standard Library
     " Select file/directory: "
 </pre>
   <p>SEE ALSO: <a href="std-system.html#lsdir">lsdir</a>, regmatch, <a href="std-filetxt.html#print_columns">print_columns</a>.</p>
+</div>
+<div class="docblock"><a name="select_name"></a><h3>select_name</h3>
+  <pre>DOCUMENT select_name(list)
+  Print out array of strings LIST (using print_columns) and
+  interactively ask the user a number/item in the list and return the
+  selected item.  If keyword INDEX is true, the item number is returned
+  rather than its value.  The prompt string can be set with keyword PROMPT
+  (default is " Select one item: ").  If keyword FOREVER is true the user
+  is prompted until a valid choice is made.
+
+  Other keywords are passed to print_columns: LABEL (as
+  LABEL), WIDTH, SEP, EOL, BOL and MAXCOLS.
+</pre>
+  <p>SEE ALSO: <a href="std-filetxt.html#print_columns">print_columns</a>.</p>
 </div>
 <div class="docsee">
   <h3>sread</h3><p>SEE: <a href="#read">read</a></p>

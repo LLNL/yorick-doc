@@ -2,6 +2,7 @@
 layout: default
 headline: Standard Library
 ---
+<p class="sectop">Back to <a href="index.html">library index</a>.</p>
 <p class="sectop">Package roots (in roots.i) - </p>
 <p class="sectop">Index of documented functions or symbols:</p>
 <div class="ndex0s">
@@ -28,7 +29,7 @@ headline: Standard Library
   Find values of an inverse function by Newton-Raphson iteration,
   backed up by bisection if the convergence seems poor.  The
   subroutine F_AND_DFDX must be defined as:
-       func F_AND_DFDX (x, &f, &dfdx)
+func F_AND_DFDX
   returning both the function value f(x) and derivative dfdx(x).
   If the input x is an array, the returned f and dfdx must have
   the same shape as the input x.  If F_AND_DFDX always returns
@@ -95,7 +96,7 @@ headline: Standard Library
   Find a root of a function by Newton-Raphson iteration, backed
   up by bisection if the convergence seems poor.  The subroutine
   F_AND_DFDX must be defined as:
-       func F_AND_DFDX (x, &f, &dfdx)
+func F_AND_DFDX
   returning both the function value f(x) and derivative dfdx(x).
   If F_AND_DFDX always returns dfdx==0, nraphson uses bisection.
   The value of x is constrained to lie within the interval from
