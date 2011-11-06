@@ -5,16 +5,19 @@ sub VERSION_MESSAGE { my $fh = shift; print $fh "ydoc.pl version 1.0\n"; }
 sub HELP_MESSAGE {
     my $fh = shift;
     print $fh <<EOF;
-Usage: perl ydoc.pl [-u] [-n pkgname] [srcpath [title]]
+Usage: perl ydoc.pl [-u] [-n pkgname] [-d ghpath] [srcpath [title]]
   Must run in yorick-doc/ working directory, output to gh-pages/.
     srcpath  path to yorick package source to be documented
     title    title of generated web pages, "Yorick " prepended
     -n pkgname   if pkgname differs from last component of srcpath
     -u       update (or create) gh-pages git branch in srcpath
+    -i ghpath  path to substitute for gh-pages git branch
   If srcpath omitted, works from gh-pages/ directory created in a
   previous invocation.  With -u, updates (or creates) gh-pages
   branch in srcpath.  Otherwise, generates html in _site/ from the
   github jekyll source in gh-pages/.
+  The -i option allows you to save customizations in an ordinary
+  directory (ghpath) instead of in a git gh-pages branch.
 EOF
 }
 
@@ -34,11 +37,12 @@ sub slurp_file($) { local( @ARGV, $/ ) = $_[0]; return <>; }
 sub burp_file($$) { open(my $f, '>', $_[0]); print $f $_[1]; close($f); }
 
 my %opts;
-my $ok = getopts('un:', \%opts);
+my $ok = getopts('un:i:', \%opts);
 my $srcpath = shift;
 my $pkgtitle = shift;
 unless ($ok && not shift) { HELP_MESSAGE(*STDERR); die ""; };
 my $pkgname = $opts{'n'};
+my $ghpath = $opts{'i'};
 my $do_update = $opts{'u'};
 my $do_generate = $srcpath;
 unless ($srcpath) {
@@ -87,6 +91,10 @@ sub make_clean {
     }
 }
 
+my $srctop;
+my $dsttop;
+sub git_cp;
+
 sub make_gh_pages() {
     remove_tree "_site", {error => \$rterr} if (-d "_site");
     unlink "gh-pages.src" if (-f "gh-pages.src");
@@ -98,14 +106,23 @@ sub make_gh_pages() {
     if ($destdir eq "gh-pages") {
         my $prefix = "http://dhmunro.github.com/yorick-doc";  # default prefix
         # initialize gh-pages from git branch
-        chdir "gh-pages";
-        for my $nm ("gh-pages", "origin/gh-pages") {
-            # see also git show for retrieving single files
-            system "git archive --remote=../$srcpath $nm 2>/dev/null | tar xf - >/dev/null 2>&1";
-            $ghinit = 1 unless ($?);
-            last if ($ghinit);
+        if ($ghpath) {
+            $dsttop = getcwd() . "/gh-pages";
+            $srctop = undef;
+            find \&git_cp, $ghpath;
+            $ghinit = 1;
+        } else {
+            chdir "gh-pages";
+            for my $nm ("gh-pages", "origin/gh-pages") {
+                # see also git show for retrieving single files
+                system "git archive --remote=../$srcpath $nm 2>/dev/null | tar xf - >/dev/null 2>&1";
+                # GNU tar bug does not return proper exit status before 1.19
+                # $ghinit = 1 unless ($?);
+                $ghinit = 1 if (-d "_layouts");
+                last if ($ghinit);
+            }
+            chdir "..";
         }
-        chdir "..";
         unless ($ghinit) {
             # create default gh-pages now
             my $cfg = slurp_file("_config.yml");
@@ -147,8 +164,6 @@ EOF
     }
 }
 
-my $srctop;
-my $dsttop;
 sub git_cp {
     my $fname = $_;
     if ($fname eq '_site') {

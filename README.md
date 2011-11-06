@@ -40,7 +40,7 @@ substitute zipball for tarball if you prefer zip format.)
 With the current working directory the top-level of `yorick-doc/`
 created by git clone (master branch), the command line is:
 
-    perl ydoc.pl [-u] [-n pkgname] [srcpath [title]]
+    perl ydoc.pl [-u] [-n pkgname] [-i ghpath] [srcpath [title]]
 
 The `srcpath` is the path to the yorick plugin or package for which
 you want to create a website.  The automatically generated site will
@@ -71,6 +71,13 @@ which are not automatically generated and your modifications will be
 preserved, if you commit them to the *gh-pages* branch in `srcpath`.
 If your `srcpath` is not a git repo or has no *gh-pages* branch,
 `ydoc.pl` creates a simple default containing all the required files.
+
+Alternatively, you can use the `-i` option to specify a `ghpath` in
+lieu of a *gh-pages* branch in `srcpath`.  This permits you to save
+and manage your modifications to the `gh-pages/` directory, even if
+`srcpath` is not a git repo, or if you simply do not wish to add a
+*gh-pages* branch.  Be sure you copy the `gh-pages/` directory to some
+permanent source-code-managed location (`ghpath`).
 
 Additionally, `ydoc.pl` writes a file `gh-pages.src` containing the
 `srcpath` argument used to generate `gh-pages/`.  This permits you to
